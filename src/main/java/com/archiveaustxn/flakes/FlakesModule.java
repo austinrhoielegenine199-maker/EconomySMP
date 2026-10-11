@@ -101,6 +101,18 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (command.getName().equalsIgnoreCase("flakeshop")) {
+            if (!(sender instanceof Player player)) {
+                send(sender, "player-only", "Only players can use this command!");
+                return true;
+            }
+            if (!sender.hasPermission("flakes.use")) {
+                send(sender, "no-permission", "&cYou have no permission for that!");
+                return true;
+            }
+            shop.open(player);
+            return true;
+        }
         if (args.length == 0 || args[0].equalsIgnoreCase("bal") || args[0].equalsIgnoreCase("balance")) {
             OfflinePlayer target;
             if (args.length >= 2) {
