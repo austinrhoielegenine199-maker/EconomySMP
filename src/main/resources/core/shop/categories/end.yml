@@ -25,3 +25,9 @@ items:
   shulker-box: {material: SHULKER_BOX, price: 800, page: 1, slot: 17, amount: 1}
   diamond-sword: {material: DIAMOND_SWORD, price: 10000, page: 2, slot: 9, amount: 1, enchants: {UNBREAKING: 2, SHARPNESS: 3, LOOTING: 2}}
   potion-of-strength: {material: POTION, price: 1000, page: 2, slot: 10, amount: 1, display-name: "&fPotion of Strength", effect: {type: SPEED, amplifier: 1, duration: 3600}}
+back:
+  slot: 22
+  material: RED_STAINED_GLASS_PANE
+  display-name: "&#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "&fᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴛᴜʀɴ"
