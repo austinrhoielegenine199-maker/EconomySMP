@@ -6,7 +6,8 @@ import com.archiveaustxn.eco.storage.PaymentHistoryStore;
 import com.archiveaustxn.eco.history.PaymentHistoryListener;
 import com.archiveaustxn.shop.ShopModule;
 import com.archiveaustxn.shop.command.ShopCommand;
-import com.archiveaustxn.sell.SellModule;\nimport com.archiveaustxn.storage.CoreDatabase;
+import com.archiveaustxn.sell.SellModule;
+import com.archiveaustxn.storage.CoreDatabase;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,12 +15,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class EconomySMP extends JavaPlugin {
     private ShopModule shopModule;
     private EconomyModule economyModule;
-    private PaymentHistoryStore paymentHistoryStore;\n    private CoreDatabase database;
+    private PaymentHistoryStore paymentHistoryStore;
+    private CoreDatabase database;
     private SellModule sellModule;
 
     @Override public void onEnable() {
         if (!getDataFolder().exists()) getDataFolder().mkdirs();
-        database = new CoreDatabase(this);\n        economyModule = new EconomyModule(this);
+        database = new CoreDatabase(this);
+        economyModule = new EconomyModule(this);
         economyModule.load();
         paymentHistoryStore = new PaymentHistoryStore(this);
         getServer().getPluginManager().registerEvents(new PaymentHistoryListener(this, paymentHistoryStore, economyModule), this);
@@ -56,10 +59,12 @@ public final class EconomySMP extends JavaPlugin {
 
     @Override public void onDisable() {
         if (shopModule != null) shopModule.close();
-        if (paymentHistoryStore != null) paymentHistoryStore.close();\n        if (database != null) database.close();
+        if (paymentHistoryStore != null) paymentHistoryStore.close();
+        if (database != null) database.close();
     }
     public ShopModule getShopModule() { return shopModule; }
     public EconomyModule getEconomyModule() { return economyModule; }
-    public PaymentHistoryStore getPaymentHistoryStore() { return paymentHistoryStore; }\n    public CoreDatabase getDatabase() { return database; }
+    public PaymentHistoryStore getPaymentHistoryStore() { return paymentHistoryStore; }
+    public CoreDatabase getDatabase() { return database; }
     public SellModule getSellModule() { return sellModule; }
 }
