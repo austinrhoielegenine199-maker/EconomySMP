@@ -1,9 +1,29 @@
-# Sell module behavior. All prices and progression are editable in this folder.
+# Sell module settings. Item prices live only in Prices.yml.
+sell-multi: true
+command-aliases:
+  - sellgui
+worth-lore:
+  enabled: true
+  lore-format: "&7Worth: &#0bf52b%price%"
+shulker-support:
+  enabled: true
+don-t-show-gui:
+  - "&8ʙᴜʏ"
 economy:
   provider: VAULT
-sell:
-  multiplier-enabled: true
-  base-multiplier: 1.0
-  sell-all-command-enabled: true
-messages:
-  prefix: '&#04fc84ꜱᴇʟʟ &7» '
+  currency-format: "#,##0.##"
+  abbreviations:
+    enabled: true
+    formats: ["K", "M", "B", "T"]
+progress-bar:
+  loading-color: "&f"
+  complete-loading-color: "&#20f706"
+  bar-length: 21
+  bar-symbol: "&m "
+sounds:
+  sell-success: "ENTITY_EXPERIENCE_ORB_PICKUP"
+  no-sellable-items: "ENTITY_VILLAGER_NO"
+  plugin-reloaded: "ENTITY_PLAYER_LEVELUP"
+  click-sound: "UI_BUTTON_CLICK"
+  setworth-success: "ENTITY_PLAYER_LEVELUP"
+  setworth-error: "ENTITY_VILLAGER_NO"
