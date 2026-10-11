@@ -13,12 +13,29 @@ commands:
     permission-message: "&cYou don't have permission."
   sell:
     description: Open the sell menu or sell all configured items
-    usage: /sell [all|reload]
+    usage: /sell [all|history|worth|progress|reload]
+    aliases: [sellgui]
     permission: economysmp.sell.use
   worth:
     description: View configured item sell prices
-    usage: /worth
+    usage: /worth [page]
     permission: economysmp.sell.use
+  sellaxe:
+    description: Give or use a Sellaxe
+    usage: /sellaxe
+    permission: sell.sellaxe
+  worthtoggle:
+    description: Toggle item worth display
+    usage: /worthtoggle
+    permission: economysmp.sell.use
+  sellhistory:
+    description: View your sell history
+    usage: /sellhistory [page]
+    permission: economysmp.sell.use
+  setworth:
+    description: Set the sell price of the held item
+    usage: /setworth <price>
+    permission: sell.setworth
   pay:
     description: Pay another player
     usage: /pay <player> <amount>
@@ -53,6 +70,11 @@ permissions:
     default: op
     children:
       economysmp.bal.other: true
+      economysmp.sell.admin: true
+      sell.reload: true
+      sell.sellaxe: true
+      sell.setworth: true
+      sell.reset: true
   economysmp.bal.other:
     default: op
   economysmp.pay:
@@ -67,3 +89,26 @@ permissions:
     default: true
   economysmp.sell.admin:
     default: op
+  sell.use:
+    default: true
+  sell.reload:
+    default: op
+  sell.sellaxe:
+    default: op
+  sell.setworth:
+    default: op
+  sell.vip:
+    default: false
+  sell.history.other:
+    default: op
+  sell.reset:
+    default: op
+  sell.admin:
+    default: op
+    children:
+      sell.reload: true
+      sell.sellaxe: true
+      sell.use: true
+      sell.setworth: true
+      sell.history.other: true
+      sell.reset: true
