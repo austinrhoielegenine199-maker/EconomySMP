@@ -52,6 +52,13 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
         shop = new FlakesShop(plugin, this);
         shop.load();
         Bukkit.getPluginManager().registerEvents(shop, plugin);
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            if (!new FlakesPlaceholderExpansion(plugin, this).register()) {
+                plugin.getLogger().warning("Could not register the Flakes PlaceholderAPI expansion.");
+            }
+        } else {
+            plugin.getLogger().info("PlaceholderAPI not found; Flakes placeholders are disabled.");
+        }
         plugin.getLogger().info("Flakes module loaded.");
     }
 
