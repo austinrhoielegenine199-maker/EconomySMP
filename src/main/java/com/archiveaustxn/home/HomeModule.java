@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 
 /**
  * Personal homes and shared team homes for EconomySMP.
@@ -64,6 +65,10 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
         homeData = YamlConfiguration.loadConfiguration(homeDataFile);
         teamData = YamlConfiguration.loadConfiguration(teamDataFile);
         Bukkit.getPluginManager().registerEvents(this, plugin);
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new HomeTeamExpansion().register();
+            plugin.getLogger().info("Home and Team PlaceholderAPI expansions registered.");
+        }
         plugin.getLogger().info("Home/TeamHome module loaded.");
     }
 
@@ -472,6 +477,49 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 load(); p.sendMessage(color("&aHome and Team configuration reloaded.")); return true;
             }
             default -> { p.sendMessage(teamLang.getString("command-usage", "&c/team <create|invite|join|leave|delete|sethome|home|info>")); return true; }
+        }
+    }
+
+    /** PlaceholderAPI identifiers: %home_count%, %home_max_homes%, %home_team_has_team%,
+     * %home_teamhome_set%, %team_name%, %team_player%, %team_rank%, %team_leader%,
+     * %team_count%, %team_home_set%, and %team_pvp%. */
+    private final class HomeTeamExpansion extends PlaceholderExpansion {
+        @Override public String getIdentifier() { return "home"; }
+        @Override public String getAuthor() { return String.join(", ", plugin.getDescription().getAuthors()); }
+        @Override public String getVersion() { return plugin.getDescription().getVersion(); }
+        @Override public boolean persist() { return true; }
+
+        @Override public String onPlaceholderRequest(Player player, String params) {
+            if (player == null) return "";
+            String key = params.toLowerCase(Locale.ROOT);
+            String team = teamName(player);
+            switch (key) {
+                case "count":
+                case "homes_count":
+                case "home_count": {
+                    int count = 0;
+                    for (int i = 1; i <= 5; i++) if (homeData.isConfigurationSection(homePath(player, i))) count++;
+                    return String.valueOf(count);
+                }
+                case "max_homes": return String.valueOf(maxHomes(player));
+                case "team_has_team": return String.valueOf(team != null);
+                case "teamhome_set": return String.valueOf(team != null && teamData.isConfigurationSection(team + ".home"));
+                case "team_name": return team == null ? "" : team;
+                case "team_player": return player.getName();
+                case "team_rank": return team == null ? "" : (isLeader(player, team) ? "leader" : "member");
+                case "team_leader": {
+                    if (team == null) return "";
+                    String leaderId = teamData.getString(team + ".leader", "");
+                    try {
+                        org.bukkit.OfflinePlayer leader = Bukkit.getOfflinePlayer(UUID.fromString(leaderId));
+                        return leader.getName() == null ? "" : leader.getName();
+                    } catch (IllegalArgumentException ex) { return ""; }
+                }
+                case "team_count": return team == null ? "0" : String.valueOf(teamData.getStringList(team + ".members").size() + 1);
+                case "team_home_set": return String.valueOf(team != null && teamData.isConfigurationSection(team + ".home"));
+                case "team_pvp": return team == null ? "false" : String.valueOf(teamData.getBoolean(team + ".pvp", false));
+                default: return null;
+            }
         }
     }
 
