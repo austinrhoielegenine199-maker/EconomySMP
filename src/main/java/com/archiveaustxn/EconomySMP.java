@@ -3,6 +3,7 @@ package com.archiveaustxn;
 import com.archiveaustxn.eco.EconomyModule;
 import com.archiveaustxn.eco.command.EconomyCommand;
 import com.archiveaustxn.eco.storage.PaymentHistoryStore;
+import com.archiveaustxn.eco.history.PaymentHistoryListener;
 import com.archiveaustxn.shop.ShopModule;
 import com.archiveaustxn.shop.command.ShopCommand;
 import org.bukkit.command.PluginCommand;
@@ -20,6 +21,7 @@ public final class EconomySMP extends JavaPlugin {
         economyModule = new EconomyModule(this);
         economyModule.load();
         paymentHistoryStore = new PaymentHistoryStore(this);
+        getServer().getPluginManager().registerEvents(new PaymentHistoryListener(this, paymentHistoryStore, economyModule), this);
         shopModule = new ShopModule(this);
         shopModule.load();
 
