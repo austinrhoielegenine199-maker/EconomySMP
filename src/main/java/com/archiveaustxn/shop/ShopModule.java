@@ -115,7 +115,53 @@ public final class ShopModule {
         player.openInventory(inv);
     }
 
-    public YamlConfiguration category(String name) { return categories.get(name.toLowerCase()); }
+    /**
+     * Adds the player's held item to an existing category file.
+     * All user-provided values are validated before touching the YAML file.
+     */
+    public boolean addHandItem(Player player, String categoryName, int slot, double price) {
+        if (player == null || categoryName == null || !categoryName.matches("[A-Za-z0-9_-]{1,32}")) return false;
+        if (!Double.isFinite(price) || price < 0 || slot < 0 || slot > 53) return false;
+        ItemStack hand = player.getInventory().getItemInMainHand();
+        if (hand == null || hand.getType().isAir()) return false;
+        YamlConfiguration yaml = categories.get(categoryName.toLowerCase(java.util.Locale.ROOT));
+        if (yaml == null) return false;
+        String itemKey = hand.getType().name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
+        ConfigurationSection items = yaml.getConfigurationSection("items");
+        if (items == null) items = yaml.createSection("items");
+        String uniqueKey = itemKey;
+        int suffix = 2;
+        while (items.contains(uniqueKey)) uniqueKey = itemKey + "-" + suffix++;
+        ConfigurationSection entry = items.createSection(uniqueKey);
+        entry.set("material", hand.getType().name());
+        entry.set("price", price);
+        entry.set("page", 1);
+        entry.set("slot", slot);
+        entry.set("amount", hand.getAmount());
+        if (hand.hasItemMeta() && hand.getItemMeta().hasDisplayName()) {
+            entry.set("display-name", hand.getItemMeta().getDisplayName());
+        }
+        if (hand.hasItemMeta() && hand.getItemMeta().hasLore()) {
+            entry.set("item-lore", hand.getItemMeta().getLore());
+        }
+        File file = new File(new File(plugin.getDataFolder(), "core/shop/categories"), categoryName.toLowerCase(java.util.Locale.ROOT) + ".yml");
+        try {
+            yaml.save(file);
+            categories.put(categoryName.toLowerCase(java.util.Locale.ROOT), YamlConfiguration.loadConfiguration(file));
+            return true;
+        } catch (java.io.IOException exception) {
+            plugin.getLogger().severe("Failed saving category " + categoryName + ": " + exception.getMessage());
+            return false;
+        }
+    }
+
+    public java.util.Set<String> categoryNames() {
+        return java.util.Collections.unmodifiableSet(categories.keySet());
+    }
+
+    public ConfigurationSection mainGuiCategories() { return mainGui.getConfigurationSection("main-menu.categories"); }
+
+    public YamlConfiguration category(String name) { return categories.get(name.toLowerCase(java.util.Locale.ROOT)); }
     public YamlConfiguration buyConfig() { return buyConfig; }
     public YamlConfiguration flakesBuyConfig() { return flakesBuy; }
     public String message(String key, String fallback) { return shopConfig.getString("messages." + key, fallback); }
