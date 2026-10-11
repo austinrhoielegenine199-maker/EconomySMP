@@ -1,0 +1,23 @@
+worth:
+  title: '&8ᴡᴏʀᴛʜ'
+  rows: 6
+  worth-items: "0-44"
+  navigation:
+    previous-page-slot: 45
+    next-page-slot: 53
+    sort-button:
+      slot: 48
+      material: CAULDRON
+      displayname: '&#04fc84ꜱᴏʀᴛɪɴɢ'
+    refresh:
+      slot: 49
+      material: ANVIL
+      displayname: '&#04fc84ɪᴛᴇᴍ ᴘʀɪᴄᴇꜱ'
+    filter:
+      slot: 50
+      material: HOPPER
+      displayname: '&#04fc84ꜰɪʟᴛᴇʀ'
+  item:
+    displayname: '&f%item-name%'
+    lore:
+      - '&fPrice: &#0bf52b%price%'
