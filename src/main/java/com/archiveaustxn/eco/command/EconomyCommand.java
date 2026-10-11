@@ -3,6 +3,13 @@ package com.archiveaustxn.eco.command;
 import com.archiveaustxn.EconomySMP;
 import com.archiveaustxn.eco.EconomyModule;
 import com.archiveaustxn.eco.storage.PaymentHistoryStore;
+import com.archiveaustxn.eco.storage.PaymentHistoryStore.Record;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.configuration.file.YamlConfiguration;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -50,6 +57,7 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
     }
     @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String cmd=command.getName().toLowerCase(Locale.ROOT);
+        if(cmd.equals("payhistory")) {\n            if(!(sender instanceof Player viewer)){send(sender,"player-only","Only players can use this command!");return true;}\n            UUID targetId=viewer.getUniqueId(); String targetName=viewer.getName();\n            if(args.length>0) { if(!sender.hasPermission("economysmp.payhistory.other")){send(sender,"no-permission","&cYou have no permission to use this command!");return true;} OfflinePlayer target=find(args[0]); if(target==null){send(sender,"player-not-found","&cPlayer not found!");return true;} targetId=target.getUniqueId(); targetName=target.getName()==null?args[0]:target.getName(); }\n            openHistory(viewer,targetId,targetName,1,"newest"); return true;\n        }
         if(cmd.equals("money")) {
             if(args.length==0) {
                 if(!(sender instanceof Player p)){send(sender,"player-only","Only players can use this command!");return true;}
