@@ -1,0 +1,20 @@
+title: "&8ᴄᴏɴꜰɪʀᴍ"
+rows: 3
+
+items:
+  home-info:
+    slot: 13
+    material: "BLUE_DYE"
+    name: "&#0044FCʜᴏᴍᴇ %home%"
+  cancel:
+    slot: 11
+    material: "RED_STAINED_GLASS_PANE"
+    name: "&#FF0000ᴄᴀɴᴄᴇʟ"
+    lore:
+      - "&fClick to cancel"
+  confirm:
+    slot: 15
+    material: "LIME_STAINED_GLASS_PANE"
+    name: "&#0bf52bᴄᴏɴꜰɪʀᴍ"
+    lore:
+      - "&fClick to delete"
