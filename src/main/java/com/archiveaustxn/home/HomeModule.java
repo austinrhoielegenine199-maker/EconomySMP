@@ -627,9 +627,40 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                     for (int i = 1; i <= 5; i++) if (homeData.isConfigurationSection(homePath(player, i))) count++;
                     return String.valueOf(count);
                 }
-                case "max_homes": return String.valueOf(maxHomes(player));
-                case "team_has_team": return String.valueOf(team != null);
-                case "teamhome_set": return String.valueOf(team != null && teamData.isConfigurationSection(team + ".home"));
+                case "max_homes":
+                case "home_max":
+                case "max": return String.valueOf(maxHomes(player));
+                case "team_has_team":
+                case "has_team": return String.valueOf(team != null);
+                case "teamhome_set":
+                case "team_home_set":
+                case "home_set": return String.valueOf(team != null && teamData.isConfigurationSection(team + ".home"));
+                case "home_list":
+                case "homes": {
+                    List<String> setHomes = new ArrayList<>();
+                    for (int i = 1; i <= 5; i++) if (homeData.isConfigurationSection(homePath(player, i))) setHomes.add(String.valueOf(i));
+                    return String.join(",", setHomes);
+                }
+                case "team_is_leader":
+                case "is_leader": return String.valueOf(team != null && isLeader(player, team));
+                case "team_role":
+                case "role": return team == null ? "" : (isLeader(player, team) ? "leader" : "member");
+                case "team_members": return team == null ? "0" : String.valueOf(teamMembers(team).size());
+                case "team_home_world": {
+                    if (team == null) return "";
+                    ConfigurationSection home = teamData.getConfigurationSection(team + ".home");
+                    return home == null ? "" : home.getString("world", "");
+                }
+                case "team_home_x":
+                case "team_home_y":
+                case "team_home_z": {
+                    if (team == null) return "";
+                    ConfigurationSection home = teamData.getConfigurationSection(team + ".home");
+                    if (home == null) return "";
+                    String coordinate = key.substring("team_home_".length());
+                    return String.valueOf(home.getDouble(coordinate));
+                }
+                case "team_home": return String.valueOf(team != null && teamData.isConfigurationSection(team + ".home"));
                 case "team_name": return team == null ? "" : team;
                 case "team_player": return player.getName();
                 case "team_rank": return team == null ? "" : (isLeader(player, team) ? "leader" : "member");
@@ -641,10 +672,28 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                         return leader.getName() == null ? "" : leader.getName();
                     } catch (IllegalArgumentException ex) { return ""; }
                 }
-                case "team_count": return team == null ? "0" : String.valueOf(teamData.getStringList(team + ".members").size() + 1);
-                case "team_home_set": return String.valueOf(team != null && teamData.isConfigurationSection(team + ".home"));
-                case "team_pvp": return team == null ? "false" : String.valueOf(teamData.getBoolean(team + ".pvp", false));
-                default: return null;
+                case "team_count": return team == null ? "0" : String.valueOf(teamMembers(team).size());
+                case "team_pvp":
+                case "team_pvp_enabled":
+                case "pvp": return team == null ? "false" : String.valueOf(teamData.getBoolean(team + ".pvp", false));
+                default: {
+                    if (key.matches("home_[1-5]_set")) {
+                        int number = Integer.parseInt(key.substring(5, 6));
+                        return String.valueOf(homeData.isConfigurationSection(homePath(player, number)));
+                    }
+                    if (key.matches("home_[1-5]_name")) {
+                        int number = Integer.parseInt(key.substring(5, 6));
+                        return homeData.getString(homePath(player, number) + ".name", "");
+                    }
+                    if (key.matches("home_[1-5]_(world|x|y|z)")) {
+                        int number = Integer.parseInt(key.substring(5, 6));
+                        ConfigurationSection home = homeData.getConfigurationSection(homePath(player, number));
+                        if (home == null) return "";
+                        String field = key.substring(7);
+                        return field.equals("world") ? home.getString(field, "") : String.valueOf(home.getDouble(field));
+                    }
+                    return null;
+                }
             }
         }
     }
