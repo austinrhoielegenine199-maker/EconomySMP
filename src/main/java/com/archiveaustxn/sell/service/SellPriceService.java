@@ -31,5 +31,12 @@ public final class SellPriceService {
         }
         return Collections.unmodifiableMap(result);
     }
+    public boolean setPrice(Material material, double price) {
+        if (material == null || !Double.isFinite(price) || price < 0) return false;
+        var yaml = config.get("prices.yml");
+        yaml.set("prices." + material.name(), price);
+        try { yaml.save(config.file("Prices.yml")); return true; }
+        catch (java.io.IOException ex) { return false; }
+    }
     public boolean isSellable(ItemStack stack) { return unitPrice(stack == null ? null : stack.getType()) > 0; }
 }
