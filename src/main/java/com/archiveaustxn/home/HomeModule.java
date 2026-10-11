@@ -66,7 +66,8 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
         teamData = YamlConfiguration.loadConfiguration(teamDataFile);
         Bukkit.getPluginManager().registerEvents(this, plugin);
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new HomeTeamExpansion().register();
+            new HomeTeamExpansion("home").register();
+            new HomeTeamExpansion("team").register();
             plugin.getLogger().info("Home and Team PlaceholderAPI expansions registered.");
         }
         plugin.getLogger().info("Home/TeamHome module loaded.");
@@ -484,7 +485,9 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
      * %home_teamhome_set%, %team_name%, %team_player%, %team_rank%, %team_leader%,
      * %team_count%, %team_home_set%, and %team_pvp%. */
     private final class HomeTeamExpansion extends PlaceholderExpansion {
-        @Override public String getIdentifier() { return "home"; }
+        private final String identifier;
+        private HomeTeamExpansion(String identifier) { this.identifier = identifier; }
+        @Override public String getIdentifier() { return identifier; }
         @Override public String getAuthor() { return String.join(", ", plugin.getDescription().getAuthors()); }
         @Override public String getVersion() { return plugin.getDescription().getVersion(); }
         @Override public boolean persist() { return true; }
@@ -492,6 +495,13 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
         @Override public String onPlaceholderRequest(Player player, String params) {
             if (player == null) return "";
             String key = params.toLowerCase(Locale.ROOT);
+            if (identifier.equals("team")) {
+                key = switch (key) {
+                    case "name" -> "team_name"; case "player" -> "team_player"; case "rank" -> "team_rank";
+                    case "leader" -> "team_leader"; case "count", "members" -> "team_count";
+                    case "home_set", "homeset" -> "team_home_set"; case "pvp" -> "team_pvp"; default -> key;
+                };
+            }
             String team = teamName(player);
             switch (key) {
                 case "count":
