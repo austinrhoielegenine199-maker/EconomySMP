@@ -119,7 +119,7 @@ public final class ShopModule {
     public YamlConfiguration buyConfig() { return buyConfig; }
     public YamlConfiguration flakesBuyConfig() { return flakesBuy; }
     public String message(String key, String fallback) { return shopConfig.getString("messages." + key, fallback); }
-    static String color(String text) {
+    public static String color(String text) {
         if (text == null) return "";
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("&#([A-Fa-f0-9]{6})").matcher(text);
         StringBuffer out = new StringBuffer();
