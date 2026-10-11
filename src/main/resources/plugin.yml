@@ -3,7 +3,7 @@ version: '1.0.0'
 main: com.archiveaustxn.EconomySMP
 api-version: '1.21'
 author: ArchiveAustxn
-description: EconomySMP Core with integrated economy and shop modules
+description: EconomySMP Core with integrated economy, shop, and sell modules
 softdepend: [Vault, PlaceholderAPI]
 commands:
   shop:
@@ -11,6 +11,14 @@ commands:
     usage: /shop
     permission: economysmp.shop.use
     permission-message: "&cYou don't have permission."
+  sell:
+    description: Open the sell menu or sell all configured items
+    usage: /sell [all|reload]
+    permission: economysmp.sell.use
+  worth:
+    description: View configured item sell prices
+    usage: /worth
+    permission: economysmp.sell.use
   pay:
     description: Pay another player
     usage: /pay <player> <amount>
@@ -55,3 +63,7 @@ permissions:
     default: op
   economysmp.paytoggle:
     default: true
+  economysmp.sell.use:
+    default: true
+  economysmp.sell.admin:
+    default: op
