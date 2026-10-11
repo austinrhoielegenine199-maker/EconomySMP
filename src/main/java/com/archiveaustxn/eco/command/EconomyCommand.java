@@ -173,11 +173,11 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
             }
             inventory.setItem(slots[index++], item);
         }
-        setHistoryButton(inventory, cfg, "previous", "pay-history-gui.previous", "&ePrevious page", page > 1);
+        setHistoryButton(inventory, cfg, "previous", "pay-history-gui.previous-page", "&ePrevious page", page > 1);
         setHistoryButton(inventory, cfg, "sort", "pay-history-gui.sort", "&eSort: " + sort, true);
         setHistoryButton(inventory, cfg, "refresh", "pay-history-gui.refresh", "&aRefresh", true);
         setHistoryButton(inventory, cfg, "filter", "pay-history-gui.filter", "&eFilter", true);
-        setHistoryButton(inventory, cfg, "next", "pay-history-gui.next", "&eNext page", records.size() == slots.length);
+        setHistoryButton(inventory, cfg, "next", "pay-history-gui.next-page", "&eNext page", records.size() == slots.length);
         viewer.openInventory(inventory);
     }
 
