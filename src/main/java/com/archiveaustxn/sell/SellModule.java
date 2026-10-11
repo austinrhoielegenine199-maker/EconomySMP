@@ -202,9 +202,10 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
             }
             ItemStack axe = createSellaxe();
             if (axe == null) { p.sendMessage(gui.color("&cSellaxe configuration has an invalid material.")); return true; }
-            Map<Integer, ItemStack> leftovers = target.getInventory().addItem(axe);
-            leftovers.values().forEach(item -> target.getWorld().dropItemNaturally(target.getLocation(), item));
-            p.sendMessage(message("sellaxe-given", "&aSellaxe given.").replace("%player%", target.getName()));
+            Player recipient = target;
+            Map<Integer, ItemStack> leftovers = recipient.getInventory().addItem(axe);
+            leftovers.values().forEach(item -> recipient.getWorld().dropItemNaturally(recipient.getLocation(), item));
+            p.sendMessage(message("sellaxe-given", "&aSellaxe given.").replace("%player%", recipient.getName()));
             return true;
         }
         if(args.length>0){
