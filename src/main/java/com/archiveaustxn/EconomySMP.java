@@ -1,6 +1,7 @@
 package com.archiveaustxn;
 
 import com.archiveaustxn.eco.EconomyModule;
+import com.archiveaustxn.flakes.FlakesModule;
 import com.archiveaustxn.home.HomeModule;
 import com.archiveaustxn.home.command.HomeCommand;
 import com.archiveaustxn.team.command.TeamCommand;
@@ -24,6 +25,7 @@ public final class EconomySMP extends JavaPlugin {
     private SellModule sellModule;
     private HomeModule homeModule;
     private TeamManager teamManager;
+    private FlakesModule flakesModule;
 
     @Override
     public void onEnable() {
@@ -45,6 +47,10 @@ public final class EconomySMP extends JavaPlugin {
 
         homeModule = new HomeModule(this);
         homeModule.load();
+
+        flakesModule = new FlakesModule(this);
+        flakesModule.load();
+        bind("flakes", flakesModule, flakesModule);
 
         sellModule = new SellModule(this);
         sellModule.load();
@@ -91,6 +97,7 @@ public final class EconomySMP extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (flakesModule != null) flakesModule.close();
         if (shopModule != null) shopModule.close();
         if (economyModule != null) economyModule.close();
         if (paymentHistoryStore != null) paymentHistoryStore.close();
@@ -104,4 +111,5 @@ public final class EconomySMP extends JavaPlugin {
     public SellModule getSellModule() { return sellModule; }
     public HomeModule getHomeModule() { return homeModule; }
     public TeamManager getTeamManager() { return teamManager; }
+    public FlakesModule getFlakesModule() { return flakesModule; }
 }
