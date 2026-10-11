@@ -1,0 +1,9 @@
+messages:
+  no-permission: "&cYou don't have permission."
+  player-only: "&cOnly players can use this command."
+  economy-unavailable: "&cThe economy is unavailable right now."
+  no-prices: "&cNo sell prices are configured."
+  nothing-to-sell: "&cYou don't have any configured items to sell."
+  transaction-failed: "&cThe sell transaction failed. Please try again."
+  sell-success: "&aSold %amount% items for $%total%."
+  reload-success: "&aSell configuration reloaded."
