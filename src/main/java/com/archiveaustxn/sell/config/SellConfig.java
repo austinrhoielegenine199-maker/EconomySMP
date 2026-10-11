@@ -17,7 +17,7 @@ public final class SellConfig {
     public void loadAll() {
         loaded.clear();
         load("sell.yml", "core/sell/sell.yml");
-        load("worth.yml", "core/sell/worth.yml");
+        load("Prices.yml", "core/sell/Prices.yml");
         load("lang.yml", "core/sell/lang.yml");
         load("level.yml", "core/sell/level.yml");
         load("gui/Sell.gui.yml", "core/sell/gui/Sell.gui.yml");
