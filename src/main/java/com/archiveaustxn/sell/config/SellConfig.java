@@ -17,15 +17,15 @@ public final class SellConfig {
     public void loadAll() {
         loaded.clear();
         load("sell.yml", "core/sell/sell.yml");
-        load("Prices.yml", "core/sell/Prices.yml");
+        load("prices.yml", "core/sell/prices.yml");
         load("lang.yml", "core/sell/lang.yml");
         load("level.yml", "core/sell/level.yml");
-        load("gui/Sell.gui.yml", "core/sell/gui/Sell.gui.yml");
-        load("gui/Sell.history.yml", "core/sell/gui/Sell.history.yml");
-        load("gui/Worth.yml", "core/sell/gui/Worth.yml");
-        load("gui/Progress.gui.yml", "core/sell/gui/Progress.gui.yml");
-        load("gui/Progress.item.list.yml", "core/sell/gui/Progress.item.list.yml");
-        load("Sellaxe.yml", "core/sell/Sellaxe.yml");
+        load("gui/sell.gui.yml", "core/sell/gui/sell.gui.yml");
+        load("gui/sell.history.yml", "core/sell/gui/sell.history.yml");
+        load("gui/worth.yml", "core/sell/gui/worth.yml");
+        load("gui/progress.gui.yml", "core/sell/gui/progress.gui.yml");
+        load("gui/progress.item.list.yml", "core/sell/gui/progress.item.list.yml");
+        load("sellaxe.yml", "core/sell/sellaxe.yml");
     }
     private void load(String key, String resource) {
         File file = new File(plugin.getDataFolder(), "core/sell/" + key);
