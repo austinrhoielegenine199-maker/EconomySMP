@@ -61,6 +61,9 @@ public final class ShopListener implements Listener {
             if (slot == 21) {
                 purchases.remove(player.getUniqueId());
                 shop.openCategory(player, purchase.category, purchase.page);
+            } else if (slot == 22) {
+                purchases.remove(player.getUniqueId());
+                shop.openMain(player);
             } else if (slot == 15) changeAmount(player, purchase, 1);
             else if (slot == 16) changeAmount(player, purchase, 10);
             else if (slot == 17) changeAmount(player, purchase, 64);
@@ -116,10 +119,12 @@ public final class ShopListener implements Listener {
             player.sendMessage(ShopModule.color(shop.message("not-enough-money", "&cYou don't have enough money.")));
             return;
         }
+        int maxStack = purchase.material.getMaxStackSize();
+        ItemStack similarItem = createPurchaseItem(purchase, 1);
         int free = 0;
         for (ItemStack contents : player.getInventory().getStorageContents()) {
-            if (contents == null || contents.getType().isAir()) free += 64;
-            else if (contents.getType() == purchase.material && contents.getAmount() < contents.getMaxStackSize())
+            if (contents == null || contents.getType().isAir()) free += maxStack;
+            else if (contents.isSimilar(similarItem) && contents.getAmount() < contents.getMaxStackSize())
                 free += contents.getMaxStackSize() - contents.getAmount();
         }
         if (free < purchase.amount) {
@@ -149,13 +154,13 @@ public final class ShopListener implements Listener {
             player.sendMessage(ShopModule.color("&cInventory delivery issue; your payment was refunded."));
             return;
         }
-        purchases.remove(player.getUniqueId());
-        player.sendMessage(ShopModule.color(shop.message("purchase-success", "&aPurchase complete!")));
-        player.closeInventory();
+        player.sendMessage(ShopModule.color("&aYou've bought " + purchase.amount + " " + prettyName(purchase.name, purchase.key) + "!"));
+        // Keep this menu open for repeat purchases.
+        openPurchase(player, purchase);
     }
 
     private void changeAmount(Player player, Purchase purchase, int delta) {
-        purchase.amount = Math.max(1, Math.min(2304, purchase.amount + delta));
+        purchase.amount = Math.max(1, Math.min(purchase.material.getMaxStackSize(), purchase.amount + delta));
         openPurchase(player, purchase);
     }
 
@@ -167,7 +172,7 @@ public final class ShopListener implements Listener {
         place(inv, 9, Material.RED_STAINED_GLASS_PANE, "&c-64", "Remove 64");
         place(inv, 10, Material.RED_STAINED_GLASS_PANE, "&c-10", "Remove 10");
         place(inv, 11, Material.RED_STAINED_GLASS_PANE, "&c-1", "Remove 1");
-        ItemStack selected = new ItemStack(p.material, Math.max(1, Math.min(64, p.amount)));
+        ItemStack selected = createPurchaseItem(p, Math.max(1, Math.min(p.material.getMaxStackSize(), p.amount)));
         ItemMeta meta = selected.getItemMeta();
         if (meta != null) {
             meta.setDisplayName(ShopModule.color(p.name));
@@ -178,9 +183,25 @@ public final class ShopListener implements Listener {
         place(inv, 15, Material.LIME_STAINED_GLASS_PANE, "&a+1", "Add 1");
         place(inv, 16, Material.LIME_STAINED_GLASS_PANE, "&a+10", "Add 10");
         place(inv, 17, Material.LIME_STAINED_GLASS_PANE, "&a+64", "Add 64");
-        place(inv, 21, Material.RED_STAINED_GLASS_PANE, "§x§f§c§0§4§0§4ᴄᴀɴᴄᴇʟ", "Return to category");
-        place(inv, 23, Material.LIME_STAINED_GLASS_PANE, "§x§0§4§f§c§0§4ᴄᴏɴғɪʀᴍ", "Confirm purchase");
+        place(inv, 21, Material.ARROW, "&fBack", "Return to category");
+        place(inv, 22, Material.RED_STAINED_GLASS_PANE, "&cCancel", "Return to main shop");
+        place(inv, 23, Material.LIME_STAINED_GLASS_PANE, "&aConfirm", "Confirm purchase");
         player.openInventory(inv);
+    }
+
+    private ItemStack createPurchaseItem(Purchase p, int amount) {
+        ItemStack stack = new ItemStack(p.material, Math.max(1, Math.min(p.material.getMaxStackSize(), amount)));
+        if (p.name != null && !p.name.isBlank() && !p.name.equalsIgnoreCase(p.key)) {
+            ItemMeta meta = stack.getItemMeta();
+            if (meta != null) { meta.setDisplayName(ShopModule.color(p.name)); stack.setItemMeta(meta); }
+        }
+        return stack;
+    }
+
+    private String prettyName(String displayName, String key) {
+        String raw = displayName == null || displayName.isBlank() || displayName.equalsIgnoreCase(key)
+                ? key : org.bukkit.ChatColor.stripColor(ShopModule.color(displayName));
+        return raw.replace('_', ' ').replace('-', ' ').replaceAll("\\s+", " ").trim();
     }
 
     private void place(Inventory inv, int slot, Material material, String name, String lore) {
