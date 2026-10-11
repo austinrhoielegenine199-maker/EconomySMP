@@ -511,7 +511,7 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
             }
             case "sethome" -> {
                 if (current == null) { send(p, "team-no-team", "&cYou don't have a team!"); return true; }
-                if (!isLeader(p, current) && !p.hasPermission("team.home.set")) { send(p, "team-not-leader", "&cOnly the team leader can set the team home!"); return true; }
+                if (!isLeader(p, current) && !p.hasPermission("team.home.set") && !teamData.getBoolean(current + ".permissions." + playerKey(p) + ".home-set", false)) { send(p, "team-not-leader", "&cOnly the team leader can set the team home!"); return true; }
                 if (!teamHomeEnabled()) { send(p, "team-home-disabled", "&cTeam homes are disabled."); return true; }
                 ConfigurationSection section = teamData.getConfigurationSection(current + ".home");
                 if (section == null) section = teamData.createSection(current + ".home");
@@ -521,7 +521,7 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
             case "home" -> {
                 if (current == null) { send(p, "team-no-team", "&cYou don't have a team!"); return true; }
                 if (!teamHomeEnabled()) { send(p, "team-home-disabled", "&cTeam homes are disabled."); return true; }
-                if (p.hasPermission("team.home.access") || isLeader(p, current) || p.hasPermission("team.home.bypass")) {
+                if ((p.hasPermission("team.home.access") && teamData.getBoolean(current + ".permissions." + playerKey(p) + ".home-access", true)) || isLeader(p, current) || p.hasPermission("team.home.bypass")) {
                     Location loc = readLocation(teamData.getConfigurationSection(current + ".home"));
                     if (loc == null) { send(p, "team-no-home", "&cYour team has not set a home!"); return true; }
                     teleport(p, loc, "team", "&aYou have been teleported to Team home!"); return true;
@@ -679,9 +679,31 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 send(player, "home-deleted", "&fHome %home% has been deleted".replace("%home%", String.valueOf(number)));
                 openHomes(player);
             }
+        } else if (holder.type.equals("member-manager")) {
+            String[] data = holder.data.split("\\|", 2);
+            if (data.length != 2) return;
+            String team = data[0]; UUID targetId;
+            try { targetId = UUID.fromString(data[1]); } catch (IllegalArgumentException ex) { return; }
+            if (!team.equals(teamName(player)) || (!isLeader(player, team) && !player.hasPermission("team.admin") && !teamData.getBoolean(team + ".permissions." + playerKey(player) + ".manage-members", false))) { send(player, "no-permission", "&cYou cannot manage members."); return; }
+            ConfigurationSection items = memberGui.getConfigurationSection("items"); if (items == null) return;
+            String clicked = null;
+            for (String key : items.getKeys(false)) { ConfigurationSection item = items.getConfigurationSection(key); if (item != null && item.getInt("slot", -1) == slot) { clicked = key; break; } }
+            if (clicked == null) return;
+            if (clicked.equals("pvp_toggle")) { boolean enabled = !teamData.getBoolean(team + ".pvp", false); teamData.set(team + ".pvp", enabled); player.sendMessage(teamMessage(enabled ? "pvp-enabled" : "pvp-disabled", enabled ? "&aTeam PvP enabled." : "&cTeam PvP disabled.")); }
+            else { String field = switch (clicked) { case "team_home_access" -> "home-access"; case "team_home_set" -> "home-set"; case "create_delete_teams" -> "team-admin"; case "manage_members" -> "manage-members"; default -> null; }; if (field == null) return; String path = team + ".permissions." + targetId + "." + field; teamData.set(path, !teamData.getBoolean(path, false)); }
+            saveTeams(); openMemberManager(player, team, targetId);
         } else if (holder.type.equals("team")) {
             String team = teamName(player);
             if (team == null) { player.closeInventory(); send(player, "team-no-team", "&cYou don't have a team!"); return; }
+            if (slot >= 0 && slot < 27) {
+                List<String> ids = new ArrayList<>(); String leaderId = teamData.getString(team + ".leader", "");
+                if (!leaderId.isBlank()) ids.add(leaderId); ids.addAll(teamData.getStringList(team + ".members"));
+                if (slot < ids.size()) {
+                    if (!isLeader(player, team) && !player.hasPermission("team.admin") && !teamData.getBoolean(team + ".permissions." + playerKey(player) + ".manage-members", false)) { send(player, "no-permission", "&cYou cannot manage members."); return; }
+                    try { openMemberManager(player, team, UUID.fromString(ids.get(slot))); } catch (IllegalArgumentException ignored) { }
+                    return;
+                }
+            }
             int homeSlot = teamGui.getInt("items.team-home.slot", 52);
             int pvpSlot = teamGui.getInt("items.pvp.slot", 53);
             if (slot == pvpSlot) {
