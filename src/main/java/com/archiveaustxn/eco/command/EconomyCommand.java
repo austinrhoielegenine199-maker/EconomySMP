@@ -146,38 +146,55 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
         YamlConfiguration cfg = YamlConfiguration.loadConfiguration(
             new java.io.File(plugin.getDataFolder(), "core/eco/gui/pay-history.yml"));
         int rows = Math.max(1, Math.min(6, cfg.getInt("pay-history-gui.rows", 6)));
-        int pageSize = cfg.getString("pay-history-gui.history-slots", "0-44").equals("0-44") ? 45 : 45;
+        int size = rows * 9;
         String title = eco.color(cfg.getString("pay-history-gui.title", "&8Payment Logs %player% (Page %page%)")
             .replace("%player%", targetName).replace("%page%", String.valueOf(page)));
-        Inventory inventory = Bukkit.createInventory(null, rows * 9, title);
-        List<Record> records = history.find(targetId, pageSize, page, sort);
-        int slot = 0;
+        com.archiveaustxn.eco.history.PaymentHistoryHolder holder =
+            new com.archiveaustxn.eco.history.PaymentHistoryHolder(targetId, targetName, page, sort);
+        Inventory inventory = Bukkit.createInventory(holder, size, title);
+        int[] slots = java.util.stream.IntStream.range(0, Math.min(45, size)).toArray();
+        List<Record> records = history.find(targetId, slots.length, page, sort);
+        int index = 0;
         for (Record record : records) {
-            while (slot < inventory.getSize() && (slot == 45 || slot == 48 || slot == 49 || slot == 50 || slot == 53)) slot++;
-            if (slot >= inventory.getSize()) break;
+            if (index >= slots.length) break;
             boolean received = record.to().equalsIgnoreCase(targetName);
-            ItemStack item = new ItemStack(received ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE);
+            String base = received ? "pay-history-gui.receive-pay" : "pay-history-gui.gift-pay";
+            Material material = Material.matchMaterial(cfg.getString(base + ".material", received ? "LIME_STAINED_GLASS_PANE" : "RED_STAINED_GLASS_PANE"));
+            if (material == null) material = Material.PAPER;
+            ItemStack item = new ItemStack(material);
             ItemMeta meta = item.getItemMeta();
             if (meta != null) {
-                meta.setDisplayName(eco.color((received ? "&aReceived payment" : "&cSent payment")));
-                meta.setLore(List.of(
-                    eco.color("&7From: &f" + record.from()),
-                    eco.color("&7To: &f" + record.to()),
-                    eco.color("&7Amount: &a" + eco.format(record.amount())),
-                    eco.color("&7Date: &f" + record.date())));
+                String amount = eco.format(record.amount());
+                meta.setDisplayName(eco.color(cfg.getString(base + ".displayname", (received ? "&a+" : "&c-") + "%amount%").replace("%amount%", amount)));
+                meta.setLore(cfg.getStringList(base + ".lore").stream().map(line -> eco.color(line
+                    .replace("%id%", record.id()).replace("%amount%", amount).replace("%from%", record.from())
+                    .replace("%to%", record.to()).replace("%date%", record.date()))).toList());
                 item.setItemMeta(meta);
             }
-            inventory.setItem(slot++, item);
+            inventory.setItem(slots[index++], item);
         }
-        ItemStack info = new ItemStack(Material.PAPER);
-        ItemMeta infoMeta = info.getItemMeta();
-        if (infoMeta != null) { infoMeta.setDisplayName(eco.color("&eSort: &f" + sort)); info.setItemMeta(infoMeta); }
-        inventory.setItem(48, info);
-        ItemStack refresh = new ItemStack(Material.ANVIL);
-        ItemMeta refreshMeta = refresh.getItemMeta();
-        if (refreshMeta != null) { refreshMeta.setDisplayName(eco.color("&aRefresh")); refresh.setItemMeta(refreshMeta); }
-        inventory.setItem(49, refresh);
+        setHistoryButton(inventory, cfg, "previous", "pay-history-gui.previous", "&ePrevious page", page > 1);
+        setHistoryButton(inventory, cfg, "sort", "pay-history-gui.sort", "&eSort: " + sort, true);
+        setHistoryButton(inventory, cfg, "refresh", "pay-history-gui.refresh", "&aRefresh", true);
+        setHistoryButton(inventory, cfg, "filter", "pay-history-gui.filter", "&eFilter", true);
+        setHistoryButton(inventory, cfg, "next", "pay-history-gui.next", "&eNext page", records.size() == slots.length);
         viewer.openInventory(inventory);
+    }
+
+    private void setHistoryButton(Inventory inventory, YamlConfiguration cfg, String id, String path, String fallback, boolean enabled) {
+        if (!enabled) return;
+        int slot = cfg.getInt(path + ".slot", switch (id) { case "previous" -> 45; case "sort" -> 48; case "refresh" -> 49; case "filter" -> 50; default -> 53; });
+        if (slot < 0 || slot >= inventory.getSize()) return;
+        Material material = Material.matchMaterial(cfg.getString(path + ".material", switch (id) { case "previous" -> "ARROW"; case "sort" -> "HOPPER"; case "refresh" -> "ANVIL"; case "filter" -> "COMPARATOR"; default -> "ARROW"; }));
+        if (material == null) material = Material.PAPER;
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName(eco.color(cfg.getString(path + ".displayname", fallback)));
+            meta.setLore(cfg.getStringList(path + ".lore").stream().map(eco::color).toList());
+            item.setItemMeta(meta);
+        }
+        inventory.setItem(slot, item);
     }
 
     @Override public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
