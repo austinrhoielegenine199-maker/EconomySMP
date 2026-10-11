@@ -7,6 +7,10 @@ description: EconomySMP Core with integrated economy, shop, and sell modules
 softdepend: [Vault, PlaceholderAPI]
 folia-supported: true
 commands:
+  flakes:
+    description: View, pay, and administer Flakes currency
+    usage: /flakes [bal|pay|give|take|set|reload]
+    aliases: [flake]
   home:
     description: Open your homes menu or teleport to a home
     usage: /home [1-5|team|reload]
@@ -72,6 +76,16 @@ commands:
     usage: /paytoggle
     permission: economysmp.paytoggle
 permissions:
+  flakes.admin:
+    default: op
+  flakes.use:
+    default: true
+  flakes.vip:
+    default: false
+  flakes.bal:
+    default: op
+  flakes.pay:
+    default: true
   home.reload:
     default: op
   home.bypass:
