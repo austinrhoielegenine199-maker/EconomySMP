@@ -37,8 +37,18 @@ public final class ShopListener implements Listener {
     public void onClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
         if (!(event.getView().getTopInventory().getHolder() instanceof ShopHolder holder)) return;
+        Inventory top = event.getView().getTopInventory();
+        // Keep shop controls protected, but let players organize their own inventory.
+        // Shift-clicks from the player inventory stay blocked so items cannot transfer into the shop.
+        if (event.getClickedInventory() == null) {
+            event.setCancelled(true);
+            return;
+        }
+        if (event.getClickedInventory() != top) {
+            event.setCancelled(event.isShiftClick());
+            return;
+        }
         event.setCancelled(true);
-        if (event.getClickedInventory() != event.getView().getTopInventory()) return;
 
         if (holder.category().equals("main")) {
             int slot = event.getSlot();
@@ -98,7 +108,15 @@ public final class ShopListener implements Listener {
 
     @EventHandler
     public void onDrag(InventoryDragEvent event) {
-        if (event.getView().getTopInventory().getHolder() instanceof ShopHolder) event.setCancelled(true);
+        if (!(event.getView().getTopInventory().getHolder() instanceof ShopHolder)) return;
+        int topSize = event.getView().getTopInventory().getSize();
+        // Dragging within the player inventory is allowed; any drag touching the shop GUI is blocked.
+        for (int rawSlot : event.getRawSlots()) {
+            if (rawSlot < topSize) {
+                event.setCancelled(true);
+                return;
+            }
+        }
     }
 
 
