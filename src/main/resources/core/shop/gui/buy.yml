@@ -11,13 +11,13 @@ confirm-menu:
   confirm:
     slot: 23
     material: LIME_STAINED_GLASS_PANE
-    display-name: "&#04fc04ᴄᴏɴғɪʀᴍ"
-    lore: ["&fClick to purchase"]
+    display-name: "&#04fc04ᴄᴏɴꜰɪʀᴍ"
+    lore: ["&fᴄʟɪᴄᴋ ᴛᴏ ʙᴜʏ"]
   cancel:
     slot: 21
     material: RED_STAINED_GLASS_PANE
     display-name: "&#fc0404ᴄᴀɴᴄᴇʟ"
-    lore: ["&fClick to cancel"]
+    lore: ["&fᴄʟɪᴄᴋ ᴛᴏ ᴄᴀɴᴄᴇʟ"]
   item:
     slot: 13
     material: "%clicked-item%"
