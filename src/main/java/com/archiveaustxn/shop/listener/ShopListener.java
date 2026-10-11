@@ -66,7 +66,7 @@ public final class ShopListener implements Listener {
             else if (slot == 10) changeAmount(player, purchase, -10);
             else if (slot == 9) changeAmount(player, purchase, -64);
             else if (slot == 23) {
-                player.sendMessage(ShopCommand.color("&cPurchase processing will be enabled with the economy integration."));
+                player.sendMessage(ShopModule.color("&cPurchase processing will be enabled with the economy integration."));
             }
             return;
         }
