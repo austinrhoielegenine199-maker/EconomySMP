@@ -32,9 +32,9 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
     }
 
     public void load() {
-        saveResourceIfMissing("flake.yml");
-        saveResourceIfMissing("lang.yml");
-        saveResourceIfMissing("FlakesBooster.yml");
+        saveResourceIfMissing("core/flakes/flake.yml");
+        saveResourceIfMissing("core/flakes/lang.yml");
+        saveResourceIfMissing("core/flakes/FlakesBooster.yml");
 
         dataFile = new File(plugin.getDataFolder(), "flakes-data.yml");
         if (!dataFile.exists()) {
@@ -47,7 +47,7 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
             }
         }
         data = YamlConfiguration.loadConfiguration(dataFile);
-        language = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "lang.yml"));
+        language = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "core/flakes/lang.yml"));
         plugin.getLogger().info("Flakes module loaded.");
     }
 
