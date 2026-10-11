@@ -2,6 +2,9 @@ package com.archiveaustxn;
 
 import com.archiveaustxn.eco.EconomyModule;
 import com.archiveaustxn.home.HomeModule;
+import com.archiveaustxn.home.command.HomeCommand;
+import com.archiveaustxn.team.command.TeamCommand;
+import com.archiveaustxn.team.manager.TeamManager;
 import com.archiveaustxn.eco.command.EconomyCommand;
 import com.archiveaustxn.eco.history.PaymentHistoryListener;
 import com.archiveaustxn.eco.storage.PaymentHistoryStore;
@@ -20,6 +23,7 @@ public final class EconomySMP extends JavaPlugin {
     private PaymentHistoryStore paymentHistoryStore;
     private SellModule sellModule;
     private HomeModule homeModule;
+    private TeamManager teamManager;
 
     @Override
     public void onEnable() {
@@ -56,10 +60,13 @@ public final class EconomySMP extends JavaPlugin {
         bind("payhistory", economyHandler, economyHandler);
         bind("paytoggle", economyHandler, economyHandler);
 
-        bind("home", homeModule, homeModule);
-        bind("sethome", homeModule, homeModule);
-        bind("delhome", homeModule, homeModule);
-        bind("team", homeModule, homeModule);
+        HomeCommand homeCommand = new HomeCommand(homeModule);
+        bind("home", homeCommand, homeCommand);
+        bind("sethome", homeCommand, homeCommand);
+        bind("delhome", homeCommand, homeCommand);
+        teamManager = new TeamManager(homeModule);
+        TeamCommand teamCommand = new TeamCommand(homeModule);
+        bind("team", teamCommand, teamCommand);
 
         bind("sell", sellModule, sellModule);
         bind("worth", sellModule, sellModule);
@@ -96,4 +103,5 @@ public final class EconomySMP extends JavaPlugin {
     public CoreDatabase getDatabase() { return database; }
     public SellModule getSellModule() { return sellModule; }
     public HomeModule getHomeModule() { return homeModule; }
+    public TeamManager getTeamManager() { return teamManager; }
 }
