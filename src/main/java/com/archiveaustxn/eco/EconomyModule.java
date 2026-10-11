@@ -25,7 +25,7 @@ public final class EconomyModule {
         configFile = new File(directory, "config.yml");
         if (!configFile.exists()) {
             try {
-                if (plugin.getResource("core/eco/config.yml") != null) plugin.saveResource("core/eco/config.yml", false);
+                if (plugin.getResource("core/eco/eco.yml") != null) plugin.saveResource("core/eco/eco.yml", false);
                 else configFile.createNewFile();
             } catch (Exception exception) { plugin.getLogger().severe("Could not create eco config: " + exception.getMessage()); }
         }
