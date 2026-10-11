@@ -1,3 +1,12 @@
+# PlaceholderAPI (requires PlaceholderAPI):
+# %home_count% / %home_homes_count% - number of personal homes set
+# %home_max_homes% - player's maximum homes
+# %home_home_1_set% through %home_home_5_set% - true/false for each personal home
+# %home_home_1_name% through %home_home_5_name% - configured home names
+# %home_home_1_world% / %home_home_1_x% / %home_home_1_y% / %home_home_1_z% (and homes 2-5)
+# %home_home_list% - comma-separated set home numbers
+# %home_team_has_team% - true/false
+# %home_teamhome_set% - true/false for whether the team home is set
 homes:
   teleport-delay: 5
   teleport-distance: 0.3
