@@ -133,7 +133,7 @@ public final class ShopModule {
     private String prettyName(String raw) {
         if (raw == null || raw.isBlank()) return "Item";
         String cleaned = raw.replace('_', ' ').replace('-', ' ').trim().replaceAll("\\s+", " ");
-        StringJoiner words = new StringJoiner(" ");
+        java.util.StringJoiner words = new java.util.StringJoiner(" ");
         for (String word : cleaned.split(" ")) {
             if (word.isEmpty()) continue;
             words.add(word.substring(0, 1).toUpperCase(java.util.Locale.ROOT)
