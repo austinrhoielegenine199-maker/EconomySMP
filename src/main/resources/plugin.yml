@@ -1,6 +1,6 @@
 name: EconomySMP
 version: '1.0.0'
-main: com.archiveaustxn.shop.EconomySMP
+main: com.archiveaustxn.EconomySMP
 api-version: '1.21'
 author: ArchiveAustxn
 description: EconomySMP Core with integrated shop module
