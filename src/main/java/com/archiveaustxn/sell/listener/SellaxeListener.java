@@ -39,7 +39,7 @@ public final class SellaxeListener implements Listener {
         this.prices = prices;
     }
 
-    private ConfigurationSection settings() { return config.get("Sellaxe.yml"); }
+    private ConfigurationSection settings() { return config.get("sellaxe.yml"); }
 
     private boolean isSellaxe(Player player) {
         ConfigurationSection y = settings();
