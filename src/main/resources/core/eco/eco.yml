@@ -1,0 +1,24 @@
+# EconomySMP Core economy settings
+# Permissions: economysmp.admin, economysmp.bal.other,
+# economysmp.paytoggle, economysmp.payhistory, economysmp.payhistory.other
+
+economy:
+  provider: VAULT
+  currency-format: "#,##0.##"
+  abbreviations:
+    enabled: true # Accept 100k, 10k, 1m, etc.
+    formats:
+      - 'K'
+      - 'M'
+      - 'B'
+      - 'T'
+
+default-balance: 0
+offline-tab-completion: true
+offline-payment: true
+
+sounds:
+  click-sound: "UI_BUTTON_CLICK"
+  pay-sound: "ENTITY_PLAYER_LEVELUP"
+  change-page: "ITEM_BOOK_PAGE_TURN"
+  refresh-gui: "UI_TOAST_IN"
