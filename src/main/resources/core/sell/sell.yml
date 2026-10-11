@@ -7,3 +7,28 @@ sell:
   sell-all-command-enabled: true
 messages:
   prefix: '&#04fc84ꜱᴇʟʟ &7» '
+
+settings:
+  enabled: true
+  sell-all:
+    enabled: true
+    require-confirmation: false
+    ignore-custom-named-items: false
+    ignore-damaged-tools: false
+    include-hotbar: true
+    include-armor: false
+    include-offhand: false
+  progression:
+    enabled: true
+    multiplier-cap: 10.0
+  history:
+    enabled: true
+    max-entries-per-player: 500
+  gui:
+    sell-enabled: true
+    worth-enabled: true
+    progress-enabled: true
+    history-enabled: true
+  logging:
+    transactions: true
+    config-reload: true
