@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 
@@ -367,7 +368,50 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 if (slot >= 0 && slot < inv.getSize()) inv.setItem(slot, stack);
             }
         }
+        List<String> members = new ArrayList<>();
+        String leaderId = teamData.getString(team + ".leader", "");
+        if (!leaderId.isBlank()) members.add(leaderId);
+        members.addAll(teamData.getStringList(team + ".members"));
+        for (int i = 0; i < Math.min(27, members.size()); i++) {
+            String memberId = members.get(i);
+            UUID memberUuid;
+            try { memberUuid = UUID.fromString(memberId); } catch (IllegalArgumentException ex) { continue; }
+            Player online = Bukkit.getPlayer(memberUuid);
+            String memberName = online != null ? online.getName() : Bukkit.getOfflinePlayer(memberUuid).getName();
+            if (memberName == null) memberName = memberId;
+            ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+            ItemMeta headMeta = head.getItemMeta();
+            if (headMeta instanceof SkullMeta skull && online != null) skull.setOwningPlayer(online);
+            if (headMeta != null) { headMeta.setDisplayName(color("&a" + memberName)); headMeta.setLore(List.of(color("&fClick to manage member"))); head.setItemMeta(headMeta); }
+            inv.setItem(i, head);
+        }
         player.openInventory(inv);
+    }
+
+    private void openMemberManager(Player viewer, String team, UUID targetId) {
+        if (targetId.toString().equals(teamData.getString(team + ".leader", ""))) { viewer.sendMessage(teamMessage("cannot-edit-owner", "&cYou cannot manage the team owner.")); return; }
+        Inventory inv = Bukkit.createInventory(new HomeHolder("member-manager", team + "|" + targetId), 27, color(memberGui.getString("gui.title", "&8Member Manager")));
+        ConfigurationSection items = memberGui.getConfigurationSection("items");
+        if (items != null) for (String key : items.getKeys(false)) {
+            ConfigurationSection item = items.getConfigurationSection(key); if (item == null) continue;
+            String path = team + ".permissions." + targetId;
+            boolean enabled = switch (key) {
+                case "pvp_toggle" -> teamData.getBoolean(team + ".pvp", false);
+                case "team_home_access" -> teamData.getBoolean(path + ".home-access", false);
+                case "team_home_set" -> teamData.getBoolean(path + ".home-set", false);
+                case "create_delete_teams" -> teamData.getBoolean(path + ".team-admin", false);
+                case "manage_members" -> teamData.getBoolean(path + ".manage-members", false);
+                default -> false;
+            };
+            String status = enabled ? item.getString("enabled_status", "&aAllowed") : item.getString("disabled_status", "&cDenied");
+            String display = item.getString("title", item.getString("name", key));
+            List<String> lore = item.getStringList("lore").stream().map(line -> color(line.replace("%status%", status))).toList();
+            Material material = Material.matchMaterial(item.getString("material", "STONE")); if (material == null) continue;
+            ItemStack stack = new ItemStack(material); ItemMeta meta = stack.getItemMeta();
+            if (meta != null) { meta.setDisplayName(color(display)); meta.setLore(lore); stack.setItemMeta(meta); }
+            int slot = item.getInt("slot", -1); if (slot >= 0 && slot < inv.getSize()) inv.setItem(slot, stack);
+        }
+        viewer.openInventory(inv);
     }
 
     @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
