@@ -444,11 +444,11 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
             }
             return true;
         }
-        if (name.equals("team")) return teamCommand(sender, args);
+        if (name.equals("team")) return executeTeamCommand(sender, args);
         return false;
     }
 
-    private boolean teamCommand(CommandSender sender, String[] args) {
+    public boolean executeTeamCommand(CommandSender sender, String[] args) {
         if (args.length == 0) {
             if (sender instanceof Player p) openTeamMenu(p);
             else sender.sendMessage(color("&e/team <create|invite|join|leave|delete|sethome|home|info>"));
