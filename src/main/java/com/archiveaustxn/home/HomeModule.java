@@ -180,7 +180,8 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
         pendingTeleports.put(player.getUniqueId(), start);
         int delay = Math.max(1, homeConfig.getInt("homes.teleport-delay", 5));
         player.sendMessage((messageKey.equals("team") ? teamMessage("teleport-countdown", "&fTeleport in %count% seconds")
-                : homeMessage("teleport-completed", "&fTeleport in %count% seconds")).replace("%count%", String.valueOf(delay)));
+                : color(homeLang.getString("cooldown.module.chat.message.0", "&fTeleport in &b%count% &fseconds")))
+                .replace("%count%", String.valueOf(delay)));
         final int[] remaining = {delay};
         Bukkit.getScheduler().runTaskTimer(plugin, task -> {
             if (!player.isOnline() || !pendingTeleports.containsKey(player.getUniqueId())) { task.cancel(); return; }
@@ -200,9 +201,10 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 play(player, "sounds.teleport-complete", "ENTITY_ENDERMAN_TELEPORT");
                 task.cancel();
             } else {
-                player.sendActionBar(color((messageKey.equals("team") ? teamMessage("teleport-countdown", "&fTeleport in %count% seconds")
-                        : homeLang.getString("cooldown.module.chat.message.0", "&fTeleport in &b%count% &fseconds"))
-                        .replace("%count%", String.valueOf(remaining[0])));
+                String countdown = messageKey.equals("team")
+                        ? teamMessage("teleport-countdown", "&fTeleport in %count% seconds")
+                        : color(homeLang.getString("cooldown.module.chat.message.0", "&fTeleport in &b%count% &fseconds"));
+                player.sendActionBar(countdown.replace("%count%", String.valueOf(remaining[0])));
                 play(player, "sounds.teleport-cooldown", "BLOCK_NOTE_BLOCK_PLING");
             }
         }, 20L, 20L);
