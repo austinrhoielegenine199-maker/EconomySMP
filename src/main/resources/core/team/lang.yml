@@ -1,0 +1,69 @@
+prefix-enable: false
+prefix: ""
+errors:
+  team-already-exists: "&cA team with this name already exists!"
+  already-in-team: "&cYou are already in a team!"
+  not-in-team: "&cYou are not in a team!"
+  not-leader: "&cOnly the team leader can do that!"
+  player-not-found: "&cPlayer not found!"
+  player-already-in-team: "&cThis player is already in a team!"
+  no-pending-invites: "&cYou have no pending invitations!"
+  team-not-found: "&cThe team no longer exists!"
+  leader-cant-leave: "&cYou cannot leave the team! &7/team delete"
+  player-not-in-your-team: "&cThis player is not in your team!"
+  insufficient-rank: "&cYou do not have permission to do that!"
+  no-team-home: "&cYour team has not set a home!"
+  cannot-kick: "&cYou cannot kick this player!"
+  team-full: "&cThe team is full!"
+  cannot-manage-self: "&cYou cannot manage yourself!"
+  cannot-edit-owner: "&cYou cannot manage the team owner!"
+  team-home-disabled: "&cTeam homes are currently disabled on this server!"
+  usage-chat: "&cUsage: /team chat <message> or /team chat toggle"
+  blocked-team-name: "&cYou cannot create a team with that name!"
+  invalid-team-name-length: "&cTeam name must be between %min% and %max% characters long!"
+  invalid-team-name-placeholder: "&cYou cannot create a team with that name!"
+team:
+  pvp-enabled: "&aTeam-PVP has been enabled!"
+  pvp-disabled: "&cTeam-PVP has been disabled!"
+  pvp-disabled-damage: "&cYou cannot damage team members!"
+  plugin-reloaded: "&#00FF00Team plugin has been reloaded!"
+  created: "&fYour team &#34eb9b%team% &fhas been created"
+  invite-sent: "&fInvitation sent to &#34eb9b%player%"
+  invite-received: ["&fYou have been invited to the team &#34eb9b%team%! &7/team join %team%"]
+  joined: "&fYou have joined the team &#34eb9b%team%"
+  member-joined: "&fPlayer &#34eb9b%player% &fhas joined the team"
+  left: "&#FC0000You have left the team!"
+  member-left: "&fThe player &#34eb9b%player% &fhas left the team!"
+  player-kicked: "&cPlayer %player% has been kicked from the team!"
+  you-were-kicked: "&cYou were kicked from the team!"
+  deleted: "&cTeam %team% has been deleted!"
+  home-set: "&aTeam home has been set!"
+  home-deleted: "&cTeam home has been deleted!"
+  new-owner: "&fTeam leader has been transferred to &#34eb9b%player%"
+  team-search: "&cType the name of the player or type cancel to cancel the action!"
+  search-cancelled: "&cTeam search cancelled!"
+  teleport-countdown: "&fTeleport in &#34eb9b%count% &fseconds"
+  teleport-completed: "&aYou have been teleported to Team home!"
+  already-teleporting: "&cYou are already teleporting!"
+  teleport-cancelled: "&cTeleport cancelled!"
+  chat-enabled: "&aTeam chat enabled!"
+  chat-disabled: "&cTeam chat disabled!"
+  chat-format: "&#34eb9b%player%&f: &#34eb9b--> &f%message%"
+command-usage: |
+  &#00FF00&lTEAM
+  &#00FF00➤ &f/team
+  &#00FF00➤ &f/team create <name>
+  &#00FF00➤ &f/team join <team>
+  &#00FF00➤ &f/team invite <player>
+  &#00FF00➤ &f/team leave
+  &#00FF00➤ &f/team kick <player>
+  &#00FF00➤ &f/team delete
+  &#00FF00➤ &f/team info
+  &#00FF00➤ &f/team sethome
+  &#00FF00➤ &f/team home
+  &#00FF00➤ &f/team transfer <player>
+  &#00FF00➤ &f/team chat <message>
+  &#00FF00➤ &f/team chat toggle
+command-usage-admin: |
+  &#FF0000&lTEAM ADMIN
+  &#FF0000➤ &f/team reload
