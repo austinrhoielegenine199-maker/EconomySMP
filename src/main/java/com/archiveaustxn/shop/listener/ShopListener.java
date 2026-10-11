@@ -156,7 +156,7 @@ public final class ShopListener implements Listener {
             player.sendMessage(ShopModule.color("&cInventory delivery issue; your payment was refunded."));
             return;
         }
-        player.sendMessage(ShopModule.color("&aYou've bought " + purchase.amount + " " + prettyName(purchase.name, purchase.key) + "!"));
+        player.sendMessage(ShopModule.color("&aYou've bought x" + purchase.amount + " " + prettyName(purchase.name, purchase.key) + "!"));
         // Keep this menu open for repeat purchases.
         openPurchase(player, purchase);
     }
@@ -171,7 +171,7 @@ public final class ShopListener implements Listener {
         ItemStack selected = createPurchaseItem(purchase, purchase.amount);
         ItemMeta meta = selected.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(ShopModule.color(purchase.name));
+            meta.setDisplayName(ShopModule.color(purchase.name == null || purchase.name.isBlank() || purchase.name.equalsIgnoreCase(purchase.key) ? prettyName(purchase.name, purchase.key) : purchase.name));
             meta.setLore(java.util.List.of(
                     ShopModule.color("&fAmount: &a" + purchase.amount),
                     ShopModule.color("&fPrice: &a" + (purchase.price * purchase.amount))));
@@ -191,7 +191,7 @@ public final class ShopListener implements Listener {
         ItemStack selected = createPurchaseItem(p, Math.max(1, Math.min(p.material.getMaxStackSize(), p.amount)));
         ItemMeta meta = selected.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(ShopModule.color(p.name));
+            meta.setDisplayName(ShopModule.color(p.name == null || p.name.isBlank() || p.name.equalsIgnoreCase(p.key) ? prettyName(p.name, p.key) : p.name));
             meta.setLore(java.util.List.of(ShopModule.color("&fAmount: &a" + p.amount), ShopModule.color("&fPrice: &a" + (p.price * p.amount))));
             selected.setItemMeta(meta);
         }
