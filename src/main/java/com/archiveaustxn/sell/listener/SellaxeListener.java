@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -74,15 +75,20 @@ public final class SellaxeListener implements Listener {
         if (event.getAction() != Action.LEFT_CLICK_BLOCK || event.getClickedBlock() == null) return;
         Player player = event.getPlayer();
         if (!isSellaxe(player)) return;
-        Material type = event.getClickedBlock().getType();
-        if (type != Material.CHEST && type != Material.TRAPPED_CHEST) return;
-
         BlockState state = event.getClickedBlock().getState();
-        if (!(state instanceof Chest chest)) return;
-        Inventory inventory = chest.getBlockInventory();
-        if (chest.getInventory().getHolder() instanceof DoubleChest doubleChest) {
-            inventory = doubleChest.getInventory();
+        if (!(state instanceof InventoryHolder holder)) return;
+        Inventory inventory;
+        if (state instanceof Chest chest) {
+            inventory = chest.getBlockInventory();
+            if (chest.getInventory().getHolder() instanceof DoubleChest doubleChest) {
+                inventory = doubleChest.getInventory();
+            }
+        } else {
+            inventory = holder.getInventory();
         }
+        // Support standard three-row storage blocks (barrels, shulker boxes, etc.)
+        // as well as single and double chests.
+        if (inventory.getSize() != 27 && inventory.getSize() != 54) return;
 
         Economy economy = plugin.getEconomyModule() == null ? null : plugin.getEconomyModule().provider();
         if (economy == null) {
