@@ -1,40 +1,49 @@
 package com.archiveaustxn;
 
+import com.archiveaustxn.eco.EconomyModule;
+import com.archiveaustxn.eco.command.EconomyCommand;
+import com.archiveaustxn.eco.storage.PaymentHistoryStore;
 import com.archiveaustxn.shop.ShopModule;
 import com.archiveaustxn.shop.command.ShopCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/**
- * Main entry point for EconomySMP Core.
- * Feature modules are initialized and shut down through this class.
- */
+/** Main entry point; owns and wires the EconomySMP Core modules. */
 public final class EconomySMP extends JavaPlugin {
     private ShopModule shopModule;
+    private EconomyModule economyModule;
+    private PaymentHistoryStore paymentHistoryStore;
 
-    @Override
-    public void onEnable() {
+    @Override public void onEnable() {
+        if (!getDataFolder().exists()) getDataFolder().mkdirs();
         saveDefaultConfig();
+        economyModule = new EconomyModule(this);
+        economyModule.load();
+        paymentHistoryStore = new PaymentHistoryStore(this);
         shopModule = new ShopModule(this);
         shopModule.load();
 
-        PluginCommand command = getCommand("shop");
-        if (command != null) {
-            ShopCommand handler = new ShopCommand(this, shopModule);
-            command.setExecutor(handler);
-            command.setTabCompleter(handler);
-        } else {
-            getLogger().severe("The /shop command is missing from plugin.yml.");
-        }
+        ShopCommand shopHandler = new ShopCommand(this, shopModule);
+        bind("shop", shopHandler, shopHandler);
+        EconomyCommand economyHandler = new EconomyCommand(this, economyModule, paymentHistoryStore);
+        bind("pay", economyHandler, economyHandler);
+        bind("money", economyHandler, economyHandler);
+        bind("eco", economyHandler, economyHandler);
         getLogger().info("EconomySMP Core enabled.");
     }
 
-    @Override
-    public void onDisable() {
-        if (shopModule != null) shopModule.close();
+    private void bind(String name, org.bukkit.command.CommandExecutor executor,
+                      org.bukkit.command.TabCompleter completer) {
+        PluginCommand command = getCommand(name);
+        if (command == null) { getLogger().severe("Command /" + name + " is missing from plugin.yml."); return; }
+        command.setExecutor(executor);
+        command.setTabCompleter(completer);
     }
 
-    public ShopModule getShopModule() {
-        return shopModule;
+    @Override public void onDisable() {
+        if (shopModule != null) shopModule.close();
     }
+    public ShopModule getShopModule() { return shopModule; }
+    public EconomyModule getEconomyModule() { return economyModule; }
+    public PaymentHistoryStore getPaymentHistoryStore() { return paymentHistoryStore; }
 }
