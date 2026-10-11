@@ -24,7 +24,7 @@ public final class ShopCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length > 0 && args[0].equalsIgnoreCase("addhanditem")) {
-            if (!sender.hasPermission("shop.admin")) {
+            if (!sender.hasPermission("economysmp.shop.admin")) {
                 sender.sendMessage(color(shop.message("no-permission", "&cYou don't have permission.")));
                 return true;
             }
@@ -58,7 +58,7 @@ public final class ShopCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
-            if (!sender.hasPermission("shop.reload")) {
+            if (!sender.hasPermission("economysmp.shop.reload")) {
                 sender.sendMessage(color(shop.message("no-permission", "&cYou have no permission for that!")));
                 return true;
             }
@@ -76,9 +76,9 @@ public final class ShopCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (args.length == 1 && sender.hasPermission("shop.admin")) return List.of("addhanditem", "reload");
-        if (args.length == 2 && args[0].equalsIgnoreCase("addhanditem") && sender.hasPermission("shop.admin")) return shop.categoryNames().stream().sorted().toList();
-        if (args.length == 1 && sender.hasPermission("shop.reload")) return List.of("reload");
+        if (args.length == 1 && sender.hasPermission("economysmp.shop.admin")) return List.of("addhanditem", "reload");
+        if (args.length == 2 && args[0].equalsIgnoreCase("addhanditem") && sender.hasPermission("economysmp.shop.admin")) return shop.categoryNames().stream().sorted().toList();
+        if (args.length == 1 && sender.hasPermission("economysmp.shop.reload")) return List.of("reload");
         return List.of();
     }
 
