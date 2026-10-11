@@ -5,7 +5,7 @@ confirm-menu:
   confirm:
     slot: 15
     material: LIME_STAINED_GLASS_PANE
-    display-name: "&#04fc04ᴄᴏɴғɪʀᴍ"
+    display-name: "&#04fc04ᴄᴏɴꜰɪʀᴍ"
   cancel:
     slot: 11
     material: RED_STAINED_GLASS_PANE
