@@ -3,21 +3,48 @@ version: '1.0.0'
 main: com.archiveaustxn.EconomySMP
 api-version: '1.21'
 author: ArchiveAustxn
-description: EconomySMP Core with integrated shop module
+description: EconomySMP Core with integrated economy and shop modules
 softdepend: [Vault, PlaceholderAPI]
 commands:
   shop:
     description: Open and administer the EconomySMP shop
     usage: /shop
-    permission: shop.use
+    permission: economysmp.shop.use
     permission-message: "&cYou don't have permission."
+  pay:
+    description: Pay another player
+    usage: /pay <player> <amount>
+    permission: economysmp.pay
+  money:
+    description: Check your balance
+    aliases: [bal, balance]
+    usage: /money [player]
+  eco:
+    description: Economy administration commands
+    usage: /eco
+    permission: economysmp.admin
+  paytoggle:
+    description: Toggle receiving player payments
+    permission: economysmp.paytoggle
+  payhistory:
+    description: View payment history
+    usage: /payhistory [player]
+    permission: economysmp.payhistory
 permissions:
-  shop.use:
+  economysmp.shop.use:
     default: true
-  shop.reload:
-    default: op
-  shop.admin:
+  economysmp.admin:
     default: op
     children:
-      shop.use: true
-      shop.reload: true
+      economysmp.payhistory.other: true
+      economysmp.bal.other: true
+  economysmp.bal.other:
+    default: op
+  economysmp.paytoggle:
+    default: true
+  economysmp.payhistory:
+    default: true
+  economysmp.payhistory.other:
+    default: op
+  economysmp.pay:
+    default: true
