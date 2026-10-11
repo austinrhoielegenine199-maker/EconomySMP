@@ -4,7 +4,6 @@ import com.archiveaustxn.EconomySMP;
 import com.archiveaustxn.eco.EconomyModule;
 import com.archiveaustxn.eco.storage.PaymentHistoryStore;
 import com.archiveaustxn.eco.storage.PaymentHistoryStore.Record;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
