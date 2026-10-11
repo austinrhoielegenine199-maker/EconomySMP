@@ -1,0 +1,23 @@
+# Sellaxe item and block-break behavior.
+enabled: true
+displayname: "&#009bffғʀᴏᴢᴇɴ ꜱᴇʟʟ ᴀxᴇ"
+lore:
+  - "&7Instantly Sells All Items in A Chest"
+  - "&8%time%"
+enchantments:
+  enabled: true
+  list:
+    - "EFFICIENCY:5"
+    - "UNBREAKING:3"
+    - "FORTUNE:3"
+    - "MENDING:1"
+time: 3d
+glow: true
+custom-model-data: 1000
+material: NETHERITE_AXE
+sound:
+  enabled: true
+  type: "ENTITY_EXPERIENCE_ORB_PICKUP"
+particle:
+  enabled: true
+  type: CLOUD
