@@ -41,14 +41,15 @@ public final class ShopListener implements Listener {
 
         if (holder.category().equals("main")) {
             int slot = event.getSlot();
-            String category = switch (slot) {
-                case 11 -> "end";
-                case 12 -> "nether";
-                case 13 -> "gear";
-                case 14 -> "food";
-                default -> null;
-            };
-            if (category != null) shop.openCategory(player, category, 1);
+            ConfigurationSection configured = shop.mainGuiCategories();
+            if (configured == null) return;
+            for (String category : configured.getKeys(false)) {
+                ConfigurationSection entry = configured.getConfigurationSection(category);
+                if (entry != null && entry.getInt("slot", -1) == slot) {
+                    shop.openCategory(player, category, 1);
+                    return;
+                }
+            }
             return;
         }
 
