@@ -6,6 +6,7 @@ import com.archiveaustxn.eco.storage.PaymentHistoryStore;
 import com.archiveaustxn.eco.history.PaymentHistoryListener;
 import com.archiveaustxn.shop.ShopModule;
 import com.archiveaustxn.shop.command.ShopCommand;
+import com.archiveaustxn.sell.SellModule;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +15,7 @@ public final class EconomySMP extends JavaPlugin {
     private ShopModule shopModule;
     private EconomyModule economyModule;
     private PaymentHistoryStore paymentHistoryStore;
+    private SellModule sellModule;
 
     @Override public void onEnable() {
         if (!getDataFolder().exists()) getDataFolder().mkdirs();
@@ -23,6 +25,9 @@ public final class EconomySMP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PaymentHistoryListener(this, paymentHistoryStore, economyModule), this);
         shopModule = new ShopModule(this);
         shopModule.load();
+        sellModule = new SellModule(this);
+        sellModule.load();
+        getServer().getPluginManager().registerEvents(sellModule, this);
 
         ShopCommand shopHandler = new ShopCommand(this, shopModule);
         bind("shop", shopHandler, shopHandler);
@@ -32,6 +37,8 @@ public final class EconomySMP extends JavaPlugin {
         bind("eco", economyHandler, economyHandler);
         bind("payhistory", economyHandler, economyHandler);
         bind("paytoggle", economyHandler, economyHandler);
+        bind("sell", sellModule, sellModule);
+        bind("worth", sellModule, sellModule);
         getLogger().info("EconomySMP Core enabled.");
     }
 
@@ -49,4 +56,5 @@ public final class EconomySMP extends JavaPlugin {
     public ShopModule getShopModule() { return shopModule; }
     public EconomyModule getEconomyModule() { return economyModule; }
     public PaymentHistoryStore getPaymentHistoryStore() { return paymentHistoryStore; }
+    public SellModule getSellModule() { return sellModule; }
 }

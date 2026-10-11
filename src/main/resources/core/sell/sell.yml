@@ -1,0 +1,9 @@
+# Sell module behavior. All prices and progression are editable in this folder.
+economy:
+  provider: VAULT
+sell:
+  multiplier-enabled: true
+  base-multiplier: 1.0
+  sell-all-command-enabled: true
+messages:
+  prefix: '&#04fc84ꜱᴇʟʟ &7» '

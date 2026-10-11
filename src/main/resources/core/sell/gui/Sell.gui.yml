@@ -1,0 +1,50 @@
+inventory:
+  title: '&8ꜱᴇʟʟɢᴜɪ'
+  rows: 5
+buttons:
+  categories:
+    crops:
+      name: "&#00f986ᴄʀᴏᴘꜱ"
+      slot: 36
+      material: WHEAT
+      lore: ['&fSell crops and farming materials to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&8%progress-bar%&r &#00f986%progress%%']
+    ores:
+      name: "&#00f986ᴏʀᴇѕ"
+      slot: 37
+      material: DIAMOND
+      lore: ['&fSell ores and mining materials to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&8%progress-bar%&r &#00f986%progress%%']
+    mobs:
+      name: "&#00f986ᴍᴏʙ ᴅʀᴏᴘѕ"
+      slot: 38
+      material: BONE
+      lore: ['&fSell mob drops and loot materials to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&f%progress-bar%&r &#00f986%progress%%']
+    natural:
+      name: "&#00f986ɴᴀᴛʀᴀʟ ɪᴛᴇᴍѕ"
+      slot: 39
+      material: OAK_LEAVES
+      lore: ['&fSell natural materials and trees materials to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&f%progress-bar%&r &#00f986%progress%%']
+    tools:
+      name: "&#00f986ᴀʀᴍᴏʀ ᴀɴᴅ ᴛᴏᴏʟѕ"
+      slot: 40
+      material: NETHERITE_HELMET
+      lore: ['&fSell armor and tools to upgrade your multiplier','','&7Progress to &f%next_multiplier%x','&f%progress-bar% &#00f986%progress%%']
+    fish:
+      name: "&#00f986ꜰɪѕʜ"
+      slot: 41
+      material: TROPICAL_FISH
+      lore: ['&fSell fish and sea drops to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&f%progress-bar% &#00f986%progress%%']
+    books:
+      name: "&#00f986ᴇɴᴄʜᴀɴᴛᴇᴅ ʙᴏᴏᴋѕ"
+      slot: 42
+      material: ENCHANTED_BOOK
+      lore: ['&fSell books and enchanted books to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&f%progress-bar% &#00f986%progress%%']
+    potions:
+      name: "&#00f986ᴘᴏᴛɪᴏɴѕ"
+      slot: 43
+      material: POTION
+      lore: ['&fSell potions and brewing materials to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&f%progress-bar% &#00f986%progress%%']
+    blocks:
+      name: "&#00f986ʙʟᴏᴄᴋѕ"
+      slot: 44
+      material: BRICK
+      lore: ['&fSell blocks and placeable items to','&fupgrade ur sell multiplier!','','&7Progress to &f%next_multiplier%x','&f%progress-bar% &#00f986%progress%%']
