@@ -18,6 +18,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,6 +39,8 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
     private final Map<UUID, Location> pendingTeleports = new HashMap<>();
     private final Map<UUID, String> pendingDelete = new HashMap<>();
     private final Map<UUID, String> pendingInvites = new HashMap<>();
+    private final Set<UUID> pendingRename = new HashSet<>();
+    private final Map<UUID, Integer> renameTarget = new HashMap<>();
 
     public HomeModule(EconomySMP plugin) {
         this.plugin = Objects.requireNonNull(plugin);
@@ -285,7 +288,21 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
         String sectionPath = !permitted ? "no-permission." + (bed ? "bed" : "dye")
                 : (set ? "home-set." + (bed ? "bed" : "dye") : "home-not-set." + (bed ? "bed" : "dye"));
         ConfigurationSection item = mainGui.getConfigurationSection(sectionPath);
-        if (item != null) putConfigured(inv, slot, item, Map.of("%home%", String.valueOf(number)));
+        if (item != null) {
+            putConfigured(inv, slot, item, Map.of("%home%", String.valueOf(number)));
+            if (bed && set) {
+                String customName = homeData.getString(path + ".name", "");
+                if (!customName.isBlank()) {
+                    ItemStack icon = inv.getItem(slot);
+                    if (icon != null && icon.hasItemMeta()) {
+                        ItemMeta meta = icon.getItemMeta();
+                        meta.setDisplayName(color(customName));
+                        icon.setItemMeta(meta);
+                        inv.setItem(slot, icon);
+                    }
+                }
+            }
+        }
     }
 
     private void putConfigured(Inventory inv, int slot, ConfigurationSection config, Map<String,String> replacements) {
@@ -539,6 +556,33 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
     }
     private boolean playerOnly(CommandSender sender) { sender.sendMessage(homeMessage("player-only", "&cOnly players can use this command!")); return true; }
 
+    @EventHandler public void onRenameChat(AsyncPlayerChatEvent event) {
+        UUID id = event.getPlayer().getUniqueId();
+        if (!pendingRename.contains(id)) return;
+        event.setCancelled(true);
+        String input = event.getMessage().trim();
+        pendingRename.remove(id);
+        Integer number = renameTarget.remove(id);
+        if (number == null) return;
+        if (input.equalsIgnoreCase("cancel")) {
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                event.getPlayer().sendMessage(homeMessage("rename-cancelled", "&cHome rename cancelled."));
+                openHomes(event.getPlayer());
+            });
+            return;
+        }
+        String name = color(input);
+        if (name.length() > 32) name = name.substring(0, 32);
+        if (name.isBlank()) name = String.valueOf(number);
+        homeData.set(homePath(event.getPlayer(), number) + ".name", name);
+        saveHomes();
+        String finalName = name;
+        Bukkit.getScheduler().runTask(plugin, () -> {
+            event.getPlayer().sendMessage(homeMessage("rename-success", "&aHome renamed to %name%.").replace("%name%", finalName));
+            openHomes(event.getPlayer());
+        });
+    }
+
     @EventHandler public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player) || !(event.getView().getTopInventory().getHolder() instanceof HomeHolder holder)) return;
         event.setCancelled(true);
@@ -561,8 +605,18 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 if (i < beds.length && parseSlot(beds[i]) == slot) {
                     if (number > maxHomes(player)) { send(player, "premium-locked", "&fThis home is premium locked!"); return; }
                     String path = homePath(player, number);
-                    if (!homeData.isConfigurationSection(path)) { setPersonalHome(player, number); player.closeInventory(); }
-                    else { Location loc = readLocation(homeData.getConfigurationSection(path)); player.closeInventory(); teleport(player, loc, "home", "&aYou have been teleported to home " + number + "!"); }
+                    if (!homeData.isConfigurationSection(path)) {
+                        setPersonalHome(player, number);
+                        player.closeInventory();
+                    } else if (event.getClick().isRightClick()) {
+                        pendingRename.add(player.getUniqueId());
+                        renameTarget.put(player.getUniqueId(), number);
+                        player.closeInventory();
+                        player.sendMessage(homeMessage("rename-prompt", "&eType the new name for home %home% in chat, or type cancel.")
+                                .replace("%home%", String.valueOf(number)));
+                    } else if (event.getClick().isLeftClick()) {
+                        openConfirm(player, number);
+                    }
                     return;
                 }
                 if (i < dyes.length && parseSlot(dyes[i]) == slot) {
