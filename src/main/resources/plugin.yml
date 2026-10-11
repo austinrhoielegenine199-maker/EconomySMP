@@ -5,7 +5,22 @@ api-version: '1.21'
 author: ArchiveAustxn
 description: EconomySMP Core with integrated economy, shop, and sell modules
 softdepend: [Vault, PlaceholderAPI]
+folia-supported: true
 commands:
+  home:
+    description: Open your homes menu or teleport to a home
+    usage: /home [1-5|team|reload]
+    aliases: [homes]
+  sethome:
+    description: Save your current location as a home
+    usage: /sethome <1-5>
+  delhome:
+    description: Delete one of your homes
+    usage: /delhome <1-5>
+  team:
+    description: Manage your team and shared team home
+    usage: /team <create|invite|join|leave|delete|sethome|home|info>
+    aliases: [teams]
   shop:
     description: Open and administer the EconomySMP shop
     usage: /shop
@@ -57,6 +72,30 @@ commands:
     usage: /paytoggle
     permission: economysmp.paytoggle
 permissions:
+  home.reload:
+    default: op
+  home.bypass:
+    default: op
+  home.others:
+    default: op
+  home.limit.1:
+    default: false
+  home.limit.2:
+    default: false
+  home.limit.3:
+    default: false
+  home.limit.4:
+    default: false
+  home.limit.5:
+    default: false
+  team.admin:
+    default: op
+  team.home.bypass:
+    default: op
+  team.home.access:
+    default: true
+  team.home.set:
+    default: op
   economysmp.shop.use:
     default: true
   economysmp.shop.reload:
