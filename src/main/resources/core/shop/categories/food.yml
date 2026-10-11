@@ -23,3 +23,9 @@ items:
   cooked-beef: {material: COOKED_BEEF, price: 35, page: 1, slot: 15, amount: 1}
   golden-carrot: {material: GOLDEN_CARROT, price: 120, page: 1, slot: 16, amount: 1}
   golden-apple: {material: GOLDEN_APPLE, price: 250, page: 1, slot: 17, amount: 1}
+back:
+  slot: 22
+  material: RED_STAINED_GLASS_PANE
+  display-name: "&#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "&fᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴛᴜʀɴ"
