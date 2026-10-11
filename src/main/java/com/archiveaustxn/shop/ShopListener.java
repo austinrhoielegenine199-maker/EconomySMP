@@ -1,5 +1,7 @@
 package com.archiveaustxn.shop;
 
+import com.archiveaustxn.EconomySMP;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
