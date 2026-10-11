@@ -1,9 +1,7 @@
 package com.archiveaustxn.eco.storage;
 
 import com.archiveaustxn.EconomySMP;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,42 +21,15 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public final class PaymentHistoryStore implements AutoCloseable {
     private final EconomySMP plugin;
-    private final File databaseFile;
-    private Connection connection;
+    private final Connection connection;
 
     public PaymentHistoryStore(EconomySMP plugin) {
         this.plugin = plugin;
-        File dir = new File(plugin.getDataFolder(), "core/eco");
-        if (!dir.exists() && !dir.mkdirs()) {
-            throw new IllegalStateException("Could not create database directory: " + dir);
-        }
-        this.databaseFile = new File(dir, "economy.db");
+        this.connection = plugin.getDatabase().connection();
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:" + databaseFile.getAbsolutePath());
-            try (Statement statement = connection.createStatement()) {
-                statement.execute("PRAGMA journal_mode=WAL");
-                statement.execute("PRAGMA busy_timeout=5000");
-                statement.execute("PRAGMA foreign_keys=ON");
-                statement.execute("""
-                    CREATE TABLE IF NOT EXISTS payment_history (
-                      id TEXT PRIMARY KEY,
-                      from_uuid TEXT NOT NULL,
-                      from_name TEXT NOT NULL,
-                      to_uuid TEXT NOT NULL,
-                      to_name TEXT NOT NULL,
-                      amount REAL NOT NULL CHECK(amount >= 0),
-                      timestamp INTEGER NOT NULL
-                    )
-                    """);
-                statement.execute("CREATE INDEX IF NOT EXISTS idx_payment_from_time ON payment_history(from_uuid, timestamp DESC)");
-                statement.execute("CREATE INDEX IF NOT EXISTS idx_payment_to_time ON payment_history(to_uuid, timestamp DESC)");
-            }
             migrateYamlHistory();
-            plugin.getLogger().info("SQLite database opened: " + databaseFile.getName());
         } catch (Exception exception) {
-            close();
-            throw new IllegalStateException("Could not initialize SQLite payment history database", exception);
+            throw new IllegalStateException("Could not migrate SQLite payment history", exception);
         }
     }
 
@@ -146,14 +117,10 @@ public final class PaymentHistoryStore implements AutoCloseable {
         return List.copyOf(result);
     }
 
-    @Override public synchronized void close() {
-        if (connection == null) return;
-        try { connection.close(); }
-        catch (SQLException exception) { plugin.getLogger().warning("Could not close SQLite database cleanly: " + exception.getMessage()); }
-        finally { connection = null; }
-    }
+    /** Connection lifecycle belongs to CoreDatabase, shared by every module. */
+    @Override public synchronized void close() { }
 
-    public File getDatabaseFile() { return databaseFile; }
+    public java.io.File getDatabaseFile() { return plugin.getDatabase().file(); }
 
     public record Record(String id, String from, String to, double amount, long timestamp) {
         public String date() {
