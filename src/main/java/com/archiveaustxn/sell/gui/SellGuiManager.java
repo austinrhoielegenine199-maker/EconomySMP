@@ -51,7 +51,7 @@ public final class SellGuiManager {
         for(int i=0;i<inv.getSize();i++)if(inv.getItem(i)==null)inv.setItem(i,pane);
     }
     public void openSell(Player p) {
-        var y=config.get("gui/Sell.gui.yml");
+        var y=config.get("gui/sell.gui.yml");
         Inventory inv=inventory(p,y.getInt("inventory.rows",5),y.getString("inventory.title","&8Sell"),Menu.SELL,null,0);
         ConfigurationSection cats=y.getConfigurationSection("buttons.categories");
         if(cats!=null) for(String key:cats.getKeys(false)){
@@ -64,7 +64,7 @@ public final class SellGuiManager {
         p.openInventory(inv);
     }
     public void openWorth(Player p,int page) {
-        var y=config.get("gui/Worth.yml"); int rows=y.getInt("worth.rows",6);
+        var y=config.get("gui/worth.yml"); int rows=y.getInt("worth.rows",6);
         Inventory inv=inventory(p,rows,y.getString("worth.title","&8Worth"),Menu.WORTH,null,page);
         List<Map.Entry<Material,Double>> all=new ArrayList<>(prices.allPrices().entrySet());
         int start=Math.max(0,page)*45;
@@ -77,9 +77,9 @@ public final class SellGuiManager {
         p.openInventory(inv);
     }
     public void openProgress(Player p,String category) {
-        var y=config.get("gui/Progress.gui.yml"); ConfigurationSection titles=y.getConfigurationSection("titles-progress-gui");
+        var y=config.get("gui/progress.gui.yml"); ConfigurationSection titles=y.getConfigurationSection("titles-progress-gui");
         String title=titles==null?"&8Progress":titles.getString(iconFor(category),"&8Progress");
-        Inventory inv=inventory(p,y.getInt("rows",6),title,Menu.PROGRESS,category,0); fill(inv,"gui/Progress.gui.yml");
+        Inventory inv=inventory(p,y.getInt("rows",6),title,Menu.PROGRESS,category,0); fill(inv,"gui/progress.gui.yml");
         List<Integer> slots=y.getIntegerList("progress-slots"); List<Level> levels=progress.levels(category);
         for(int i=0;i<slots.size();i++){int slot=slots.get(i);if(slot<0||slot>=inv.getSize())continue;
             Level next=i<levels.size()?levels.get(i):null; int pct=next==null?100:(int)Math.max(0,Math.min(100,progress.total(p.getUniqueId(),category)/Math.max(1,next.required())*100));
@@ -93,7 +93,7 @@ public final class SellGuiManager {
     }
     private String iconFor(String cat){return switch(cat==null?"":cat.toLowerCase(Locale.ROOT)){case "crops"->"WHEAT";case "ores"->"DIAMOND";case "mobs"->"BONE";case "natural"->"OAK_LEAVES";case "tools"->"NETHERITE_HELMET";case "fish"->"TROPICAL_FISH";case "books"->"ENCHANTED_BOOK";case "potions"->"POTION";case "blocks"->"BRICK";default->"WHEAT";};}
     public void openCategory(Player p,String category,int page) {
-        var y=config.get("gui/Progress.item.list.yml"); ConfigurationSection root=y.getConfigurationSection("category-item-worth-list");
+        var y=config.get("gui/progress.item.list.yml"); ConfigurationSection root=y.getConfigurationSection("category-item-worth-list");
         String title=root==null?"&8Items":root.getString("titles."+category,"&8Items");
         Inventory inv=inventory(p,root==null?6:root.getInt("rows",6),title,Menu.CATEGORY,category,page);
         int per=45,start=Math.max(0,page)*per,i=0; for(var e:prices.allPrices().entrySet()){
