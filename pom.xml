@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bx</groupId>
-    <artifactId>ultimatedonutsmp</artifactId>
+    <artifactId>EconomySMP</artifactId>
     <version>1.6</version>
     <packaging>jar</packaging>
 
-    <name>ultimatedonutsmp</name>
+    <name>EconomySMP</name>
 
     <properties>
         <java.version>21</java.version>
@@ -34,7 +34,7 @@
 
     <build>
         <defaultGoal>clean package</defaultGoal>
-        <finalName>UltimateDonutSmp-${project.version}</finalName>
+        <finalName>EconomySMP</finalName>
         <sourceDirectory>${source.directory}</sourceDirectory>
         <plugins>
             <plugin>

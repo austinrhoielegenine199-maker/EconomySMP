@@ -1,4 +1,4 @@
-name: UltimateDonutSmp
+name: EconomySMP
 version: ${project.version}
 main: com.bx.ultimateDonutSmp.UltimateDonutSmp
 api-version: "1.21"
