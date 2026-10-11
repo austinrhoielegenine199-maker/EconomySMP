@@ -1,0 +1,47 @@
+# EconomySMP Core language and messages
+# Set prefix-enable to true to prepend the prefix to messages.
+prefix-enable: false
+prefix: ""
+
+# Messages
+no-permission: '&cYou have no permission to use this command!'
+player-only: 'Only players can use this command!'
+player-not-found: "&cPlayer not found!"
+reload-success: '&aPlugin successfully reloaded!'
+invalid-number: "&cInvalid number!"
+not-enough-money: "&cYou don't have enough money!"
+self-pay: "&cYou can't pay yourself!"
+transaction-failed: "&cTransaction failed! Please try again."
+balance: "&7You have &#0bf52b%balance%"
+money_balance_other: "&#00A0FC%player% &7has &#0bf52b%balance%"
+send: "&7You paid &#0bf52b%bal_send% &7to &#00A0FC%player%"
+received: "&7You received &#0bf52b%bal_received% &7from &#00A0FC%target_player%"
+given: "&7You gave &#0bf52b%bal_given% &7to &#00A0FC%player%"
+taken: "&7You took &#0bf52b%bal_taken% &7from &#00A0FC%player%"
+set: "&7You set &#00A0FC%player%'s &7money to &#0bf52b%bal_set%"
+pay-toggle-enabled: "&cNow you can NOT receive payments!"
+pay-toggle-disabled: "&aNow you can receive payments!"
+pay-toggle-receiver-blocked: "&c%player% has disabled receiving payments!"
+clear-all-success: "&aAll balances have been cleared!"
+eco-give-all: "&7You gave &#0bf52b%bal_given% &7to all players!"
+eco-take-all: "&7You took &#0bf52b%bal_taken% &7from all players!"
+clear-player-success: "&a%player%'s balance has been cleared!"
+clear-player-failed: "&cFailed to delete player data for %player%!"
+offline-payment-disabled: "&cYou cannot pay offline players!"
+
+# Help messages
+command-usage: |
+  &#00fc88EconomySMP
+  &#00fc88➤ &f/pay <player> <amount>
+  &#00fc88➤ &f/bal
+  &#00fc88➤ &f/paytoggle
+  &#00fc88➤ &f/payhistory
+
+command-usage-admin: |
+  &#00fc88EconomySMP Admin
+  &#00fc88➤ &f/pay reload
+  &#00fc88➤ &f/eco give <player> <amount>
+  &#00fc88➤ &f/eco take <player> <amount>
+  &#00fc88➤ &f/eco set <player> <amount>
+  &#00fc88➤ &f/eco clear <player>
+  &#00fc88➤ &f/payhistory <player>
