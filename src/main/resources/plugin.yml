@@ -7,9 +7,10 @@ description: EconomySMP Core with integrated shop module
 softdepend: [Vault, PlaceholderAPI]
 commands:
   shop:
-    description: Open the EconomySMP shop
+    description: Open and administer the EconomySMP shop
     usage: /shop
     permission: shop.use
+    permission-message: "&cYou don't have permission."
 permissions:
   shop.use:
     default: true
