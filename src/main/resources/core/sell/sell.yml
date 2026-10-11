@@ -1,34 +1,29 @@
-# Sell module behavior. All prices and progression are editable in this folder.
+# General Sell module settings. Item prices are configured only in Prices.yml.
+sell-multi: true
+command-aliases:
+  - sellgui
+worth-lore:
+  enabled: true
+  lore-format: "&7Worth: &#0bf52b%price%"
+shulker-support:
+  enabled: true
+don-t-show-gui:
+  - "&8ʙᴜʏ"
 economy:
   provider: VAULT
-sell:
-  multiplier-enabled: true
-  base-multiplier: 1.0
-  sell-all-command-enabled: true
-messages:
-  prefix: '&#04fc84ꜱᴇʟʟ &7» '
-
-settings:
-  enabled: true
-  sell-all:
+  currency-format: "#,##0.##"
+  abbreviations:
     enabled: true
-    require-confirmation: false
-    ignore-custom-named-items: false
-    ignore-damaged-tools: false
-    include-hotbar: true
-    include-armor: false
-    include-offhand: false
-  progression:
-    enabled: true
-    multiplier-cap: 10.0
-  history:
-    enabled: true
-    max-entries-per-player: 500
-  gui:
-    sell-enabled: true
-    worth-enabled: true
-    progress-enabled: true
-    history-enabled: true
-  logging:
-    transactions: true
-    config-reload: true
+    formats: ["K", "M", "B", "T"]
+progress-bar:
+  loading-color: "&f"
+  complete-loading-color: "&#20f706"
+  bar-length: 21
+  bar-symbol: "&m "
+sounds:
+  sell-success: "ENTITY_EXPERIENCE_ORB_PICKUP"
+  no-sellable-items: "ENTITY_VILLAGER_NO"
+  plugin-reloaded: "ENTITY_PLAYER_LEVELUP"
+  click-sound: "UI_BUTTON_CLICK"
+  setworth-success: "ENTITY_PLAYER_LEVELUP"
+  setworth-error: "ENTITY_VILLAGER_NO"
