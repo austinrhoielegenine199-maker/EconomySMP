@@ -7,21 +7,27 @@ import java.util.Locale;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.server.ServiceRegisterEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 /** Owns economy configuration and the optional Vault provider. */
-public final class EconomyModule {
+public final class EconomyModule implements Listener {
     private final EconomySMP plugin;
     private File configFile;
     private YamlConfiguration config;
     private YamlConfiguration lang;
-    private Economy provider;
+    private volatile Economy provider;
+    private boolean providerListenerRegistered;
 
     public EconomyModule(EconomySMP plugin) { this.plugin = plugin; }
 
     public void load() {
         File directory = new File(plugin.getDataFolder(), "core/eco");
-        directory.mkdirs();
+        if (!directory.isDirectory() && !directory.mkdirs()) {
+            plugin.getLogger().severe("Could not create economy config directory: " + directory);
+        }
         configFile = new File(directory, "eco.yml");
         if (!configFile.exists()) {
             try {
@@ -39,24 +45,49 @@ public final class EconomyModule {
             } catch (Exception exception) { plugin.getLogger().severe("Could not create eco language file: " + exception.getMessage()); }
         }
         lang = YamlConfiguration.loadConfiguration(langFile);
+
+        if (!providerListenerRegistered) {
+            Bukkit.getPluginManager().registerEvents(this, plugin);
+            providerListenerRegistered = true;
+        }
         setupProvider();
+        // Some economy plugins register their Vault service after this plugin's onEnable.
+        Bukkit.getScheduler().runTaskLater(plugin, this::setupProvider, 1L);
+        Bukkit.getScheduler().runTaskLater(plugin, this::setupProvider, 40L);
     }
 
     public void reload() { load(); }
 
+    @EventHandler
+    public void onEconomyServiceRegistered(ServiceRegisterEvent event) {
+        if (event.getProvider().getService() == Economy.class) {
+            Bukkit.getScheduler().runTask(plugin, this::setupProvider);
+        }
+    }
+
     private void setupProvider() {
-        provider = null;
         if (!"VAULT".equalsIgnoreCase(config.getString("economy.provider", "VAULT"))) {
-            plugin.getLogger().warning("Unsupported economy provider; configure VAULT.");
+            provider = null;
+            plugin.getLogger().warning("Unsupported economy provider; configure economy.provider: VAULT.");
             return;
         }
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
-            plugin.getLogger().warning("Vault is not installed; economy commands will report unavailable.");
+            provider = null;
+            plugin.getLogger().warning("Vault is not installed or has not loaded. Install Vault and an economy provider such as EssentialsX Economy.");
             return;
         }
         RegisteredServiceProvider<Economy> registration = Bukkit.getServicesManager().getRegistration(Economy.class);
-        if (registration != null) provider = registration.getProvider();
-        if (provider == null) plugin.getLogger().warning("No Vault economy provider is registered.");
+        Economy found = registration == null ? null : registration.getProvider();
+        if (found == null) {
+            provider = null;
+            plugin.getLogger().warning("Vault is installed, but no economy plugin has registered a Vault Economy service. Install/enable an economy provider (for example EssentialsX Economy).");
+            return;
+        }
+        boolean newlyAvailable = provider == null;
+        provider = found;
+        if (newlyAvailable) {
+            plugin.getLogger().info("Vault economy hooked successfully: " + found.getName());
+        }
     }
 
     public Economy provider() { return provider; }
@@ -85,7 +116,7 @@ public final class EconomyModule {
         while (matcher.find()) {
             StringBuilder code = new StringBuilder("§x");
             for (char c : matcher.group(1).toCharArray()) code.append('§').append(c);
-            matcher.appendReplacement(out, code.toString());
+            matcher.appendReplacement(out, java.util.regex.Matcher.quoteReplacement(code.toString()));
         }
         matcher.appendTail(out);
         return org.bukkit.ChatColor.translateAlternateColorCodes('&', out.toString());
