@@ -61,9 +61,6 @@ public final class ShopListener implements Listener {
             if (slot == 21) {
                 purchases.remove(player.getUniqueId());
                 shop.openCategory(player, purchase.category, purchase.page);
-            } else if (slot == 22) {
-                purchases.remove(player.getUniqueId());
-                shop.openMain(player);
             } else if (slot == 15) changeAmount(player, purchase, 1);
             else if (slot == 16) changeAmount(player, purchase, 10);
             else if (slot == 17) changeAmount(player, purchase, 64);
@@ -80,6 +77,11 @@ public final class ShopListener implements Listener {
         if (category == null) return;
         ConfigurationSection items = category.getConfigurationSection("items");
         if (items == null) return;
+        ConfigurationSection back = category.getConfigurationSection("back");
+        if (back != null && back.getBoolean("enabled", true) && back.getInt("slot", 22) == event.getSlot()) {
+            shop.openMain(player);
+            return;
+        }
         for (String key : items.getKeys(false)) {
             ConfigurationSection item = items.getConfigurationSection(key);
             if (item != null && item.getInt("page", 1) == holder.page() && item.getInt("slot", -1) == event.getSlot()) {
@@ -161,7 +163,21 @@ public final class ShopListener implements Listener {
 
     private void changeAmount(Player player, Purchase purchase, int delta) {
         purchase.amount = Math.max(1, Math.min(purchase.material.getMaxStackSize(), purchase.amount + delta));
-        openPurchase(player, purchase);
+        Inventory inv = player.getOpenInventory().getTopInventory();
+        if (!(inv.getHolder() instanceof ShopHolder holder) || !holder.category().equals("purchase")) {
+            openPurchase(player, purchase);
+            return;
+        }
+        ItemStack selected = createPurchaseItem(purchase, purchase.amount);
+        ItemMeta meta = selected.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName(ShopModule.color(purchase.name));
+            meta.setLore(java.util.List.of(
+                    ShopModule.color("&fAmount: &a" + purchase.amount),
+                    ShopModule.color("&fPrice: &a" + (purchase.price * purchase.amount))));
+            selected.setItemMeta(meta);
+        }
+        inv.setItem(13, selected);
     }
 
     private void openPurchase(Player player, Purchase p) {
@@ -183,9 +199,8 @@ public final class ShopListener implements Listener {
         place(inv, 15, Material.LIME_STAINED_GLASS_PANE, "&a+1", "Add 1");
         place(inv, 16, Material.LIME_STAINED_GLASS_PANE, "&a+10", "Add 10");
         place(inv, 17, Material.LIME_STAINED_GLASS_PANE, "&a+64", "Add 64");
-        place(inv, 21, Material.ARROW, "&fBack", "Return to category");
-        place(inv, 22, Material.RED_STAINED_GLASS_PANE, "&cCancel", "Return to main shop");
-        place(inv, 23, Material.LIME_STAINED_GLASS_PANE, "&aConfirm", "Confirm purchase");
+        place(inv, 21, Material.RED_STAINED_GLASS_PANE, "&#fc0404ᴄᴀɴᴄᴇʟ", "ᴄʟɪᴄᴋ ᴛᴏ ᴄᴀɴᴄᴇʟ");
+        place(inv, 23, Material.LIME_STAINED_GLASS_PANE, "&#04fc04ᴄᴏɴꜰɪʀᴍ", "ᴄʟɪᴄᴋ ᴛᴏ ʙᴜʏ");
         player.openInventory(inv);
     }
 
@@ -201,7 +216,13 @@ public final class ShopListener implements Listener {
     private String prettyName(String displayName, String key) {
         String raw = displayName == null || displayName.isBlank() || displayName.equalsIgnoreCase(key)
                 ? key : org.bukkit.ChatColor.stripColor(ShopModule.color(displayName));
-        return raw.replace('_', ' ').replace('-', ' ').replaceAll("\\s+", " ").trim();
+        String cleaned = raw.replace('_', ' ').replace('-', ' ').replaceAll("\\s+", " ").trim();
+        java.util.StringJoiner words = new java.util.StringJoiner(" ");
+        for (String word : cleaned.split(" ")) {
+            if (!word.isEmpty()) words.add(word.substring(0, 1).toUpperCase(java.util.Locale.ROOT)
+                    + word.substring(1).toLowerCase(java.util.Locale.ROOT));
+        }
+        return words.toString();
     }
 
     private void place(Inventory inv, int slot, Material material, String name, String lore) {
