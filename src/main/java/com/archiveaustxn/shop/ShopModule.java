@@ -93,7 +93,7 @@ public final class ShopModule {
             ItemMeta meta = stack.getItemMeta();
             if (meta != null) {
                 meta.setDisplayName(color(item.getString("displayname", "&f" + key)));
-                meta.setLore(java.util.List.of(color(shopConfig.getString("price-lore", "&a%price%").replace("%price%", String.valueOf(item.getDouble("price")))));
+                meta.setLore(java.util.List.of(color(shopConfig.getString("price-lore", "&a%price%").replace("%price%", String.valueOf(item.getDouble("price"))))));
                 stack.setItemMeta(meta);
             }
             int slot = item.getInt("slot", -1);
