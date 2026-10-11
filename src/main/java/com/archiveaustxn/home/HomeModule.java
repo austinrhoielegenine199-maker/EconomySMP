@@ -51,16 +51,16 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
     }
 
     public void load() {
-        loadResource("core/home/main.gui.yml");
-        loadResource("core/home/confirm.gui.yml");
+        loadResource("core/home/gui/main.gui.yml");
+        loadResource("core/home/gui/confirm.gui.yml");
         loadResource("core/home/home.yml");
         loadResource("core/home/lang.yml");
         loadResource("core/team/gui/main.gui.yml");
         loadResource("core/team/gui/member.manager.yml");
         loadResource("core/team/team.yml");
         loadResource("core/team/lang.yml");
-        mainGui = yaml("core/home/main.gui.yml");
-        confirmGui = yaml("core/home/confirm.gui.yml");
+        mainGui = yaml("core/home/gui/main.gui.yml");
+        confirmGui = yaml("core/home/gui/confirm.gui.yml");
         homeConfig = yaml("core/home/home.yml");
         homeLang = yaml("core/home/lang.yml");
         teamGui = yaml("core/team/gui/main.gui.yml");
