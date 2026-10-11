@@ -154,7 +154,10 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
         if (meta == null) return item;
         meta.setDisplayName(gui.color(y.getString("displayname", "&bSellaxe")));
         List<String> lore = y.getStringList("lore");
-        if (!lore.isEmpty()) meta.setLore(lore.stream().map(gui::color).toList());
+        String time = y.getString("time", "3d");
+        if (!lore.isEmpty()) meta.setLore(lore.stream()
+                .map(line -> gui.color(line.replace("%time%", time)))
+                .toList());
         if (y.contains("custom-model-data")) meta.setCustomModelData(y.getInt("custom-model-data"));
         ConfigurationSection enchants = y.getConfigurationSection("enchantments");
         if (enchants != null && enchants.getBoolean("enabled", true)) {
