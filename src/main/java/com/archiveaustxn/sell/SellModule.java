@@ -174,7 +174,7 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
         if(!(sender instanceof Player p)){sender.sendMessage(message("player-only","&cOnly players can use this command."));return true;}
         String commandName = command.getName().toLowerCase(Locale.ROOT);
         if (commandName.equals("worth")) { openWorth(p, args.length > 0 ? parsePage(args[0]) : 0); return true; }
-        if (commandName.equals("sellhistory")) { openHistory(p, 0); return true; }
+        if (commandName.equals("sellhistory")) { openHistory(p, args.length > 0 ? parsePage(args[0]) : 0); return true; }
         if (commandName.equals("worthtoggle")) {
             boolean enabled = !p.hasMetadata("sell.worth.enabled");
             p.setMetadata("sell.worth.enabled", new org.bukkit.metadata.FixedMetadataValue(plugin, enabled));
