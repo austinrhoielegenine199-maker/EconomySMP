@@ -39,10 +39,10 @@ public final class PaymentHistoryListener implements Listener {
         if (slot == cfg.getInt("pay-history-gui.refresh.slot", 49)) {
             open(player, holder, holder.page(), holder.sort()); return;
         }
-        if (slot == cfg.getInt("pay-history-gui.previous.slot", 45) && holder.page() > 1) {
+        if (slot == cfg.getInt("pay-history-gui.previous-page.slot", 45) && holder.page() > 1) {
             open(player, holder, holder.page()-1, holder.sort()); return;
         }
-        if (slot == cfg.getInt("pay-history-gui.next.slot", 53)) {
+        if (slot == cfg.getInt("pay-history-gui.next-page.slot", 53)) {
             if (history.find(holder.targetId(), 45, holder.page()+1, holder.sort()).size() > 0) open(player, holder, holder.page()+1, holder.sort());
             return;
         }
@@ -52,8 +52,8 @@ public final class PaymentHistoryListener implements Listener {
             open(player, holder, 1, sorts[(i+1)%sorts.length]); return;
         }
         if (slot == cfg.getInt("pay-history-gui.filter.slot", 50)) {
-            String[] values={"all","sent","received"};
-            String current=filters.getOrDefault(player.getUniqueId(),"all");
+            String[] values={"name_az","name_za","newest","oldest","highest_price","lowest_price"};
+            String current=filters.getOrDefault(player.getUniqueId(),"name_az");
             int i=0; for(int n=0;n<values.length;n++) if(values[n].equals(current)) i=n;
             filters.put(player.getUniqueId(), values[(i+1)%values.length]);
             open(player, holder, 1, holder.sort());
@@ -67,12 +67,12 @@ public final class PaymentHistoryListener implements Listener {
         PaymentHistoryHolder next=new PaymentHistoryHolder(holder.targetId(),holder.targetName(),page,sort);
         org.bukkit.inventory.Inventory inv=Bukkit.createInventory(next,rows*9,title);
         var records=history.find(holder.targetId(),45,page,sort);
-        String filter=filters.getOrDefault(player.getUniqueId(),"all");
+        String filter=filters.getOrDefault(player.getUniqueId(),"name_az");
         int index=0;
         for(var record:records) {
             boolean received=record.to().equalsIgnoreCase(holder.targetName());
-            if(!filter.equals("all") && filter.equals("sent") && received) continue;
-            if(!filter.equals("all") && filter.equals("received") && !received) continue;
+            
+            
             String path=received?"pay-history-gui.receive-pay":"pay-history-gui.gift-pay";
             Material mat=Material.matchMaterial(cfg.getString(path+".material",received?"LIME_STAINED_GLASS_PANE":"RED_STAINED_GLASS_PANE"));
             ItemStack item=new ItemStack(mat==null?Material.PAPER:mat);
