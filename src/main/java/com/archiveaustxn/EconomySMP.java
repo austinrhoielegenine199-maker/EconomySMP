@@ -51,6 +51,7 @@ public final class EconomySMP extends JavaPlugin {
         flakesModule = new FlakesModule(this);
         flakesModule.load();
         bind("flakes", flakesModule, flakesModule);
+        bind("flakeshop", flakesModule, flakesModule);
 
         sellModule = new SellModule(this);
         sellModule.load();
