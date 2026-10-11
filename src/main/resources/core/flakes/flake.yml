@@ -16,3 +16,12 @@ Sounds:
   plugin-reloaded: "ENTITY_PLAYER_LEVELUP"
   level-up: "ENTITY_PLAYER_LEVELUP"
   booster-activate: "ENTITY_PLAYER_LEVELUP"
+
+# PlaceholderAPI identifiers (when PlaceholderAPI is installed)
+# Use these in scoreboard, tab, chat, and other PAPI-supported plugins:
+# %flakes_balance%           - formatted Flakes balance
+# %flakes_balance_formatted% - formatted Flakes balance
+# %flakes_balance_raw%       - raw numeric balance
+# %flakes_bal%               - alias for formatted balance
+# %flakes_amount%            - alias for formatted balance
+# %flakes_name%              - player's name
