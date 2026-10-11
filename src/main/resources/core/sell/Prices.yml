@@ -1,0 +1,22 @@
+# Single source of truth for sell prices. Price is paid per item.
+# Use valid Bukkit Material names and non-negative numeric values.
+prices:
+  WHEAT: 1.0
+  CARROT: 0.8
+  POTATO: 0.8
+  BEETROOT: 0.6
+  IRON_INGOT: 4.0
+  GOLD_INGOT: 6.0
+  DIAMOND: 20.0
+  EMERALD: 12.0
+  COAL: 1.0
+  RAW_IRON: 2.0
+  RAW_GOLD: 3.0
+  BONE: 0.5
+  STRING: 0.5
+  ROTTEN_FLESH: 0.25
+  OAK_LOG: 1.0
+  OAK_LEAVES: 0.25
+  COD: 1.0
+  SALMON: 1.5
+  BRICK: 0.5
