@@ -23,28 +23,21 @@ commands:
     description: Economy administration commands
     usage: /eco
     permission: economysmp.admin
-  paytoggle:
-    description: Toggle receiving player payments
-    permission: economysmp.paytoggle
-  payhistory:
-    description: View payment history
-    usage: /payhistory [player]
-    permission: economysmp.payhistory
 permissions:
   economysmp.shop.use:
     default: true
+  economysmp.shop.reload:
+    default: op
+  economysmp.shop.admin:
+    default: op
+    children:
+      economysmp.shop.use: true
+      economysmp.shop.reload: true
   economysmp.admin:
     default: op
     children:
-      economysmp.payhistory.other: true
       economysmp.bal.other: true
   economysmp.bal.other:
-    default: op
-  economysmp.paytoggle:
-    default: true
-  economysmp.payhistory:
-    default: true
-  economysmp.payhistory.other:
     default: op
   economysmp.pay:
     default: true
