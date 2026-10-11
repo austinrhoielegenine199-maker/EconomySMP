@@ -1,0 +1,13 @@
+# Player-to-player payments
+enabled: true
+minimum-amount: 1.0
+maximum-amount: 1000000000.0
+cooldown-seconds: 3
+require-online-target: true
+prevent-self-payment: true
+messages:
+  usage: "&cUsage: /pay <player> <amount>"
+  target-not-found: "&cThat player is not online."
+  cannot-pay-self: "&cYou cannot pay yourself."
+  success-sender: "&aYou paid &f%player% &f%amount%."
+  success-target: "&aYou received &f%amount% &afrom &f%player%."
