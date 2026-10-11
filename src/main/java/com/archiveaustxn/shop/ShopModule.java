@@ -13,6 +13,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import com.archiveaustxn.shop.gui.ShopHolder;
+import com.archiveaustxn.shop.listener.ShopListener;
 
 public final class ShopModule {
     private final EconomySMP plugin;
