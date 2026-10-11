@@ -15,7 +15,7 @@ prefix: "&#009bffғʟᴀᴋᴇꜱ &7» "
 no-permission: '&cYou have no permission for that!'
 player-only: 'Only players can use this command!'
 player-not-found: "&cPlayer not found"
-reload-success: '&#00FF00Flakes reloaded successfully!'
+reload-success: '&#009bffFlakes reloaded successfully!'
 invalid-number: "&cInvalid number!"
 not-enough-flakes: "&cYou do not have enough Flakes!"
 not-enough-money: "&cYou do not have enough money!"
@@ -30,7 +30,7 @@ booster-activated: "&fYour Flakes Booster is now active for &#009bff%time%&f hou
 booster-remaining: "&fYour Flakes Booster is active for another &#009bff%time%&f!"
 
 # GUI messages
-gui-updated: "&aFlakes GUI reloaded successfully!"
+gui-updated: "&#009bffFlakes GUI reloaded successfully!"
 send-flakes-chat-input: |
   &cPlease write the number in chat,
   &cor type cancel to cancel the input!
@@ -38,13 +38,13 @@ send-flakes-chat-cancel: "&cInput cancelled!"
 
 # Payment messages
 flakes-balance: "&fBalance: &#009bff%flakes% Flakes"
-flakes-balance-other: "&#00FF00%target% &fhas &#009bff%flakes% Flakes&f!"
-flakes-send: "&fYou sent &#009bff%flakes_send% Flakes &fto &#00FF00%player%"
-flakes-received: "&fYou received &#009bff%flakes_received% Flakes &ffrom &#00FF00%target_player%"
-flakes-given: "&fYou gave &#009bff%flakes_given% Flakes &fto &#00FF00%player%!"
-flakes-taken: "&fYou took &#009bff%flakes_taken% Flakes &ffrom &#00FF00%player%!"
-flakes-set: "&fYou set the Flakes of &#00FF00%player% &fto &#009bff%flakes_set%&f!"
-clear-all-success: "&aSuccessfully cleared all Flakes and levels from all players!"
+flakes-balance-other: "&#009bff%target% &fhas &#009bff%flakes% Flakes&f!"
+flakes-send: "&fYou sent &#009bff%flakes_send% Flakes &fto &#009bff%player%"
+flakes-received: "&fYou received &#009bff%flakes_received% Flakes &ffrom &#009bff%target_player%"
+flakes-given: "&fYou gave &#009bff%flakes_given% Flakes &fto &#009bff%player%!"
+flakes-taken: "&fYou took &#009bff%flakes_taken% Flakes &ffrom &#009bff%player%!"
+flakes-set: "&fYou set the Flakes of &#009bff%player% &fto &#009bff%flakes_set%&f!"
+clear-all-success: "&#009bffSuccessfully cleared all Flakes and levels from all players!"
 
 command-usage: |
   &#009bff&lFLAKES
@@ -54,10 +54,10 @@ command-usage: |
   &#009bff➤ &f/flakes upgrade
 
 command-usage-admin: |
-  &#FF0000&lFLAKES ADMIN
-  &#FF0000➤ &f/flakes reload
-  &#FF0000➤ &f/flakes give <player> <amount>
-  &#FF0000➤ &f/flakes take <player> <amount>
-  &#FF0000➤ &f/flakes set <player> <amount>
-  &#FF0000➤ &f/flakes booster <player> <time> <amount>
-  &#FF0000➤ &f/flakes clear all-players
+  &#009bff&lFLAKES ADMIN
+  &#009bff➤ &f/flakes reload
+  &#009bff➤ &f/flakes give <player> <amount>
+  &#009bff➤ &f/flakes take <player> <amount>
+  &#009bff➤ &f/flakes set <player> <amount>
+  &#009bff➤ &f/flakes booster <player> <time> <amount>
+  &#009bff➤ &f/flakes clear all-players
