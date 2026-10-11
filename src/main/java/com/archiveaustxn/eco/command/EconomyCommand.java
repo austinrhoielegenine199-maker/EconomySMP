@@ -95,7 +95,7 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
         }
         if(cmd.equals("eco")) {
             if(!sender.hasPermission("economysmp.admin")){send(sender,"no-permission","&cYou have no permission to use this command!");return true;}
-            if(args.length==0){sender.sendMessage(eco.color(eco.config().getString("command-usage-admin","/eco give <player> <amount>")));return true;}
+            if(args.length==0){sender.sendMessage(eco.color(eco.lang().getString("command-usage-admin","/eco give <player> <amount>")));return true;}
             String action=args[0].toLowerCase(Locale.ROOT);
             if(action.equals("reload")) { eco.reload(); send(sender,"reload-success","&aPlugin successfully reloaded!"); return true; }
             if(action.equals("clearall")) {
