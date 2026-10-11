@@ -1,0 +1,63 @@
+# Configurable Flakes messages
+# Placeholders:
+# %player% - Player name
+# %flakes% - Flake balance
+# %flakes_send% - Amount sent
+# %flakes_given% - Amount given
+# %flakes_taken% - Amount taken
+# %flakes_received% - Amount received
+# %flakes_set% - Amount set
+# %target_player% - Target player name
+
+prefix-enable: true
+prefix: "&#009bffғʟᴀᴋᴇꜱ &7» "
+
+no-permission: '&cYou have no permission for that!'
+player-only: 'Only players can use this command!'
+player-not-found: "&cPlayer not found"
+reload-success: '&#00FF00Flakes reloaded successfully!'
+invalid-number: "&cInvalid number!"
+not-enough-flakes: "&cYou do not have enough Flakes!"
+not-enough-money: "&cYou do not have enough money!"
+max-level-reached: "&cYou reached the max Flakes level!"
+self-pay: "&cYou cannot give yourself Flakes!"
+economy-not-available: "&cThe economy system is not available!"
+
+# Booster messages
+booster-item-received: "&fYou received a &#009bff%amount%x &fFlakes Booster for &#009bff%time% &fhours!"
+booster-expired: "&cYour Flakes Booster has expired!"
+booster-activated: "&fYour Flakes Booster is now active for &#009bff%time%&f hours!"
+booster-remaining: "&fYour Flakes Booster is active for another &#009bff%time%&f!"
+
+# GUI messages
+gui-updated: "&aFlakes GUI reloaded successfully!"
+send-flakes-chat-input: |
+  &cPlease write the number in chat,
+  &cor type cancel to cancel the input!
+send-flakes-chat-cancel: "&cInput cancelled!"
+
+# Payment messages
+flakes-balance: "&fBalance: &#009bff%flakes% Flakes"
+flakes-balance-other: "&#00FF00%target% &fhas &#009bff%flakes% Flakes&f!"
+flakes-send: "&fYou sent &#009bff%flakes_send% Flakes &fto &#00FF00%player%"
+flakes-received: "&fYou received &#009bff%flakes_received% Flakes &ffrom &#00FF00%target_player%"
+flakes-given: "&fYou gave &#009bff%flakes_given% Flakes &fto &#00FF00%player%!"
+flakes-taken: "&fYou took &#009bff%flakes_taken% Flakes &ffrom &#00FF00%player%!"
+flakes-set: "&fYou set the Flakes of &#00FF00%player% &fto &#009bff%flakes_set%&f!"
+clear-all-success: "&aSuccessfully cleared all Flakes and levels from all players!"
+
+command-usage: |
+  &#009bff&lFLAKES
+  &#009bff➤ &f/flakes
+  &#009bff➤ &f/flakes pay <player> <amount>
+  &#009bff➤ &f/flakes bal <player>
+  &#009bff➤ &f/flakes upgrade
+
+command-usage-admin: |
+  &#FF0000&lFLAKES ADMIN
+  &#FF0000➤ &f/flakes reload
+  &#FF0000➤ &f/flakes give <player> <amount>
+  &#FF0000➤ &f/flakes take <player> <amount>
+  &#FF0000➤ &f/flakes set <player> <amount>
+  &#FF0000➤ &f/flakes booster <player> <time> <amount>
+  &#FF0000➤ &f/flakes clear all-players
