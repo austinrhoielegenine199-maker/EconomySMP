@@ -2,7 +2,7 @@ flakes-booster:
   material: "GLASS_BOTTLE"
   name: '&#009bffғʟᴀᴋᴇ ʙᴏᴏꜱᴛᴇʀ'
   lore:
-    - '&7%amount%x Flake Production for %time% hours'
+    - '&#009bff%amount%x Flake Production for %time% hours'
     - '&8The booster lasts one day.'
   flake-amount: 4
   duration: 24
