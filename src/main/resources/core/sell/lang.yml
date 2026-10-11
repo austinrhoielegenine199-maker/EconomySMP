@@ -1,9 +1,53 @@
+# All player-facing Sell module messages and action-bar text.
+prefix-enabled: true
+prefix: "&#009bffꜱᴇʟʟ &8» "
+sell-success:
+  chat: "&aSold &f%total_items% &aitems for &#20f706$%total%"
+  actionbar: "&#20f706+$%total% &8| &f%total_items% items sold"
+  title: "&#20f706&lSOLD!"
+  subtitle: "&f%total_items% items for $%total%"
 messages:
-  no-permission: "&cYou don't have permission."
+  no-permission: "&cYou don't have permission to do that."
   player-only: "&cOnly players can use this command."
-  economy-unavailable: "&cThe economy is unavailable right now."
-  no-prices: "&cNo sell prices are configured."
-  nothing-to-sell: "&cYou don't have any configured items to sell."
+  economy-unavailable: "&cThe economy provider is unavailable."
+  no-prices: "&cNo item prices are configured."
+  nothing-to-sell: "&cYou don't have any sellable items."
   transaction-failed: "&cThe sell transaction failed. Please try again."
   sell-success: "&aSold %amount% items for $%total%."
+  plugin-reloaded: "&aSell configuration reloaded."
   reload-success: "&aSell configuration reloaded."
+  sellaxe-given: "&aYou received a Sellaxe."
+  sellaxe-invalid-player: "&cThat player could not be found."
+  sellaxe-invalid-item: "&cHold a valid item to configure its worth."
+  setworth-success: "&aSet the worth of %item% to $%price%."
+  setworth-error: "&cUsage: /setworth <price> while holding an item."
+  worth-toggle-on: "&aWorth display enabled."
+  worth-toggle-off: "&cWorth display disabled."
+  history-empty: "&7No sell history is available yet."
+  history-other-denied: "&cYou cannot view another player's sell history."
+  invalid-number: "&cPlease enter a valid number."
+  invalid-material: "&cThat is not a valid item."
+  sellaxe-disabled: "&cSellaxe is disabled in the configuration."
+action-bars:
+  worth: "&fWorth: &#0bf52b%price%"
+  stack-worth: "&fStack worth: &#0bf52b%price%"
+  shulker-worth: "&fShulker worth: &#0bf52b%price%"
+  item-not-sellable: "&cThis item cannot be sold."
+  worth-toggle-on: "&#20f706Worth display enabled"
+  worth-toggle-off: "&cWorth display disabled"
+command-usage: |-
+  &7Sell commands:
+  &f/sell &7- Open the sell menu
+  &f/sell all &7- Sell all configured items in your inventory
+  &f/sell worth &7- Open the item worth menu
+  &f/sell history &7- View your recent sell history
+  &f/sell progress <category> &7- View category progression
+  &f/worth &7- View configured item prices
+  &f/worthtoggle &7- Toggle worth display
+command-usage-admin: |-
+  &7Sell administration:
+  &f/sell reload &7- Reload Sell configuration
+  &f/sellaxe <player> &7- Give a Sellaxe
+  &f/setworth <price> &7- Set the held item's sell price
+  &f/sellhistory [player] &7- View sell history
+  &f/sell reset <player> &7- Reset Sell progression
