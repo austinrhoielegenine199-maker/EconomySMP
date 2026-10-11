@@ -56,9 +56,9 @@ public final class SellGuiManager {
         ConfigurationSection cats=y.getConfigurationSection("buttons.categories");
         if(cats!=null) for(String key:cats.getKeys(false)){
             ConfigurationSection c=cats.getConfigurationSection(key);if(c==null)continue;
-            Level next=progress.next(p.getUniqueId()); String mult=next==null?"MAX":String.valueOf(next.multiplier());
+            Level next=progress.next(p.getUniqueId(), key); String mult=next==null?"MAX":String.valueOf(next.multiplier());
             List<String> lore=new ArrayList<>(); for(String line:c.getStringList("lore"))
-                lore.add(line.replace("%next_multiplier%",mult).replace("%progress%",String.valueOf(progress.progressPercent(p.getUniqueId()))).replace("%progress-bar%",bar(progress.progressPercent(p.getUniqueId()),10)));
+                lore.add(line.replace("%next_multiplier%",mult).replace("%progress%",String.valueOf(progress.progressPercent(p.getUniqueId(), key))).replace("%progress-bar%",bar(progress.progressPercent(p.getUniqueId()),10)));
             int slot=c.getInt("slot",-1); if(slot>=0&&slot<inv.getSize())inv.setItem(slot,make(c.getString("material"),c.getString("name","&f"+key),lore));
         }
         p.openInventory(inv);
@@ -80,12 +80,12 @@ public final class SellGuiManager {
         var y=config.get("gui/Progress.gui.yml"); ConfigurationSection titles=y.getConfigurationSection("titles-progress-gui");
         String title=titles==null?"&8Progress":titles.getString(iconFor(category),"&8Progress");
         Inventory inv=inventory(p,y.getInt("rows",6),title,Menu.PROGRESS,category,0); fill(inv,"gui/Progress.gui.yml");
-        List<Integer> slots=y.getIntegerList("progress-slots"); List<Level> levels=progress.levels();
+        List<Integer> slots=y.getIntegerList("progress-slots"); List<Level> levels=progress.levels(category);
         for(int i=0;i<slots.size();i++){int slot=slots.get(i);if(slot<0||slot>=inv.getSize())continue;
-            Level next=i<levels.size()?levels.get(i):null; int pct=next==null?100:(int)Math.max(0,Math.min(100,progress.total(p.getUniqueId())/Math.max(1,next.required())*100));
+            Level next=i<levels.size()?levels.get(i):null; int pct=next==null?100:(int)Math.max(0,Math.min(100,progress.total(p.getUniqueId(),category)/Math.max(1,next.required())*100));
             String key=pct>=100?"complete":pct>0?"working":"incomplete"; ConfigurationSection item=y.getConfigurationSection(key);if(item==null)continue;
             String bar=bar(pct,10),mult=next==null?"MAX":String.valueOf(next.multiplier());
-            List<String> lore=item.getStringList("lore").stream().map(s->s.replace("%loading-bar%",bar).replace("%multiplier%",mult).replace("%progress%",String.valueOf(pct)).replace("%amount-have%",String.format(Locale.US,"%.2f",progress.total(p.getUniqueId()))).replace("%amount-needed%",next==null?"MAX":String.format(Locale.US,"%.2f",next.required()))).toList();
+            List<String> lore=item.getStringList("lore").stream().map(s->s.replace("%loading-bar%",bar).replace("%multiplier%",mult).replace("%progress%",String.valueOf(pct)).replace("%amount-have%",String.format(Locale.US,"%.2f",progress.total(p.getUniqueId(),category))).replace("%amount-needed%",next==null?"MAX":String.format(Locale.US,"%.2f",next.required()))).toList();
             inv.setItem(slot,make(item.getString("material","WHITE_STAINED_GLASS_PANE"),item.getString("displayname","&fProgress"),lore));
         }
         ConfigurationSection back=y.getConfigurationSection("back-button");if(back!=null&&back.getBoolean("enabled",true)){int slot=back.getInt("slot",45);if(slot>=0&&slot<inv.getSize())inv.setItem(slot,make(back.getString("material","RED_STAINED_GLASS_PANE"),back.getString("displayname","&cBack"),back.getStringList("lore")));}
