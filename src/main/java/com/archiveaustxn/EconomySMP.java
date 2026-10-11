@@ -29,6 +29,8 @@ public final class EconomySMP extends JavaPlugin {
         bind("pay", economyHandler, economyHandler);
         bind("money", economyHandler, economyHandler);
         bind("eco", economyHandler, economyHandler);
+        bind("payhistory", economyHandler, economyHandler);
+        bind("paytoggle", economyHandler, economyHandler);
         getLogger().info("EconomySMP Core enabled.");
     }
 
