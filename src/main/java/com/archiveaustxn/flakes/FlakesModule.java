@@ -26,6 +26,7 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
     private File dataFile;
     private YamlConfiguration data;
     private YamlConfiguration language;
+    private FlakesShop shop;
 
     public FlakesModule(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -48,6 +49,9 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
         }
         data = YamlConfiguration.loadConfiguration(dataFile);
         language = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "core/flakes/lang.yml"));
+        shop = new FlakesShop(plugin, this);
+        shop.load();
+        Bukkit.getPluginManager().registerEvents(shop, plugin);
         plugin.getLogger().info("Flakes module loaded.");
     }
 
@@ -123,6 +127,14 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
         }
 
         String sub = args[0].toLowerCase(Locale.ROOT);
+        if (sub.equals("shop")) {
+            if (!(sender instanceof Player player)) {
+                send(sender, "player-only", "Only players can use this command!");
+                return true;
+            }
+            shop.open(player);
+            return true;
+        }
         if (sub.equals("pay")) {
             if (!(sender instanceof Player player)) {
                 send(sender, "player-only", "Only players can use this command!");
@@ -179,7 +191,8 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
                 return true;
             }
             if (sub.equals("reload")) {
-                language = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "lang.yml"));
+                language = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "core/flakes/lang.yml"));
+                shop.load();
                 send(sender, "reload-success", "&aFlakes reloaded successfully!");
                 return true;
             }
@@ -211,7 +224,7 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
     @Override
     public java.util.List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (args.length == 1) {
-            java.util.List<String> options = new java.util.ArrayList<>(java.util.List.of("bal", "balance", "pay"));
+            java.util.List<String> options = new java.util.ArrayList<>(java.util.List.of("bal", "balance", "pay", "shop"));
             if (sender.hasPermission("flakes.admin")) options.addAll(java.util.List.of("give", "take", "set", "reload"));
             return options.stream().filter(s -> s.startsWith(args[0].toLowerCase(Locale.ROOT))).toList();
         }
