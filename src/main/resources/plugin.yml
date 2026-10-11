@@ -11,6 +11,10 @@ commands:
     description: View, pay, and administer Flakes currency
     usage: /flakes [bal|pay|give|take|set|reload]
     aliases: [flake]
+  flakeshop:
+    description: Open the Flakes shop
+    usage: /flakeshop
+    permission: flakes.use
   home:
     description: Open your homes menu or teleport to a home
     usage: /home [1-5|team|reload]
