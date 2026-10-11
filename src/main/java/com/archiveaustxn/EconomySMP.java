@@ -56,6 +56,7 @@ public final class EconomySMP extends JavaPlugin {
 
     @Override public void onDisable() {
         if (shopModule != null) shopModule.close();
+        if (paymentHistoryStore != null) paymentHistoryStore.close();
     }
     public ShopModule getShopModule() { return shopModule; }
     public EconomyModule getEconomyModule() { return economyModule; }
