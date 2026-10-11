@@ -568,7 +568,7 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
             }
             case "chat" -> {
                 if (current == null) { send(p, "team-not-in", "&cYou are not in a team!"); return true; }
-                if (args.length == 1 && args[0].equalsIgnoreCase("toggle")) {
+                if (args.length == 2 && args[1].equalsIgnoreCase("toggle")) {
                     if (teamChatEnabled.remove(p.getUniqueId())) send(p, "chat-disabled", "&cTeam chat disabled!");
                     else { teamChatEnabled.add(p.getUniqueId()); send(p, "chat-enabled", "&aTeam chat enabled!"); }
                     return true;
