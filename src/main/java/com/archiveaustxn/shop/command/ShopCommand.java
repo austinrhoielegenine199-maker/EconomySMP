@@ -23,6 +23,40 @@ public final class ShopCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length > 0 && args[0].equalsIgnoreCase("addhanditem")) {
+            if (!sender.hasPermission("shop.admin")) {
+                sender.sendMessage(color(shop.message("no-permission", "&cYou don't have permission.")));
+                return true;
+            }
+            if (!(sender instanceof Player player)) {
+                sender.sendMessage(color(shop.message("player-only", "&cOnly players can use this command.")));
+                return true;
+            }
+            if (args.length != 4) {
+                sender.sendMessage(color("&cUsage: /shop addhanditem <category> <slot> <price>"));
+                sender.sendMessage(color("&7Categories: &f" + String.join(", ", shop.categoryNames())));
+                return true;
+            }
+            int slot;
+            double price;
+            try {
+                slot = Integer.parseInt(args[2]);
+                price = Double.parseDouble(args[3]);
+            } catch (NumberFormatException exception) {
+                sender.sendMessage(color("&cSlot must be a number and price must be a valid number."));
+                return true;
+            }
+            if (slot < 0 || slot > 53 || !Double.isFinite(price) || price < 0) {
+                sender.sendMessage(color("&cSlot must be 0-53 and price must be zero or greater."));
+                return true;
+            }
+            if (shop.addHandItem(player, args[1], slot, price)) {
+                sender.sendMessage(color("&aAdded your held item to category &f" + args[1] + " &aat slot &f" + slot + " &afor &f" + price + "&a."));
+            } else {
+                sender.sendMessage(color("&cCould not add item. Hold an item and use an existing category name."));
+            }
+            return true;
+        }
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("shop.reload")) {
                 sender.sendMessage(color(shop.message("no-permission", "&cYou have no permission for that!")));
@@ -42,6 +76,8 @@ public final class ShopCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (args.length == 1 && sender.hasPermission("shop.admin")) return List.of("addhanditem", "reload");
+        if (args.length == 2 && args[0].equalsIgnoreCase("addhanditem") && sender.hasPermission("shop.admin")) return shop.categoryNames().stream().sorted().toList();
         if (args.length == 1 && sender.hasPermission("shop.reload")) return List.of("reload");
         return List.of();
     }
