@@ -1,7 +1,7 @@
 package com.archiveaustxn;
 
 import com.archiveaustxn.shop.ShopModule;
-import com.archiveaustxn.shop.ShopCommand;
+import com.archiveaustxn.shop.command.ShopCommand;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
