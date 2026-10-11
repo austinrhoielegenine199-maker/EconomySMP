@@ -515,13 +515,34 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 openHomes(player);
             }
         } else if (holder.type.equals("team")) {
+            String team = teamName(player);
+            if (team == null) { player.closeInventory(); send(player, "team-no-team", "&cYou don't have a team!"); return; }
             int homeSlot = teamGui.getInt("items.team-home.slot", 52);
+            int pvpSlot = teamGui.getInt("items.pvp.slot", 53);
+            if (slot == pvpSlot) {
+                if (!isLeader(player, team) && !player.hasPermission("team.admin")) {
+                    send(player, "team-not-leader", "&cOnly the team leader can change team PvP."); return;
+                }
+                boolean enabled = !teamData.getBoolean(team + ".pvp", false);
+                teamData.set(team + ".pvp", enabled);
+                saveTeams();
+                player.sendMessage(teamMessage(enabled ? "pvp-enabled" : "pvp-disabled",
+                        enabled ? "&aTeam-PVP has been enabled!" : "&cTeam-PVP has been disabled!"));
+                openTeamMenu(player);
+                return;
+            }
             if (slot == homeSlot) {
-                String team = teamName(player);
-                if (team == null) { send(player, "team-no-team", "&cYou don't have a team!"); return; }
-                if (isLeader(player, team)) { send(player, "team-home-set", "&aUse /team sethome to set the home."); return; }
+                if (!teamHomeEnabled()) { send(player, "team-home-disabled", "&cTeam homes are disabled."); return; }
                 Location loc = readLocation(teamData.getConfigurationSection(team + ".home"));
-                if (loc == null) { send(player, "team-no-home", "&cYour team has not set a home!"); return; }
+                if (loc == null) {
+                    if (isLeader(player, team)) send(player, "team-home-set", "&aUse /team sethome to set the home.");
+                    else send(player, "team-no-home", "&cYour team has not set a home!");
+                    return;
+                }
+                if (!teamData.getBoolean(team + ".home-access", true)
+                        && !isLeader(player, team) && !player.hasPermission("team.home.bypass")) {
+                    send(player, "no-permission", "&cYou don't have permission for this!"); return;
+                }
                 player.closeInventory(); teleport(player, loc, "team", "&aYou have been teleported to Team home!");
             }
         }
