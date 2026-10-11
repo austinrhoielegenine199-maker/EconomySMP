@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -208,6 +209,16 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 play(player, "sounds.teleport-cooldown", "BLOCK_NOTE_BLOCK_PLING");
             }
         }, 20L, 20L);
+    }
+
+    @EventHandler public void onTeamDamage(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player attacker) || !(event.getEntity() instanceof Player victim)) return;
+        String attackerTeam = teamName(attacker);
+        if (attackerTeam == null || !attackerTeam.equalsIgnoreCase(teamName(victim))) return;
+        if (!teamData.getBoolean(attackerTeam + ".pvp", false)) {
+            event.setCancelled(true);
+            attacker.sendMessage(teamMessage("pvp-disabled-damage", "&cYou cannot damage team members!"));
+        }
     }
 
     @EventHandler public void onMove(PlayerMoveEvent event) {
