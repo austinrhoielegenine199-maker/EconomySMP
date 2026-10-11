@@ -78,34 +78,87 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
     }
     public void sellAll(Player player) {
         Economy economy = getEconomy();
-        if(economy==null){player.sendMessage(message("economy-unavailable","&cEconomy is unavailable."));return;}
-        ItemStack[] inventory=player.getInventory().getStorageContents();
-        Map<Integer,Integer> remove=new LinkedHashMap<>();
-        double total=0;int amount=0;
-        for(int slot=0;slot<inventory.length;slot++){
-            ItemStack stack=inventory[slot]; if(stack==null||stack.getType().isAir())continue;
-            double unit=prices.unitPrice(stack.getType());if(unit<=0)continue;
-            double line=unit*stack.getAmount();
-            if(!Double.isFinite(line)||!Double.isFinite(total+line)){player.sendMessage(message("transaction-failed","&cSell transaction failed."));return;}
-            total+=line;amount+=stack.getAmount();remove.put(slot,stack.getAmount());
+        if (economy == null) { player.sendMessage(message("economy-unavailable", "&cEconomy is unavailable.")); return; }
+        ItemStack[] contents = player.getInventory().getStorageContents();
+        Map<Integer, Integer> remove = new LinkedHashMap<>();
+        Map<Integer, Double> lineTotals = new LinkedHashMap<>();
+        Map<String, Double> categoryProgress = new LinkedHashMap<>();
+        double total = 0.0;
+        int amount = 0;
+        for (int slot = 0; slot < contents.length; slot++) {
+            ItemStack stack = contents[slot];
+            if (stack == null || stack.getType().isAir()) continue;
+            double unit = prices.unitPrice(stack.getType());
+            if (unit <= 0) continue;
+            String category = progress.categoryFor(stack.getType());
+            double raw = unit * stack.getAmount();
+            double multiplier = progress.current(player.getUniqueId(), category).multiplier();
+            double line = raw * multiplier;
+            if (!Double.isFinite(raw) || !Double.isFinite(line) || !Double.isFinite(total + line)) {
+                player.sendMessage(message("transaction-failed", "&cSell transaction failed.")); return;
+            }
+            total += line;
+            amount += stack.getAmount();
+            remove.put(slot, stack.getAmount());
+            lineTotals.put(slot, line);
+            categoryProgress.merge(category, raw, Double::sum);
         }
-        if(amount==0){player.sendMessage(message("nothing-to-sell","&cNo configured items found in your inventory."));return;}
-        double multiplier=progress.current(player.getUniqueId()).multiplier();
-        total*=multiplier;
-        if(!Double.isFinite(total)||total<=0){player.sendMessage(message("transaction-failed","&cSell transaction failed."));return;}
-        if(!economy.depositPlayer(player,total).transactionSuccess()){player.sendMessage(message("transaction-failed","&cSell transaction failed."));return;}
-        for(var e:remove.entrySet()){
-            ItemStack stack=player.getInventory().getItem(e.getKey());
-            if(stack!=null){int left=stack.getAmount()-e.getValue();if(left<=0)player.getInventory().setItem(e.getKey(),null);else stack.setAmount(left);}
+        if (amount == 0) { player.sendMessage(message("nothing-to-sell", "&cNo configured items found in your inventory.")); return; }
+        if (!Double.isFinite(total) || total <= 0) { player.sendMessage(message("transaction-failed", "&cSell transaction failed.")); return; }
+        if (!economy.depositPlayer(player, total).transactionSuccess()) {
+            player.sendMessage(message("transaction-failed", "&cSell transaction failed.")); return;
         }
-        progress.add(player.getUniqueId(),total);
-        for(var e:remove.entrySet()){
-            ItemStack stack=inventory[e.getKey()];
-            if(stack!=null)history.record(player.getUniqueId(),player.getName(),stack.getType().name(),e.getValue(),prices.unitPrice(stack.getType())*e.getValue()*multiplier);
+        for (var entry : remove.entrySet()) {
+            ItemStack stack = player.getInventory().getItem(entry.getKey());
+            if (stack != null) {
+                int left = stack.getAmount() - entry.getValue();
+                player.getInventory().setItem(entry.getKey(), left <= 0 ? null : stack);
+                if (left > 0) stack.setAmount(left);
+            }
         }
-        player.sendMessage(message("sell-success","&aSold %amount% items for $%total%.")
-                .replace("%amount%",String.valueOf(amount)).replace("%total%",String.format(Locale.US,"%.2f",total)));
+        categoryProgress.forEach((category, earned) -> progress.add(player.getUniqueId(), category, earned));
+        for (var entry : remove.entrySet()) {
+            ItemStack stack = contents[entry.getKey()];
+            if (stack != null) history.record(player.getUniqueId(), player.getName(), stack.getType().name(),
+                    entry.getValue(), lineTotals.getOrDefault(entry.getKey(), 0.0));
+        }
+        player.sendMessage(message("sell-success", "&aSold %amount% items for $%total%.")
+                .replace("%amount%", String.valueOf(amount))
+                .replace("%total%", String.format(Locale.US, "%.2f", total))
+                .replace("%total_items%", String.valueOf(amount)));
     }
+
+    private ItemStack createSellaxe() {
+        var y = config.get("Sellaxe.yml");
+        Material material = Material.matchMaterial(y.getString("material", "NETHERITE_AXE"));
+        if (material == null || material.isAir()) return null;
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return item;
+        meta.setDisplayName(gui.color(y.getString("displayname", "&bSellaxe")));
+        List<String> lore = y.getStringList("lore");
+        if (!lore.isEmpty()) meta.setLore(lore.stream().map(gui::color).toList());
+        if (y.contains("custom-model-data")) meta.setCustomModelData(y.getInt("custom-model-data"));
+        ConfigurationSection enchants = y.getConfigurationSection("enchantments");
+        if (enchants != null && enchants.getBoolean("enabled", true)) {
+            for (String raw : enchants.getStringList("list")) {
+                String[] parts = raw.split(":", 2);
+                if (parts.length != 2) continue;
+                try {
+                    org.bukkit.enchantments.Enchantment enchantment = org.bukkit.enchantments.Enchantment.getByName(parts[0].toUpperCase(Locale.ROOT));
+                    int level = Integer.parseInt(parts[1]);
+                    if (enchantment != null && level > 0) meta.addEnchant(enchantment, level, true);
+                } catch (NumberFormatException ignored) { }
+            }
+        }
+        if (y.getBoolean("glow", false) && meta.getEnchants().isEmpty()) {
+            org.bukkit.enchantments.Enchantment glow = org.bukkit.enchantments.Enchantment.getByName("UNBREAKING");
+            if (glow != null) meta.addEnchant(glow, 1, true);
+        }
+        item.setItemMeta(meta);
+        return item;
+    }
+
     private Economy getEconomy(){
         if(plugin.getEconomyModule()!=null&&plugin.getEconomyModule().provider()!=null)return plugin.getEconomyModule().provider();
         RegisteredServiceProvider<Economy> registration=Bukkit.getServicesManager().getRegistration(Economy.class);
@@ -142,7 +195,16 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
         }
         if (commandName.equals("sellaxe")) {
             if (!p.hasPermission("sell.sellaxe")) { p.sendMessage(message("no-permission", "&cNo permission.")); return true; }
-            p.sendMessage(message("sellaxe-given", "&cSellaxe item creation is not yet implemented."));
+            Player target = p;
+            if (args.length > 0) {
+                target = Bukkit.getPlayerExact(args[0]);
+                if (target == null) { p.sendMessage(gui.color("&cThat player is not online.")); return true; }
+            }
+            ItemStack axe = createSellaxe();
+            if (axe == null) { p.sendMessage(gui.color("&cSellaxe configuration has an invalid material.")); return true; }
+            Map<Integer, ItemStack> leftovers = target.getInventory().addItem(axe);
+            leftovers.values().forEach(item -> target.getWorld().dropItemNaturally(target.getLocation(), item));
+            p.sendMessage(message("sellaxe-given", "&aSellaxe given.").replace("%player%", target.getName()));
             return true;
         }
         if(args.length>0){
