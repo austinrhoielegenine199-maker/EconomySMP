@@ -99,7 +99,7 @@ public final class FlakesModule implements CommandExecutor, TabCompleter {
     }
 
     private String color(String input) {
-        return input.replace('&', '§');
+        return com.archiveaustxn.shop.ShopModule.color(input);
     }
 
     private void send(CommandSender sender, String key, String fallback) {
