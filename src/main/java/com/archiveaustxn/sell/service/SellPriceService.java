@@ -6,7 +6,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import java.util.*;
 
-/** Centralized price lookup and valuation; prices are configured in worth.yml. */
+/** Centralized price lookup and valuation; prices are configured in prices.yml. */
 public final class SellPriceService {
     private final SellConfig config;
     public SellPriceService(SellConfig config) { this.config = config; }
