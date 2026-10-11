@@ -53,6 +53,8 @@ public final class PaymentHistoryStore {
             case "oldest" -> Comparator.comparingLong(Record::timestamp);
             case "highest_price" -> Comparator.comparingDouble(Record::amount).reversed();
             case "lowest_price" -> Comparator.comparingDouble(Record::amount);
+            case "name_az" -> Comparator.comparing(Record::from, String.CASE_INSENSITIVE_ORDER).thenComparing(Record::to, String.CASE_INSENSITIVE_ORDER);
+            case "name_za" -> Comparator.comparing(Record::from, String.CASE_INSENSITIVE_ORDER.reversed()).thenComparing(Record::to, String.CASE_INSENSITIVE_ORDER.reversed());
             default -> Comparator.comparingLong(Record::timestamp).reversed();
         };
         result.sort(comparator);
