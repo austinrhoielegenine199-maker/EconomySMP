@@ -129,6 +129,45 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
         }
         return false;
     }
+
+    private void openHistory(Player viewer, UUID targetId, String targetName, int page, String sort) {
+        YamlConfiguration cfg = YamlConfiguration.loadConfiguration(
+            new java.io.File(plugin.getDataFolder(), "core/eco/gui/pay-history.yml"));
+        int rows = Math.max(1, Math.min(6, cfg.getInt("pay-history-gui.rows", 6)));
+        int pageSize = cfg.getString("pay-history-gui.history-slots", "0-44").equals("0-44") ? 45 : 45;
+        String title = eco.color(cfg.getString("pay-history-gui.title", "&8Payment Logs %player% (Page %page%)")
+            .replace("%player%", targetName).replace("%page%", String.valueOf(page)));
+        Inventory inventory = Bukkit.createInventory(null, rows * 9, title);
+        List<Record> records = history.find(targetId, pageSize, page, sort);
+        int slot = 0;
+        for (Record record : records) {
+            while (slot < inventory.getSize() && (slot == 45 || slot == 48 || slot == 49 || slot == 50 || slot == 53)) slot++;
+            if (slot >= inventory.getSize()) break;
+            boolean received = record.to().equalsIgnoreCase(targetName);
+            ItemStack item = new ItemStack(received ? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE);
+            ItemMeta meta = item.getItemMeta();
+            if (meta != null) {
+                meta.setDisplayName(eco.color((received ? "&aReceived payment" : "&cSent payment")));
+                meta.setLore(List.of(
+                    eco.color("&7From: &f" + record.from()),
+                    eco.color("&7To: &f" + record.to()),
+                    eco.color("&7Amount: &a" + eco.format(record.amount())),
+                    eco.color("&7Date: &f" + record.date())));
+                item.setItemMeta(meta);
+            }
+            inventory.setItem(slot++, item);
+        }
+        ItemStack info = new ItemStack(Material.PAPER);
+        ItemMeta infoMeta = info.getItemMeta();
+        if (infoMeta != null) { infoMeta.setDisplayName(eco.color("&eSort: &f" + sort)); info.setItemMeta(infoMeta); }
+        inventory.setItem(48, info);
+        ItemStack refresh = new ItemStack(Material.ANVIL);
+        ItemMeta refreshMeta = refresh.getItemMeta();
+        if (refreshMeta != null) { refreshMeta.setDisplayName(eco.color("&aRefresh")); refresh.setItemMeta(refreshMeta); }
+        inventory.setItem(49, refresh);
+        viewer.openInventory(inventory);
+    }
+
     @Override public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if(command.getName().equalsIgnoreCase("eco")&&args.length==1&&sender.hasPermission("economysmp.admin"))return List.of("give","take","set","clear","giveall","takeall","clearall","reload");
         if(command.getName().equalsIgnoreCase("eco")&&args.length==2&&sender.hasPermission("economysmp.admin")&&List.of("give","take","set","clear").contains(args[0].toLowerCase(Locale.ROOT)))return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
