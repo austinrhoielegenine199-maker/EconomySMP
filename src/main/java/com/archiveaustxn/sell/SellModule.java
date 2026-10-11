@@ -115,11 +115,11 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
     private String pretty(String raw){StringJoiner j=new StringJoiner(" ");for(String s:raw.toLowerCase(Locale.ROOT).split("_"))j.add(s.substring(0,1).toUpperCase(Locale.ROOT)+s.substring(1));return j.toString();}
     @Override public boolean onCommand(CommandSender sender,Command command,String label,String[] args){
         if(args.length>0&&args[0].equalsIgnoreCase("reload")){
-            if(!sender.hasPermission("economysmp.sell.admin")){sender.sendMessage(message("no-permission","&cNo permission."));return true;}
+            if(!sender.hasPermission("sell.reload") && !sender.hasPermission("sell.admin") && !sender.hasPermission("economysmp.sell.admin")){sender.sendMessage(message("no-permission","&cNo permission."));return true;}
             config.reload();sender.sendMessage(message("reload-success","&aSell configuration reloaded."));return true;
         }
         if(!(sender instanceof Player p)){sender.sendMessage(message("player-only","&cOnly players can use this command."));return true;}
-        if(command.getName().equalsIgnoreCase("worth")){openWorth(p,args.length>1?parsePage(args[1]):0);return true;}
+        if(command.getName().equalsIgnoreCase("worth")){openWorth(p,args.length>0?parsePage(args[0]):0);return true;}
         if(args.length>0){
             switch(args[0].toLowerCase(Locale.ROOT)){
                 case "all" -> sellAll(p);
