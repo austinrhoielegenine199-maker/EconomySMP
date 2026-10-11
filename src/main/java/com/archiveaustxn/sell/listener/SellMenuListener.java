@@ -19,6 +19,7 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
+import org.bukkit.Bukkit;
 
 /** Owns click, drag, and close handling for Sell-module inventories. */
 public final class SellMenuListener implements Listener {
@@ -82,7 +83,7 @@ public final class SellMenuListener implements Listener {
         if (!(event.getPlayer() instanceof Player player)) return;
         if (!(event.getInventory().getHolder() instanceof MenuTag tag) || tag.menu() != Menu.SELL) return;
         Inventory sellInventory = event.getInventory();
-        Economy economy = module.getEconomyProvider();
+        Economy economy = Bukkit.getServicesManager().load(Economy.class);
         if (economy == null) {
             player.sendMessage(module.message("economy-unavailable", "&cEconomy is unavailable."));
             return;
