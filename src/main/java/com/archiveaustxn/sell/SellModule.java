@@ -58,7 +58,7 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
     public void openWorth(Player p,int page){ gui.openWorth(p,page); }
 
     public void openHistory(Player p,int page) {
-        var y=config.get("gui/Sell.history.yml");
+        var y=config.get("gui/sell.history.yml");
         int rows=Math.max(1,Math.min(6,y.getInt("sellhistory.rows",6)));
         Inventory inv=Bukkit.createInventory(new MenuTag(Menu.HISTORY,null,page),rows*9,gui.color(y.getString("sellhistory.title","&8Sell History")));
         ConfigurationSection source=y.getConfigurationSection("source-item");
@@ -146,7 +146,7 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
     }
 
     private ItemStack createSellaxe() {
-        var y = config.get("Sellaxe.yml");
+        var y = config.get("sellaxe.yml");
         Material material = Material.matchMaterial(y.getString("material", "NETHERITE_AXE"));
         if (material == null || material.isAir()) return null;
         ItemStack item = new ItemStack(material);
