@@ -2,7 +2,7 @@ package com.archiveaustxn;
 
 import com.archiveaustxn.eco.EconomyModule;
 import com.archiveaustxn.eco.command.EconomyCommand;
-import com.archiveaustxn.eco.storage.PaymentHistoryStore;
+import com.archiveaustxn.eco.storage.PaymentHistoryStore;\nimport com.archiveaustxn.eco.storage.SQLiteDatabase;
 import com.archiveaustxn.eco.history.PaymentHistoryListener;
 import com.archiveaustxn.shop.ShopModule;
 import com.archiveaustxn.shop.command.ShopCommand;
@@ -14,14 +14,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class EconomySMP extends JavaPlugin {
     private ShopModule shopModule;
     private EconomyModule economyModule;
-    private PaymentHistoryStore paymentHistoryStore;
+    private PaymentHistoryStore paymentHistoryStore;\n    private SQLiteDatabase database;
     private SellModule sellModule;
 
     @Override public void onEnable() {
         if (!getDataFolder().exists()) getDataFolder().mkdirs();
         economyModule = new EconomyModule(this);
         economyModule.load();
-        paymentHistoryStore = new PaymentHistoryStore(this);
+        database = new SQLiteDatabase(this);\n        try { database.open(); } catch (java.sql.SQLException exception) {\n            getLogger().severe("Failed to initialize SQLite database: " + exception.getMessage());\n            getServer().getPluginManager().disablePlugin(this);\n            return;\n        }\n        paymentHistoryStore = new PaymentHistoryStore(this, database);
         getServer().getPluginManager().registerEvents(new PaymentHistoryListener(this, paymentHistoryStore, economyModule), this);
         shopModule = new ShopModule(this);
         shopModule.load();
@@ -55,7 +55,7 @@ public final class EconomySMP extends JavaPlugin {
     }
 
     @Override public void onDisable() {
-        if (shopModule != null) shopModule.close();
+        if (shopModule != null) shopModule.close();\n        if (database != null) database.close();
     }
     public ShopModule getShopModule() { return shopModule; }
     public EconomyModule getEconomyModule() { return economyModule; }
