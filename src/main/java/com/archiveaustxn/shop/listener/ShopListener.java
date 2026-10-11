@@ -5,6 +5,7 @@ import com.archiveaustxn.shop.command.ShopCommand;
 import com.archiveaustxn.shop.gui.ShopHolder;
 
 import com.archiveaustxn.EconomySMP;
+import net.milkbowl.vault.economy.Economy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +68,7 @@ public final class ShopListener implements Listener {
             else if (slot == 10) changeAmount(player, purchase, -10);
             else if (slot == 9) changeAmount(player, purchase, -64);
             else if (slot == 23) {
-                player.sendMessage(ShopModule.color("&cPurchase processing will be enabled with the economy integration."));
+                completePurchase(player, purchase);
             }
             return;
         }
@@ -93,6 +94,64 @@ public final class ShopListener implements Listener {
     @EventHandler
     public void onDrag(InventoryDragEvent event) {
         if (event.getView().getTopInventory().getHolder() instanceof ShopHolder) event.setCancelled(true);
+    }
+
+
+    private void completePurchase(Player player, Purchase purchase) {
+        Economy economy = plugin.getEconomyModule() == null ? null : plugin.getEconomyModule().provider();
+        if (economy == null) {
+            player.sendMessage(ShopModule.color(shop.message("economy-unavailable", "&cThe shop economy is unavailable right now.")));
+            return;
+        }
+        if (!Double.isFinite(purchase.price) || purchase.price < 0 || purchase.amount < 1) {
+            player.sendMessage(ShopModule.color("&cThis item has an invalid price."));
+            return;
+        }
+        double total = purchase.price * purchase.amount;
+        if (!Double.isFinite(total)) {
+            player.sendMessage(ShopModule.color("&cThe total price is too large."));
+            return;
+        }
+        if (!economy.has(player, total)) {
+            player.sendMessage(ShopModule.color(shop.message("not-enough-money", "&cYou don't have enough money.")));
+            return;
+        }
+        int free = 0;
+        for (ItemStack contents : player.getInventory().getStorageContents()) {
+            if (contents == null || contents.getType().isAir()) free += 64;
+            else if (contents.getType() == purchase.material && contents.getAmount() < contents.getMaxStackSize())
+                free += contents.getMaxStackSize() - contents.getAmount();
+        }
+        if (free < purchase.amount) {
+            player.sendMessage(ShopModule.color(shop.message("inventory-full", "&cMake some room in your inventory first.")));
+            return;
+        }
+        java.util.List<ItemStack> delivery = new java.util.ArrayList<>();
+        int left = purchase.amount;
+        while (left > 0) {
+            int stackAmount = Math.min(left, purchase.material.getMaxStackSize());
+            ItemStack stack = new ItemStack(purchase.material, stackAmount);
+            if (purchase.name != null && !purchase.name.isBlank() && !purchase.name.equalsIgnoreCase(purchase.key)) {
+                ItemMeta meta = stack.getItemMeta();
+                if (meta != null) { meta.setDisplayName(ShopModule.color(purchase.name)); stack.setItemMeta(meta); }
+            }
+            delivery.add(stack);
+            left -= stackAmount;
+        }
+        if (!economy.withdrawPlayer(player, total).transactionSuccess()) {
+            player.sendMessage(ShopModule.color("&cPayment failed. Please try again."));
+            return;
+        }
+        java.util.Map<Integer, ItemStack> leftovers = player.getInventory().addItem(delivery.toArray(new ItemStack[0]));
+        if (!leftovers.isEmpty()) {
+            economy.depositPlayer(player, total);
+            for (ItemStack item : leftovers.values()) player.getWorld().dropItemNaturally(player.getLocation(), item);
+            player.sendMessage(ShopModule.color("&cInventory delivery issue; your payment was refunded."));
+            return;
+        }
+        purchases.remove(player.getUniqueId());
+        player.sendMessage(ShopModule.color(shop.message("purchase-success", "&aPurchase complete!")));
+        player.closeInventory();
     }
 
     private void changeAmount(Player player, Purchase purchase, int delta) {
