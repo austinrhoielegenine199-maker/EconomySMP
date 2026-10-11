@@ -23,3 +23,9 @@ items:
   soul-sand: {material: SOUL_SAND, price: 50, page: 1, slot: 15, amount: 1}
   magma-block: {material: MAGMA_BLOCK, price: 35, page: 1, slot: 16, amount: 1}
   crying-obsidian: {material: CRYING_OBSIDIAN, price: 150, page: 1, slot: 17, amount: 1}
+back:
+  slot: 22
+  material: RED_STAINED_GLASS_PANE
+  display-name: "&#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "&fᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴛᴜʀɴ"

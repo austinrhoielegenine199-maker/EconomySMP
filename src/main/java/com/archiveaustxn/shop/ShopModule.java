@@ -105,14 +105,41 @@ public final class ShopModule {
             ItemStack stack = new ItemStack(material, Math.max(1, Math.min(64, item.getInt("amount", 1))));
             ItemMeta meta = stack.getItemMeta();
             if (meta != null) {
-                meta.setDisplayName(color(item.getString("display-name", item.getString("displayname", "&f" + key))));
+                meta.setDisplayName(color(item.getString("display-name", item.getString("displayname", "&f" + prettyName(key)))));
                 meta.setLore(java.util.List.of(color(shopConfig.getString("price-lore", "&a%price%").replace("%price%", String.valueOf(item.getDouble("price"))))));
                 stack.setItemMeta(meta);
             }
             int slot = item.getInt("slot", -1);
             if (slot >= 0 && slot < inv.getSize()) inv.setItem(slot, stack);
         }
+        ConfigurationSection back = yaml.getConfigurationSection("back");
+        if (back != null && back.getBoolean("enabled", true)) {
+            int slot = back.getInt("slot", 22);
+            Material material = Material.matchMaterial(back.getString("material", "RED_STAINED_GLASS_PANE"));
+            if (material != null && slot >= 0 && slot < inv.getSize()) {
+                ItemStack button = new ItemStack(material);
+                ItemMeta meta = button.getItemMeta();
+                if (meta != null) {
+                    meta.setDisplayName(color(back.getString("display-name", "&#FF0000ʙᴀᴄᴋ")));
+                    meta.setLore(back.getStringList("lore").stream().map(ShopModule::color).toList());
+                    button.setItemMeta(meta);
+                }
+                inv.setItem(slot, button);
+            }
+        }
         player.openInventory(inv);
+    }
+
+    private String prettyName(String raw) {
+        if (raw == null || raw.isBlank()) return "Item";
+        String cleaned = raw.replace('_', ' ').replace('-', ' ').trim().replaceAll("\\s+", " ");
+        java.util.StringJoiner words = new java.util.StringJoiner(" ");
+        for (String word : cleaned.split(" ")) {
+            if (word.isEmpty()) continue;
+            words.add(word.substring(0, 1).toUpperCase(java.util.Locale.ROOT)
+                    + word.substring(1).toLowerCase(java.util.Locale.ROOT));
+        }
+        return words.toString();
     }
 
     /**

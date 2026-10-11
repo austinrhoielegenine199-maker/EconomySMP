@@ -47,12 +47,21 @@ public final class SellaxeListener implements Listener {
         ItemMeta meta = tool.getItemMeta();
         if (meta == null || !meta.hasDisplayName()) return false;
         String expected = y.getString("displayname", "&bSellaxe");
-        String actualName = ChatColor.stripColor(meta.getDisplayName());
-        String expectedName = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', expected));
-        if (!actualName.equals(expectedName)) return false;
+        String actualName = normalizeName(meta.getDisplayName());
+        String expectedName = normalizeName(expected);
+        if (!actualName.equalsIgnoreCase(expectedName)) return false;
         if (y.contains("custom-model-data") && (!meta.hasCustomModelData()
                 || meta.getCustomModelData() != y.getInt("custom-model-data"))) return false;
         return true;
+    }
+
+    private String normalizeName(String input) {
+        if (input == null) return "";
+        String withoutAmpHex = input.replaceAll("(?i)&#[0-9a-f]{6}", "");
+        String withoutSectionHex = withoutAmpHex.replaceAll("(?i)§x(§[0-9a-f]){6}", "");
+        return ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', withoutSectionHex))
+                .replaceAll("(?i)§[0-9a-fk-or]", "")
+                .trim();
     }
 
     @EventHandler(ignoreCancelled = true)
