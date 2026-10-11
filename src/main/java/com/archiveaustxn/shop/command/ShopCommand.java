@@ -46,7 +46,7 @@ public final class ShopCommand implements CommandExecutor, TabCompleter {
         return List.of();
     }
 
-    static String color(String text) {
+    public static String color(String text) {
         return ChatColor.translateAlternateColorCodes('&', text == null ? "" : text);
     }
 }
