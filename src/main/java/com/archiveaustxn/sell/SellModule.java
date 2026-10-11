@@ -47,7 +47,7 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
         history = new SellHistoryService(plugin);
         gui = new SellGuiManager(config, prices, progress);
         Bukkit.getPluginManager().registerEvents(new SellMenuListener(gui, this, history), plugin);
-        Bukkit.getPluginManager().registerEvents(new SellaxeListener(config, prices), plugin);
+        Bukkit.getPluginManager().registerEvents(new SellaxeListener(plugin, config, prices), plugin);
         plugin.getLogger().info("Sell module loaded: " + prices.allPrices().size() + " configured item prices.");
     }
     public SellConfig getConfigService(){ return config; }
