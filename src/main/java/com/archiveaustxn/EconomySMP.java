@@ -17,7 +17,6 @@ public final class EconomySMP extends JavaPlugin {
 
     @Override public void onEnable() {
         if (!getDataFolder().exists()) getDataFolder().mkdirs();
-        saveDefaultConfig();
         economyModule = new EconomyModule(this);
         economyModule.load();
         paymentHistoryStore = new PaymentHistoryStore(this);
