@@ -1,3 +1,8 @@
+# PlaceholderAPI (requires PlaceholderAPI):
+# %team_name%, %team_player%, %team_rank%, %team_role%, %team_is_leader%
+# %team_leader%, %team_count% / %team_members%, %team_home_set%, %team_home%
+# %team_home_world%, %team_home_x%, %team_home_y%, %team_home_z%
+# %team_pvp% / %team_pvp_enabled%, %team_has_team%
 sounds:
   click-sound: "UI_BUTTON_CLICK"
   plugin-reloaded: "ENTITY_PLAYER_LEVELUP"
