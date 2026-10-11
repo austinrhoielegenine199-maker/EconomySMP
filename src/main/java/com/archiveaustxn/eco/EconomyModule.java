@@ -14,6 +14,7 @@ public final class EconomyModule {
     private final EconomySMP plugin;
     private File configFile;
     private YamlConfiguration config;
+    private YamlConfiguration lang;
     private Economy provider;
 
     public EconomyModule(EconomySMP plugin) { this.plugin = plugin; }
@@ -29,6 +30,15 @@ public final class EconomyModule {
             } catch (Exception exception) { plugin.getLogger().severe("Could not create eco config: " + exception.getMessage()); }
         }
         config = YamlConfiguration.loadConfiguration(configFile);
+
+        File langFile = new File(directory, "lang.yml");
+        if (!langFile.exists()) {
+            try {
+                if (plugin.getResource("core/eco/lang.yml") != null) plugin.saveResource("core/eco/lang.yml", false);
+                else langFile.createNewFile();
+            } catch (Exception exception) { plugin.getLogger().severe("Could not create eco language file: " + exception.getMessage()); }
+        }
+        lang = YamlConfiguration.loadConfiguration(langFile);
         setupProvider();
     }
 
@@ -51,8 +61,9 @@ public final class EconomyModule {
 
     public Economy provider() { return provider; }
     public YamlConfiguration config() { return config; }
+    public YamlConfiguration lang() { return lang; }
     public boolean available() { return provider != null; }
-    public String message(String key, String fallback) { return config.getString(key, fallback); }
+    public String message(String key, String fallback) { return lang.getString(key, fallback); }
     public String format(double amount) {
         String pattern = config.getString("economy.currency-format", "#,##0.##");
         String formatted;
@@ -80,6 +91,6 @@ public final class EconomyModule {
         return org.bukkit.ChatColor.translateAlternateColorCodes('&', out.toString());
     }
     public String messageFor(String key, String fallback) { return color(message(key, fallback)); }
-    public String prefix() { return config.getBoolean("prefix-enable", false) ? color(config.getString("prefix", "")) : ""; }
+    public String prefix() { return lang.getBoolean("prefix-enable", false) ? color(lang.getString("prefix", "")) : ""; }
     public boolean validAmount(double amount) { return Double.isFinite(amount) && amount > 0 && amount <= 1_000_000_000_000.0; }
 }
