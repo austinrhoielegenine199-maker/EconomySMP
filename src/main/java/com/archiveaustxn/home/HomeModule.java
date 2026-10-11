@@ -383,7 +383,6 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
             if (!pendingInvites.getOrDefault(p.getUniqueId(), "").equalsIgnoreCase(team)) {
                 send(p, "team-no-invite", "&cYou don't have an invite to that team."); return true;
             }
-            teamData.getStringList(team + ".members").add(p.getUniqueId().toString());
             List<String> members = new ArrayList<>(teamData.getStringList(team + ".members"));
             if (!members.contains(p.getUniqueId().toString())) members.add(p.getUniqueId().toString());
             teamData.set(team + ".members", members); saveTeams(); pendingInvites.remove(p.getUniqueId());
