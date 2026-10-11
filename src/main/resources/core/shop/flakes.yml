@@ -1,0 +1,84 @@
+flakes-enabled: true
+main-menu:
+  slot: 15
+  material: AMETHYST_SHARD
+  display-name: "&#009bffғʟᴀᴋᴇs ꜱʜᴏᴘ"
+  lore:
+    - "&fClick to view the Flakes shop"
+shop-menu:
+  title: "&8ꜱʜᴏᴘ - ғʟᴀᴋᴇs ꜱʜᴏᴘ"
+  rows: 3
+  back-button-slot: 18
+items:
+  common-key:
+    material: TRIPWIRE_HOOK
+    price: 200
+    slot: 3
+    amount: 1
+    give-command: "crate givekey %player% common virtuell 1"
+  crimson-key:
+    material: TRIPWIRE_HOOK
+    price: 2500
+    slot: 4
+    amount: 1
+    give-command: "crate givekey %player% crimson virtuell 1"
+  prime-key:
+    material: TRIPWIRE_HOOK
+    price: 2000
+    slot: 5
+    amount: 1
+    give-command: "crate givekey %player% prime virtuell 1"
+  pig-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 9
+    amount: 1
+    give-command: "spawner give pig %player%"
+  cow-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 10
+    amount: 1
+    give-command: "spawner give cow %player%"
+  zombie-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 11
+    amount: 1
+    give-command: "spawner give zombie %player%"
+  spider-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 12
+    amount: 1
+    give-command: "spawner give spider %player%"
+  skeleton-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 13
+    amount: 1
+    give-command: "spawner give skeleton %player%"
+  creeper-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 14
+    amount: 1
+    give-command: "spawner give creeper %player%"
+  zombified-piglin-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 15
+    amount: 1
+    give-command: "spawner give zombified_piglin %player%"
+  blaze-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 16
+    amount: 1
+    give-command: "spawner give blaze %player%"
+  iron-golem-spawner:
+    material: SPAWNER
+    price: 1500
+    slot: 17
+    amount: 1
+    give-command: "spawner give iron_golem %player%"
