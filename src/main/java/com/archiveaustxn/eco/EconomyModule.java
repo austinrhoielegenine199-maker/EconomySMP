@@ -66,20 +66,8 @@ public final class EconomyModule implements Listener {
     }
 
     private void setupProvider() {
-        // Prefer an external Vault provider when one is already available, but never leave
-        // the server without an economy merely because Vault has no third-party provider.
-        RegisteredServiceProvider<Economy> registration = Bukkit.getServicesManager().getRegistration(Economy.class);
-        Economy found = registration == null ? null : registration.getProvider();
-        if (found != null && found != builtInProvider) {
-            boolean newlyAvailable = provider != found;
-            provider = found;
-            if (newlyAvailable) plugin.getLogger().info("Vault economy hooked successfully: " + found.getName());
-            return;
-        }
-
-        if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
-            plugin.getLogger().warning("Vault is not installed. EconomySMP's internal economy is available to its own modules, but other Vault plugins require Vault.");
-        }
+        // EconomySMP's provider is the authoritative source so every built-in module
+        // uses the same SQLite balances, regardless of other installed economy plugins.
         if (builtInProvider == null) {
             try {
                 builtInProvider = new BuiltInEconomyProvider(plugin);
@@ -90,17 +78,11 @@ public final class EconomyModule implements Listener {
             }
         }
         if (!builtInRegistered) {
-            Bukkit.getServicesManager().register(Economy.class, builtInProvider, plugin, ServicePriority.Normal);
+            Bukkit.getServicesManager().register(Economy.class, builtInProvider, plugin, ServicePriority.Highest);
             builtInRegistered = true;
         }
         boolean newlyAvailable = provider != builtInProvider;
         provider = builtInProvider;
-        if (newlyAvailable) plugin.getLogger().info("Built-in SQLite economy provider enabled.");
-    }
-
-    public void close() {
-        if (builtInProvider != null) Bukkit.getServicesManager().unregister(Economy.class, builtInProvider);
-        builtInRegistered = false;
-        provider = null;
+        if (newlyAvailable) plugin.getLogger().info("Built-in SQLite economy provider enabled (shared economy.db).");
     }
 
