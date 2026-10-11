@@ -1,0 +1,51 @@
+name: Rebrand source package to EconomySMP
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/rebrand-economysmp.yml"
+permissions:
+  contents: write
+jobs:
+  rebrand:
+    if: github.event.head_commit.message != 'Apply EconomySMP source rebrand'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Move Java package and update references
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -d src/main/java/com/bx/ultimateDonutSmp ]; then
+            echo "Old source package is not present; nothing to migrate."
+            exit 0
+          fi
+          mkdir -p src/main/java/com src/test/java/com
+          git mv src/main/java/com/bx/ultimateDonutSmp src/main/java/com/archiveaustxn
+          if [ -d src/test/java/com/bx/ultimateDonutSmp ]; then
+            git mv src/test/java/com/bx/ultimateDonutSmp src/test/java/com/archiveaustxn
+          fi
+          find src/main/java/com/archiveaustxn src/test/java/com/archiveaustxn -type f -name '*.java' -print0 2>/dev/null | xargs -0 -r sed -i \
+            -e 's/com\.bx\.ultimateDonutSmp/com.archiveaustxn/g' \
+            -e 's/UltimateDonutSmp/EconomySMP/g' \
+            -e 's/ultimateDonutSmp/archiveaustxn/g' \
+            -e 's/ultimatedonutsmp/economysmp/g'
+          if [ -f src/main/java/com/archiveaustxn/EconomySMP.java ]; then
+            :
+          elif [ -f src/main/java/com/archiveaustxn/UltimateDonutSmp.java ]; then
+            git mv src/main/java/com/archiveaustxn/UltimateDonutSmp.java src/main/java/com/archiveaustxn/EconomySMP.java
+          fi
+          if [ -f src/main/resources/plugin.yml ]; then
+            sed -i 's/com\.bx\.ultimateDonutSmp\.UltimateDonutSmp/com.archiveaustxn.EconomySMP/g; s/ultimatedonutsmp/economysmp/g' src/main/resources/plugin.yml
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No source changes to commit."
+            exit 0
+          fi
+          git commit -m "Apply EconomySMP source rebrand"
+          git push
