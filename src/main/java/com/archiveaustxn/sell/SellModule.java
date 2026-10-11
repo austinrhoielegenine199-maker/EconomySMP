@@ -65,7 +65,7 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
         int pageSize=45;
         List<SellHistoryService.Entry> entries=history.recent(p.getUniqueId(),500);
         int start=Math.max(0,page)*pageSize;
-        for(int i=0;i<pageSize&&start+i<entries.size();i++){
+        for(int i=0;i<pageSize&&start+i<entries.size()&&i<inv.getSize()-9;i++){
             SellHistoryService.Entry e=entries.get(start+i);
             Material material=Material.matchMaterial(e.material()); if(material==null)material=Material.PAPER;
             String display=source==null?"&f%item_name%":source.getString("displayname","&f%item_name%");
@@ -73,6 +73,23 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
             ItemStack item=new ItemStack(material);ItemMeta meta=item.getItemMeta();
             if(meta!=null){meta.setDisplayName(gui.color(display.replace("%item_name%",pretty(e.material()))));meta.setLore(lore.stream().map(s->gui.color(s.replace("%item_lore%","").replace("%total_price%",String.format(Locale.US,"%.2f",e.total())).replace("%total_amount%",String.valueOf(e.amount())))).toList());item.setItemMeta(meta);}
             inv.setItem(i,item);
+        }
+        ConfigurationSection navigation = source == null ? null : source.getConfigurationSection("navigation");
+        if (navigation != null) {
+            int previous = navigation.getInt("previous-page-slot", 45);
+            int next = navigation.getInt("next-page-slot", 53);
+            if (previous >= 0 && previous < inv.getSize()) {
+                ItemStack button = new ItemStack(Material.ARROW);
+                ItemMeta meta = button.getItemMeta();
+                if (meta != null) { meta.setDisplayName(gui.color("&fPrevious page")); button.setItemMeta(meta); }
+                inv.setItem(previous, button);
+            }
+            if (next >= 0 && next < inv.getSize()) {
+                ItemStack button = new ItemStack(Material.ARROW);
+                ItemMeta meta = button.getItemMeta();
+                if (meta != null) { meta.setDisplayName(gui.color("&fNext page")); button.setItemMeta(meta); }
+                inv.setItem(next, button);
+            }
         }
         p.openInventory(inv);
     }
