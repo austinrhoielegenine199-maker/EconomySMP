@@ -1,9 +1,81 @@
+#Here you can change all the messages and actions bars of the plugin
+
+prefix-enabled: false
+prefix: '&#E0E319&lSELL &7» '
+
+sell-success:
+  module:
+    chat:
+      enabled: false
+      message:
+        - ""
+    actionbar:
+      enabled: true
+      message:
+        - "&#00fc88+%price%"
+    title:
+      enabled: false
+      message:
+        - "&#00fc88+%price%"
+    subtitle:
+      enabled: false
+      message:
+        - ""
+
 messages:
-  no-permission: "&cYou don't have permission."
-  player-only: "&cOnly players can use this command."
-  economy-unavailable: "&cThe economy is unavailable right now."
-  no-prices: "&cNo sell prices are configured."
-  nothing-to-sell: "&cYou don't have any configured items to sell."
-  transaction-failed: "&cThe sell transaction failed. Please try again."
-  sell-success: "&aSold %amount% items for $%total%."
-  reload-success: "&aSell configuration reloaded."
+  no-permission: '&#FF0000You do not have permission for this!'
+  plugin-reloaded: '&#0bf52bPlugin has been reloaded!'
+  sellaxe-given: '&#0bf52bYou have received a Sell Axe!'
+  sellaxe-give-to-player: '&#0bf52bSuccess!'
+  sellaxe-broken: '&#FF0000Your Sell Axe has broken!'
+  player-not-found: '&#FF0000Player not found!'
+  player-only: 'You must be a player to use this command!'
+  no-sellable-items: '&#FF0000You have no sellable items!'
+  worth-toggle-enabled: '&#0bf52bWorth-Lore has been enabled!'
+  worth-toggle-disabled: '&#FF0000Worth-Lore has been disabled!'
+  material-not-exists: '&#FF0000The material does not exist!'
+  available-categories: '&#0bf52bAvailable categories:'
+  category-list: '&#0bf52b- &f%category%'
+  material-created: '&#0bf52bMaterial %material% has been created in category %category% with price %price%!'
+  material-updated: '&#0bf52bMaterial %material% has been updated in category %category% with price %price%!'
+  enchantedbook-created: '&#0bf52bEnchanted Book with enchantment %enchantment% as been created in category %category% with price %price%!'
+  enchantedbook-updated: '&#0bf52bEnchanted Book with enchantment %enchantment% as been updated in category %category% with price %price%!'
+  potion-created: '&#0bf52bPotion %potion% has been created in category %category% with price %price%!'
+  potion-updated: '&#0bf52bPotion %potion% has been updated in category %category% with price %price%!'
+  no-item-in-hand: '&#FF0000You have no item in your hand!'
+  invalid-price: '&#FF0000Invalid price!'
+  player-reset: '&#0bf52bPlayer has been reset!'
+
+action-bars:
+  plugin-reloaded: '&#0bf52bPlugin has been reloaded!'
+  no-sellable-items: '&#FF0000You have no sellable items!'
+  item-worth: "&f%item% is &#0bf52b%price% &fworth"
+  stack-worth: "&f%item% &7(x%amount%) is &#0bf52b%total% &fworth &7(%single% each)"
+  shulker-worth: "&f%item% is &#0bf52b%price% &fworth &7(%count% items)"
+  shulker-empty: "&f%item% is &#0bf52b%price% &fworth &7(empty)"
+  item-not-sellable: "&#FF0000%item% this Item can´t sell"
+  no-item-in-hand: "&#FF0000You have no Item in your hand"
+  invalid-item: "&#FF0000Invalid item!"
+  worth-toggle-on: "&#0bf52b✓ Worth-Lore is now visible"
+  worth-toggle-off: "&#FF0000✗ Worth-Lore is now hidden"
+
+command-usage: |
+  &#E0E319&lSELL
+  &#E0E319➤ &f/sell
+  &#E0E319➤ &f/worth
+  &#E0E319➤ &f/worth <item> 
+  &#E0E319➤ &f/worth hand 
+  &#E0E319➤ &f/worthtoggle
+  &#E0E319➤ &f/sellhistory
+
+
+command-usage-admin: |
+  &#FF0000&lSELL ADMIN
+  &#FF0000➤ &f/sell reload
+  &#FF0000➤ &f/sellaxe <player>
+  &#FF0000➤ &f/setworth <item> <price>
+  &#FF0000➤ &f/setworth <item> <price> <category>
+  &#FF0000➤ &f/setworth hand <price>
+  &#FF0000➤ &f/setworth hand <price> <category>
+  &#FF0000➤ &f/sell reset <player>
+  &#FF0000➤ &f/sellhistory <player>
