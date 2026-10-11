@@ -4,7 +4,7 @@ main-menu:
   material: AMETHYST_SHARD
   display-name: "&#009bffғʟᴀᴋᴇꜱ ꜱʜᴏᴘ"
   lore:
-    - "&#009bffClick to view the Flakes shop"
+    - "&fClick to view the Flakes shop"
 shop-menu:
   title: "&#009bffꜱʜᴏᴘ - ғʟᴀᴋᴇꜱ ꜱʜᴏᴘ"
   rows: 3
