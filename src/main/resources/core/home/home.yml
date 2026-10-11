@@ -1,0 +1,27 @@
+homes:
+  teleport-delay: 5
+  teleport-distance: 0.3
+  default-max-homes: 3
+
+sounds:
+  teleport-cooldown: "block.note_block.pling"
+  teleport-complete: "entity.enderman.teleport"
+  teleport-cancel: "entity.villager.no"
+  no-permission: "entity.villager.no"
+  reload-success: "entity.player.levelup"
+  click-sound: "ui.button.click"
+
+block-world:
+  - "world_example"
+block-world-guard:
+  - "region_example"
+
+chat-input:
+  SignAPI: true
+  ChatAPI: false
+
+sign-gui:
+  - ''
+  - ↑↑↑↑↑↑↑↑↑↑↑↑↑
+  - '    Name    '
+  - '             '
