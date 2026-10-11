@@ -1,0 +1,19 @@
+# Flakes purchase confirmation GUI
+confirm-menu:
+  rows: 3
+  title: "&8ʙᴜʏɪɴɢ ғʟᴀᴋᴇs"
+  confirm:
+    slot: 15
+    material: LIME_STAINED_GLASS_PANE
+    display-name: "&#04fc04ᴄᴏɴғɪʀᴍ"
+  cancel:
+    slot: 11
+    material: RED_STAINED_GLASS_PANE
+    display-name: "&#fc0404ᴄᴀɴᴄᴇʟ"
+  item:
+    slot: 13
+    material: "%clicked-item%"
+    amount: "%clicked-amount%"
+    lore:
+      - "&fAmount: &#009bff%amount%x"
+      - "&fPrice: &#009bff%price% Flakes"
