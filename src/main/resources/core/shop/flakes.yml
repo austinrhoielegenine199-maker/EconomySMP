@@ -2,11 +2,11 @@ flakes-enabled: true
 main-menu:
   slot: 15
   material: AMETHYST_SHARD
-  display-name: "&#009bffғʟᴀᴋᴇs ꜱʜᴏᴘ"
+  display-name: "&#009bffғʟᴀᴋᴇꜱ ꜱʜᴏᴘ"
   lore:
-    - "&fClick to view the Flakes shop"
+    - "&#009bffClick to view the Flakes shop"
 shop-menu:
-  title: "&8ꜱʜᴏᴘ - ғʟᴀᴋᴇs ꜱʜᴏᴘ"
+  title: "&#009bffꜱʜᴏᴘ - ғʟᴀᴋᴇꜱ ꜱʜᴏᴘ"
   rows: 3
   back-button-slot: 18
 items:
