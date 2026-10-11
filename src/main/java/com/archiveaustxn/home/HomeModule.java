@@ -41,6 +41,7 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
     private final Map<UUID, String> pendingDelete = new HashMap<>();
     private final Map<UUID, String> pendingInvites = new HashMap<>();
     private final Set<UUID> pendingRename = new HashSet<>();
+    private final Set<UUID> teamChatEnabled = new HashSet<>();
     private final Map<UUID, Integer> renameTarget = new HashMap<>();
 
     public HomeModule(EconomySMP plugin) {
@@ -528,6 +529,60 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
                 }
                 send(p, "no-permission", "&cYou don't have permission for this!"); return true;
             }
+            case "kick" -> {
+                if (current == null) { send(p, "team-not-in", "&cYou are not in a team!"); return true; }
+                if (!isLeader(p, current) && !p.hasPermission("team.admin")
+                        && !teamData.getBoolean(current + ".permissions." + playerKey(p) + ".manage-members", false)) {
+                    send(p, "team-not-leader", "&cYou cannot manage team members."); return true;
+                }
+                if (args.length < 2) { p.sendMessage(color("&cUsage: /team kick <player>")); return true; }
+                org.bukkit.OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+                String targetId = target.getUniqueId().toString();
+                if (targetId.equals(teamData.getString(current + ".leader", ""))) {
+                    p.sendMessage(color("&cYou cannot kick the team leader.")); return true;
+                }
+                List<String> members = new ArrayList<>(teamData.getStringList(current + ".members"));
+                if (!members.remove(targetId)) { send(p, "team-player-not-found", "&cThat player is not in your team."); return true; }
+                teamData.set(current + ".members", members);
+                teamData.set(current + ".permissions." + targetId, null);
+                saveTeams();
+                p.sendMessage(teamMessage("player-kicked", "&cPlayer %player% has been kicked from the team!").replace("%player%", target.getName() == null ? args[1] : target.getName()));
+                Player onlineTarget = Bukkit.getPlayer(target.getUniqueId());
+                if (onlineTarget != null) onlineTarget.sendMessage(teamMessage("you-were-kicked", "&cYou were kicked from the team!"));
+                return true;
+            }
+            case "transfer" -> {
+                if (current == null) { send(p, "team-not-in", "&cYou are not in a team!"); return true; }
+                if (!isLeader(p, current)) { send(p, "team-not-leader", "&cOnly the team leader can transfer ownership."); return true; }
+                if (args.length < 2) { p.sendMessage(color("&cUsage: /team transfer <player>")); return true; }
+                org.bukkit.OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+                String targetId = target.getUniqueId().toString();
+                List<String> members = new ArrayList<>(teamData.getStringList(current + ".members"));
+                if (!members.remove(targetId)) { p.sendMessage(color("&cThat player must be a member of your team.")); return true; }
+                members.add(playerKey(p));
+                teamData.set(current + ".members", members);
+                teamData.set(current + ".leader", targetId);
+                saveTeams();
+                p.sendMessage(teamMessage("new-owner", "&fTeam leader has been transferred to %player%").replace("%player%", target.getName() == null ? args[1] : target.getName()));
+                return true;
+            }
+            case "chat" -> {
+                if (current == null) { send(p, "team-not-in", "&cYou are not in a team!"); return true; }
+                if (args.length == 1 && args[0].equalsIgnoreCase("toggle")) {
+                    if (teamChatEnabled.remove(p.getUniqueId())) send(p, "chat-disabled", "&cTeam chat disabled!");
+                    else { teamChatEnabled.add(p.getUniqueId()); send(p, "chat-enabled", "&aTeam chat enabled!"); }
+                    return true;
+                }
+                if (args.length < 2) { p.sendMessage(color("&cUsage: /team chat <message> or /team chat toggle")); return true; }
+                String message = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+                String formatted = teamMessage("chat-format", "&a%player%&f: &a--> &f%message%")
+                        .replace("%player%", p.getName()).replace("%message%", message);
+                for (String memberId : teamMembers(current)) {
+                    try { Player recipient = Bukkit.getPlayer(UUID.fromString(memberId)); if (recipient != null) recipient.sendMessage(formatted); }
+                    catch (IllegalArgumentException ignored) { }
+                }
+                return true;
+            }
             case "info" -> {
                 if (current == null) { send(p, "team-not-in", "&cYou are not in a team!"); return true; }
                 p.sendMessage(color("&aTeam: &f" + current + " &7| Members: " + (teamData.getStringList(current + ".members").size() + 1)
@@ -594,6 +649,14 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
         }
     }
 
+    private List<String> teamMembers(String team) {
+        List<String> ids = new ArrayList<>();
+        String leader = teamData.getString(team + ".leader", "");
+        if (!leader.isBlank()) ids.add(leader);
+        ids.addAll(teamData.getStringList(team + ".members"));
+        return ids;
+    }
+
     private String findTeam(String wanted) {
         for (String team : teamData.getKeys(false)) if (team.equalsIgnoreCase(wanted)) return team;
         return null;
@@ -602,6 +665,21 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
 
     @EventHandler public void onRenameChat(AsyncPlayerChatEvent event) {
         UUID id = event.getPlayer().getUniqueId();
+        if (teamChatEnabled.contains(id) && !pendingRename.contains(id)) {
+            event.setCancelled(true);
+            Player sender = event.getPlayer();
+            String team = teamName(sender);
+            if (team == null) { teamChatEnabled.remove(id); return; }
+            String formatted = teamMessage("chat-format", "&a%player%&f: &a--> &f%message%")
+                    .replace("%player%", sender.getName()).replace("%message%", event.getMessage());
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                for (String memberId : teamMembers(team)) {
+                    try { Player recipient = Bukkit.getPlayer(UUID.fromString(memberId)); if (recipient != null) recipient.sendMessage(formatted); }
+                    catch (IllegalArgumentException ignored) { }
+                }
+            });
+            return;
+        }
         if (!pendingRename.contains(id)) return;
         event.setCancelled(true);
         String input = event.getMessage().trim();
@@ -743,7 +821,7 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
 
     @Override public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         String name = command.getName().toLowerCase(Locale.ROOT);
-        if (name.equals("team") && args.length == 1) return List.of("create","invite","join","leave","delete","sethome","home","info","reload").stream()
+        if (name.equals("team") && args.length == 1) return List.of("create","invite","join","leave","kick","delete","sethome","home","transfer","chat","info","reload").stream()
                 .filter(s -> s.startsWith(args[0].toLowerCase(Locale.ROOT))).toList();
         if ((name.equals("home") || name.equals("sethome") || name.equals("delhome")) && args.length == 1)
             return name.equals("home") ? List.of("1","2","3","4","5","team","reload") : List.of("1","2","3","4","5");
