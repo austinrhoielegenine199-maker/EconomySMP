@@ -37,9 +37,15 @@ public final class SellMenuListener implements Listener {
 
         // Cancel shift-clicks and clicks in the player's own inventory too.
         event.setCancelled(true);
-        if (event.getClickedInventory() == null || event.getClickedInventory() != top) return;
-
+        if (event.getClickedInventory() == null) return;
         int slot = event.getRawSlot();
+        if (tag.menu() == Menu.SELL && event.getClickedInventory() == top && slot >= 0 && slot < 36) {
+            // Slots 0-35 are a real sell container; category buttons remain protected.
+            event.setCancelled(false);
+            return;
+        }
+        if (event.getClickedInventory() != top) return;
+
         switch (tag.menu()) {
             case SELL -> {
                 if (slot >= 36 && slot <= 44) {
@@ -77,8 +83,17 @@ public final class SellMenuListener implements Listener {
 
     @EventHandler
     public void drag(InventoryDragEvent event) {
-        if (event.getView().getTopInventory().getHolder() instanceof MenuTag) {
-            event.setCancelled(true);
+        if (!(event.getView().getTopInventory().getHolder() instanceof MenuTag tag)) return;
+        if (tag.menu() == Menu.SELL) {
+            // Allow drag/drop only when every touched top slot is in the 36-slot sell area.
+            for (int rawSlot : event.getRawSlots()) {
+                if (rawSlot < event.getView().getTopInventory().getSize() && (rawSlot < 0 || rawSlot >= 36)) {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
+            return;
         }
+        event.setCancelled(true);
     }
 }
