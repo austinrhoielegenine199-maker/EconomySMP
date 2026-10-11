@@ -561,25 +561,23 @@ public final class HomeModule implements CommandExecutor, TabCompleter, Listener
         if (!pendingRename.contains(id)) return;
         event.setCancelled(true);
         String input = event.getMessage().trim();
-        pendingRename.remove(id);
-        Integer number = renameTarget.remove(id);
-        if (number == null) return;
-        if (input.equalsIgnoreCase("cancel")) {
-            Bukkit.getScheduler().runTask(plugin, () -> {
-                event.getPlayer().sendMessage(homeMessage("rename-cancelled", "&cHome rename cancelled."));
-                openHomes(event.getPlayer());
-            });
-            return;
-        }
-        String name = color(input);
-        if (name.length() > 32) name = name.substring(0, 32);
-        if (name.isBlank()) name = String.valueOf(number);
-        homeData.set(homePath(event.getPlayer(), number) + ".name", name);
-        saveHomes();
-        String finalName = name;
         Bukkit.getScheduler().runTask(plugin, () -> {
-            event.getPlayer().sendMessage(homeMessage("rename-success", "&aHome renamed to %name%.").replace("%name%", finalName));
-            openHomes(event.getPlayer());
+            pendingRename.remove(id);
+            Integer number = renameTarget.remove(id);
+            Player player = event.getPlayer();
+            if (number == null || !player.isOnline()) return;
+            if (input.equalsIgnoreCase("cancel")) {
+                player.sendMessage(homeMessage("rename-cancelled", "&cHome rename cancelled."));
+                openHomes(player);
+                return;
+            }
+            String name = color(input);
+            if (name.length() > 32) name = name.substring(0, 32);
+            if (name.isBlank()) name = String.valueOf(number);
+            homeData.set(homePath(player, number) + ".name", name);
+            saveHomes();
+            player.sendMessage(homeMessage("rename-success", "&aHome renamed to %name%.").replace("%name%", name));
+            openHomes(player);
         });
     }
 
