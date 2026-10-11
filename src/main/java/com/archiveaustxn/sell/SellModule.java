@@ -119,7 +119,32 @@ public final class SellModule implements CommandExecutor, TabCompleter, Listener
             config.reload();sender.sendMessage(message("reload-success","&aSell configuration reloaded."));return true;
         }
         if(!(sender instanceof Player p)){sender.sendMessage(message("player-only","&cOnly players can use this command."));return true;}
-        if(command.getName().equalsIgnoreCase("worth")){openWorth(p,args.length>0?parsePage(args[0]):0);return true;}
+        String commandName = command.getName().toLowerCase(Locale.ROOT);
+        if (commandName.equals("worth")) { openWorth(p, args.length > 0 ? parsePage(args[0]) : 0); return true; }
+        if (commandName.equals("sellhistory")) { openHistory(p, 0); return true; }
+        if (commandName.equals("worthtoggle")) {
+            boolean enabled = !p.hasMetadata("sell.worth.enabled");
+            p.setMetadata("sell.worth.enabled", new org.bukkit.metadata.FixedMetadataValue(plugin, enabled));
+            p.sendMessage(message(enabled ? "worth-toggle-on" : "worth-toggle-off", enabled ? "&aWorth display enabled." : "&cWorth display disabled."));
+            return true;
+        }
+        if (commandName.equals("setworth")) {
+            if (!p.hasPermission("sell.setworth")) { p.sendMessage(message("no-permission", "&cNo permission.")); return true; }
+            if (args.length < 1) { p.sendMessage(message("setworth-error", "&cUsage: /setworth <price>")); return true; }
+            ItemStack held = p.getInventory().getItemInMainHand();
+            if (held.getType().isAir()) { p.sendMessage(message("invalid-material", "&cHold an item first.")); return true; }
+            try {
+                double price = Double.parseDouble(args[0]);
+                if (!prices.setPrice(held.getType(), price)) { p.sendMessage(message("setworth-error", "&cInvalid price or save failed.")); return true; }
+                p.sendMessage(message("setworth-success", "&aSet worth.").replace("%item%", held.getType().name()).replace("%price%", String.format(Locale.US, "%.2f", price)));
+            } catch (NumberFormatException ex) { p.sendMessage(message("invalid-number", "&cInvalid number.")); }
+            return true;
+        }
+        if (commandName.equals("sellaxe")) {
+            if (!p.hasPermission("sell.sellaxe")) { p.sendMessage(message("no-permission", "&cNo permission.")); return true; }
+            p.sendMessage(message("sellaxe-given", "&cSellaxe item creation is not yet implemented."));
+            return true;
+        }
         if(args.length>0){
             switch(args[0].toLowerCase(Locale.ROOT)){
                 case "all" -> sellAll(p);
