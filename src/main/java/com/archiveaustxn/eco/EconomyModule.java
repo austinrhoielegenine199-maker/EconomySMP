@@ -22,7 +22,7 @@ public final class EconomyModule {
     public void load() {
         File directory = new File(plugin.getDataFolder(), "core/eco");
         directory.mkdirs();
-        configFile = new File(directory, "config.yml");
+        configFile = new File(directory, "eco.yml");
         if (!configFile.exists()) {
             try {
                 if (plugin.getResource("core/eco/eco.yml") != null) plugin.saveResource("core/eco/eco.yml", false);
