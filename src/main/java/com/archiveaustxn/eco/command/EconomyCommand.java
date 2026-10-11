@@ -12,6 +12,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.Set;
+import java.util.HashSet;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -26,6 +28,7 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
     private final EconomySMP plugin;
     private final EconomyModule eco;
     private final PaymentHistoryStore history;
+    private final Set<UUID> paymentDisabled = new HashSet<>();
     public EconomyCommand(EconomySMP plugin, EconomyModule eco, PaymentHistoryStore history) {
         this.plugin=plugin; this.eco=eco; this.history=history;
     }
@@ -56,7 +59,7 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
     }
     @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String cmd=command.getName().toLowerCase(Locale.ROOT);
-        if(cmd.equals("payhistory")) {\n            if(!(sender instanceof Player viewer)){send(sender,"player-only","Only players can use this command!");return true;}\n            UUID targetId=viewer.getUniqueId(); String targetName=viewer.getName();\n            if(args.length>0) { if(!sender.hasPermission("economysmp.payhistory.other")){send(sender,"no-permission","&cYou have no permission to use this command!");return true;} OfflinePlayer target=find(args[0]); if(target==null){send(sender,"player-not-found","&cPlayer not found!");return true;} targetId=target.getUniqueId(); targetName=target.getName()==null?args[0]:target.getName(); }\n            openHistory(viewer,targetId,targetName,1,"newest"); return true;\n        }
+        if(cmd.equals("paytoggle")) {\n            if(!(sender instanceof Player player)){send(sender,"player-only","Only players can use this command!");return true;}\n            if(paymentDisabled.remove(player.getUniqueId())) send(sender,"pay-toggle-disabled","&aNow you can receive payments!");\n            else { paymentDisabled.add(player.getUniqueId()); send(sender,"pay-toggle-enabled","&cNow you cannot receive payments!"); }\n            return true;\n        }\n        if(cmd.equals("payhistory")) {\n            if(!(sender instanceof Player viewer)){send(sender,"player-only","Only players can use this command!");return true;}\n            UUID targetId=viewer.getUniqueId(); String targetName=viewer.getName();\n            if(args.length>0) { if(!sender.hasPermission("economysmp.payhistory.other")){send(sender,"no-permission","&cYou have no permission to use this command!");return true;} OfflinePlayer target=find(args[0]); if(target==null){send(sender,"player-not-found","&cPlayer not found!");return true;} targetId=target.getUniqueId(); targetName=target.getName()==null?args[0]:target.getName(); }\n            openHistory(viewer,targetId,targetName,1,"newest"); return true;\n        }
         if(cmd.equals("money")) {
             if(args.length==0) {
                 if(!(sender instanceof Player p)){send(sender,"player-only","Only players can use this command!");return true;}
@@ -76,7 +79,7 @@ public final class EconomyCommand implements CommandExecutor, TabCompleter {
             if(!ready(sender))return true;
             OfflinePlayer target=find(args[0]); if(target==null||target.getUniqueId()==null){send(sender,"player-not-found","&cPlayer not found!");return true;}
             if(target.getUniqueId().equals(from.getUniqueId())){send(sender,"self-pay","&cYou can't pay yourself!");return true;}
-            if(!target.isOnline()&&!eco.config().getBoolean("offline-payment",true)){send(sender,"offline-payment-disabled","&cYou cannot pay offline players!");return true;}
+            if(target.isOnline() && paymentDisabled.contains(target.getUniqueId())) { sender.sendMessage(eco.color(eco.message("pay-toggle-receiver-blocked","&c%player% has disabled receiving payments!").replace("%player%",target.getName()))); return true; }\n            if(!target.isOnline()&&!eco.config().getBoolean("offline-payment",true)){send(sender,"offline-payment-disabled","&cYou cannot pay offline players!");return true;}
             double amount=parse(args[1]); if(!Double.isFinite(amount)){send(sender,"invalid-number","&cInvalid number!");return true;}
             Economy bank=eco.provider();
             if(!bank.has(from,amount)){send(sender,"not-enough-money","&cYou don't have enough money!");return true;}
