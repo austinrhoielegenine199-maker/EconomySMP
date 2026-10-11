@@ -21,6 +21,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
 
 import java.util.Locale;
 
@@ -101,7 +103,7 @@ public final class SellaxeListener implements Listener {
             return;
         }
         inventory.setContents(contents);
-        player.sendMessage(color("&a+" + String.format(Locale.US, "%.2f", total)));
+        player.sendActionBar(Component.text("+" + String.format(Locale.US, "%.2f", total)).color(NamedTextColor.GREEN));
     }
 
     private Sale valueAndRemove(ItemStack stack) {
