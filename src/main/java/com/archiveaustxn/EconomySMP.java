@@ -39,6 +39,10 @@ public final class EconomySMP extends JavaPlugin {
         bind("paytoggle", economyHandler, economyHandler);
         bind("sell", sellModule, sellModule);
         bind("worth", sellModule, sellModule);
+        bind("sellaxe", sellModule, sellModule);
+        bind("worthtoggle", sellModule, sellModule);
+        bind("sellhistory", sellModule, sellModule);
+        bind("setworth", sellModule, sellModule);
         getLogger().info("EconomySMP Core enabled.");
     }
 
