@@ -35,7 +35,7 @@ public class PvpLeaderboardMenu extends BaseMenu {
     public void build(Player player) {
         clear();
         slotCategories.clear();
-        fill(Material.BLACK_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         int shown = Math.max(1, Math.min(15, config().getInt(PATH + ".ENTRIES", 10)));
         PvpManager.TopCategory[] categories = PvpManager.TopCategory.values();
