@@ -1,106 +1,77 @@
 row: 3
-# Allowed range: 1-6 rows; each row contains 9 slots and overrides SIZE.
 
-# Configuration section for Food Menu.
 FOOD-MENU:
   TITLE: '&8food - shop'
   SIZE: 27
-  # Configuration section for Potato Item.
   POTATO-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: POTATO
     DISPLAY-NAME: '&fPotato'
     SLOT: 9
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 75
     LORE:
     - '&fBuy price: &a$75'
-  # Configuration section for Sweet Berries Item.
   SWEET-BERRIES-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: SWEET_BERRIES
     DISPLAY-NAME: '&fSweet Berries'
     SLOT: 10
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 50
     LORE:
     - '&fBuy price: &a$50'
-  # Configuration section for Melon Slice Item.
   MELON-SLICE-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: MELON_SLICE
     DISPLAY-NAME: '&fMelon Slice'
     SLOT: 11
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 10
     LORE:
     - '&fBuy price: &a$10'
-  # Configuration section for Carrot Item.
   CARROT-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: CARROT
     DISPLAY-NAME: '&fCarrot'
     SLOT: 12
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 65
     LORE:
     - '&fBuy price: &a$65'
-  # Configuration section for Apple Item.
   APPLE-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: APPLE
     DISPLAY-NAME: '&fApple'
     SLOT: 13
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 25
     LORE:
     - '&fBuy price: &a$25'
-  # Configuration section for Cooked Chicken Item.
   COOKED-CHICKEN-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: COOKED_CHICKEN
     DISPLAY-NAME: '&fApple'
     SLOT: 14
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 30
     LORE:
     - '&fBuy price: &a$30'
-  # Configuration section for Steak Item.
   STEAK-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: COOKED_BEEF
     DISPLAY-NAME: '&fSteak'
     SLOT: 15
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 35
     LORE:
     - '&fBuy price: &a$35'
-  # Configuration section for Golden Carrot Item.
   GOLDEN-CARROT-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: GOLDEN_CARROT
     DISPLAY-NAME: '&fGolden Carrot'
     SLOT: 16
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 50
     LORE:
     - '&fBuy price: &a$50'
-  # Configuration section for Golden Apple Item.
   GOLDEN-APPLE-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: GOLDEN_APPLE
     DISPLAY-NAME: '&bGolden Apple'
     SLOT: 17
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 250
     LORE:
     - '&fBuy price: &a$250'
