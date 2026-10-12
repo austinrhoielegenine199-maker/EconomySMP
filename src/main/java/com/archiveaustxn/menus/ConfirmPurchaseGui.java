@@ -55,7 +55,7 @@ public final class ConfirmPurchaseGui extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         set(AuctionHouseMenuSupport.slot(plugin, "GUI.CONFIRM_PURCHASE.ITEM", 11),
                 AuctionHouseMenuSupport.createListingDisplay(
                         plugin,
@@ -67,7 +67,7 @@ public final class ConfirmPurchaseGui extends BaseMenu {
                 AuctionHouseMenuSupport.control(
                         plugin,
                         "GUI.CONFIRM_PURCHASE.CONFIRM",
-                        Material.LIME_STAINED_GLASS_PANE,
+                        Material.AIR,
                         "&aConfirm purchase",
                         List.of("&7Price: {price}", "&eClick to purchase"),
                         "{price}", plugin.getCurrencyManager().formatMoney(listing.price())
@@ -76,7 +76,7 @@ public final class ConfirmPurchaseGui extends BaseMenu {
                 AuctionHouseMenuSupport.control(
                         plugin,
                         "GUI.CONFIRM_PURCHASE.CANCEL",
-                        Material.RED_STAINED_GLASS_PANE,
+                        Material.AIR,
                         "&cCancel",
                         List.of("&7Return to auction house")
                 ));
