@@ -29,7 +29,7 @@ public class SpawnerWorldListMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         slotBindings.clear();
 
         List<Integer> layoutSlots = resolveLayoutSlots();
