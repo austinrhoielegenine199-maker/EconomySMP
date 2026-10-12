@@ -1,104 +1,69 @@
 row: 3
-# Allowed range: 1-6 rows; each row contains 9 slots and overrides SIZE.
 
-# Configuration section for Gear Menu.
 GEAR-MENU:
   TITLE: '&8gear - shop'
   SIZE: 27
-  # Custom item enchantments and glow effects can be configured per item:
-  # ENCHANTMENTS:
-  #   MENDING: 1
-  #   UNBREAKING: 3
-  # Or list format:
-  # ENCHANTMENTS:
-  #   - "mending:1"
-  #   - "unbreaking:3"
-  # GLINT: true
-  # Configuration section for Obsidian Item.
   OBSIDIAN-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: OBSIDIAN
     DISPLAY-NAME: '&fObsidian'
     SLOT: 9
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 100
     LORE:
     - '&fBuy price: &a$100'
-  # Configuration section for End Crystal Item.
   END-CRYSTAL-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: END_CRYSTAL
     DISPLAY-NAME: '&bEnd Crystal'
     SLOT: 10
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 350
     LORE:
     - '&fBuy price: &a$350'
-  # Configuration section for Respawn Anchor Item.
   RESPAWN-ANCHOR-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: RESPAWN_ANCHOR
     DISPLAY-NAME: '&fRespawn Anchor'
     SLOT: 11
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 1000
     LORE:
     - '&fBuy price: &a$1000'
-  # Configuration section for Glowstone Item.
   GLOWSTONE-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: GLOWSTONE
     DISPLAY-NAME: '&fGlowstone'
     SLOT: 12
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 100
     LORE:
     - '&fBuy price: &a$100'
-  # Configuration section for Totem Of Undying Item.
   TOTEM-OF-UNDYING-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: TOTEM_OF_UNDYING
     DISPLAY-NAME: '&eTotem of Undying'
     SLOT: 13
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 1250
     LORE:
     - '&fBuy price: &a$1250'
-  # Configuration section for Ender Pearl Item.
   ENDER-PEARL-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: ENDER_PEARL
     DISPLAY-NAME: '&fEnder Pearl'
     SLOT: 14
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 75
     LORE:
     - '&fBuy price: &a$75'
-  # Configuration section for Golden Apple Item.
   GOLDEN-APPLE-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: GOLDEN_APPLE
     DISPLAY-NAME: '&bGolden Apple'
     SLOT: 15
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 250
     LORE:
     - '&fBuy price: &a$250'
-  # Configuration section for Bottle O Enchanting Item.
   BOTTLE-O-ENCHANTING-ITEM:
-    # The text or value for Currency. Available options: Any valid string text
     CURRENCY: MONEY
     MATERIAL: EXPERIENCE_BOTTLE
     DISPLAY-NAME: '&eBottle O'' Enchanting'
     SLOT: 16
-    # The numerical value for Price Per Unit. Available options: Any valid integer
     PRICE-PER-UNIT: 100
     LORE:
     - '&fBuy price: &a$100'
