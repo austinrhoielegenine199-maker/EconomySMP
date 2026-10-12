@@ -54,7 +54,7 @@ class MoneyNametagConfigurationTest {
     @Test
     void bundledConfigShipsTheDocumentedDefaults() throws Exception {
         YamlConfiguration config = new YamlConfiguration();
-        config.load(Path.of("src/main/resources", "config.yml").toFile());
+        config.load(Path.of("src/main/resources/core/config", "config.yml").toFile());
 
         assertTrue(config.isConfigurationSection("MONEY-NAMETAGS"));
         assertTrue(config.getBoolean("MONEY-NAMETAGS.ENABLED"));
@@ -73,7 +73,7 @@ class MoneyNametagConfigurationTest {
         assertFalse(new PlayerData(UUID.randomUUID(), "Tester").isMoneyNametagsEnabled());
 
         YamlConfiguration menus = new YamlConfiguration();
-        menus.load(Path.of("src/main/resources", "menus.yml").toFile());
+        menus.load(Path.of("src/main/resources/core/gui", "menus.yml").toFile());
         ConfigurationSection buttons = menus.getConfigurationSection(PlayerSettingDefaults.BUTTONS_PATH);
         assertNotNull(buttons);
         assertNotNull(buttons.getConfigurationSection("MONEY_NAMETAGS"));

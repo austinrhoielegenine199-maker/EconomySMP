@@ -85,7 +85,7 @@ class ChatLogsTest {
     @Test
     void chatLoggingShipsOnForBothPublicAndPrivateMessages() throws Exception {
         YamlConfiguration config = new YamlConfiguration();
-        config.load(Path.of("src/main/resources", "config.yml").toFile());
+        config.load(Path.of("src/main/resources/core/config", "config.yml").toFile());
         ConfigurationSection logging = config.getConfigurationSection("CHAT.LOGGING");
 
         assertNotNull(logging, "config.yml has no CHAT.LOGGING section");

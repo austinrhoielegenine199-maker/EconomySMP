@@ -27,7 +27,7 @@ class FakePlayerNametagTest {
     @Test
     void bundledStaffModeHidesNametagsByDefault() throws Exception {
         YamlConfiguration config = new YamlConfiguration();
-        config.load(Path.of("src/main/resources", "staff-mode.yml").toFile());
+        config.load(Path.of("src/main/resources/core/staff-mode", "staff-mode.yml").toFile());
 
         assertTrue(config.getBoolean("FAKE-PLAYER.HIDE-NAMETAG", false),
                 "staff-mode.yml must ship HIDE-NAMETAG as true so a config restore keeps prefix and money off the bait");

@@ -96,7 +96,7 @@ class CrateHologramSpacingTest {
 
     private static YamlConfiguration load(String resource) throws Exception {
         YamlConfiguration configuration = new YamlConfiguration();
-        configuration.load(Path.of("src/main/resources", resource).toFile());
+        Path file = switch (resource) { case "crates.yml" -> Path.of("src/main/resources/core/crates/crates.yml"); case "config.yml" -> Path.of("src/main/resources/core/config/config.yml"); default -> throw new IllegalArgumentException("Unknown bundled resource: " + resource); }; configuration.load(file.toFile());
         return configuration;
     }
 }
