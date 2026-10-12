@@ -88,7 +88,7 @@ class LeaderboardConfigurationTest {
 
     private static YamlConfiguration load(String fileName) throws Exception {
         YamlConfiguration configuration = new YamlConfiguration();
-        configuration.load(Path.of("src/main/resources", fileName).toFile());
+        configuration.load(Path.of("src/main/resources/core/gui", fileName).toFile());
         return configuration;
     }
 }

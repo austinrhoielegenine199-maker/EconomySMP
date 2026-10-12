@@ -271,7 +271,7 @@ class LanguageManagerTest {
     private static YamlConfiguration loadResource(String name) throws Exception {
         YamlConfiguration configuration = new YamlConfiguration();
         configuration.options().parseComments(true);
-        configuration.load(Path.of("src/main/resources", name).toFile());
+        Path file = switch (name) { case "config.yml" -> Path.of("src/main/resources/core/config/config.yml"); case "messages.yml" -> Path.of("src/main/resources/core/messages/messages.yml"); case "shop.yml" -> Path.of("src/main/resources/core/shop/shop.yml"); default -> Path.of("src/main/resources", name); }; configuration.load(file.toFile());
         return configuration;
     }
 

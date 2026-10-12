@@ -227,7 +227,7 @@ class ServerNotificationConfigurationTest {
 
     private static ConfigurationSection notifications() throws Exception {
         YamlConfiguration config = new YamlConfiguration();
-        config.load(Path.of("src/main/resources", "config.yml").toFile());
+        config.load(Path.of("src/main/resources/core/config", "config.yml").toFile());
         ConfigurationSection section = config.getConfigurationSection("SERVER-NOTIFICATIONS");
         assertNotNull(section, "config.yml has no SERVER-NOTIFICATIONS section");
         return section;

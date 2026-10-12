@@ -185,7 +185,7 @@ class PlayerSettingsConfigurationTest {
 
     private static YamlConfiguration load(String fileName) throws Exception {
         YamlConfiguration configuration = new YamlConfiguration();
-        configuration.load(Path.of("src/main/resources", fileName).toFile());
+        Path file = switch (fileName) { case "menus.yml" -> Path.of("src/main/resources/core/gui/menus.yml"); case "rtp.yml" -> Path.of("src/main/resources/core/rtp/rtp.yml"); default -> throw new IllegalArgumentException("Unknown bundled resource: " + fileName); }; configuration.load(file.toFile());
         return configuration;
     }
 }
