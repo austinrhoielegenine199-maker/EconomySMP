@@ -42,7 +42,7 @@ public class PvpAssignMatchMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.BLACK_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         List<PvpKit> kits = plugin.getPvpManager().getKits();
         if (kitId == null && !kits.isEmpty()) {
@@ -65,7 +65,7 @@ public class PvpAssignMatchMenu extends BaseMenu {
         set(CONFIRM_SLOT, ItemUtils.createItem(
                 ItemUtils.parseMaterial(config().getString(PATH + "."
                         + (ready ? "CONFIRM" : "BLOCKED") + ".MATERIAL",
-                        ready ? "LIME_STAINED_GLASS_PANE" : "RED_STAINED_GLASS_PANE")),
+                        ready ? "EMERALD" : "BARRIER")),
                 config().getString(PATH + ".CONFIRM.DISPLAY-NAME", ready ? "&aSTART MATCH" : "&cNOT READY"),
                 ready
                         ? List.of("&7Click to start the match.")
