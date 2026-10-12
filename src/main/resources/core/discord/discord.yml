@@ -168,3 +168,13 @@ WEBHOOKS:
       AUTHOR_NAME: Security System
       # The text or value for Footer. Available options: Any valid string text
       FOOTER: Blacklist enforced
+
+# Discord account linking used by the separate discord-bot-example Node.js bot.
+# Keep the bot token and application IDs in discord-bot-example/.env; do not put secrets here.
+ACCOUNT_LINKING:
+  # Enables or disables /pvp sync codes in game.
+  ENABLED: true
+  # One-time code expiration. Examples: 5m, 10m, 1h.
+  EXPIRES: 10m
+  # Code length; values are clamped to 4-16 characters.
+  CODE_LENGTH: 6
