@@ -55,7 +55,7 @@ public class BountyMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         displayedBounties.clear();
 
         FileConfiguration menus = plugin.getConfigManager().getMenus();
