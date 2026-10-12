@@ -23,7 +23,7 @@ class FoliaSchedulerUsageTest {
 
     private static final Path SOURCE_ROOT = Path.of("src", "main", "java");
     private static final Path SCHEDULER_WRAPPER =
-            SOURCE_ROOT.resolve(Path.of("com", "bx", "archiveaustxn", "utils", "SpigotScheduler.java"));
+            SOURCE_ROOT.resolve(Path.of("com", "archiveaustxn", "utils", "SpigotScheduler.java"));
 
     @Test
     void pluginDeclaresFoliaSupport() throws Exception {

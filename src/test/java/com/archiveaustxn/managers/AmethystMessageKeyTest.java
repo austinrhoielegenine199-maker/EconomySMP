@@ -42,11 +42,11 @@ class AmethystMessageKeyTest {
 
     private Set<String> readMessageKeys() throws IOException {
         Set<String> keys = new TreeSet<>();
-        try (Stream<Path> files = Files.walk(Path.of("src/main/java/com/bx/archiveaustxn/amethyst"))) {
+        try (Stream<Path> files = Files.walk(Path.of("src/main/java/com/archiveaustxn/amethyst"))) {
             files.filter(path -> path.toString().endsWith(".java")).forEach(path -> collect(path, keys));
         }
         // The command reads the same AMETHYST-MESSAGES section from outside the package.
-        collect(Path.of("src/main/java/com/bx/archiveaustxn/commands/AmethystToolCommand.java"), keys);
+        collect(Path.of("src/main/java/com/archiveaustxn/commands/AmethystToolCommand.java"), keys);
         return keys;
     }
 

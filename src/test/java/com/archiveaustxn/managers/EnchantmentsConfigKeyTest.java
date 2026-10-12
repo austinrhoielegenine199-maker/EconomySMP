@@ -31,7 +31,7 @@ class EnchantmentsConfigKeyTest {
     );
 
     private static YamlConfiguration enchantments() {
-        return YamlConfiguration.loadConfiguration(new File("src/main/resources/enchantments.yml"));
+        return YamlConfiguration.loadConfiguration(new File("src/main/resources/core/enchantments/enchantments.yml"));
     }
 
     private static List<String> lookupPaths() throws Exception {

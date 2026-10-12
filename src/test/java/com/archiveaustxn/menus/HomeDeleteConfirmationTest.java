@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class HomeDeleteConfirmationTest {
 
     private static final Path HOME_MENU =
-            Path.of("src", "main", "java", "com", "bx", "archiveaustxn", "menus", "HomeMenu.java");
+            Path.of("src", "main", "java", "com", "archiveaustxn", "menus", "HomeMenu.java");
 
     @Test
     void everyRightClickBranchOpensAConfirmationFirst() throws Exception {
