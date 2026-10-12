@@ -35,7 +35,7 @@ public final class FilterGui extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         categorySlots.clear();
 
         AuctionCategory[] categories = {
@@ -58,7 +58,7 @@ public final class FilterGui extends BaseMenu {
                     plugin,
                     "GUI.FILTER.CATEGORY",
                     selected
-                            ? Material.LIME_STAINED_GLASS_PANE
+                            ? Material.AIR
                             : plugin.getAuctionHouseManager().getCategoryIcon(category),
                     (selected ? "&a" : "&f")
                             + plugin.getAuctionHouseManager().getCategoryDisplayName(category),
