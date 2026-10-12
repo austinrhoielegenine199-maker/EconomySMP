@@ -67,7 +67,7 @@ public class SellMenu extends BaseMenu {
         String compactPrice = plugin.getCurrencyManager().formatCompactAmount(CurrencyManager.CurrencyType.MONEY, total);
         String formattedPrice = plugin.getCurrencyManager().formatMoney(total);
 
-        Material material = ItemUtils.parseMaterial(menus.getString("SELL-MENU.CONFIRM-BUTTON.MATERIAL", "LIME_STAINED_GLASS_PANE"));
+        Material material = ItemUtils.parseMaterial(menus.getString("SELL-MENU.CONFIRM-BUTTON.MATERIAL", "EMERALD"));
         String title = applyPricePlaceholders(
                 menus.getString("SELL-MENU.CONFIRM-BUTTON.TITLE", "&a&lConfirm sell"),
                 compactPrice,
