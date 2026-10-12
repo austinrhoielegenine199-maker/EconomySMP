@@ -89,7 +89,7 @@ public class OrdersDeliverConfirmMenu extends BaseMenu {
 
         set(11, OrdersMenuSupport.button(
                 plugin, "GUI.DELIVERY_CONFIRM.BUTTONS.CANCEL", "ORDERS.GUI.CONFIRM.CANCEL",
-                Material.AIR, "&cCancel", List.of("&fReturn without delivering")
+                Material.BARRIER, "&cCancel", List.of("&fReturn without delivering")
         ));
         set(13, OrdersMenuSupport.decorateItem(
                 plugin,
@@ -114,7 +114,7 @@ public class OrdersDeliverConfirmMenu extends BaseMenu {
         ));
         set(15, OrdersMenuSupport.button(
                 plugin, "GUI.DELIVERY_CONFIRM.BUTTONS.CONFIRM", "ORDERS.GUI.CONFIRM.CONFIRM",
-                quantity > 0 ? Material.AIR : Material.BARRIER,
+                quantity > 0 ? Material.EMERALD : Material.BARRIER,
                 quantity > 0 ? "&aConfirm" : "&cCannot deliver",
                 quantity > 0
                         ? List.of("&fDeliver {amount} items", "&7You receive {receive}")
