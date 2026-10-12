@@ -41,7 +41,7 @@ public class PlayerLogsMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         totalItems = plugin.getDatabaseManager().getPlayerLogsCount(targetUuid);
         totalPages = Math.max(1, (int) Math.ceil(totalItems / (double) MAX_ITEMS_PER_PAGE));
@@ -103,7 +103,7 @@ public class PlayerLogsMenu extends BaseMenu {
                     List.of("&7Go to page " + page + ".")
             ));
         } else {
-            set(PREVIOUS_PAGE_SLOT, ItemUtils.createPlaceholder(Material.GRAY_STAINED_GLASS_PANE));
+            set(PREVIOUS_PAGE_SLOT, ItemUtils.createPlaceholder(Material.AIR));
         }
 
         // Next Page Button
@@ -114,7 +114,7 @@ public class PlayerLogsMenu extends BaseMenu {
                     List.of("&7Go to page " + (page + 2) + ".")
             ));
         } else {
-            set(NEXT_PAGE_SLOT, ItemUtils.createPlaceholder(Material.GRAY_STAINED_GLASS_PANE));
+            set(NEXT_PAGE_SLOT, ItemUtils.createPlaceholder(Material.AIR));
         }
     }
 
