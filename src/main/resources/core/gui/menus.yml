@@ -148,7 +148,7 @@ TEAM-MENUS:
       - '&fCurrently: {state}'
     BACK-BUTTON:
       TITLE: '&cBack'
-      MATERIAL: AIR
+      MATERIAL: BARRIER
       SLOT: 18
       LORE:
       - '&fClick to return'
@@ -158,13 +158,13 @@ TEAM-MENUS:
     SIZE: 27
     CANCEL-BUTTON:
       TITLE: '&#FC0000Cancel'
-      MATERIAL: AIR
+      MATERIAL: BARRIER
       SLOT: 11
       LORE:
       - '&fClick to cancel'
     CONFIRM-BUTTON:
       TITLE: '&#00FC00Confirm'
-      MATERIAL: AIR
+      MATERIAL: EMERALD
       SLOT: 15
       LORE:
       - '&fClick to kick {player}'
@@ -174,13 +174,13 @@ TEAM-MENUS:
     SIZE: 27
     CANCEL-BUTTON:
       TITLE: '&#FC0000Cancel'
-      MATERIAL: AIR
+      MATERIAL: BARRIER
       SLOT: 11
       LORE:
       - '&fClick to cancel'
     CONFIRM-BUTTON:
       TITLE: '&#00FC00Confirm'
-      MATERIAL: AIR
+      MATERIAL: EMERALD
       SLOT: 15
       LORE:
       - '&fClick to confirm'
@@ -1090,13 +1090,13 @@ PROGRESS-MENU:
       BLOCKS: BRICK
   WORKING-BUTTON:
     TITLE: '&eWorking'
-    MATERIAL: AIR
+    MATERIAL: GOLD_INGOT
     LORE:
     - '{porcentage_level} &f{next_multiplier} {porcentage}%'
     - '&7{current_earned}/{next_goal}'
   COMPLETED-BUTTON:
     TITLE: '&aCompleted'
-    MATERIAL: AIR
+    MATERIAL: EMERALD
     LORE:
     - '{porcentage_level} &f{next_multiplier} {porcentage}%'
     - '&7{current_earned}/{next_goal}'
@@ -1106,7 +1106,7 @@ SELL-MENU:
   AUTO-SELL: true
   MODE: "confirm"
   CONFIRM-BUTTON:
-    MATERIAL: "AIR"
+    MATERIAL: "EMERALD"
     TITLE: "&a&lConfirm Sell"
     LORE:
     - "&a{price_formatted}"
@@ -1202,12 +1202,12 @@ TPA-CONFIRM-MENU:
   SIZE: 27
   BUTTONS:
     CANCEL:
-      MATERIAL: AIR
+      MATERIAL: BARRIER
       NAME: '&cCancel'
       LORE:
       - '&fCLICK TO CANCEL'
     CONFIRM:
-      MATERIAL: AIR
+      MATERIAL: EMERALD
       NAME: '&aConfirm'
       LORE:
       - '&fCLICK TO CONFIRM'
@@ -1248,7 +1248,7 @@ BOUNTY-CONFIRM-MENU:
   TITLE: '&8Confirm Bounty'
   SIZE: 27
   CANCEL-BUTTON:
-    MATERIAL: AIR
+    MATERIAL: BARRIER
     NAME: '&#FC0000Cancel'
     LORE:
     - '&7Click to cancel the bounty adding!'
@@ -1258,7 +1258,7 @@ BOUNTY-CONFIRM-MENU:
     LORE:
     - '&fYou''re going to set &#00FC00{amount}'
   CONFIRM-BUTTON:
-    MATERIAL: AIR
+    MATERIAL: EMERALD
     NAME: '&#00FC00Confirm'
     LORE:
     - '&7Click to confirm to add {amount} bounty!'
@@ -1306,17 +1306,17 @@ PURCHASE-SHOP-MENU:
         DEFAULT: '&fBUY PRICE: &a${price}'
     CANCEL:
       SLOT: 21
-      MATERIAL: AIR
+      MATERIAL: BARRIER
       NAME: '&cCancel'
       LORE: '&fCLICK TO CANCEL'
     CONFIRM:
       SLOT: 23
-      MATERIAL: AIR
+      MATERIAL: EMERALD
       NAME: '&aConfirm'
       LORE: '&fCLICK TO BUY'
     QUANTITY_ADJUST:
       ADD:
-        MATERIAL: AIR
+        MATERIAL: EMERALD
         ADD_1:
           SLOT: 15
           NAME: '&aAdd 1'
@@ -1330,7 +1330,7 @@ PURCHASE-SHOP-MENU:
           NAME: '&aSet To 64'
           INCREMENT: 64
       REMOVE:
-        MATERIAL: AIR
+        MATERIAL: BARRIER
         REMOVE_1:
           SLOT: 11
           NAME: '&cRemove 1'
@@ -1370,12 +1370,12 @@ PAY-CONFIRM-MENU:
   SIZE: 27
   CONFIRM-BUTTON:
     TITLE: '&#00FC00Confirm'
-    MATERIAL: AIR
+    MATERIAL: EMERALD
     LORE:
     - '&7Click to confirm to pay {amount}!'
   CANCEL-BUTTON:
     TITLE: '&#FC0000Cancel'
-    MATERIAL: AIR
+    MATERIAL: BARRIER
     LORE:
     - '&7Click to cancel'
   PLAYER-BUTTON:
@@ -1386,14 +1386,14 @@ SELLALL-CONFIRM-MENU:
   SIZE: 27
   CONFIRM-BUTTON:
     TITLE: '&#00FC00Confirm'
-    MATERIAL: AIR
+    MATERIAL: EMERALD
     SLOT: 15
     LORE:
     - '&7Click to confirm to sell all'
     - '&7sellable items in your inventory.'
   CANCEL-BUTTON:
     TITLE: '&#FC0000Cancel'
-    MATERIAL: AIR
+    MATERIAL: BARRIER
     SLOT: 11
     LORE:
     - '&7Click to cancel'
@@ -1893,12 +1893,12 @@ PROFILE-VIEWER-HOMES-MENU:
     LORE:
     - '&7This player has no homes saved.'
   BACK-BUTTON:
-    MATERIAL: AIR
+    MATERIAL: BARRIER
     DISPLAY-NAME: '&cBack'
     LORE:
     - '&7Return to the main profile viewer'
   CLOSE-BUTTON:
-    MATERIAL: AIR
+    MATERIAL: BARRIER
     DISPLAY-NAME: '&cClose'
     LORE:
     - '&7Close this home list'
@@ -2128,13 +2128,13 @@ STATS-WIPE-CONFIRM-MENU:
       - '&7Click confirm only if you are sure.'
     CANCEL:
       SLOT: 11
-      MATERIAL: AIR
+      MATERIAL: BARRIER
       DISPLAY-NAME: '&cCancel'
       LORE:
       - '&7Return to the Stats Wipe menu.'
     CONFIRM:
       SLOT: 15
-      MATERIAL: AIR
+      MATERIAL: EMERALD
       DISPLAY-NAME: '&aConfirm'
       LORE:
       - '&7Run wipe for &f{target}&7.'
@@ -2286,7 +2286,7 @@ SPAWNER-MENUS:
     SIZE: 27
     CONFIRM-BUTTON:
       SLOT: 11
-      MATERIAL: AIR
+      MATERIAL: EMERALD
       TITLE: '&aConfirm Sell'
       LORE:
       - '&fTotal Value: &a${price}'
@@ -2295,7 +2295,7 @@ SPAWNER-MENUS:
       - '&eClick to confirm sale!'
     CANCEL-BUTTON:
       SLOT: 15
-      MATERIAL: AIR
+      MATERIAL: BARRIER
       TITLE: '&cCancel'
       LORE:
       - '&7Cancel transaction and return to storage.'
@@ -2335,13 +2335,13 @@ VOICE-CHAT-CONSENT-MENU:
     - '&f/voicechatconsent revoke'
   CONFIRM-BUTTON:
     DISPLAY-NAME: '&aConfirm'
-    MATERIAL: AIR
+    MATERIAL: EMERALD
     SLOT: 11
     LORE:
     - '&fClick to turn voice chat on'
   DECLINE-BUTTON:
     DISPLAY-NAME: '&cDecline'
-    MATERIAL: AIR
+    MATERIAL: BARRIER
     SLOT: 15
     LORE:
     - '&fVoice chat will stay disabled'
