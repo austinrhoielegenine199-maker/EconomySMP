@@ -271,7 +271,30 @@ class LanguageManagerTest {
     private static YamlConfiguration loadResource(String name) throws Exception {
         YamlConfiguration configuration = new YamlConfiguration();
         configuration.options().parseComments(true);
-        Path file = switch (name) { case "config.yml" -> Path.of("src/main/resources/core/config/config.yml"); case "messages.yml" -> Path.of("src/main/resources/core/messages/messages.yml"); case "shop.yml" -> Path.of("src/main/resources/core/shop/shop.yml"); default -> Path.of("src/main/resources", name); }; configuration.load(file.toFile());
+        Path file = switch (name) {
+            case "config.yml" -> Path.of("src/main/resources/core/config/config.yml");
+            case "messages.yml" -> Path.of("src/main/resources/core/messages/messages.yml");
+            case "shop.yml" -> Path.of("src/main/resources/core/shop/shop.yml");
+            case "billford.yml" -> Path.of("src/main/resources/core/billford/billford.yml");
+            case "rtp.yml" -> Path.of("src/main/resources/core/rtp/rtp.yml");
+            case "amethyst-tools.yml" -> Path.of("src/main/resources/core/amethyst-tools/amethyst-tools.yml");
+            case "ender-chest.yml" -> Path.of("src/main/resources/core/ender-chest/ender-chest.yml");
+            case "invsee.yml" -> Path.of("src/main/resources/core/invsee/invsee.yml");
+            case "freeze.yml" -> Path.of("src/main/resources/core/freeze/freeze.yml");
+            case "auction-house.yml" -> Path.of("src/main/resources/core/auction-house/auction-house.yml");
+            case "orders.yml" -> Path.of("src/main/resources/core/orders/orders.yml");
+            case "duels.yml" -> Path.of("src/main/resources/core/duels/duels.yml");
+            case "ffa.yml" -> Path.of("src/main/resources/core/ffa/ffa.yml");
+            case "crates.yml" -> Path.of("src/main/resources/core/crates/crates.yml");
+            case "spawners.yml" -> Path.of("src/main/resources/core/spawners/spawners.yml");
+            case "spawn-stash.yml" -> Path.of("src/main/resources/core/spawn-stash/spawn-stash.yml");
+            case "network.yml" -> Path.of("src/main/resources/core/network/network.yml");
+            case "staff-mode.yml" -> Path.of("src/main/resources/core/staff-mode/staff-mode.yml");
+            case "server-wipe.yml" -> Path.of("src/main/resources/core/server-wipe/server-wipe.yml");
+            case "worth.yml" -> Path.of("src/main/resources/core/worth/worth.yml");
+            default -> Path.of("src/main/resources", name);
+        };
+        configuration.load(file.toFile());
         return configuration;
     }
 
