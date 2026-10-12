@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: UltimateDonutSmp-${{ steps.metadata.outputs.version }}
-          path: target/UltimateDonutSmp-*.jar
+          path: target/EconomySMP.jar
           if-no-files-found: error
 
       - name: Update Nightly Tag
@@ -73,7 +73,7 @@ jobs:
             - **Build Date:** ${{ github.event.head_commit.timestamp }}
             - **Build:** #${{ github.run_number }}
           prerelease: true
-          files: target/UltimateDonutSmp-${{ steps.metadata.outputs.version }}.jar
+          files: target/EconomySMP.jar
           make_latest: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
