@@ -37,7 +37,7 @@ public class SpawnerFilterMenu extends BaseMenu {
         if (instance == null) {
             inventory = Bukkit.createInventory(this, 27, ColorUtils.toComponent("&8Spawner Missing"));
             clear();
-            fill(Material.GRAY_STAINED_GLASS_PANE);
+            fill(Material.AIR);
             set(13, ItemUtils.createItem(Material.BARRIER, "&cSpawner Not Found"));
             return;
         }
@@ -52,7 +52,7 @@ public class SpawnerFilterMenu extends BaseMenu {
 
         inventory = Bukkit.createInventory(this, menuSize, ColorUtils.toComponent(titleStr));
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         dropSlotMap.clear();
 
