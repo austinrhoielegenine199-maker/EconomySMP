@@ -24,7 +24,7 @@ public class SellAllConfirmMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         FileConfiguration menus = plugin.getConfigManager().getMenus();
 
@@ -32,7 +32,7 @@ public class SellAllConfirmMenu extends BaseMenu {
         set(
                 menus.getInt(cancelPath + ".SLOT", 11),
                 ItemUtils.createItem(
-                        ItemUtils.parseMaterial(menus.getString(cancelPath + ".MATERIAL", "RED_STAINED_GLASS_PANE")),
+                        ItemUtils.parseMaterial(menus.getString(cancelPath + ".MATERIAL", "BARRIER")),
                         menus.getString(cancelPath + ".TITLE", "&cCancel"),
                         menus.getStringList(cancelPath + ".LORE")
                 )
@@ -52,7 +52,7 @@ public class SellAllConfirmMenu extends BaseMenu {
         set(
                 menus.getInt(confirmPath + ".SLOT", 15),
                 ItemUtils.createItem(
-                        ItemUtils.parseMaterial(menus.getString(confirmPath + ".MATERIAL", "LIME_STAINED_GLASS_PANE")),
+                        ItemUtils.parseMaterial(menus.getString(confirmPath + ".MATERIAL", "EMERALD")),
                         menus.getString(confirmPath + ".TITLE", "&aConfirm"),
                         menus.getStringList(confirmPath + ".LORE")
                 )
