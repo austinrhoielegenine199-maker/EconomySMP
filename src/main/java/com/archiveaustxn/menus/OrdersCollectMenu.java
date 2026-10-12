@@ -32,7 +32,7 @@ public class OrdersCollectMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         List<OrderCollectionClaim> claims = getClaims(player);
         int itemsPerPage = plugin.getOrdersManager().getCollectItemsPerPage();
@@ -55,7 +55,7 @@ public class OrdersCollectMenu extends BaseMenu {
         set(lastRow, ItemUtils.createItem(Material.COMPASS, "&bBack to board", List.of("&7Return to active orders")));
         set(lastRow + 1, page > 1
                 ? ItemUtils.createItem(Material.ARROW, "&aPrevious page", List.of("&7Go to page &f" + (page - 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         set(lastRow + 2, ItemUtils.createItem(Material.WRITABLE_BOOK, "&bMy orders", List.of("&7View your orders")));
         set(lastRow + 3, ItemUtils.createItem(Material.CLOCK, "&eRefresh", List.of("&7Reload your collect queue")));
         int collectPageSlot = OrdersMenuSupport.slot(plugin, "GUI.COLLECT.BUTTONS.COLLECT_PAGE.SLOT", lastRow + 4);
@@ -70,7 +70,7 @@ public class OrdersCollectMenu extends BaseMenu {
         ));
         set(lastRow + 7, hasNextPage(claims.size(), itemsPerPage)
                 ? ItemUtils.createItem(Material.ARROW, "&aNext page", List.of("&7Go to page &f" + (page + 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         int dropPageSlot = OrdersMenuSupport.slot(plugin, "GUI.COLLECT.BUTTONS.DROP_PAGE.SLOT", lastRow + 8);
         set(dropPageSlot, OrdersMenuSupport.button(
                 plugin, "GUI.COLLECT.BUTTONS.DROP_PAGE", "ORDERS.GUI.COLLECT.DROP_PAGE",
