@@ -37,7 +37,7 @@ public class RulesMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.BLACK_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         slotButtons.clear();
 
         int renderedButtons = 0;
