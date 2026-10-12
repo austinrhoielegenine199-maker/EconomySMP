@@ -232,9 +232,9 @@ public class ServersMenu extends BaseMenu {
     }
 
     private Material configuredPlaceholderMaterial() {
-        String raw = menus().getString(MENU_PATH + ".PLACEHOLDER-MATERIAL", "BLACK_STAINED_GLASS_PANE");
+        String raw = menus().getString(MENU_PATH + ".PLACEHOLDER-MATERIAL", "AIR");
         Material material = Material.matchMaterial(raw == null ? "" : raw.trim().toUpperCase(Locale.ROOT));
-        return material == null ? Material.BLACK_STAINED_GLASS_PANE : material;
+        return material == null ? Material.AIR : material;
     }
 
     private Material configuredOnlineMaterial() {
