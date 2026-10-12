@@ -43,7 +43,7 @@ UltimateDonutSMP includes custom mob spawners engineered for high-performance mo
 - `/spawner remove` – Remove the spawner block you are looking at. `/spawner forcebreak` does the same thing.
 - `/spawner reload` – Reload `spawners.yml`.
 
-The admin entries need `ultimatedonutsmp.admin.spawner`, which also unlocks the full `/spawner info` breakdown on any spawner. The command itself is gated by `ultimatedonutsmp.command.spawner`, and every player holds that one by default.
+The admin entries need `economysmp.admin.spawner`, which also unlocks the full `/spawner info` breakdown on any spawner. The command itself is gated by `economysmp.command.spawner`, and every player holds that one by default.
 
 ---
 

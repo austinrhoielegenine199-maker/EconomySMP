@@ -71,7 +71,7 @@ This page provides answers and troubleshooting steps for common questions, confi
 ### Question: Why do custom spawners break into default pig spawners or fail to drop when mined?
 
 #### Solutions:
-- **Silk Touch Requirement**: By default, breaking spawners requires a pickaxe enchanted with Silk Touch. Only Creative mode and the `ultimatedonutsmp.spawner.bypass` permission are exempt. Operators are **not** exempt: that node is registered with `default: false` and must be assigned explicitly via LuckPerms.
+- **Silk Touch Requirement**: By default, breaking spawners requires a pickaxe enchanted with Silk Touch. Only Creative mode and the `economysmp.spawner.bypass` permission are exempt. Operators are **not** exempt: that node is registered with `default: false` and must be assigned explicitly via LuckPerms.
 - **Check `spawners.yml`**: Ensure `SETTINGS.REQUIRE_SILK_TOUCH: true/false` is configured according to your server rules.
 
 ---
@@ -82,7 +82,7 @@ This page provides answers and troubleshooting steps for common questions, confi
 
 #### Solutions:
 - **Install ProtocolLib**: UltimateDonutSMP uses **ProtocolLib** for packet-level vanish suppression, chest animation silencing, and equipment hiding. Install `ProtocolLib.jar` for full vanish protection.
-- **Check Staff Permissions**: Ensure normal players do not have see-vanish permissions (`ultimatedonutsmp.admin.vanish.see`).
+- **Check Staff Permissions**: Ensure normal players do not have see-vanish permissions (`economysmp.admin.vanish.see`).
 
 ---
 
@@ -121,9 +121,9 @@ Set custom rank prefixes for the `+` or `MEDIA` rank groups in LuckPerms:
 
 #### 3. Granting UltimateDonutSMP Rank Perks
 Attach specific UltimateDonutSMP permission nodes to your `plus` or `media` groups:
-- **Expanded Home Limits**: `ultimatedonutsmp.command.sethome.multiple.<amount>`
-- **Ender Chest Row Expansion**: `ultimatedonutsmp.enderchest.rows.<1-6>`
-- **RTP Cooldown Bypass**: `ultimatedonutsmp.command.rtp.bypasscooldown`
+- **Expanded Home Limits**: `economysmp.command.sethome.multiple.<amount>`
+- **Ender Chest Row Expansion**: `economysmp.enderchest.rows.<1-6>`
+- **RTP Cooldown Bypass**: `economysmp.command.rtp.bypasscooldown`
 - **Key Giveaways & Rewards**:
   - Give Crate Keys: `/crate key <player> <crate_name> <amount>`
   - KeyAll Broadcast: `/crate keyall <crate_name> <amount>`
