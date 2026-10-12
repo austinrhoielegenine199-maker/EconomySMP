@@ -130,7 +130,7 @@ public class WorthMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         List<WorthManager.WorthBrowserEntry> entries = getSortedEntries();
         int startIndex = (page - 1) * itemsPerPage;
@@ -159,10 +159,10 @@ public class WorthMenu extends BaseMenu {
         }
 
         int lastRowStart = inventory.getSize() - 9;
-        set(lastRowStart, ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+        set(lastRowStart, ItemUtils.createPlaceholder(Material.AIR));
         set(lastRowStart + 1, page > 1
                 ? ItemUtils.createItem(Material.ARROW, "&aPrevious page", List.of("&7Go to page &f" + (page - 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         set(lastRowStart + 3, ItemUtils.createItem(
                 Material.BOOK,
                 "&bWorth browser",
@@ -181,7 +181,7 @@ public class WorthMenu extends BaseMenu {
         ));
         set(lastRowStart + 7, hasNextPage(entries.size())
                 ? ItemUtils.createItem(Material.ARROW, "&aNext page", List.of("&7Go to page &f" + (page + 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         set(lastRowStart + 8, parentMenu != null
                 ? ItemUtils.createItem(Material.BARRIER, "&cBack", List.of("&7Go back to previous menu"))
                 : ItemUtils.createItem(Material.BARRIER, "&cClose", List.of("&7Close this menu")));
