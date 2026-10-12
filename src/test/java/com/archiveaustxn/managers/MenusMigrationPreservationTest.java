@@ -26,7 +26,7 @@ class MenusMigrationPreservationTest {
     @Test
     void detectsOnlyPlaceholderAreasInFreshBundledMenuConfig() throws Exception {
         YamlConfiguration bundled = new YamlConfiguration();
-        bundled.load(Path.of("src/main/resources/menus.yml").toFile());
+        bundled.load(Path.of("src/main/resources/core/gui/menus.yml").toFile());
 
         assertTrue(ConfigManager.hasOnlyPlaceholderAreas(bundled, "SPAWN-MENU"),
                 "Bundled default SPAWN-MENU should only have placeholders");

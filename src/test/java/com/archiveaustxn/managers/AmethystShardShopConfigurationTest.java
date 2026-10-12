@@ -65,7 +65,7 @@ class AmethystShardShopConfigurationTest {
     }
 
     private YamlConfiguration loadResource() {
-        var file = new java.io.File("src/main/resources/amethyst-tools.yml");
+        var file = new java.io.File("src/main/resources/core/amethyst-tools/amethyst-tools.yml");
         return YamlConfiguration.loadConfiguration(file);
     }
 }

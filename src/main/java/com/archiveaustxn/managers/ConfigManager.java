@@ -30,37 +30,71 @@ import java.util.logging.Level;
 public class ConfigManager {
 
     private static final List<String> CONFIGURATION_RESOURCES = List.of(
-            "config.yml",
-            "messages.yml",
-            "death-messages.yml",
-            "menus.yml",
-            "scoreboard.yml",
-            "shop.yml",
-            "sounds.yml",
-            "billford.yml",
-            "rtp.yml",
-            "worth.yml",
-            "amethyst-tools.yml",
-            "ender-chest.yml",
-            "invsee.yml",
-            "freeze.yml",
-            "auction-house.yml",
-            "orders.yml",
-            "enchantments.yml",
-            "filter.yml",
-            "duels.yml",
-            "ffa.yml",
-            "pvp.yml",
-            "crates.yml",
-            "spawners.yml",
-            "spawn-stash.yml",
-            "network.yml",
-            "staff-mode.yml",
-            "hide.yml",
-            "database.yml",
-            "server-wipe.yml",
-            "discord.yml",
-            "anvil-moderation.yml"
+            "core/config/config.yml",
+            "core/messages/messages.yml",
+            "core/messages/death-messages.yml",
+            "core/gui/menus.yml",
+            "core/scoreboard/scoreboard.yml",
+            "core/shop/shop.yml",
+            "core/sounds/sounds.yml",
+            "core/billford/billford.yml",
+            "core/rtp/rtp.yml",
+            "core/worth/worth.yml",
+            "core/amethyst-tools/amethyst-tools.yml",
+            "core/ender-chest/ender-chest.yml",
+            "core/invsee/invsee.yml",
+            "core/freeze/freeze.yml",
+            "core/auction/auction-house.yml",
+            "core/orders/orders.yml",
+            "core/enchantments/enchantments.yml",
+            "core/filter/filter.yml",
+            "core/duels/duels.yml",
+            "core/ffa/ffa.yml",
+            "core/pvp/pvp.yml",
+            "core/crates/crates.yml",
+            "core/spawners/spawners.yml",
+            "core/spawn-stash/spawn-stash.yml",
+            "core/network/network.yml",
+            "core/staff-mode/staff-mode.yml",
+            "core/hide/hide.yml",
+            "core/database/database.yml",
+            "core/server-wipe/server-wipe.yml",
+            "core/discord/discord.yml",
+            "core/anvil-moderation/anvil-moderation.yml"
+    );
+
+    private static final Map<String, String> LEGACY_CONFIGURATION_PATHS = Map.ofEntries(
+            Map.entry("config.yml", "core/config/config.yml"),
+            Map.entry("messages.yml", "core/messages/messages.yml"),
+            Map.entry("death-messages.yml", "core/messages/death-messages.yml"),
+            Map.entry("menus.yml", "core/gui/menus.yml"),
+            Map.entry("scoreboard.yml", "core/scoreboard/scoreboard.yml"),
+            Map.entry("shop.yml", "core/shop/shop.yml"),
+            Map.entry("sounds.yml", "core/sounds/sounds.yml"),
+            Map.entry("billford.yml", "core/billford/billford.yml"),
+            Map.entry("rtp.yml", "core/rtp/rtp.yml"),
+            Map.entry("worth.yml", "core/worth/worth.yml"),
+            Map.entry("amethyst-tools.yml", "core/amethyst-tools/amethyst-tools.yml"),
+            Map.entry("ender-chest.yml", "core/ender-chest/ender-chest.yml"),
+            Map.entry("invsee.yml", "core/invsee/invsee.yml"),
+            Map.entry("freeze.yml", "core/freeze/freeze.yml"),
+            Map.entry("auction-house.yml", "core/auction/auction-house.yml"),
+            Map.entry("orders.yml", "core/orders/orders.yml"),
+            Map.entry("enchantments.yml", "core/enchantments/enchantments.yml"),
+            Map.entry("filter.yml", "core/filter/filter.yml"),
+            Map.entry("duels.yml", "core/duels/duels.yml"),
+            Map.entry("ffa.yml", "core/ffa/ffa.yml"),
+            Map.entry("pvp.yml", "core/pvp/pvp.yml"),
+            Map.entry("crates.yml", "core/crates/crates.yml"),
+            Map.entry("spawners.yml", "core/spawners/spawners.yml"),
+            Map.entry("spawn-stash.yml", "core/spawn-stash/spawn-stash.yml"),
+            Map.entry("network.yml", "core/network/network.yml"),
+            Map.entry("staff-mode.yml", "core/staff-mode/staff-mode.yml"),
+            Map.entry("hide.yml", "core/hide/hide.yml"),
+            Map.entry("database.yml", "core/database/database.yml"),
+            Map.entry("server-wipe.yml", "core/server-wipe/server-wipe.yml"),
+            Map.entry("discord.yml", "core/discord/discord.yml"),
+            Map.entry("anvil-moderation.yml", "core/anvil-moderation/anvil-moderation.yml")
     );
 
     private static final DateTimeFormatter BACKUP_TIMESTAMP_FORMAT =
@@ -117,40 +151,61 @@ public class ConfigManager {
     }
 
     private void reloadLoadedConfigurations() {
-        config       = load("config.yml", config);
-        messages     = load("messages.yml", messages);
-        deathMessages= load("death-messages.yml", deathMessages);
-        menus        = load("menus.yml", menus);
-        scoreboard   = load("scoreboard.yml", scoreboard);
-        shop         = load("shop.yml", shop);
-        sounds       = load("sounds.yml", sounds);
-        billford     = load("billford.yml", billford);
-        rtp          = load("rtp.yml", rtp);
-        worth        = load("worth.yml", worth);
-        amethystTools = load("amethyst-tools.yml", amethystTools);
-        enderChest   = load("ender-chest.yml", enderChest);
-        invsee       = load("invsee.yml", invsee);
-        freeze       = load("freeze.yml", freeze);
-        auctionHouse = load("auction-house.yml", auctionHouse);
-        orders       = load("orders.yml", orders);
-        duels        = load("duels.yml", duels);
-        ffa          = load("ffa.yml", ffa);
-        pvp          = load("pvp.yml", pvp);
-        crates       = load("crates.yml", crates);
-        spawners     = load("spawners.yml", spawners);
-        spawnStash   = load("spawn-stash.yml", spawnStash);
-        network      = load("network.yml", network);
-        staffMode    = load("staff-mode.yml", staffMode);
-        hide         = load("hide.yml", hide);
-        database     = load("database.yml", database);
-        serverWipe   = load("server-wipe.yml", serverWipe);
-        discord      = load("discord.yml", discord);
-        anvilModeration = load("anvil-moderation.yml", anvilModeration);
-        enchantments = load("enchantments.yml", enchantments);
-        filter       = load("filter.yml", filter);
+        config       = load("core/config/config.yml", config);
+        messages     = load("core/messages/messages.yml", messages);
+        deathMessages= load("core/messages/death-messages.yml", deathMessages);
+        menus        = load("core/gui/menus.yml", menus);
+        scoreboard   = load("core/scoreboard/scoreboard.yml", scoreboard);
+        shop         = load("core/shop/shop.yml", shop);
+        sounds       = load("core/sounds/sounds.yml", sounds);
+        billford     = load("core/billford/billford.yml", billford);
+        rtp          = load("core/rtp/rtp.yml", rtp);
+        worth        = load("core/worth/worth.yml", worth);
+        amethystTools = load("core/amethyst-tools/amethyst-tools.yml", amethystTools);
+        enderChest   = load("core/ender-chest/ender-chest.yml", enderChest);
+        invsee       = load("core/invsee/invsee.yml", invsee);
+        freeze       = load("core/freeze/freeze.yml", freeze);
+        auctionHouse = load("core/auction/auction-house.yml", auctionHouse);
+        orders       = load("core/orders/orders.yml", orders);
+        duels        = load("core/duels/duels.yml", duels);
+        ffa          = load("core/ffa/ffa.yml", ffa);
+        pvp          = load("core/pvp/pvp.yml", pvp);
+        crates       = load("core/crates/crates.yml", crates);
+        spawners     = load("core/spawners/spawners.yml", spawners);
+        spawnStash   = load("core/spawn-stash/spawn-stash.yml", spawnStash);
+        network      = load("core/network/network.yml", network);
+        staffMode    = load("core/staff-mode/staff-mode.yml", staffMode);
+        hide         = load("core/hide/hide.yml", hide);
+        database     = load("core/database/database.yml", database);
+        serverWipe   = load("core/server-wipe/server-wipe.yml", serverWipe);
+        discord      = load("core/discord/discord.yml", discord);
+        anvilModeration = load("core/anvil-moderation/anvil-moderation.yml", anvilModeration);
+        enchantments = load("core/enchantments/enchantments.yml", enchantments);
+        filter       = load("core/filter/filter.yml", filter);
+    }
+
+    private final Set<String> migrationFailures = new HashSet<>();
+
+    private void migrateLegacyConfigurationFiles() {
+        for (Map.Entry<String, String> entry : LEGACY_CONFIGURATION_PATHS.entrySet()) {
+            File legacyFile = new File(plugin.getDataFolder(), entry.getKey());
+            File targetFile = new File(plugin.getDataFolder(), entry.getValue());
+            if (!legacyFile.isFile() || targetFile.exists()) continue;
+            try {
+                Files.createDirectories(targetFile.getParentFile().toPath());
+                Files.move(legacyFile.toPath(), targetFile.toPath());
+                plugin.getLogger().info("Migrated configuration " + entry.getKey() + " -> " + entry.getValue());
+            } catch (IOException e) {
+                plugin.getLogger().log(Level.SEVERE, "Could not migrate legacy configuration " + legacyFile.getPath()
+                        + " to " + targetFile.getPath() + "; refusing to replace it with defaults.", e);
+                migrationFailures.add(entry.getValue());
+            }
+        }
     }
 
     private void syncBundledConfigurations() {
+        migrationFailures.clear();
+        migrateLegacyConfigurationFiles();
         File backupDirectory = new File(
                 new File(plugin.getDataFolder(), "config-backups"),
                 LocalDateTime.now().format(BACKUP_TIMESTAMP_FORMAT)
@@ -161,6 +216,7 @@ public class ConfigManager {
         int skipped = 0;
 
         for (String name : CONFIGURATION_RESOURCES) {
+            if (migrationFailures.contains(name)) { skipped++; continue; }
             SyncResult result = syncBundledConfiguration(name, backupDirectory);
             if (result.created) {
                 created++;
@@ -346,7 +402,7 @@ public class ConfigManager {
 
     private boolean isPlaceholderRepairTarget(String resourceName) {
         return resourceName != null
-                && ("menus.yml".equals(resourceName) || resourceName.startsWith("languages/"));
+                && ("menus.yml".equals(new File(resourceName).getName()) || resourceName.startsWith("languages/"));
     }
 
     private static Map<String, String> createMiscasedPlaceholders() {
@@ -738,6 +794,7 @@ public class ConfigManager {
     }
 
     static boolean isUserManagedBundledPath(String resourceName, String path) {
+        resourceName = new File(resourceName).getName();
         // Crate definitions are live server content. The bundled CRATES tree is only
         // an initial example and must not be merged back after admins edit/delete it.
         if ("crates.yml".equals(resourceName)
@@ -943,14 +1000,14 @@ public class ConfigManager {
                 configuration.load(reader);
             }
             invalidConfigurations.remove(name);
-            if ("menus.yml".equals(name) && (configuration.contains("SETTINGS-MENU-LEGACY") || hasLegacyButtons(configuration))) {
+            if ("menus.yml".equals(new File(name).getName()) && (configuration.contains("SETTINGS-MENU-LEGACY") || hasLegacyButtons(configuration))) {
                 if (plugin != null) {
                     plugin.getLogger().warning("Detected legacy menus.yml format. Regenerating settings menu layout...");
                 }
                 backupInvalidFile(file);
                 regenerateSettingsMenu(file, configuration);
             }
-            if ("menus.yml".equals(name)) {
+            if ("menus.yml".equals(new File(name).getName())) {
                 restoreAccidentallyResetAreasIfPresent(file, configuration);
             }
             return configuration;
@@ -1020,7 +1077,7 @@ public class ConfigManager {
             TextFileContent currentText = readTextFile(file);
             Map<String, YamlPathLine> index = indexYamlPathLines(currentText.lines());
             YamlPathLine settingsNode = index.get("SETTINGS-MENU");
-            List<String> bundledLines = readBundledResourceLines("menus.yml");
+            List<String> bundledLines = readBundledResourceLines("core/gui/menus.yml");
             Map<String, YamlPathLine> bundledIndex = indexYamlPathLines(bundledLines);
             YamlPathLine bundledSettingsNode = bundledIndex.get("SETTINGS-MENU");
 
@@ -1057,7 +1114,7 @@ public class ConfigManager {
         }
 
         try {
-            YamlConfiguration bundled = loadBundledYaml("menus.yml");
+            YamlConfiguration bundled = loadBundledYaml("core/gui/menus.yml");
             configuration.set("SETTINGS-MENU", bundled.get("SETTINGS-MENU"));
             configuration.set("SETTINGS-MENU-LEGACY", null);
             configuration.save(file);
@@ -1197,43 +1254,43 @@ public class ConfigManager {
     public FileConfiguration getLegacyShop() { return shop; }
     public FileConfiguration getLegacyAuctionHouse() { return auctionHouse; }
 
-    public void reloadShop() { shop = load("shop.yml", shop); }
-    public void reloadMenus() { menus = load("menus.yml", menus); }
-    public void reloadSounds() { sounds = load("sounds.yml", sounds); }
-    public void reloadWorth() { worth = load("worth.yml", worth); }
-    public void reloadAmethystTools() { amethystTools = load("amethyst-tools.yml", amethystTools); }
-    public void reloadEnderChest() { enderChest = load("ender-chest.yml", enderChest); }
-    public void reloadInvsee() { invsee = load("invsee.yml", invsee); }
-    public void reloadFreeze() { freeze = load("freeze.yml", freeze); }
-    public void reloadAuctionHouse() { auctionHouse = load("auction-house.yml", auctionHouse); }
-    public void reloadOrders() { orders = load("orders.yml", orders); }
-    public void reloadDuels() { duels = load("duels.yml", duels); }
-    public void reloadFfa() { ffa = load("ffa.yml", ffa); }
-    public void reloadPvp() { pvp = load("pvp.yml", pvp); }
-    public void reloadCrates() { crates = load("crates.yml", crates); }
-    public void reloadSpawners() { spawners = load("spawners.yml", spawners); }
-    public void reloadSpawnStash() { spawnStash = load("spawn-stash.yml", spawnStash); }
-    public void reloadNetwork() { network = load("network.yml", network); }
-    public void reloadStaffMode() { staffMode = load("staff-mode.yml", staffMode); }
-    public void reloadHide() { hide = load("hide.yml", hide); }
-    public void reloadDatabase() { database = load("database.yml", database); }
-    public void reloadDiscord() { discord = load("discord.yml", discord); }
-    public void reloadAnvilModeration() { anvilModeration = load("anvil-moderation.yml", anvilModeration); }
-    public void reloadEnchantments() { enchantments = load("enchantments.yml", enchantments); }
-    public void reloadFilter() { filter = load("filter.yml", filter); }
-    public boolean saveConfig() { return save("config.yml", config); }
-    public boolean saveDuels() { return save("duels.yml", duels); }
-    public boolean saveFfa() { return save("ffa.yml", ffa); }
-    public boolean savePvp() { return save("pvp.yml", pvp); }
-    public boolean saveCrates() { return save("crates.yml", crates); }
-    public boolean saveShop() { return save("shop.yml", shop); }
-    public boolean saveRtp() { return save("rtp.yml", rtp); }
-    public boolean saveMenus() { return save("menus.yml", menus); }
-    public boolean saveAuctionHouse() { return save("auction-house.yml", auctionHouse); }
-    public boolean saveDatabase() { return save("database.yml", database); }
-    public boolean saveNetwork() { return save("network.yml", network); }
-    public boolean saveDiscord() { return save("discord.yml", discord); }
-    public boolean saveAnvilModeration() { return save("anvil-moderation.yml", anvilModeration); }
+    public void reloadShop() { shop = load("core/shop/shop.yml", shop); }
+    public void reloadMenus() { menus = load("core/gui/menus.yml", menus); }
+    public void reloadSounds() { sounds = load("core/sounds/sounds.yml", sounds); }
+    public void reloadWorth() { worth = load("core/worth/worth.yml", worth); }
+    public void reloadAmethystTools() { amethystTools = load("core/amethyst-tools/amethyst-tools.yml", amethystTools); }
+    public void reloadEnderChest() { enderChest = load("core/ender-chest/ender-chest.yml", enderChest); }
+    public void reloadInvsee() { invsee = load("core/invsee/invsee.yml", invsee); }
+    public void reloadFreeze() { freeze = load("core/freeze/freeze.yml", freeze); }
+    public void reloadAuctionHouse() { auctionHouse = load("core/auction/auction-house.yml", auctionHouse); }
+    public void reloadOrders() { orders = load("core/orders/orders.yml", orders); }
+    public void reloadDuels() { duels = load("core/duels/duels.yml", duels); }
+    public void reloadFfa() { ffa = load("core/ffa/ffa.yml", ffa); }
+    public void reloadPvp() { pvp = load("core/pvp/pvp.yml", pvp); }
+    public void reloadCrates() { crates = load("core/crates/crates.yml", crates); }
+    public void reloadSpawners() { spawners = load("core/spawners/spawners.yml", spawners); }
+    public void reloadSpawnStash() { spawnStash = load("core/spawn-stash/spawn-stash.yml", spawnStash); }
+    public void reloadNetwork() { network = load("core/network/network.yml", network); }
+    public void reloadStaffMode() { staffMode = load("core/staff-mode/staff-mode.yml", staffMode); }
+    public void reloadHide() { hide = load("core/hide/hide.yml", hide); }
+    public void reloadDatabase() { database = load("core/database/database.yml", database); }
+    public void reloadDiscord() { discord = load("core/discord/discord.yml", discord); }
+    public void reloadAnvilModeration() { anvilModeration = load("core/anvil-moderation/anvil-moderation.yml", anvilModeration); }
+    public void reloadEnchantments() { enchantments = load("core/enchantments/enchantments.yml", enchantments); }
+    public void reloadFilter() { filter = load("core/filter/filter.yml", filter); }
+    public boolean saveConfig() { return save("core/config/config.yml", config); }
+    public boolean saveDuels() { return save("core/duels/duels.yml", duels); }
+    public boolean saveFfa() { return save("core/ffa/ffa.yml", ffa); }
+    public boolean savePvp() { return save("core/pvp/pvp.yml", pvp); }
+    public boolean saveCrates() { return save("core/crates/crates.yml", crates); }
+    public boolean saveShop() { return save("core/shop/shop.yml", shop); }
+    public boolean saveRtp() { return save("core/rtp/rtp.yml", rtp); }
+    public boolean saveMenus() { return save("core/gui/menus.yml", menus); }
+    public boolean saveAuctionHouse() { return save("core/auction/auction-house.yml", auctionHouse); }
+    public boolean saveDatabase() { return save("core/database/database.yml", database); }
+    public boolean saveNetwork() { return save("core/network/network.yml", network); }
+    public boolean saveDiscord() { return save("core/discord/discord.yml", discord); }
+    public boolean saveAnvilModeration() { return save("core/anvil-moderation/anvil-moderation.yml", anvilModeration); }
 
     // ── Convenience helpers ────────────────────────────────────────────────────
 
