@@ -976,7 +976,24 @@ public class PvpManager {
     // ── Discord account sync ──────────────────────────────────────────────────
 
     public boolean isSyncEnabled() {
-        return config().getBoolean("SYNC.ENABLED", true);
+        return plugin.getConfigManager().getDiscord().getBoolean(
+                "ACCOUNT_LINKING.ENABLED",
+                config().getBoolean("SYNC.ENABLED", true)
+        );
+    }
+
+    private String syncSetting(String path, String fallback) {
+        return plugin.getConfigManager().getDiscord().getString(
+                "ACCOUNT_LINKING." + path,
+                config().getString("SYNC." + path, fallback)
+        );
+    }
+
+    private int syncSetting(String path, int fallback) {
+        return plugin.getConfigManager().getDiscord().getInt(
+                "ACCOUNT_LINKING." + path,
+                config().getInt("SYNC." + path, fallback)
+        );
     }
 
     /**
@@ -995,9 +1012,9 @@ public class PvpManager {
             return null;
         }
 
-        long ttl = parseDuration(config().getString("SYNC.EXPIRES", "10m"));
+        long ttl = parseDuration(syncSetting("EXPIRES", "10m"));
         long now = System.currentTimeMillis();
-        String code = generateSyncCode(Math.max(4, Math.min(16, config().getInt("SYNC.CODE_LENGTH", 6))));
+        String code = generateSyncCode(Math.max(4, Math.min(16, syncSetting("CODE_LENGTH", 6))));
 
         try (PreparedStatement clear = connection.prepareStatement(
                 "delete from pvp_sync_codes where player_uuid = ? or expires_at < ?")) {
