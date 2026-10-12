@@ -1,24 +1,14 @@
-# Configuration section for Webhooks.
 WEBHOOKS:
-  # Determines whether Enabled is enabled or disabled. Available options: true, false
   ENABLED: true
-  # The text or value for Url. Available options: Any valid string text
   URL: https://discord.com/api/webhooks/your_webhook_here
-  # The text or value for Avatar Api. Available options: Any valid string text
   AVATAR_API: https://visage.surgeplay.com/face/128/%uuid_no_dash%
-  # The text or value for Model Api. Available options: Any valid string text
   MODEL_API: https://visage.surgeplay.com/full/384/%uuid_no_dash%
-  # The text or value for Bust Api. Available options: Any valid string text
   BUST_API: https://visage.surgeplay.com/bust/384/%uuid_no_dash%
   MESSAGES:
-    # Configuration section for Ban.
     BAN:
-      # Determines whether Enabled is enabled or disabled. Available options: true, false
       ENABLED: true
       TITLE: Player Banned - %player%
-      # The text or value for Color. Available options: Any valid string text
       COLOR: '#FF0000'
-      # The text or value for Description. Available options: Any valid string text
       DESCRIPTION: |-
         :hammer: **Punishment Type:** Ban
 
@@ -38,20 +28,13 @@ WEBHOOKS:
         %date%
 
         **ID:** `%id%`
-      # The text or value for Thumbnail. Available options: Any valid string text
       THUMBNAIL: '%skin_bust%'
-      # The text or value for Author Name. Available options: Any valid string text
       AUTHOR_NAME: Ban System
-      # The text or value for Footer. Available options: Any valid string text
       FOOTER: Punishment issued via server
-    # Configuration section for Mute.
     MUTE:
-      # Determines whether Enabled is enabled or disabled. Available options: true, false
       ENABLED: true
       TITLE: Player Muted - %player%
-      # The text or value for Color. Available options: Any valid string text
       COLOR: '#FFFF00'
-      # The text or value for Description. Available options: Any valid string text
       DESCRIPTION: |-
         :mute: **Punishment Type:** Mute
 
@@ -71,20 +54,13 @@ WEBHOOKS:
         %date%
 
         **ID:** `%id%`
-      # The text or value for Thumbnail. Available options: Any valid string text
       THUMBNAIL: '%skin_bust%'
-      # The text or value for Author Name. Available options: Any valid string text
       AUTHOR_NAME: Moderation System
-      # The text or value for Footer. Available options: Any valid string text
       FOOTER: Chat restriction applied
-    # Configuration section for Warn.
     WARN:
-      # Determines whether Enabled is enabled or disabled. Available options: true, false
       ENABLED: true
       TITLE: Player Warned - %player%
-      # The text or value for Color. Available options: Any valid string text
       COLOR: '#FFA500'
-      # The text or value for Description. Available options: Any valid string text
       DESCRIPTION: |-
         :warning: **Punishment Type:** Warning
 
@@ -101,20 +77,13 @@ WEBHOOKS:
         %date%
 
         **ID:** `%id%`
-      # The text or value for Thumbnail. Available options: Any valid string text
       THUMBNAIL: '%skin_bust%'
-      # The text or value for Author Name. Available options: Any valid string text
       AUTHOR_NAME: Moderation System
-      # The text or value for Footer. Available options: Any valid string text
       FOOTER: Warning issued
-    # Configuration section for Kick.
     KICK:
-      # Determines whether Enabled is enabled or disabled. Available options: true, false
       ENABLED: true
       TITLE: Player Kicked - %player%
-      # The text or value for Color. Available options: Any valid string text
       COLOR: '#FF6347'
-      # The text or value for Description. Available options: Any valid string text
       DESCRIPTION: |-
         :boot: **Punishment Type:** Kick
 
@@ -129,20 +98,13 @@ WEBHOOKS:
 
         **Date:**
         %date%
-      # The text or value for Thumbnail. Available options: Any valid string text
       THUMBNAIL: '%skin_bust%'
-      # The text or value for Author Name. Available options: Any valid string text
       AUTHOR_NAME: Moderation System
-      # The text or value for Footer. Available options: Any valid string text
       FOOTER: Player was removed from server
-    # Configuration section for Blacklist.
     BLACKLIST:
-      # Determines whether Enabled is enabled or disabled. Available options: true, false
       ENABLED: true
       TITLE: PLAYER BLACKLISTED - %player%
-      # The text or value for Color. Available options: Any valid string text
       COLOR: '#000000'
-      # The text or value for Description. Available options: Any valid string text
       DESCRIPTION: |-
         :no_entry: **PERMANENT NETWORK BAN**
 
@@ -162,11 +124,8 @@ WEBHOOKS:
 
         :exclamation:
         This is a permanent network-wide ban
-      # The text or value for Thumbnail. Available options: Any valid string text
       THUMBNAIL: '%skin_bust%'
-      # The text or value for Author Name. Available options: Any valid string text
       AUTHOR_NAME: Security System
-      # The text or value for Footer. Available options: Any valid string text
       FOOTER: Blacklist enforced
 
     AUCTION_LISTED:
@@ -204,34 +163,19 @@ WEBHOOKS:
       FOOTER: New player order
       TIMESTAMP: true
 
-# Discord account linking used by the separate discord-bot-example Node.js bot.
-# Keep the bot token and application IDs in discord-bot-example/.env; do not put secrets here.
 ACCOUNT_LINKING:
-  # Enables or disables /pvp sync codes in game.
   ENABLED: true
-  # One-time code expiration. Examples: 5m, 10m, 1h.
   EXPIRES: 10m
-  # Code length; values are clamped to 4-16 characters.
   CODE_LENGTH: 6
 
-# Settings consumed by discord-bot-example/src/index.js.
-# Prefer environment variables for production secrets. If configured here, protect this file
-# from public access and never commit a real bot token to the repository.
 BOT:
-  # Discord bot token. Keep blank here and set DISCORD_TOKEN in .env for safer deployments.
   TOKEN: ''
-  # Discord application/client ID.
   CLIENT_ID: ''
-  # Optional test guild ID; blank deploys commands globally.
   GUILD_ID: ''
-  # Optional channel for ranked PvP match result embeds.
   PVP_MATCH_CHANNEL_ID: ''
-  # Polling interval for match results, in seconds.
   PVP_MATCH_POLL_SECONDS: 15
-  # Bot-owned link database file, relative to discord-bot-example unless absolute.
   LINKS_FILE: data/links.db
 
-  # Editable Discord account-linking command replies. Supports {player}, {code}, {command}.
   LINK_PROMPT: 'Run /link in Minecraft to get a one-time code, then use /link code:<code> here.'
   LINK_SUCCESS: 'Successfully linked Minecraft account **{player}** to your Discord account!'
   LINK_INVALID: 'That link code is invalid. Run /pvp sync in Minecraft to get a new one.'
