@@ -22,7 +22,7 @@ public class DuelClaimMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         List<DuelClaim> claims = plugin.getDuelManager().getClaims(player.getUniqueId());
         int itemsPerPage = plugin.getDuelManager().getClaimsItemsPerPage();
@@ -42,11 +42,11 @@ public class DuelClaimMenu extends BaseMenu {
         int lastRow = inventory.getSize() - 9;
         set(lastRow, page > 1
                 ? ItemUtils.createItem(Material.ARROW, plugin.getDuelManager().getGuiText("CLAIMS.ITEMS.PREVIOUS_PAGE.NAME", "&aprevious page"))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         set(lastRow + 4, ItemUtils.createItem(Material.CLOCK, plugin.getDuelManager().getGuiText("CLAIMS.ITEMS.REFRESH.NAME", "&erefresh")));
         set(lastRow + 7, hasNextPage(claims.size(), itemsPerPage)
                 ? ItemUtils.createItem(Material.ARROW, plugin.getDuelManager().getGuiText("CLAIMS.ITEMS.NEXT_PAGE.NAME", "&anext page"))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         set(lastRow + 8, ItemUtils.createItem(Material.BARRIER, plugin.getDuelManager().getGuiText("CLAIMS.ITEMS.BACK.NAME", "&cback")));
 
         if (claims.isEmpty()) {
