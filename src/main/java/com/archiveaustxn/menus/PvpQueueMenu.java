@@ -40,7 +40,7 @@ public class PvpQueueMenu extends BaseMenu {
     public void build(Player player) {
         clear();
         slotKits.clear();
-        fill(Material.BLACK_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         List<PvpKit> kits = plugin.getPvpManager().getAvailableKits(player);
         if (kits.isEmpty()) {
@@ -70,7 +70,7 @@ public class PvpQueueMenu extends BaseMenu {
 
         boolean queued = plugin.getPvpMatchManager().isQueued(player.getUniqueId());
         set(CONFIRM_SLOT, ItemUtils.createItem(
-                ItemUtils.parseMaterial(config().getString(PATH + ".CONFIRM.MATERIAL", "LIME_STAINED_GLASS_PANE")),
+                ItemUtils.parseMaterial(config().getString(PATH + ".CONFIRM.MATERIAL", "EMERALD")),
                 config().getString(PATH + ".CONFIRM.DISPLAY-NAME", "&aCONFIRM"),
                 queued
                         ? List.of("&7Already in the queue.", "&7Waiting: &f" + waiting(player) + "s")
@@ -78,7 +78,7 @@ public class PvpQueueMenu extends BaseMenu {
                         + plugin.getPvpMatchManager().getQueueSize())
         ));
         set(CANCEL_SLOT, ItemUtils.createItem(
-                ItemUtils.parseMaterial(config().getString(PATH + ".CANCEL.MATERIAL", "RED_STAINED_GLASS_PANE")),
+                ItemUtils.parseMaterial(config().getString(PATH + ".CANCEL.MATERIAL", "BARRIER")),
                 config().getString(PATH + ".CANCEL.DISPLAY-NAME", "&cLEAVE"),
                 List.of(queued ? "&7Click to leave the queue." : "&7Click to close this menu.")
         ));
