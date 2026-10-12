@@ -56,7 +56,7 @@ public final class AuctionHouseBrowseMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         slotMappings.clear();
 
         AuctionHouseManager manager = plugin.getAuctionHouseManager();
@@ -106,7 +106,7 @@ public final class AuctionHouseBrowseMenu extends BaseMenu {
         set(controlSlot("PREVIOUS", 45), renderedPage.hasPrevious()
                 ? control("PREVIOUS", Material.ARROW, "&fPrevious page",
                 List.of("&7Go to page &f{page}"), "{page}", String.valueOf(renderedPage.page() - 1))
-                : control("FILLER", Material.BLACK_STAINED_GLASS_PANE, "&7 ", List.of()));
+                : control("FILLER", Material.AIR, "&7 ", List.of()));
         set(controlSlot("SORT", 47), control(
                 "SORT",
                 Material.CAULDRON,
@@ -152,7 +152,7 @@ public final class AuctionHouseBrowseMenu extends BaseMenu {
         set(controlSlot("NEXT", 53), renderedPage.hasNext()
                 ? control("NEXT", Material.ARROW, "&fNext page",
                 List.of("&7Go to page &f{page}"), "{page}", String.valueOf(renderedPage.page() + 1))
-                : control("FILLER", Material.BLACK_STAINED_GLASS_PANE, "&7 ", List.of()));
+                : control("FILLER", Material.AIR, "&7 ", List.of()));
     }
 
     @Override
