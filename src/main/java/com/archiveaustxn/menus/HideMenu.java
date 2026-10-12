@@ -25,7 +25,7 @@ public class HideMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.BLACK_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         HideManager manager = plugin.getHideManager();
         HideState state = manager.getState(player.getUniqueId());
 
