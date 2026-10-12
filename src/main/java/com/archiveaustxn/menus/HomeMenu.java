@@ -545,7 +545,7 @@ public class HomeMenu extends BaseMenu {
     }
 
     private void fillWithFiller() {
-        ItemStack filler = blank(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        ItemStack filler = blank(Material.AIR);
         for (int i = 0; i < inventory.getSize(); i++) {
             set(i, filler);
         }
