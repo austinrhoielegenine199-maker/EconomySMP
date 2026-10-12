@@ -47,7 +47,7 @@ public class BillfordMenu extends BaseMenu {
         clockSlot = config.getInt("GUI.COUNTDOWN_SLOT", 13);
         infoSlot = config.getInt("GUI.INFO_SLOT", 22);
         confirmSlot = config.getInt("GUI.CONFIRM_SLOT", 26);
-        fillerMaterial = ItemUtils.parseMaterial(config.getString("GUI.FILLER_MATERIAL", "GRAY_STAINED_GLASS_PANE"));
+        fillerMaterial = ItemUtils.parseMaterial(config.getString("GUI.FILLER_MATERIAL", "AIR"));
         closeOnSuccess = config.getBoolean("SETTINGS.CLOSE_MENU_ON_SUCCESS", true);
         reopenOnTradeChange = config.getBoolean("SETTINGS.REOPEN_ON_TRADE_CHANGE", true);
         allowedClickTypes = resolveAllowedClickTypes(config.getStringList("SETTINGS.ALLOWED_CLICK_TYPES"));
