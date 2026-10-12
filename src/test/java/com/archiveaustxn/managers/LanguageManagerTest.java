@@ -294,6 +294,8 @@ class LanguageManagerTest {
             case "staff-mode.yml" -> Path.of("src/main/resources/core/staff-mode/staff-mode.yml");
             case "server-wipe.yml" -> Path.of("src/main/resources/core/server-wipe/server-wipe.yml");
             case "worth.yml" -> Path.of("src/main/resources/core/worth/worth.yml");
+            case "hide.yml" -> Path.of("src/main/resources/core/hide/hide.yml");
+            case "enchantments.yml" -> Path.of("src/main/resources/core/enchantments/enchantments.yml");
             default -> Path.of("src/main/resources", name);
         };
         configuration.load(file.toFile());
