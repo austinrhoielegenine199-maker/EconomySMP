@@ -1,4 +1,3 @@
-# Configuration section for Blocks.
 Blocks:
 - STONE
 - GRANITE
@@ -539,7 +538,6 @@ Blocks:
 - LANTERN
 - SOUL_LANTERN
 - LEVER
-# Configuration section for Tools.
 Tools:
 - WOODEN_PICKAXE
 - STONE_PICKAXE
@@ -574,7 +572,6 @@ Tools:
 - LEAD
 - NAME_TAG
 - SPYGLASS
-# Configuration section for Food.
 Food:
 - APPLE
 - GOLDEN_APPLE
@@ -619,7 +616,6 @@ Food:
 - PUFFERFISH
 - ROTTEN_FLESH
 - SPIDER_EYE
-# Configuration section for Combat.
 Combat:
 - WOODEN_SWORD
 - STONE_SWORD
@@ -662,13 +658,11 @@ Combat:
 - ELYTRA
 - FIREWORK_ROCKET
 - GOAT_HORN
-# Configuration section for Potions.
 Potions:
 - POTION
 - SPLASH_POTION
 - LINGERING_POTION
 - DRAGON_BREATH
-# Configuration section for Books.
 Books:
 - BOOK
 - ENCHANTED_BOOK
@@ -680,7 +674,6 @@ Books:
 - FILLED_MAP
 - COMPASS
 - RECOVERY_COMPASS
-# Configuration section for Ingredients.
 Ingredients:
 - STICK
 - STRING
@@ -795,7 +788,6 @@ Ingredients:
 - SHELTER_POTTERY_SHERD
 - SKULL_POTTERY_SHERD
 - SNORT_POTTERY_SHERD
-# Configuration section for Utilities.
 Utilities:
 - REDSTONE_TORCH
 - REDSTONE_LAMP
