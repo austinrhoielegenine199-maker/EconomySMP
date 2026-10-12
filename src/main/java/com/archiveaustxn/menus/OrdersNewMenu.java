@@ -24,14 +24,14 @@ public class OrdersNewMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         OrdersManager manager = plugin.getOrdersManager();
         OrdersManager.NewOrderSession session = manager.getOrCreateNewOrderSession(player.getUniqueId());
 
         // Slot 10: Cancel
         set(10, ItemUtils.createItem(
-                Material.RED_STAINED_GLASS_PANE,
+                Material.BARRIER,
                 "&cCancel",
                 List.of("&7Click to cancel an item and return")
         ));
@@ -114,7 +114,7 @@ public class OrdersNewMenu extends BaseMenu {
         }
 
         ItemStack confirmDisplay = ItemUtils.createItem(
-                canConfirm ? Material.LIME_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE,
+                canConfirm ? Material.EMERALD : Material.BARRIER,
                 "&aConfirm order",
                 confirmLore
         );
