@@ -111,7 +111,7 @@ async function handleMyStats(interaction) {
   const link = links.getLink(interaction.user.id);
   if (!link) {
     await interaction.editReply(
-      message('LINK_PROMPT', 'Run /pvp sync in Minecraft, then use /link code:{code} here.', { code: 'your-code' })
+      message('LINK_PROMPT', 'Run /link in Minecraft to get a one-time code, then use /link code:<code> here.')
     );
     return;
   }
@@ -172,7 +172,7 @@ async function handleSync(interaction) {
 
   const entry = await pvp.findSyncCode(code);
   if (!entry) {
-    await interaction.editReply(message('LINK_INVALID', 'That link code is invalid. Run /pvp sync in Minecraft to get a new one.'));
+    await interaction.editReply(message('LINK_INVALID', 'That link code is invalid. Run /link in Minecraft to get a new one.'));
     return;
   }
   if (entry.expiresAt > 0 && entry.expiresAt < Date.now()) {
@@ -180,7 +180,7 @@ async function handleSync(interaction) {
     return;
   }
   if (links.isCodeUsed(code)) {
-    await interaction.editReply(message('LINK_USED', 'That link code has already been used. Generate a new one with /pvp sync.'));
+    await interaction.editReply(message('LINK_USED', 'That link code has already been used. Generate a new one with /link in Minecraft.'));
     return;
   }
 
