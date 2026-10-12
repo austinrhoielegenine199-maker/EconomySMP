@@ -64,7 +64,7 @@ public class ShopMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         slotCategories.clear();
         slotItems.clear();
         slotQuotes.clear();
@@ -393,7 +393,7 @@ public class ShopMenu extends BaseMenu {
             return;
         }
         set(getBackSlot(), ItemUtils.createItem(
-                ItemUtils.parseMaterial(backButton.getString("MATERIAL", "RED_STAINED_GLASS_PANE")),
+                ItemUtils.parseMaterial(backButton.getString("MATERIAL", "AIR")),
                 backButton.getString("DISPLAY-NAME", "&cBack"),
                 backButton.getStringList("LORE")
         ));
