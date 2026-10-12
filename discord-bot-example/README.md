@@ -45,7 +45,8 @@ placeholder values such as `your_test_server_id` in `.env`.
 /stats player:<minecraft username or uuid>
 /leaderboard type:<money|shards|kills|deaths|playtime|...> limit:<1-10>
 
-/sync code:<code from /pvp sync in game>
+/link code:<code from /pvp sync in game>
+/sync code:<code from /pvp sync in game> (legacy alias)
 /unsync
 /mystats
 /tier stats player:<minecraft username or uuid>
@@ -55,7 +56,7 @@ placeholder values such as `your_test_server_id` in `.env`.
 ## Linking an account
 
 A player runs `/pvp sync` in game. The plugin gives them a short one-time code and writes it to the
-`pvp_sync_codes` table. They then run `/sync code:<that code>` in Discord, and the bot checks the
+`pvp_sync_codes` table. They then run `/link code:<that code>` in Discord, and the bot checks the
 code, confirms it has not expired or been spent, and records the link on its own side.
 
 The plugin never learns anybody's Discord id, which is why the bot can keep the plugin database
@@ -157,3 +158,7 @@ npm run check
 
 This example follows the discord.js v14 slash command pattern with `REST`, `Routes`, `Client`,
 `GatewayIntentBits`, and `SlashCommandBuilder`.
+
+## Editable link messages
+
+Edit the `BOT.LINK_*` and `BOT.UNLINK_*` entries in `plugins/EconomySMP/core/discord/discord.yml` to customize the Discord replies for linking and unlinking. Supported placeholder: `{player}`. The link prompt also supports `{code}`. The bot reads the values at startup; restart the bot after editing. Environment variables named `LINK_MESSAGE_LINK_SUCCESS`, etc. override the YAML values.
