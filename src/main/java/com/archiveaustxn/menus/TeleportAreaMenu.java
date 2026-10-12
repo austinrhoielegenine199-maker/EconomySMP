@@ -43,7 +43,7 @@ public abstract class TeleportAreaMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         slotAreas.clear();
         randomEnabled = false;
         unsetBarrierSlot = -1;
