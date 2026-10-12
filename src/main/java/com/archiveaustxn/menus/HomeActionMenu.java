@@ -26,7 +26,7 @@ public class HomeActionMenu extends BaseMenu {
     public void build(Player player) {
         clear();
         slotActions.clear();
-        fill(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         if (home == null) return;
 
