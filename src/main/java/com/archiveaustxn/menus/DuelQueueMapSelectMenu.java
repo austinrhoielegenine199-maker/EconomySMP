@@ -23,7 +23,7 @@ public class DuelQueueMapSelectMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         List<DuelManager.DuelMapOption> options = plugin.getDuelManager().getSelectableMapOptions(true);
         int[] slots = contentSlots();
