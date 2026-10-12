@@ -15,6 +15,20 @@ LOCATIONS:
   SPAWN-LOCATION: ''
   # The text or value for Afk Location. Available options: Any valid string text
   AFK-LOCATION: ''
+# Combat tag behavior. These defaults are deliberately conservative for logout and mob damage.
+COMBAT-MANAGER:
+  ENABLED: true
+  COOLDOWN: 16
+  KILL-ON-LOGOUT: false
+  ACTION-BAR: '&fcombat: &b${time}s'
+  MOBS: false
+  ENDER-CRYSTAL: true
+  ENDER-PEARL: true
+  RESPAWN-ANCHOR: true
+  BLOCK-MESSAGE: '&cYou cannot use that command while in combat.'
+  BLOCK-COMMANDS: []
+  EXCLUDED-WORLDS: []
+
 # Configuration section for Portal System.
 PORTAL-SYSTEM:
   # Determines whether Enabled is enabled or disabled. Available options: true, false

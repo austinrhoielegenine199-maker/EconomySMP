@@ -24,7 +24,7 @@ class AmethystMessageKeyTest {
     @Test
     void everyMessageKeyTheCodeReadsIsShipped() throws IOException {
         ConfigurationSection messages = YamlConfiguration
-                .loadConfiguration(new java.io.File("src/main/resources/amethyst-tools.yml"))
+                .loadConfiguration(new java.io.File("src/main/resources/core/amethyst-tools/amethyst-tools.yml"))
                 .getConfigurationSection("AMETHYST-MESSAGES");
         assertNotNull(messages, "AMETHYST-MESSAGES");
 

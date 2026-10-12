@@ -70,7 +70,7 @@ class DeathMessageAudienceTest {
 
     private static YamlConfiguration bundledDeathMessages() {
         var stream = DeathMessageAudienceTest.class.getClassLoader()
-                .getResourceAsStream("death-messages.yml");
+                .getResourceAsStream("core/messages/death-messages.yml");
         assertNotNull(stream);
 
         return YamlConfiguration.loadConfiguration(

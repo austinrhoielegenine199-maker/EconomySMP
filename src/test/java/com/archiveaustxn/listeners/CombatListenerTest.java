@@ -100,7 +100,7 @@ class CombatListenerTest {
     }
 
     private static YamlConfiguration bundledConfig() {
-        var stream = CombatListenerTest.class.getClassLoader().getResourceAsStream("config.yml");
+        var stream = CombatListenerTest.class.getClassLoader().getResourceAsStream("core/config/config.yml");
         assertNotNull(stream);
 
         return YamlConfiguration.loadConfiguration(
