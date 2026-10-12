@@ -36,12 +36,12 @@ public class TpaConfirmMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
-        set(11, ItemUtils.createItem(Material.RED_STAINED_GLASS_PANE, "&cCancel",
+        set(11, ItemUtils.createItem(Material.BARRIER, "&cCancel",
                 List.of("&7Deny this teleport request.")));
 
-        set(15, ItemUtils.createItem(Material.LIME_STAINED_GLASS_PANE, "&aConfirm",
+        set(15, ItemUtils.createItem(Material.EMERALD, "&aConfirm",
                 List.of("&7Accept this teleport request.")));
 
         String requestText = tpaHere
