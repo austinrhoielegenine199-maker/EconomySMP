@@ -283,7 +283,7 @@ class LanguageManagerTest {
             case "ender-chest.yml" -> Path.of("src/main/resources/core/ender-chest/ender-chest.yml");
             case "invsee.yml" -> Path.of("src/main/resources/core/invsee/invsee.yml");
             case "freeze.yml" -> Path.of("src/main/resources/core/freeze/freeze.yml");
-            case "auction-house.yml" -> Path.of("src/main/resources/core/auction-house/auction-house.yml");
+            case "auction-house.yml" -> Path.of("src/main/resources/core/auction/auction-house.yml");
             case "orders.yml" -> Path.of("src/main/resources/core/orders/orders.yml");
             case "duels.yml" -> Path.of("src/main/resources/core/duels/duels.yml");
             case "ffa.yml" -> Path.of("src/main/resources/core/ffa/ffa.yml");
