@@ -169,6 +169,41 @@ WEBHOOKS:
       # The text or value for Footer. Available options: Any valid string text
       FOOTER: Blacklist enforced
 
+    AUCTION_LISTED:
+      ENABLED: true
+      TITLE: 'New Auction Listed'
+      COLOR: '#009BFF'
+      DESCRIPTION: |-
+        A new item was listed in the Auction House.
+
+        **Item:** %item% x%amount%
+        **Price:** %price%
+        **Category:** %category%
+        **Seller:** %player%
+        **Listing ID:** #%id%
+        **Expires:** %expires%
+      AUTHOR_NAME: EconomySMP Auction House
+      FOOTER: New auction listing
+      TIMESTAMP: true
+    ORDER_CREATED:
+      ENABLED: true
+      TITLE: 'New Item Order'
+      COLOR: '#2ECC71'
+      DESCRIPTION: |-
+        A new player order was created.
+
+        **Requested Item:** %item%
+        **Quantity:** %quantity%
+        **Price Each:** %price%
+        **Total Budget:** %total%
+        **Category:** %category%
+        **Buyer:** %player%
+        **Order ID:** #%id%
+        **Expires:** %expires%
+      AUTHOR_NAME: EconomySMP Orders
+      FOOTER: New player order
+      TIMESTAMP: true
+
 # Discord account linking used by the separate discord-bot-example Node.js bot.
 # Keep the bot token and application IDs in discord-bot-example/.env; do not put secrets here.
 ACCOUNT_LINKING:
