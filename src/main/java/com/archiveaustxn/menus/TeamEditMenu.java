@@ -43,7 +43,7 @@ public class TeamEditMenu extends BaseMenu {
         clear();
 
         if (menus().getBoolean(MENU_PATH + ".PLACEHOLDER", false)) {
-            fill(material(MENU_PATH + ".PLACEHOLDER-MATERIAL", Material.BLACK_STAINED_GLASS_PANE));
+            fill(material(MENU_PATH + ".PLACEHOLDER-MATERIAL", Material.AIR));
         }
 
         Team team = plugin.getTeamManager().getTeam(player);
@@ -105,7 +105,7 @@ public class TeamEditMenu extends BaseMenu {
         set(
                 menus().getInt(backPath + ".SLOT", 18),
                 ItemUtils.createItem(
-                        material(backPath + ".MATERIAL", Material.RED_STAINED_GLASS_PANE),
+                        material(backPath + ".MATERIAL", Material.BARRIER),
                         menus().getString(backPath + ".TITLE", "&cBack"),
                         menus().getStringList(backPath + ".LORE")
                 )
