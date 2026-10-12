@@ -19,7 +19,7 @@ class HideIdentityPolicyTest {
 
     @Test
     void bundledConfigurationIsValid() {
-        var file = new java.io.File("src/main/resources/hide.yml");
+        var file = new java.io.File("src/main/resources/core/hide/hide.yml");
         var config = YamlConfiguration.loadConfiguration(file);
 
         assertTrue(HideIdentityPolicy.validate(config).isEmpty());

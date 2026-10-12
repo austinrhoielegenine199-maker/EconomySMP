@@ -12,7 +12,7 @@ class FirstJoinSpawnTeleportTest {
 
     @Test
     void bundledConfigShipsTheFirstJoinSpawnDelay() {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/config/config.yml"));
         assertTrue(config.contains("SETTINGS.FIRST-JOIN-SPAWN-DELAY-TICKS"));
         assertEquals(
                 PlayerJoinQuitListener.DEFAULT_FIRST_JOIN_SPAWN_DELAY_TICKS,

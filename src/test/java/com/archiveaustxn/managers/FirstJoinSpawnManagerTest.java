@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FirstJoinSpawnManagerTest {
 
     private static YamlConfiguration bundledConfig() {
-        return YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        return YamlConfiguration.loadConfiguration(new File("src/main/resources/core/config/config.yml"));
     }
 
     @Test

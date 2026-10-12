@@ -14,7 +14,7 @@ class MaintenanceLobbyDestinationTest {
 
     @Test
     void bundledConfigShipsTheMaintenanceSection() {
-        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/network.yml"));
+        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/network/network.yml"));
         assertTrue(network.contains("MAINTENANCE.LOBBY_SERVER"));
         assertTrue(network.getBoolean("MAINTENANCE.USE_PROXY"));
         assertEquals("lobby", network.getString("MAINTENANCE.LOBBY_SERVER"));
@@ -28,7 +28,7 @@ class MaintenanceLobbyDestinationTest {
 
     @Test
     void bundledConfigShipsTheMaintenanceMessages() {
-        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/network.yml"));
+        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/network/network.yml"));
 
         assertEquals(
                 "&cThis server is in maintenance and no lobby is available.",

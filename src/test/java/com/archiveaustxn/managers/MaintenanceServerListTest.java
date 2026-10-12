@@ -51,7 +51,7 @@ class MaintenanceServerListTest {
 
     @Test
     void bundledConfigShipsTheServerListBlock() {
-        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/network.yml"));
+        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/network/network.yml"));
 
         assertTrue(network.getBoolean("MAINTENANCE.SERVER_LIST.ENABLED"));
         assertEquals(LINES, network.getStringList("MAINTENANCE.SERVER_LIST.LINES"));
@@ -65,7 +65,7 @@ class MaintenanceServerListTest {
 
     @Test
     void theBundledDefaultsProduceTheEntryTheRequestAskedFor() {
-        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/network.yml"));
+        YamlConfiguration network = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/network/network.yml"));
 
         assertEquals(
                 "&cCurrently under maintenance\n&bCome back in: &d03:29",

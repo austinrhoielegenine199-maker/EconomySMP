@@ -86,7 +86,7 @@ class PortalHologramPlaceholderTest {
 
     @Test
     void bundledConfigLinesUseDestinationPlayersPlaceholder() {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/config/config.yml"));
         List<String> lines = config.getStringList("PORTAL-SYSTEM.HOLOGRAM.LINES");
 
         assertFalse(lines.isEmpty(), "config.yml should define PORTAL-SYSTEM.HOLOGRAM.LINES");

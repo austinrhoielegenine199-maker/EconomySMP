@@ -17,7 +17,7 @@ class JoinQuitLogTest {
 
     @Test
     void bundledConfigShipsJoinQuitLoggingOn() {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/config/config.yml"));
         assertTrue(config.contains(PlayerJoinQuitListener.JOIN_QUIT_LOG_PATH));
         assertTrue(config.getBoolean(PlayerJoinQuitListener.JOIN_QUIT_LOG_PATH));
     }
