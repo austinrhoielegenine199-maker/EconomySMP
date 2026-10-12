@@ -585,7 +585,7 @@ public class ShopMenu extends BaseMenu {
                 configured = Math.min(54, ((required + 8) / 9) * 9);
             }
         } else {
-            int rows = config.getInt(menuSection + ".ROW", -1);
+            int rows = config.getInt(menuSection + ".row", -1);
             configured = rows >= 1 && rows <= 6
                     ? rows * 9
                     : config.getInt(menuSection + ".SIZE", 27);
