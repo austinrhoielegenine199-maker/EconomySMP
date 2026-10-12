@@ -34,7 +34,7 @@ public class TeamKickConfirmMenu extends BaseMenu {
     public void build(Player player) {
         clear();
         if (menus().getBoolean(MENU_PATH + ".PLACEHOLDER", true)) {
-            fill(Material.BLACK_STAINED_GLASS_PANE);
+            fill(Material.AIR);
         }
 
         String targetName = resolveTargetName();
@@ -43,7 +43,7 @@ public class TeamKickConfirmMenu extends BaseMenu {
         set(
                 menus().getInt(cancelPath + ".SLOT", 11),
                 ItemUtils.createItem(
-                        material(cancelPath + ".MATERIAL", Material.RED_STAINED_GLASS_PANE),
+                        material(cancelPath + ".MATERIAL", Material.BARRIER),
                         menus().getString(cancelPath + ".TITLE", "&cCancel"),
                         replace(menus().getStringList(cancelPath + ".LORE"), Map.of("player", targetName))
                 )
@@ -53,7 +53,7 @@ public class TeamKickConfirmMenu extends BaseMenu {
         set(
                 menus().getInt(confirmPath + ".SLOT", 15),
                 ItemUtils.createItem(
-                        material(confirmPath + ".MATERIAL", Material.LIME_STAINED_GLASS_PANE),
+                        material(confirmPath + ".MATERIAL", Material.EMERALD),
                         menus().getString(confirmPath + ".TITLE", "&aConfirm"),
                         replace(menus().getStringList(confirmPath + ".LORE"), Map.of("player", targetName))
                 )
