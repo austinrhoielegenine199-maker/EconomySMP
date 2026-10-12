@@ -41,7 +41,7 @@ public class OrdersSearchItemMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         OrderUiState state = plugin.getOrdersManager().getUiState(player.getUniqueId());
         state.itemSearch(query);
         state.itemPage(page - 1);
@@ -72,7 +72,7 @@ public class OrdersSearchItemMenu extends BaseMenu {
                 List.of(OrdersMenuSupport.text(plugin, "ORDERS.GUI.BACK.LORE", "&7Return"))));
         set(lastRow + 1, page > 1
                 ? ItemUtils.createItem(Material.ARROW, "&aPrevious page", List.of("&7Page " + (page - 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         set(lastRow + 2, ItemUtils.createItem(Material.SPYGLASS, "&bNew search",
                 List.of("&7Search another item or category")));
         set(lastRow + 3, ItemUtils.createItem(Material.HOPPER,
@@ -83,7 +83,7 @@ public class OrdersSearchItemMenu extends BaseMenu {
                 List.of("&7Matches: &f" + results.size(), "&7Query: &f" + query)));
         set(lastRow + 7, page < totalPages(results.size(), itemsPerPage)
                 ? ItemUtils.createItem(Material.ARROW, "&aNext page", List.of("&7Page " + (page + 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
 
         if (results.isEmpty()) {
             set(Math.min(itemsPerPage - 1, itemsPerPage / 2),
