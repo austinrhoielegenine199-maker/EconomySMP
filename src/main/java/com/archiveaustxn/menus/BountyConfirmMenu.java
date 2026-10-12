@@ -40,7 +40,7 @@ public class BountyConfirmMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         FileConfiguration menus = plugin.getConfigManager().getMenus();
         set(CANCEL_SLOT, buildConfigItem(
