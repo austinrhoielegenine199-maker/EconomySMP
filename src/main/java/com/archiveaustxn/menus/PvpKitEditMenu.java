@@ -47,7 +47,7 @@ public class PvpKitEditMenu extends BaseMenu {
         }
         for (int slot = DIVIDER_START; slot < DIVIDER_END; slot++) {
             inventory.setItem(slot, ItemUtils.createItem(
-                    Material.GRAY_STAINED_GLASS_PANE,
+                    Material.AIR,
                     "&8-",
                     List.of("&7Rows above: the kit inventory.",
                             "&7Row below: armour and offhand.",
@@ -69,7 +69,7 @@ public class PvpKitEditMenu extends BaseMenu {
                 )
         ));
         for (int slot : FILLER_SLOTS) {
-            inventory.setItem(slot, ItemUtils.createItem(Material.BLACK_STAINED_GLASS_PANE, "&8-", null));
+            inventory.setItem(slot, ItemUtils.createItem(Material.AIR, "&8-", null));
         }
     }
 
