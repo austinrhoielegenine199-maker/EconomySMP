@@ -51,7 +51,7 @@ public class TpaQueueMenu extends BaseMenu {
 
         FileConfiguration menus = menus();
         if (menus.getBoolean(MENU_PATH + ".PLACEHOLDER", true)) {
-            fill(ItemUtils.parseMaterial(menus.getString(MENU_PATH + ".PLACEHOLDER-MATERIAL", "GRAY_STAINED_GLASS_PANE")));
+            fill(ItemUtils.parseMaterial(menus.getString(MENU_PATH + ".PLACEHOLDER-MATERIAL", "AIR")));
         }
 
         List<Integer> contentSlots = contentSlots();
