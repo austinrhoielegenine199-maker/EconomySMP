@@ -183,6 +183,11 @@ commands:
     usage: /pvp [join|leave|kit|stats|top|queue|leaderboard|history|assign|wand|create|setspawn|setspawn2|setlobby|setboundary|schematic|reset|reload]
     permission: economysmp.command.pvp
     permission-message: "&cYou do not have permission to use /pvp."
+  link:
+    description: Generate a one-time code to link your Minecraft account to Discord
+    usage: /link
+    permission: economysmp.command.pvp
+    permission-message: "&cYou do not have permission to use /link."
   auctionhouse:
     description: Open the Auction House
     usage: /auctionhouse [sell|my|claims|cancel|reload]
