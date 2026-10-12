@@ -50,7 +50,7 @@ public class EnchantSelectMenu extends BaseMenu {
         EnchantmentsManager em = plugin.getEnchantmentsManager();
 
         // 1. Fill background if enabled
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         // 2. Preview item slot (usually 0)
         ItemStack preview = new ItemStack(material);
@@ -72,13 +72,13 @@ public class EnchantSelectMenu extends BaseMenu {
 
         // 3. Navigation and action buttons
         set(em.getCancelSlot(), ItemUtils.createItem(
-                Material.RED_STAINED_GLASS_PANE,
+                Material.BARRIER,
                 "&cCancel",
                 List.of("&7Click to return without saving")
         ));
 
         set(em.getConfirmSlot(), ItemUtils.createItem(
-                Material.LIME_STAINED_GLASS_PANE,
+                Material.EMERALD,
                 "&aConfirm",
                 List.of("&7Click to confirm these enchantments")
         ));
@@ -90,7 +90,7 @@ public class EnchantSelectMenu extends BaseMenu {
                     List.of("&7Go to page &f" + (page - 1))
             ));
         } else {
-            set(em.getPrevSlot(), ItemUtils.createPlaceholder(Material.GRAY_STAINED_GLASS_PANE));
+            set(em.getPrevSlot(), ItemUtils.createPlaceholder(Material.AIR));
         }
 
         if (page < maxPage) {
@@ -100,7 +100,7 @@ public class EnchantSelectMenu extends BaseMenu {
                     List.of("&7Go to page &f" + (page + 1))
             ));
         } else {
-            set(em.getNextSlot(), ItemUtils.createPlaceholder(Material.GRAY_STAINED_GLASS_PANE));
+            set(em.getNextSlot(), ItemUtils.createPlaceholder(Material.AIR));
         }
 
         // 4. Render enchant option books for current page
