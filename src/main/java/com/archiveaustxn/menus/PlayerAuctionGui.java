@@ -36,7 +36,7 @@ public final class PlayerAuctionGui extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         entriesBySlot.clear();
 
         List<Object> entries = AuctionPlayerEntries.combine(
@@ -65,7 +65,7 @@ public final class PlayerAuctionGui extends BaseMenu {
         set(previousSlot, page > 1
                 ? control("PREVIOUS", Material.ARROW, "&fPrevious page",
                 List.of("&7Go to page &f{page}"), "{page}", String.valueOf(page - 1))
-                : control("FILLER", Material.BLACK_STAINED_GLASS_PANE, "&7 ", List.of()));
+                : control("FILLER", Material.AIR, "&7 ", List.of()));
         set(BACK_SLOT, control(
                 "BACK",
                 Material.CHEST,
@@ -90,7 +90,7 @@ public final class PlayerAuctionGui extends BaseMenu {
         set(nextSlot, page < totalPages
                 ? control("NEXT", Material.ARROW, "&fNext page",
                 List.of("&7Go to page &f{page}"), "{page}", String.valueOf(page + 1))
-                : control("FILLER", Material.BLACK_STAINED_GLASS_PANE, "&7 ", List.of()));
+                : control("FILLER", Material.AIR, "&7 ", List.of()));
     }
 
     @Override
