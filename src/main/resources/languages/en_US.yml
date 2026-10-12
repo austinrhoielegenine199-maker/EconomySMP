@@ -188,7 +188,6 @@ ORDERS:
     ORDER:
       TITLE: 'Order #{id}'
       BUTTON: |-
-        #{id} {item} X{remaining}
         {price} Each - {owner}
     CANCEL:
       TITLE: Cancel order
