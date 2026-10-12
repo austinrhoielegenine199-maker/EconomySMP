@@ -1,116 +1,82 @@
-# Configuration section for Categories.
 CATEGORIES:
-  # The text or value for Menu Title. Available options: Any valid string text
   MENU-TITLE: '&8Shop'
-  # The numerical value for Menu Size. Available options: Any valid integer
   MENU-SIZE: 27
-  # Configuration section for End.
   END:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: end.yml
     MATERIAL: END_STONE
     DISPLAY-NAME: '&#6BF18DEnd'
     SLOT: 11
     LORE:
     - '&fClick to view the end shop'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{end-menu}'
-  # Configuration section for Nether.
   NETHER:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: nether.yml
     MATERIAL: NETHERRACK
     DISPLAY-NAME: '&#6BF18DNether'
     SLOT: 12
     LORE:
     - '&fClick to view the nether shop'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{nether-menu}'
-  # Configuration section for Gear.
   GEAR:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: gear.yml
     MATERIAL: TOTEM_OF_UNDYING
     DISPLAY-NAME: '&#6BF18DGear'
     SLOT: 13
     LORE:
     - '&fClick to view the gear shop'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{gear-menu}'
-  # Configuration section for Food.
   FOOD:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: food.yml
     MATERIAL: COOKED_BEEF
     DISPLAY-NAME: '&#6BF18DFood'
     SLOT: 14
     LORE:
     - '&fClick to view the food shop'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{food-menu}'
-  # Configuration section for Shard.
   SHARD:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: flakes.yml
     MATERIAL: AMETHYST_SHARD
     DISPLAY-NAME: '&#6BF18DShard shop'
     SLOT: 15
     LORE:
     - '&fClick to view the shard shop'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{shard-menu}'
-  # Configuration section for Extra 1.
   EXTRA-1:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: extra-1.yml
-    # Determines whether Enabled is enabled or disabled. Available options: true, false
     ENABLED: false
     MATERIAL: DIAMOND_ORE
     DISPLAY-NAME: '&#6BF18DExtra Menu (1)'
     SLOT: 22
     LORE:
     - '&fClick to view extra menu'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{extra-1-menu}'
-  # Configuration section for Extra 2.
   EXTRA-2:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: extra-2.yml
-    # Determines whether Enabled is enabled or disabled. Available options: true, false
     ENABLED: false
     MATERIAL: IRON_ORE
     DISPLAY-NAME: '&#6BF18DExtra Menu (2)'
     SLOT: 23
     LORE:
     - '&fClick to view extra menu'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{extra-2-menu}'
-  # Configuration section for Extra 3.
   EXTRA-3:
-    # Source YAML under core/shop/categories/ used for this category's items and menu settings.
     FILE-TYPE: extra-3.yml
-    # Determines whether Enabled is enabled or disabled. Available options: true, false
     ENABLED: false
     MATERIAL: GOLD_ORE
     DISPLAY-NAME: '&#6BF18DExtra Menu (3)'
     SLOT: 24
     LORE:
     - '&fClick to view extra menu'
-    # The text or value for Open Menu. Available options: Any valid string text
     OPEN-MENU: '{extra-3-menu}'
-# Configuration section for Back Button.
 BACK-BUTTON:
   MATERIAL: RED_STAINED_GLASS_PANE
   DISPLAY-NAME: '&cback'
   LORE:
   - '&fClick to return'
 
-# Configuration section for Shop Web Analytics Server
 SHOP-GUI:
   SHOW-AUCTION-PRICE: true
-  # Configuration section for Item.
   ITEM:
-    # Configuration section for Lore.
     LORE:
     - '&7Shop price: {shop_price}'
     - '{auction_line}'
@@ -122,11 +88,7 @@ SHOP-GUI:
   FAVORITES:
     ENABLED: true
   WEB-SERVER:
-    # Set to true to enable the embedded Shop Analytics web server
     ENABLED: false
-    # Port for the embedded web server (e.g. 8080 or 25580)
     PORT: 8080
-    # Optional custom domain or public URL (e.g. "https://stats.ultimatedonutsmpmc.net" or "http://192.168.1.15:8080/stats")
-    # If left empty (""), it automatically resolves to http://localhost:<PORT>/stats
     PUBLIC-URL: ""
 
