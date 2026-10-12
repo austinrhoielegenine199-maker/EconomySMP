@@ -42,7 +42,7 @@ public class OrdersSelectItemMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         OrderUiState state = plugin.getOrdersManager().getUiState(player.getUniqueId());
         state.itemPage(page - 1);
         List<OrderCatalogEntry> entries = entries(state);
@@ -69,7 +69,7 @@ public class OrdersSelectItemMenu extends BaseMenu {
         set(lastRow, ItemUtils.createItem(Material.COMPASS, "&bBack", List.of("&7Return")));
         set(lastRow + 1, page > 1
                 ? ItemUtils.createItem(Material.ARROW, "&aPrevious page", List.of("&7Page " + (page - 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
         set(lastRow + 2, ItemUtils.createItem(Material.CHEST,
                 "&bFilter: &f" + plugin.getOrdersManager().prettifyCategory(categoryFilter),
                 List.of("&7Click to cycle category")));
@@ -83,7 +83,7 @@ public class OrdersSelectItemMenu extends BaseMenu {
                 List.of("&7Available items: &f" + entries.size())));
         set(lastRow + 7, page < totalPages(entries.size(), itemsPerPage)
                 ? ItemUtils.createItem(Material.ARROW, "&aNext page", List.of("&7Page " + (page + 1)))
-                : ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+                : ItemUtils.createPlaceholder(Material.AIR));
 
         if (entries.isEmpty()) {
             set(Math.min(itemsPerPage - 1, itemsPerPage / 2),
