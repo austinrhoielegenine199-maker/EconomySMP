@@ -1,0 +1,6 @@
+# Configuration section for Extra 3 Menu.
+EXTRA-3-MENU:
+  TITLE: '&8extra - shop'
+  SIZE: 27
+  # The numerical value for Back Button Slot. Available options: Any valid integer
+  BACK-BUTTON-SLOT: 18

@@ -1,0 +1,103 @@
+# Configuration section for Nether Menu.
+NETHER-MENU:
+  TITLE: '&8shop - nether'
+  SIZE: 27
+  # Configuration section for Blaze Rod Item.
+  BLAZE-ROD-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: BLAZE_ROD
+    DISPLAY-NAME: '&fBlaze Rod'
+    SLOT: 9
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 150.0
+    LORE:
+    - '&fBuy price: &a$150'
+  # Configuration section for Nether Wart Item.
+  NETHER-WART-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: NETHER_WART
+    DISPLAY-NAME: '&fNether Wart'
+    SLOT: 10
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 25
+    LORE:
+    - '&fBuy price: &a$25'
+  # Configuration section for Glowstone Dust Item.
+  GLOWSTONE-DUST-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: GLOWSTONE_DUST
+    DISPLAY-NAME: '&fGlowstone Dust'
+    SLOT: 11
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 15
+    LORE:
+    - '&fBuy price: &a$15'
+  # Configuration section for Magma Cream Item.
+  MAGMA-CREAM-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: MAGMA_CREAM
+    DISPLAY-NAME: '&fMagma Cream'
+    SLOT: 12
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 25
+    LORE:
+    - '&fBuy price: &a$25'
+  # Configuration section for Ghast Tear Item.
+  GHAST-TEAR-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: GHAST_TEAR
+    DISPLAY-NAME: '&fGhast Tear'
+    SLOT: 13
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 350
+    LORE:
+    - '&fBuy price: &a$350'
+  # Configuration section for Nether Quartz Item.
+  NETHER-QUARTZ-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: QUARTZ
+    DISPLAY-NAME: '&fNether Quartz'
+    SLOT: 14
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 15
+    LORE:
+    - '&fBuy price: &a$15'
+  # Configuration section for Soul Sand Item.
+  SOUL-SAND-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: SOUL_SAND
+    DISPLAY-NAME: '&fSoul Sand'
+    SLOT: 15
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 50
+    LORE:
+    - '&fBuy price: &a$50'
+  # Configuration section for Magma Block Item.
+  MAGMA-BLOCK-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: MAGMA_BLOCK
+    DISPLAY-NAME: '&fMagma Block'
+    SLOT: 16
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 35
+    LORE:
+    - '&fBuy price: &a$35'
+  # Configuration section for Crying Obsidian Item.
+  CRYING-OBSIDIAN-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: CRYING_OBSIDIAN
+    DISPLAY-NAME: '&fCrying Obsidian'
+    SLOT: 17
+    # The numerical value for Price Per Unit. Available options: Any valid integer
+    PRICE-PER-UNIT: 150
+    LORE:
+    - '&fBuy price: &a$150'

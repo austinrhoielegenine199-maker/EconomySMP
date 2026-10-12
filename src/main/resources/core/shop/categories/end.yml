@@ -1,0 +1,111 @@
+# Configuration section for End Menu.
+END-MENU:
+  # The text or value for Currency. Available options: Any valid string text
+  CURRENCY: MONEY
+  TITLE: '&8shop - end'
+  SIZE: 27
+  # Configuration section for Ender Chest Item.
+  ENDER-CHEST-ITEM:
+    MATERIAL: ENDER_CHEST
+    DISPLAY-NAME: '&fEnder Chest'
+    SLOT: 9
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 2500.0
+    LORE:
+    - '&fBuy price: &a$2,500'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: ''
+  # Configuration section for Ender Pearl Item.
+  ENDER-PEARL-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: ENDER_PEARL
+    DISPLAY-NAME: '&fEnder Pearl'
+    SLOT: 10
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 75.0
+    LORE:
+    - '&fBuy price: &a$75'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: ''
+  # Configuration section for End Stone Item.
+  END-STONE-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: END_STONE
+    DISPLAY-NAME: '&fEnd Stone'
+    SLOT: 11
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 8.0
+    LORE:
+    - '&fBuy price: &a$8'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: ''
+  # Configuration section for Dragon Breath Item.
+  DRAGON-BREATH-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: DRAGON_BREATH
+    DISPLAY-NAME: '&eDragon''s Breath'
+    SLOT: 12
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 1000.0
+    LORE:
+    - '&fBuy price: &a$1,000'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: ''
+  # Configuration section for End Rod Item.
+  END-ROD-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: END_ROD
+    DISPLAY-NAME: '&fEnd Rod'
+    SLOT: 13
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 100.0
+    LORE:
+    - '&fBuy price: &a$100'
+  # Configuration section for Chorus Fruit Item.
+  CHORUS-FRUIT-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: CHORUS_FRUIT
+    DISPLAY-NAME: '&fChorus Fruit'
+    SLOT: 14
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 25.0
+    LORE:
+    - '&fBuy price: &a$25'
+  # Configuration section for Popped Chorus Fruit Item.
+  POPPED-CHORUS-FRUIT-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: POPPED_CHORUS_FRUIT
+    DISPLAY-NAME: '&fPopped Chorus Fruit'
+    SLOT: 15
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 15.0
+    LORE:
+    - '&fBuy price: &a$15'
+  # Configuration section for Shulker Shell Item.
+  SHULKER-SHELL-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: SHULKER_SHELL
+    DISPLAY-NAME: '&fShulker Shell'
+    SLOT: 16
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 350.0
+    LORE:
+    - '&fBuy price: &a$350'
+  # Configuration section for Shulker Box Item.
+  SHULKER-BOX-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: MONEY
+    MATERIAL: SHULKER_BOX
+    DISPLAY-NAME: '&fShulker Box'
+    SLOT: 17
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 800.0
+    LORE:
+    - '&fBuy price: &a$800'

@@ -1,0 +1,148 @@
+# Configuration section for Shard Menu.
+SHARD-MENU:
+  TITLE: '&8shard - shop'
+  SIZE: 27
+  # Configuration section for Pig Spawner Item.
+  PIG-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 9
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 250.0
+    LORE:
+    - '&ePig'
+    - '&fBuy price: &5250x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} pig {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Cow Spawner Item.
+  COW-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 10
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 350.0
+    LORE:
+    - '&eCow'
+    - '&fBuy price: &5350x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} cow {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Zombie Spawner Item.
+  ZOMBIE-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 11
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 400.0
+    LORE:
+    - '&eZombie'
+    - '&fBuy price: &5400x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} zombie {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Spider Spawner Item.
+  SPIDER-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 12
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 750.0
+    LORE:
+    - '&eSpider'
+    - '&fBuy price: &5750x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} spider {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Skeleton Spawner Item.
+  SKELETON-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 13
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 500.0
+    LORE:
+    - '&eSkeleton'
+    - '&fBuy price: &5500x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} skeleton {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Creeper Spawner Item.
+  CREEPER-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 14
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 625.0
+    LORE:
+    - '&eCreeper'
+    - '&fBuy price: &5625x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} creeper {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Zombified Spawner Item.
+  ZOMBIFIED-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 15
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 750.0
+    LORE:
+    - '&eZombified Piglin'
+    - '&fBuy price: &5750x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} piglin {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Blaze Spawner Item.
+  BLAZE-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 16
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 1000.0
+    LORE:
+    - '&eBlaze'
+    - '&fBuy price: &51000x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} blaze {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false
+  # Configuration section for Golem Spawner Item.
+  GOLEM-SPAWNER-ITEM:
+    # The text or value for Currency. Available options: Any valid string text
+    CURRENCY: SHARD
+    MATERIAL: SPAWNER
+    DISPLAY-NAME: '&dSpawner'
+    SLOT: 17
+    # The decimal value for Price Per Unit. Available options: Any decimal number
+    PRICE-PER-UNIT: 1500.0
+    LORE:
+    - '&eIron Golem'
+    - '&fBuy price: &51500x &lShards'
+    # The text or value for Command. Available options: Any valid string text
+    COMMAND: spawner give {username} iron_golem {amount}
+    # Determines whether Give Item is enabled or disabled. Available options: true, false
+    GIVE-ITEM: false

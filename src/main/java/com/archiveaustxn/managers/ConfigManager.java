@@ -156,7 +156,7 @@ public class ConfigManager {
         deathMessages= load("core/messages/death-messages.yml", deathMessages);
         menus        = load("core/gui/menus.yml", menus);
         scoreboard   = load("core/scoreboard/scoreboard.yml", scoreboard);
-        shop         = load("core/shop/shop.yml", shop);
+        shop         = loadShopWithCategories(load("core/shop/shop.yml", shop));
         sounds       = load("core/sounds/sounds.yml", sounds);
         billford     = load("core/billford/billford.yml", billford);
         rtp          = load("core/rtp/rtp.yml", rtp);
@@ -1254,7 +1254,7 @@ public class ConfigManager {
     public FileConfiguration getLegacyShop() { return shop; }
     public FileConfiguration getLegacyAuctionHouse() { return auctionHouse; }
 
-    public void reloadShop() { shop = load("core/shop/shop.yml", shop); }
+    public void reloadShop() { shop = loadShopWithCategories(load("core/shop/shop.yml", shop)); }
     public void reloadMenus() { menus = load("core/gui/menus.yml", menus); }
     public void reloadSounds() { sounds = load("core/sounds/sounds.yml", sounds); }
     public void reloadWorth() { worth = load("core/worth/worth.yml", worth); }
@@ -1283,7 +1283,109 @@ public class ConfigManager {
     public boolean saveFfa() { return save("core/ffa/ffa.yml", ffa); }
     public boolean savePvp() { return save("core/pvp/pvp.yml", pvp); }
     public boolean saveCrates() { return save("core/crates/crates.yml", crates); }
-    public boolean saveShop() { return save("core/shop/shop.yml", shop); }
+    public boolean saveShop() {
+        if (shop == null) {
+            return false;
+        }
+
+        Map<String, YamlConfiguration> externalMenus = new LinkedHashMap<>();
+        ConfigurationSection categories = shop.getConfigurationSection("CATEGORIES");
+        if (categories != null) {
+            for (String key : categories.getKeys(false)) {
+                ConfigurationSection category = categories.getConfigurationSection(key);
+                if (category == null) {
+                    continue;
+                }
+                String fileType = category.getString("FILE-TYPE", "").trim();
+                String menuSection = category.getString("OPEN-MENU", "").replace("{", "").replace("}", "").trim().toUpperCase(java.util.Locale.ROOT);
+                if (fileType.isBlank() || menuSection.isBlank() || !fileType.matches("[A-Za-z0-9_-]+\\.yml")) {
+                    continue;
+                }
+                ConfigurationSection menu = shop.getConfigurationSection(menuSection);
+                if (menu == null) {
+                    continue;
+                }
+                YamlConfiguration categoryConfig = new YamlConfiguration();
+                copySection(categoryConfig, menuSection, menu);
+                externalMenus.put(menuSection, categoryConfig);
+                if (!save("core/shop/categories/" + fileType, categoryConfig)) {
+                    plugin.getLogger().warning("Failed to save shop category file " + fileType + ".");
+                }
+                shop.set(menuSection, null);
+            }
+        }
+
+        boolean saved = save("core/shop/shop.yml", shop);
+        for (Map.Entry<String, YamlConfiguration> entry : externalMenus.entrySet()) {
+            ConfigurationSection section = entry.getValue().getConfigurationSection(entry.getKey());
+            if (section != null) {
+                copySection(shop, entry.getKey(), section);
+            }
+        }
+        return saved;
+    }
+
+    private void copySection(ConfigurationSection target, String path, ConfigurationSection source) {
+        for (String key : source.getKeys(false)) {
+            String childPath = path + "." + key;
+            ConfigurationSection child = source.getConfigurationSection(key);
+            if (child != null) {
+                copySection(target, childPath, child);
+            } else {
+                target.set(childPath, source.get(key));
+            }
+        }
+    }
+
+    private FileConfiguration loadShopWithCategories(FileConfiguration configuration) {
+        if (configuration == null) {
+            return null;
+        }
+        ConfigurationSection categories = configuration.getConfigurationSection("CATEGORIES");
+        if (categories == null) {
+            return configuration;
+        }
+
+        for (String key : categories.getKeys(false)) {
+            ConfigurationSection category = categories.getConfigurationSection(key);
+            if (category == null) {
+                continue;
+            }
+            String fileType = category.getString("FILE-TYPE", "").trim();
+            String menuSection = category.getString("OPEN-MENU", "").replace("{", "").replace("}", "").trim().toUpperCase(java.util.Locale.ROOT);
+            if (fileType.isBlank() || menuSection.isBlank() || !fileType.matches("[A-Za-z0-9_-]+\\.yml")) {
+                continue;
+            }
+
+            File categoryFile = new File(plugin.getDataFolder(), "core/shop/categories/" + fileType);
+            try {
+                if (!categoryFile.exists()) {
+                    ConfigurationSection legacyMenu = configuration.getConfigurationSection(menuSection);
+                    if (legacyMenu != null) {
+                        YamlConfiguration migrated = new YamlConfiguration();
+                        copySection(migrated, menuSection, legacyMenu);
+                        Files.createDirectories(categoryFile.toPath().getParent());
+                        migrated.save(categoryFile);
+                    } else if (!copyBundledResource("core/shop/categories/" + fileType, categoryFile, false)) {
+                        plugin.getLogger().warning("Missing shop category YAML: core/shop/categories/" + fileType);
+                        continue;
+                    }
+                }
+
+                YamlConfiguration categoryConfig = loadYamlFile(categoryFile);
+                ConfigurationSection menu = categoryConfig.getConfigurationSection(menuSection);
+                if (menu == null) {
+                    plugin.getLogger().warning("Shop category file " + fileType + " does not contain " + menuSection + ".");
+                    continue;
+                }
+                configuration.set(menuSection, null);
+                copySection(configuration, menuSection, menu);
+            } catch (IOException | InvalidConfigurationException exception) {
+                plugin.getLogger().log(Level.WARNING, "Failed to load shop category file " + fileType + ".", exception);
+            }
+        }
+        return configuration;
+    }
     public boolean saveRtp() { return save("core/rtp/rtp.yml", rtp); }
     public boolean saveMenus() { return save("core/gui/menus.yml", menus); }
     public boolean saveAuctionHouse() { return save("core/auction/auction-house.yml", auctionHouse); }
