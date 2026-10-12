@@ -27,7 +27,7 @@ public class DuelClaimPreviewMenu extends BaseMenu {
 
         DuelClaim claim = plugin.getDuelManager().getClaim(player.getUniqueId(), matchId);
         for (int slot = 45; slot < inventory.getSize(); slot++) {
-            set(slot, ItemUtils.createPlaceholder(Material.BLACK_STAINED_GLASS_PANE));
+            set(slot, ItemUtils.createPlaceholder(Material.AIR));
         }
 
         if (claim == null || claim.items() == null || claim.items().isEmpty()) {
@@ -76,7 +76,7 @@ public class DuelClaimPreviewMenu extends BaseMenu {
                         "{count}", claim.itemCount())
         ));
         set(49, ItemUtils.createItem(
-                Material.LIME_STAINED_GLASS_PANE,
+                Material.EMERALD,
                 plugin.getDuelManager().getGuiText("CLAIM_PREVIEW.ITEMS.CLAIM_ALL.NAME", "&aclaim all"),
                 plugin.getDuelManager().getGuiTextList("CLAIM_PREVIEW.ITEMS.CLAIM_ALL.LORE",
                         List.of(
@@ -85,7 +85,7 @@ public class DuelClaimPreviewMenu extends BaseMenu {
                         ))
         ));
         set(51, ItemUtils.createItem(
-                Material.RED_STAINED_GLASS_PANE,
+                Material.BARRIER,
                 plugin.getDuelManager().getGuiText("CLAIM_PREVIEW.ITEMS.DELETE_CLAIM.NAME", "&cdelete claim"),
                 plugin.getDuelManager().getGuiTextList("CLAIM_PREVIEW.ITEMS.DELETE_CLAIM.LORE",
                         List.of(
