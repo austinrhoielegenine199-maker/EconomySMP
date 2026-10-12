@@ -258,7 +258,7 @@ public class CrateGachaMenu extends BaseMenu {
 
     private ItemStack createIndicatorItem(String arrow) {
         return ItemUtils.createItem(
-                Material.AIR,
+                Material.BARRIER,
                 arrow,
                 List.of("&7Winning slot")
         );
