@@ -166,7 +166,7 @@ class PvpMatchPrepareTest {
     private ConfigManager arenaConfig() throws Exception {
         ConfigManager configManager = build(ConfigManager.class);
         YamlConfiguration pvp = new YamlConfiguration();
-        pvp.load(new File("src/main/resources/pvp.yml"));
+        pvp.load(new File("src/main/resources/core/pvp/pvp.yml"));
         set(configManager, "pvp", pvp);
         return configManager;
     }

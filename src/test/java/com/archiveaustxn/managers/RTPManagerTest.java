@@ -746,7 +746,7 @@ class RTPManagerTest {
 
     @Test
     void testShippedConfigLeavesTheSearchAWayToReachAChunk() {
-        YamlConfiguration shipped = YamlConfiguration.loadConfiguration(new File("src/main/resources/rtp.yml"));
+        YamlConfiguration shipped = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/rtp/rtp.yml"));
 
         assertTrue(
                 shipped.getBoolean("SETTINGS.LOAD-GENERATED-CHUNKS")

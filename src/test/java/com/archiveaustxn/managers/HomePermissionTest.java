@@ -195,7 +195,7 @@ class HomePermissionTest {
     @Test
     void bundledConfigShipsTheHomePermissionSection() throws Exception {
         YamlConfiguration bundled = new YamlConfiguration();
-        bundled.load(new File("src/main/resources/config.yml"));
+        bundled.load(new File("src/main/resources/core/config/config.yml"));
 
         assertTrue(bundled.getBoolean("SETTINGS.HOME-PERMISSIONS.ENABLED"));
         assertTrue(bundled.isConfigurationSection("SETTINGS.HOME-PERMISSIONS.PERMISSIONS"));

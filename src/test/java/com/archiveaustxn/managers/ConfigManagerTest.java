@@ -710,7 +710,7 @@ class ConfigManagerTest {
     @Test
     void bundledMenusAndLanguagesShipNoMiscasedPlaceholders() throws Exception {
         List<Path> targets = new ArrayList<>();
-        targets.add(Path.of("src/main/resources/menus.yml"));
+        targets.add(Path.of("src/main/resources/core/gui/menus.yml"));
         try (Stream<Path> paths = Files.list(Path.of("src/main/resources/languages"))) {
             paths.filter(ConfigManagerTest::isYamlResource).forEach(targets::add);
         }
@@ -732,7 +732,7 @@ class ConfigManagerTest {
     void bundledSettingsMenuIsNotMistakenForTheOldLayout() throws Exception {
         YamlConfiguration bundled = new YamlConfiguration();
         bundled.options().parseComments(true);
-        bundled.load(Path.of("src/main/resources/menus.yml").toFile());
+        bundled.load(Path.of("src/main/resources/core/gui/menus.yml").toFile());
 
         assertFalse(hasLegacyButtons(bundled));
     }

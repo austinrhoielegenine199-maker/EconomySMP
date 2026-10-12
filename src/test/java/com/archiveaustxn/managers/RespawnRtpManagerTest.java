@@ -126,7 +126,7 @@ class RespawnRtpManagerTest {
 
     @Test
     void bundledConfigShipsRespawnRtpDisabledByDefault() {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/config.yml"));
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/config/config.yml"));
         assertTrue(config.contains("RESPAWN-RTP.ENABLED"));
         assertFalse(config.getBoolean("RESPAWN-RTP.ENABLED"));
         assertEquals("", config.getString("RESPAWN-RTP.WORLD.NAME"));

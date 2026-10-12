@@ -61,13 +61,13 @@ class SpawnerMessageKeyTest {
     private Set<String> readMessageKeys() throws IOException {
         Set<String> keys = new TreeSet<>();
         List<Path> files = List.of(
-                Path.of("src/main/java/com/bx/archiveaustxn/managers/SpawnerManager.java"),
-                Path.of("src/main/java/com/bx/archiveaustxn/commands/SpawnerCommand.java"),
-                Path.of("src/main/java/com/bx/archiveaustxn/listeners/SpawnerBlockListener.java"),
-                Path.of("src/main/java/com/bx/archiveaustxn/listeners/SpawnerInteractListener.java"),
-                Path.of("src/main/java/com/bx/archiveaustxn/menus/SpawnerStorageMenu.java"),
-                Path.of("src/main/java/com/bx/archiveaustxn/menus/SpawnerFilterMenu.java"),
-                Path.of("src/main/java/com/bx/archiveaustxn/menus/SpawnerPanelMenu.java")
+                Path.of("src/main/java/com/archiveaustxn/managers/SpawnerManager.java"),
+                Path.of("src/main/java/com/archiveaustxn/commands/SpawnerCommand.java"),
+                Path.of("src/main/java/com/archiveaustxn/listeners/SpawnerBlockListener.java"),
+                Path.of("src/main/java/com/archiveaustxn/listeners/SpawnerInteractListener.java"),
+                Path.of("src/main/java/com/archiveaustxn/menus/SpawnerStorageMenu.java"),
+                Path.of("src/main/java/com/archiveaustxn/menus/SpawnerFilterMenu.java"),
+                Path.of("src/main/java/com/archiveaustxn/menus/SpawnerPanelMenu.java")
         );
 
         for (Path file : files) {

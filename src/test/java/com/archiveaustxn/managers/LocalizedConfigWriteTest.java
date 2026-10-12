@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class LocalizedConfigWriteTest {
 
     private static final Path CONFIG_MANAGER =
-            Path.of("src/main/java/com/bx/archiveaustxn/managers/ConfigManager.java");
+            Path.of("src/main/java/com/archiveaustxn/managers/ConfigManager.java");
 
     @Test
     void aWriteThroughGetRtpNeverReachesTheConfigurationSaveRtpPersists() throws Exception {

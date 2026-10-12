@@ -122,7 +122,7 @@ class HomeWorldBlacklistTest {
     @Test
     void bundledConfigContainsWorldBlacklistSettings() throws Exception {
         YamlConfiguration bundled = new YamlConfiguration();
-        bundled.load(new File("src/main/resources/config.yml"));
+        bundled.load(new File("src/main/resources/core/config/config.yml"));
 
         assertTrue(bundled.isList("SETTINGS.HOME-EXCLUDED-WORLDS"));
         assertTrue(bundled.isList("TEAM.EXCLUDED-WORLDS"));
@@ -131,7 +131,7 @@ class HomeWorldBlacklistTest {
     @Test
     void bundledMessagesContainWorldBlacklistKeys() throws Exception {
         YamlConfiguration bundled = new YamlConfiguration();
-        bundled.load(new File("src/main/resources/messages.yml"));
+        bundled.load(new File("src/main/resources/core/messages/messages.yml"));
 
         assertTrue(bundled.contains("HOME.EXCLUDED-WORLD"));
         assertTrue(bundled.contains("TEAM.EXCLUDED-WORLD"));

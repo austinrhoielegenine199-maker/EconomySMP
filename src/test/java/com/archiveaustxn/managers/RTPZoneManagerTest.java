@@ -14,7 +14,7 @@ class RTPZoneManagerTest {
 
     @Test
     void bundledConfigDefinesDefaultTitleFadeOut() {
-        var file = new java.io.File("src/main/resources/config.yml");
+        var file = new java.io.File("src/main/resources/core/config/config.yml");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         assertEquals(10, config.getInt("RTP-ZONE.TITLE-FADE-OUT-TICKS"));
     }

@@ -43,7 +43,7 @@ class HideNametagOffsetTest {
     @Test
     void bundledHideConfigCarriesTheOffsetTheCodeFallsBackTo() throws Exception {
         YamlConfiguration hide = new YamlConfiguration();
-        hide.load(new File("src/main/resources/hide.yml"));
+        hide.load(new File("src/main/resources/core/hide/hide.yml"));
 
         assertTrue(hide.contains("SCRAMBLE.NAMETAG-OFFSET-Y"));
         assertEquals(BUNDLED_DEFAULT, hide.getDouble("SCRAMBLE.NAMETAG-OFFSET-Y"));

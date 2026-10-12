@@ -24,9 +24,9 @@ class SpawnStashMessageKeyTest {
             Pattern.compile("(?:publicMessage|message)\\(\\s*\"([A-Za-z0-9-]+)\"");
 
     private static final List<Path> SOURCES = List.of(
-            Path.of("src/main/java/com/bx/archiveaustxn/listeners/SpawnStashListener.java"),
-            Path.of("src/main/java/com/bx/archiveaustxn/commands/SpawnStashCommand.java"),
-            Path.of("src/main/java/com/bx/archiveaustxn/managers/SpawnStashManager.java")
+            Path.of("src/main/java/com/archiveaustxn/listeners/SpawnStashListener.java"),
+            Path.of("src/main/java/com/archiveaustxn/commands/SpawnStashCommand.java"),
+            Path.of("src/main/java/com/archiveaustxn/managers/SpawnStashManager.java")
     );
 
     @Test

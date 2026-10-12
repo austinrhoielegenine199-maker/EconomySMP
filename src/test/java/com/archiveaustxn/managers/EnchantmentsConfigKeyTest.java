@@ -36,7 +36,7 @@ class EnchantmentsConfigKeyTest {
 
     private static List<String> lookupPaths() throws Exception {
         String source = Files.readString(
-                new File("src/main/java/com/bx/archiveaustxn/managers/EnchantmentsManager.java").toPath(),
+                new File("src/main/java/com/archiveaustxn/managers/EnchantmentsManager.java").toPath(),
                 StandardCharsets.UTF_8
         );
         List<String> paths = new ArrayList<>();

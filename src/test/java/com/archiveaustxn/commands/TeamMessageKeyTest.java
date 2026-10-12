@@ -20,7 +20,7 @@ class TeamMessageKeyTest {
     private static final Pattern KEY = Pattern.compile("getMessage\\(\\s*\"(TEAM\\.[A-Z0-9_-]+)\"");
 
     private static final Path COMMAND =
-            Path.of("src/main/java/com/bx/archiveaustxn/commands/TeamCommand.java");
+            Path.of("src/main/java/com/archiveaustxn/commands/TeamCommand.java");
 
     /**
      * ConfigManager.getMessage(path) reads messages.yml for the legacy value and then asks
@@ -30,7 +30,7 @@ class TeamMessageKeyTest {
     @Test
     void everyTeamMessageKeyTheCommandReadsIsShipped() throws IOException {
         ConfigurationSection legacy = YamlConfiguration
-                .loadConfiguration(new File("src/main/resources/messages.yml"));
+                .loadConfiguration(new File("src/main/resources/core/messages/messages.yml"));
         ConfigurationSection language = YamlConfiguration
                 .loadConfiguration(new File("src/main/resources/languages/en_US.yml"))
                 .getConfigurationSection("MESSAGES");

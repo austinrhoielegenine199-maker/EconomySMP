@@ -210,7 +210,7 @@ class EnderChestRowPermissionTest {
     @Test
     void bundledConfigShipsTheRowPermissionSection() throws Exception {
         YamlConfiguration bundled = new YamlConfiguration();
-        bundled.load(new File("src/main/resources/ender-chest.yml"));
+        bundled.load(new File("src/main/resources/core/ender-chest/ender-chest.yml"));
 
         assertTrue(bundled.getBoolean("ENDER-CHEST.ROW-PERMISSIONS.ENABLED"));
         assertEquals("KEEP-SIZE", bundled.getString("ENDER-CHEST.ROW-PERMISSIONS.ON-DOWNGRADE"));
