@@ -21,7 +21,7 @@ class MaintenanceLobbyDestinationTest {
         assertEquals("WORLD", network.getString("MAINTENANCE.LOBBY_WORLD"));
         assertEquals(5, network.getInt("MAINTENANCE.RECONNECT_DELAY_SECONDS"));
         assertEquals(
-                "ULTIMATEDONUTSMP.ADMIN.MAINTENANCE.BYPASS",
+                "economysmp.admin.maintenance.bypass",
                 network.getString("MAINTENANCE.BYPASS_PERMISSION")
         );
     }

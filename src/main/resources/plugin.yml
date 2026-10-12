@@ -1862,6 +1862,9 @@ permissions:
   economysmp.admin.maintenance:
     description: Toggle maintenance mode and manage the allowed player list
     default: op
+  economysmp.admin.maintenance.bypass:
+    description: Bypass maintenance mode login restrictions
+    default: op
   economysmp.command.serverwipe:
     description: Access to /serverwipe command
     default: op

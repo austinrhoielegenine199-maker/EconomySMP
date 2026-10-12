@@ -236,7 +236,7 @@ public class MaintenanceManager {
         save();
 
         FileConfiguration config = plugin.getConfigManager().getNetwork();
-        String bypassPerm = config.getString("MAINTENANCE.BYPASS_PERMISSION", "ULTIMATEDONUTSMP.ADMIN.MAINTENANCE.BYPASS");
+        String bypassPerm = config.getString("MAINTENANCE.BYPASS_PERMISSION", "economysmp.admin.maintenance.bypass");
         String enteringMessage = config.getString("MAINTENANCE.MESSAGES.ENTERING", "&d[Maintenance] &7server is entering maintenance. Moving you to the lobby...");
         String lobby = getLobbyServer();
         String localServerId = config.getString("NETWORK.LOCAL_SERVER_ID", "local");

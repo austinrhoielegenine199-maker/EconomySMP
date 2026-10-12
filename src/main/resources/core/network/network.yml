@@ -113,7 +113,7 @@ NETWORK-STATUS:
 # Maintenance mode behaviour (/maintenance on|off|status|setlobby)
 MAINTENANCE:
   # Permission node that lets a player join while maintenance mode is active
-  BYPASS_PERMISSION: economysmp.ADMIN.MAINTENANCE.BYPASS
+  BYPASS_PERMISSION: economysmp.admin.maintenance.bypass
 
   # Move players to another server through the proxy (true) or keep them on this one (false)
   USE_PROXY: true

@@ -274,6 +274,7 @@ class LanguageManagerTest {
         Path file = switch (name) {
             case "config.yml" -> Path.of("src/main/resources/core/config/config.yml");
             case "messages.yml" -> Path.of("src/main/resources/core/messages/messages.yml");
+            case "death-messages.yml" -> Path.of("src/main/resources/core/messages/death-messages.yml");
             case "shop.yml" -> Path.of("src/main/resources/core/shop/shop.yml");
             case "billford.yml" -> Path.of("src/main/resources/core/billford/billford.yml");
             case "rtp.yml" -> Path.of("src/main/resources/core/rtp/rtp.yml");
