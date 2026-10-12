@@ -45,11 +45,11 @@ public class OrdersDeleteConfirmMenu extends BaseMenu {
         }
         set(10, OrdersMenuSupport.button(
                 plugin, "GUI.DELETE.BUTTONS.BACK", "ORDERS.GUI.DELETE.BACK",
-                Material.AIR, "&cBack", List.of("&fReturn without cancelling")
+                Material.BARRIER, "&cBack", List.of("&fReturn without cancelling")
         ));
         set(16, OrdersMenuSupport.button(
                 plugin, "GUI.DELETE.BUTTONS.CONFIRM", "ORDERS.GUI.DELETE.CONFIRM",
-                Material.AIR, "&aConfirm",
+                Material.EMERALD, "&aConfirm",
                 List.of("&fCancel this order", "&7Unused escrow becomes a collectable refund")
         ));
     }
