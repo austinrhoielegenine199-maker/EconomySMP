@@ -66,7 +66,7 @@ public class OrdersDeliverConfirmMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         OrdersManager manager = plugin.getOrdersManager();
         Order order = manager.getOrder(orderId);
         if (order == null) {
@@ -89,7 +89,7 @@ public class OrdersDeliverConfirmMenu extends BaseMenu {
 
         set(11, OrdersMenuSupport.button(
                 plugin, "GUI.DELIVERY_CONFIRM.BUTTONS.CANCEL", "ORDERS.GUI.CONFIRM.CANCEL",
-                Material.RED_STAINED_GLASS_PANE, "&cCancel", List.of("&fReturn without delivering")
+                Material.AIR, "&cCancel", List.of("&fReturn without delivering")
         ));
         set(13, OrdersMenuSupport.decorateItem(
                 plugin,
@@ -114,7 +114,7 @@ public class OrdersDeliverConfirmMenu extends BaseMenu {
         ));
         set(15, OrdersMenuSupport.button(
                 plugin, "GUI.DELIVERY_CONFIRM.BUTTONS.CONFIRM", "ORDERS.GUI.CONFIRM.CONFIRM",
-                quantity > 0 ? Material.LIME_STAINED_GLASS_PANE : Material.BARRIER,
+                quantity > 0 ? Material.AIR : Material.BARRIER,
                 quantity > 0 ? "&aConfirm" : "&cCannot deliver",
                 quantity > 0
                         ? List.of("&fDeliver {amount} items", "&7You receive {receive}")
