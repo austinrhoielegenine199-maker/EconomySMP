@@ -33,7 +33,7 @@ public class StatsWipeMenu extends BaseMenu {
         targetSlots.clear();
 
         Material placeholderMaterial = ItemUtils.parseMaterial(
-                menus().getString(MENU_PATH + ".PLACEHOLDER-MATERIAL", "BLACK_STAINED_GLASS_PANE")
+                menus().getString(MENU_PATH + ".PLACEHOLDER-MATERIAL", "AIR")
         );
         if (menus().getBoolean(MENU_PATH + ".PLACEHOLDER", true)) {
             fill(placeholderMaterial);
