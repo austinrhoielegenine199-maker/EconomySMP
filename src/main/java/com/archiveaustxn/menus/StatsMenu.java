@@ -40,7 +40,7 @@ public class StatsMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         PlayerData data = plugin.getPlayerDataManager().get(targetUuid);
         if (data == null) {
