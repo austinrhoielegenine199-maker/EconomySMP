@@ -50,7 +50,7 @@ public class LeaderboardTypeMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         int offset = page * ENTRY_SLOTS.length;
         List<LeaderboardManager.LeaderboardEntry> entries =
@@ -69,7 +69,7 @@ public class LeaderboardTypeMenu extends BaseMenu {
         }
 
         set(45, ItemUtils.createItem(
-                Material.RED_STAINED_GLASS_PANE,
+                Material.AIR,
                 "&cBack",
                 List.of("&7Return to leaderboard menu.")
         ));
