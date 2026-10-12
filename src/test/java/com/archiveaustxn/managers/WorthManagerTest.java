@@ -210,7 +210,7 @@ class WorthManagerTest {
     @Test
     void theBundledConfigShipsTheWorthLoreSwitchTurnedOn() throws Exception {
         org.bukkit.configuration.file.YamlConfiguration config = new org.bukkit.configuration.file.YamlConfiguration();
-        config.load(java.nio.file.Path.of("src/main/resources", "config.yml").toFile());
+        config.load(java.nio.file.Path.of("src/main/resources/core/config", "config.yml").toFile());
 
         assertTrue(config.isConfigurationSection("WORTH-LORE"));
         assertTrue(config.getBoolean("WORTH-LORE.ENABLED"));

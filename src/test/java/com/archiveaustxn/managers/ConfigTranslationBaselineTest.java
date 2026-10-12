@@ -64,8 +64,24 @@ class ConfigTranslationBaselineTest {
     private static YamlConfiguration resource(String name) {
         String resourcePath = switch (name) {
             case "config.yml" -> "core/config/config.yml";
-            case "network.yml" -> "core/network/network.yml";
             case "messages.yml" -> "core/messages/messages.yml";
+            case "billford.yml" -> "core/billford/billford.yml";
+            case "rtp.yml" -> "core/rtp/rtp.yml";
+            case "amethyst-tools.yml" -> "core/amethyst-tools/amethyst-tools.yml";
+            case "ender-chest.yml" -> "core/ender-chest/ender-chest.yml";
+            case "invsee.yml" -> "core/invsee/invsee.yml";
+            case "freeze.yml" -> "core/freeze/freeze.yml";
+            case "auction-house.yml" -> "core/auction-house/auction-house.yml";
+            case "orders.yml" -> "core/orders/orders.yml";
+            case "duels.yml" -> "core/duels/duels.yml";
+            case "ffa.yml" -> "core/ffa/ffa.yml";
+            case "crates.yml" -> "core/crates/crates.yml";
+            case "spawners.yml" -> "core/spawners/spawners.yml";
+            case "spawn-stash.yml" -> "core/spawn-stash/spawn-stash.yml";
+            case "network.yml" -> "core/network/network.yml";
+            case "staff-mode.yml" -> "core/staff-mode/staff-mode.yml";
+            case "server-wipe.yml" -> "core/server-wipe/server-wipe.yml";
+            case "worth.yml" -> "core/worth/worth.yml";
             default -> name;
         };
         return YamlConfiguration.loadConfiguration(new File("src/main/resources/" + resourcePath));
