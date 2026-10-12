@@ -324,7 +324,7 @@ MESSAGES:
   SYNC_FAILED: '&cCould not create a sync code right now.'
   SYNC_HEADER: '&e&lTier Sync'
   SYNC_CODE: '&fYour sync code: &e{code}'
-  SYNC_HINT: '&7Use &f/sync {code} &7on our Discord to link your account.'
+  SYNC_HINT: '&7Use &f/link code:{code} &7on our Discord to link your account.'
   MATCH_STARTED: '&8[&cPVP&8] &f{first} &7vs &f{second}'
   MATCH_COUNTDOWN: '&fStarting in &c{seconds}&f...'
   MATCH_WIN: '&aYou beat &f{opponent} &8(&a{elo} elo&8, &a{hits} hits&8)'
