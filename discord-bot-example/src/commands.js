@@ -43,6 +43,15 @@ export const commands = [
     .setName('mystats')
     .setDescription('View your own competitive statistics.'),
   new SlashCommandBuilder()
+    .setName('link')
+    .setDescription('Link your Minecraft account to Discord.')
+    .addStringOption(option =>
+      option
+        .setName('code')
+        .setDescription('The code /link gave you in Minecraft')
+        .setRequired(true)
+    ),
+  new SlashCommandBuilder()
     .setName('sync')
     .setDescription('Sync your Minecraft account with Discord.')
     .addStringOption(option =>
