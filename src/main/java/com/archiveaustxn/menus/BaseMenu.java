@@ -59,7 +59,7 @@ public abstract class BaseMenu implements InventoryHolder {
 
     protected boolean isPlaceholder(ItemStack item) {
         if (item == null) return true;
-        return item.getType() == Material.GRAY_STAINED_GLASS_PANE
-                || item.getType() == Material.BLACK_STAINED_GLASS_PANE;
+        return item.getType() == Material.AIR
+                || item.getType() == Material.AIR;
     }
 }
