@@ -105,7 +105,7 @@ NETWORK:
 | `NETWORK.STAFF_ALERTS_LOG_TO_CONSOLE` | `bool` | `true`, `false` | `true` | The same for helpop and report alerts. Delete the key rather than setting it and alerts follow whatever `LOG_TO_CONSOLE` says, instead of falling back to `true` on their own. |
 | `NETWORK.MAX_MESSAGE_LENGTH` | `int` | `1` or greater | `'512'` | Longest staff chat message accepted. Anything longer is refused with `STAFFCHAT.MESSAGE_TOO_LONG` and never sent anywhere. Values below `1` are read as `1`. |
 | `NETWORK.STAFF_ALERTS_MAX_REASON_LENGTH` | `int` | `1` or greater | `'256'` | Longest `/helpop` message or `/report` reason accepted. It doubles as the default for two finer keys that do not ship in the file, `HELPOP_MAX_MESSAGE_LENGTH` and `REPORT_MAX_REASON_LENGTH`; add one of those to give that command a limit of its own. |
-| `NETWORK.HELPOP_COOLDOWN_SECONDS` | `int` | `0` or greater | `'30'` | How long a player waits between `/helpop` submissions. `0` removes the wait entirely, and anyone holding `ultimatedonutsmp.staff.alerts.bypass-cooldown` skips it whatever the value. |
+| `NETWORK.HELPOP_COOLDOWN_SECONDS` | `int` | `0` or greater | `'30'` | How long a player waits between `/helpop` submissions. `0` removes the wait entirely, and anyone holding `economysmp.staff.alerts.bypass-cooldown` skips it whatever the value. |
 | `NETWORK.REPORT_COOLDOWN_SECONDS` | `int` | `0` or greater | `'60'` | The same for `/report`, with the same bypass permission and the same meaning for `0`. The two cooldowns are counted separately, so using one does not delay the other. |
 | `NETWORK.SERVER_STATUS` | `str` | Any string text | `'&6%server% &eis now %status%&e.'` | Format for the online and offline notices described under `SERVER_STATUS_ENABLED`. `%server%` is the server that changed and `%status%` is the bare word `online` or `offline`. See the placeholder section below. |
 | `NETWORK.STAFF_CHAT` | `str` | Any string text | `'&8[&dNetwork&8] &7[%server%] &e%pla...'` | Format every staff chat line is drawn with, both on the server it was sent from and on the ones it reaches. Remove the key and the plugin falls back to `STAFFCHAT.FORMAT` in `messages.yml`. See the placeholder section below. |
@@ -129,8 +129,8 @@ unfilled.
 
 A placeholder typed into the message itself is not expanded; it prints as the text that was typed.
 
-Colour codes typed into the message follow `ultimatedonutsmp.chat.color`, which defaults to `op` and
-comes with the `ultimatedonutsmp.admin` and `ultimatedonutsmp.staff.mode` bundles. A sender holding
+Colour codes typed into the message follow `economysmp.chat.color`, which defaults to `op` and
+comes with the `economysmp.admin` and `economysmp.staff.mode` bundles. A sender holding
 it can colour their own staff chat text; for anyone else the codes are removed before the line goes
 out, on the server the message was sent from rather than the ones it arrives at.
 
@@ -326,7 +326,7 @@ NETWORK-STATUS:
 # Maintenance mode behaviour (/maintenance on [duration]|off|status|setlobby)
 MAINTENANCE:
   # Permission node that lets a player join while maintenance mode is active
-  BYPASS_PERMISSION: ULTIMATEDONUTSMP.ADMIN.MAINTENANCE.BYPASS
+  BYPASS_PERMISSION: economysmp.ADMIN.MAINTENANCE.BYPASS
 
   # Move players to another server through the proxy (true) or keep them on this one (false)
   USE_PROXY: true
@@ -399,7 +399,7 @@ MAINTENANCE:
 
 | Option / Key Path | Data Type | Allowed Values | Default | Technical Function & Setup Guide |
 | :--- | :--- | :--- | :--- | :--- |
-| `MAINTENANCE.BYPASS_PERMISSION` | `str` | Any permission node | `'ULTIMATEDONUTSMP.ADMIN.MAINTENANCE.BYPASS'` | Players holding this node join normally while maintenance is active and are never moved or kicked by it. |
+| `MAINTENANCE.BYPASS_PERMISSION` | `str` | Any permission node | `'economysmp.ADMIN.MAINTENANCE.BYPASS'` | Players holding this node join normally while maintenance is active and are never moved or kicked by it. |
 | `MAINTENANCE.USE_PROXY` | `bool` | `true`, `false` | `true` | `true` hands players to another server over the BungeeCord/Velocity plugin channel. `false` keeps them on this server and teleports them instead. |
 | `MAINTENANCE.LOBBY_SERVER` | `str` | Any proxy server name, or empty | `'lobby'` | Destination used when `USE_PROXY` is `true`. `/maintenance setlobby <server>` overrides it at runtime, and `/maintenance setlobby` with no name clears that override and hands the decision back to this key. Leave it empty on a server with no lobby: the connection is then refused during login, so players never enter the world. |
 | `MAINTENANCE.LOBBY_WORLD` | `str` | Any loaded world name, or empty | `'WORLD'` | Destination used when `USE_PROXY` is `false`. When that world is not loaded the spawn location is used in its place. Leave it empty on a server with nowhere to put players: maintenance kicks everyone who is online and refuses every connection after that, which is how an empty `LOBBY_SERVER` already behaves in proxy mode. |
@@ -422,7 +422,7 @@ A single server with no lobby to hand players to. `/maintenance on` refuses ever
 
 ```yaml
 MAINTENANCE:
-  BYPASS_PERMISSION: ULTIMATEDONUTSMP.ADMIN.MAINTENANCE.BYPASS
+  BYPASS_PERMISSION: economysmp.ADMIN.MAINTENANCE.BYPASS
   USE_PROXY: true
   LOBBY_SERVER: ''
 ```

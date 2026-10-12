@@ -19,8 +19,8 @@ SETTINGS:
   MAX_ACTIVE_ORDERS_DEFAULT: 5
   # Maximum active order limits granted by permission node
   MAX_ACTIVE_ORDERS_BY_PERMISSION:
-    ultimatedonutsmp.orders.limit.10: 10
-    ultimatedonutsmp.orders.limit.15: 15
+    economysmp.orders.limit.10: 10
+    economysmp.orders.limit.15: 15
   # Maximum quantity of items requested per single order listing
   MAX_QUANTITY_PER_ORDER: 2304
   # Anti-spam click cooldown between menu interactions (in milliseconds)
@@ -38,8 +38,8 @@ SETTINGS:
 | `SETTINGS.ENABLED` | `bool` | `true`, `false` | `true` | Global toggle for `SETTINGS` system. Set to `true` to enable, `false` to disable. |
 | `SETTINGS.ORDER_DURATION_HOURS` | `int` | Any valid integer number | `'168'` | Configures the technical `ORDER_DURATION_HOURS` parameter for `SETTINGS.ORDER_DURATION_HOURS` in `orders.yml`. |
 | `SETTINGS.MAX_ACTIVE_ORDERS_DEFAULT` | `int` | Any valid integer number | `'5'` | Configures the technical `MAX_ACTIVE_ORDERS_DEFAULT` parameter for `SETTINGS.MAX_ACTIVE_ORDERS_DEFAULT` in `orders.yml`. |
-| `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.ultimatedonutsmp.orders.limit.10` | `int` | Any valid integer number | `'10'` | Configures the technical `10` parameter for `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.ultimatedonutsmp.orders.limit.10` in `orders.yml`. |
-| `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.ultimatedonutsmp.orders.limit.15` | `int` | Any valid integer number | `'15'` | Configures the technical `15` parameter for `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.ultimatedonutsmp.orders.limit.15` in `orders.yml`. |
+| `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.economysmp.orders.limit.10` | `int` | Any valid integer number | `'10'` | Configures the technical `10` parameter for `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.economysmp.orders.limit.10` in `orders.yml`. |
+| `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.economysmp.orders.limit.15` | `int` | Any valid integer number | `'15'` | Configures the technical `15` parameter for `SETTINGS.MAX_ACTIVE_ORDERS_BY_PERMISSION.economysmp.orders.limit.15` in `orders.yml`. |
 | `SETTINGS.MAX_QUANTITY_PER_ORDER` | `int` | Any valid integer number | `'2304'` | Configures the technical `MAX_QUANTITY_PER_ORDER` parameter for `SETTINGS.MAX_QUANTITY_PER_ORDER` in `orders.yml`. |
 | `SETTINGS.CLICK_COOLDOWN_MS` | `int` | Any valid integer number | `'750'` | Configures the technical `CLICK_COOLDOWN_MS` parameter for `SETTINGS.CLICK_COOLDOWN_MS` in `orders.yml`. |
 | `SETTINGS.EXPIRE_CHECK_SECONDS` | `int` | Any valid integer number | `'30'` | Configures the technical `EXPIRE_CHECK_SECONDS` parameter for `SETTINGS.EXPIRE_CHECK_SECONDS` in `orders.yml`. |
@@ -56,8 +56,8 @@ SETTINGS:
   MAX_ACTIVE_ORDERS_DEFAULT: 5
   # Maximum active order limits granted by permission node
   MAX_ACTIVE_ORDERS_BY_PERMISSION:
-    ultimatedonutsmp.orders.limit.10: 10
-    ultimatedonutsmp.orders.limit.15: 15
+    economysmp.orders.limit.10: 10
+    economysmp.orders.limit.15: 15
   # Maximum quantity of items requested per single order listing
   MAX_QUANTITY_PER_ORDER: 2304
   # Anti-spam click cooldown between menu interactions (in milliseconds)
