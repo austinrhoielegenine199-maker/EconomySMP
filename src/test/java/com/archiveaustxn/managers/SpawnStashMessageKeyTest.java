@@ -32,7 +32,7 @@ class SpawnStashMessageKeyTest {
     @Test
     void everySpawnStashMessageKeyTheCodeReadsIsShipped() throws IOException {
         ConfigurationSection messages = YamlConfiguration
-                .loadConfiguration(new File("src/main/resources/spawn-stash.yml"))
+                .loadConfiguration(new File("src/main/resources/core/spawn-stash/spawn-stash.yml"))
                 .getConfigurationSection("MESSAGES");
         assertNotNull(messages, "MESSAGES");
 

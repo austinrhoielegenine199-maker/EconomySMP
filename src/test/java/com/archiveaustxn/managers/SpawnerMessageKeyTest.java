@@ -25,7 +25,7 @@ class SpawnerMessageKeyTest {
     @Test
     void everyMessageKeyTheCodeReadsIsShipped() throws IOException {
         ConfigurationSection messages = YamlConfiguration
-                .loadConfiguration(new File("src/main/resources/spawners.yml"))
+                .loadConfiguration(new File("src/main/resources/core/spawners/spawners.yml"))
                 .getConfigurationSection("MESSAGES");
         assertNotNull(messages, "MESSAGES section in spawners.yml must exist");
 
@@ -42,7 +42,7 @@ class SpawnerMessageKeyTest {
     @Test
     void essentialKeysAreConfigured() {
         ConfigurationSection messages = YamlConfiguration
-                .loadConfiguration(new File("src/main/resources/spawners.yml"))
+                .loadConfiguration(new File("src/main/resources/core/spawners/spawners.yml"))
                 .getConfigurationSection("MESSAGES");
         assertNotNull(messages, "MESSAGES section in spawners.yml must exist");
 
