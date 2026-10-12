@@ -52,7 +52,7 @@ public class PurchaseShopMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         ShopManager.ShopRestriction restriction = plugin.getShopManager().getPurchaseRestriction(item);
         if (quantity <= 0) {
@@ -157,7 +157,7 @@ public class PurchaseShopMenu extends BaseMenu {
 
     private void buildCancelButton() {
         set(getCancelSlot(), ItemUtils.createItem(
-                ItemUtils.parseMaterial(getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.CANCEL.MATERIAL", "RED_STAINED_GLASS_PANE")),
+                ItemUtils.parseMaterial(getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.CANCEL.MATERIAL", "BARRIER")),
                 getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.CANCEL.NAME", "&cCancel"),
                 replaceCommonPlaceholders(readLines("PURCHASE-SHOP-MENU.BUTTONS.CANCEL.LORE"))
         ));
@@ -165,7 +165,7 @@ public class PurchaseShopMenu extends BaseMenu {
 
     private void buildConfirmButton() {
         set(getConfirmSlot(), ItemUtils.createItem(
-                ItemUtils.parseMaterial(getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.CONFIRM.MATERIAL", "LIME_STAINED_GLASS_PANE")),
+                ItemUtils.parseMaterial(getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.CONFIRM.MATERIAL", "EMERALD")),
                 replaceCommonPlaceholders(getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.CONFIRM.NAME", "&aConfirm")),
                 replaceCommonPlaceholders(readLines("PURCHASE-SHOP-MENU.BUTTONS.CONFIRM.LORE"))
         ));
@@ -173,10 +173,10 @@ public class PurchaseShopMenu extends BaseMenu {
 
     private void buildQuantityButtons() {
         Material addMaterial = ItemUtils.parseMaterial(
-                getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.QUANTITY_ADJUST.ADD.MATERIAL", "LIME_STAINED_GLASS_PANE")
+                getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.QUANTITY_ADJUST.ADD.MATERIAL", "EMERALD")
         );
         Material removeMaterial = ItemUtils.parseMaterial(
-                getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.QUANTITY_ADJUST.REMOVE.MATERIAL", "RED_STAINED_GLASS_PANE")
+                getMenus().getString("PURCHASE-SHOP-MENU.BUTTONS.QUANTITY_ADJUST.REMOVE.MATERIAL", "BARRIER")
         );
 
         buildQuantityButton(
