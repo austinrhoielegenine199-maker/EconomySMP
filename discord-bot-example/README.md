@@ -10,11 +10,12 @@ how far the match watcher has read, lives in its own SQLite file.
 ## Setup
 
 1. Install Node.js `22.12.0` or newer.
-2. Copy `.env.example` to `.env`.
+2. Copy `.env.example` to `.env`, or configure `BOT` in the server's `plugins/EconomySMP/core/discord/discord.yml`.
 3. Fill:
    - `DISCORD_TOKEN`
    - `DISCORD_CLIENT_ID`
    - `DISCORD_GUILD_ID` for fast test-server command deploys, or leave it empty for global commands
+   - Alternatively, set `CORE_DISCORD_CONFIG` to the path of `core/discord/discord.yml`; the bot reads `BOT.TOKEN`, `BOT.CLIENT_ID`, `BOT.GUILD_ID`, and match-watcher settings from that file. Environment variables take precedence.
    - database settings
 4. Install dependencies:
 
