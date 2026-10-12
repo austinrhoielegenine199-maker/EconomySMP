@@ -38,18 +38,18 @@ public class OrdersDeleteConfirmMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         Order order = plugin.getOrdersManager().getOrder(orderId);
         if (order != null) {
             set(13, OrdersMenuSupport.createOrderDisplay(plugin, plugin.getOrdersManager(), order, true));
         }
         set(10, OrdersMenuSupport.button(
                 plugin, "GUI.DELETE.BUTTONS.BACK", "ORDERS.GUI.DELETE.BACK",
-                Material.RED_STAINED_GLASS_PANE, "&cBack", List.of("&fReturn without cancelling")
+                Material.AIR, "&cBack", List.of("&fReturn without cancelling")
         ));
         set(16, OrdersMenuSupport.button(
                 plugin, "GUI.DELETE.BUTTONS.CONFIRM", "ORDERS.GUI.DELETE.CONFIRM",
-                Material.LIME_STAINED_GLASS_PANE, "&aConfirm",
+                Material.AIR, "&aConfirm",
                 List.of("&fCancel this order", "&7Unused escrow becomes a collectable refund")
         ));
     }
