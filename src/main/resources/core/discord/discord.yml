@@ -232,7 +232,7 @@ BOT:
   LINKS_FILE: data/links.db
 
   # Editable Discord account-linking command replies. Supports {player}, {code}, {command}.
-  LINK_PROMPT: 'Run /pvp sync in Minecraft, then use /link code:{code} here.'
+  LINK_PROMPT: 'Run /link in Minecraft to get a one-time code, then use /link code:<code> here.'
   LINK_SUCCESS: 'Successfully linked Minecraft account **{player}** to your Discord account!'
   LINK_INVALID: 'That link code is invalid. Run /pvp sync in Minecraft to get a new one.'
   LINK_EXPIRED: 'That link code has expired. Run /pvp sync in Minecraft to get a new one.'
