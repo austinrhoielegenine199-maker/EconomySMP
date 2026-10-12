@@ -49,6 +49,10 @@ public class PvpCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        // Dedicated /link command: issue the same one-time code as legacy /pvp sync.
+        if (command.getName().equalsIgnoreCase("link")) {
+            return handleSync(sender);
+        }
         PvpManager pvp = plugin.getPvpManager();
         if (pvp == null) {
             sender.sendMessage(ColorUtils.toComponent("&cThe PvP arena is not available."));
@@ -347,8 +351,13 @@ public class PvpCommand implements CommandExecutor, TabCompleter {
 
     /** Hands the player a code to type into the Discord bot. */
     private boolean handleSync(CommandSender sender) {
+        PvpManager manager = plugin.getPvpManager();
+        if (manager == null) {
+            send(sender, "&cAccount linking is not available right now.");
+            return true;
+        }
         return requirePlayer(sender, player -> {
-            PvpManager pvp = plugin.getPvpManager();
+            PvpManager pvp = manager;
             if (!pvp.isSyncEnabled()) {
                 send(player, pvp.message("SYNC_DISABLED", "&cAccount syncing is switched off."));
                 return;
@@ -362,7 +371,7 @@ public class PvpCommand implements CommandExecutor, TabCompleter {
 
             send(player, pvp.message("SYNC_HEADER", "&e&lTier Sync"));
             send(player, pvp.message("SYNC_CODE", "&fYour sync code: &e{code}").replace("{code}", code));
-            send(player, pvp.message("SYNC_HINT", "&7Use &f/sync {code} &7on our Discord to link your account.")
+            send(player, pvp.message("SYNC_HINT", "&7In Discord, run &f/link code:{code} &7to link your account.")
                     .replace("{code}", code));
         });
     }
@@ -548,6 +557,9 @@ public class PvpCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         PvpManager pvp = plugin.getPvpManager();
         List<String> options = new ArrayList<>();
+        if (command.getName().equalsIgnoreCase("link")) {
+            return options;
+        }
 
         if (args.length == 1) {
             options.addAll(PLAYER_SUBCOMMANDS);
