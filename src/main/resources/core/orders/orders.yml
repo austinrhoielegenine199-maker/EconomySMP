@@ -12,8 +12,8 @@ SETTINGS:
   MAX_ACTIVE_ORDERS_DEFAULT: 5
   # Maximum active order limits granted by permission node
   MAX_ACTIVE_ORDERS_BY_PERMISSION:
-    ultimatedonutsmp.orders.limit.10: 10
-    ultimatedonutsmp.orders.limit.15: 15
+    economysmp.orders.limit.10: 10
+    economysmp.orders.limit.15: 15
   # Maximum quantity of items requested per single order listing
   MAX_QUANTITY_PER_ORDER: 2304
   # Anti-spam click cooldown between menu interactions (in milliseconds)
