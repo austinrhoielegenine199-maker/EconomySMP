@@ -32,7 +32,7 @@ public class DuelCreateMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         Player target = Bukkit.getPlayer(targetUuid);
         if (target == null) {
