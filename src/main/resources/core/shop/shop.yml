@@ -69,7 +69,7 @@ CATEGORIES:
     - '&fClick to view extra menu'
     OPEN-MENU: '{extra-3-menu}'
 BACK-BUTTON:
-  MATERIAL: RED_STAINED_GLASS_PANE
+  MATERIAL: BARRIER
   DISPLAY-NAME: '&cback'
   LORE:
   - '&fClick to return'
