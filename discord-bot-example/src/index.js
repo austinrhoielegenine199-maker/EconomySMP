@@ -46,6 +46,7 @@ client.on(Events.InteractionCreate, async interaction => {
       case 'mystats':
         await handleMyStats(interaction);
         return;
+      case 'link':
       case 'sync':
         await handleSync(interaction);
         return;
@@ -110,7 +111,7 @@ async function handleMyStats(interaction) {
   const link = links.getLink(interaction.user.id);
   if (!link) {
     await interaction.editReply(
-      'Your Discord account is not linked yet. Run `/pvp sync` in game, then `/sync` here with the code it gives you.'
+      message('LINK_PROMPT', 'Run /pvp sync in Minecraft, then use /link code:{code} here.', { code: 'your-code' })
     );
     return;
   }
@@ -171,29 +172,34 @@ async function handleSync(interaction) {
 
   const entry = await pvp.findSyncCode(code);
   if (!entry) {
-    await interaction.editReply('That sync code is not valid. Run `/pvp sync` in game for a new one.');
+    await interaction.editReply(message('LINK_INVALID', 'That link code is invalid. Run /pvp sync in Minecraft to get a new one.'));
     return;
   }
   if (entry.expiresAt > 0 && entry.expiresAt < Date.now()) {
-    await interaction.editReply('That sync code has expired. Run `/pvp sync` in game for a new one.');
+    await interaction.editReply(message('LINK_EXPIRED', 'That link code has expired. Run /pvp sync in Minecraft to get a new one.'));
     return;
   }
   if (links.isCodeUsed(code)) {
-    await interaction.editReply('That sync code has already been used. Run `/pvp sync` in game for a new one.');
+    await interaction.editReply(message('LINK_USED', 'That link code has already been used. Generate a new one with /pvp sync.'));
     return;
   }
 
   const taken = links.getLinkByUuid(entry.uuid);
   if (taken && taken.discord_id !== interaction.user.id) {
     await interaction.editReply(
-      'That Minecraft account is already linked to another Discord user. They need to `/unsync` first.'
+      message('LINK_TAKEN', 'That Minecraft account is already linked to another Discord user. They must use /unsync first.')
     );
     return;
   }
 
   const name = entry.name ?? (await pvp.findStats(entry.uuid))?.username ?? 'your account';
+  const existing = links.getLink(interaction.user.id);
+  if (existing && existing.player_uuid !== entry.uuid) {
+    await interaction.editReply(message('LINK_ALREADY_LINKED', 'Your Discord account is already linked to **{player}**. Use /unsync before linking another account.', { player: existing.player_name ?? existing.player_uuid }));
+    return;
+  }
   links.link(interaction.user.id, entry.uuid, name, code);
-  await interaction.editReply(`Sync successful! You are now linked with **${name}**.`);
+  await interaction.editReply(message('LINK_SUCCESS', 'Successfully linked Minecraft account **{player}** to your Discord account!', { player: name }));
 }
 
 async function handleUnsync(interaction) {
@@ -201,12 +207,12 @@ async function handleUnsync(interaction) {
 
   const link = links.getLink(interaction.user.id);
   if (!link) {
-    await interaction.editReply('Your Discord account is not linked to a Minecraft account.');
+    await interaction.editReply(message('UNLINK_NOT_LINKED', 'Your Discord account is not linked to a Minecraft account.'));
     return;
   }
 
   links.unlink(interaction.user.id);
-  await interaction.editReply(`Unlinked from **${link.player_name ?? link.player_uuid}**.`);
+  await interaction.editReply(message('UNLINK_SUCCESS', 'Successfully unlinked **{player}** from your Discord account.', { player: link.player_name ?? link.player_uuid }));
 }
 
 function shutdown() {
@@ -221,3 +227,11 @@ process.once('SIGINT', shutdown);
 process.once('SIGTERM', shutdown);
 
 await client.login(token);
+
+function message(key, fallback, variables = {}) {
+  let value = process.env[`LINK_MESSAGE_${key}`] || fallback;
+  for (const [name, replacement] of Object.entries(variables)) {
+    value = value.replaceAll(`{${name}}`, String(replacement));
+  }
+  return value;
+}
