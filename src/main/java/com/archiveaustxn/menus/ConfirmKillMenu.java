@@ -23,21 +23,21 @@ public class ConfirmKillMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         String cancelTitle = plugin.getConfigManager().getMenus().getString("CONFIRM-KILL-MENU.CANCEL-BUTTON.TITLE", "&cCancel");
-        String cancelMaterialStr = plugin.getConfigManager().getMenus().getString("CONFIRM-KILL-MENU.CANCEL-BUTTON.MATERIAL", "RED_STAINED_GLASS_PANE");
+        String cancelMaterialStr = plugin.getConfigManager().getMenus().getString("CONFIRM-KILL-MENU.CANCEL-BUTTON.MATERIAL", "BARRIER");
         Material cancelMaterial = Material.matchMaterial(cancelMaterialStr);
-        if (cancelMaterial == null) cancelMaterial = Material.RED_STAINED_GLASS_PANE;
+        if (cancelMaterial == null) cancelMaterial = Material.BARRIER;
         List<String> cancelLore = plugin.getConfigManager().getMenus().getStringList("CONFIRM-KILL-MENU.CANCEL-BUTTON.LORE");
         if (cancelLore.isEmpty()) {
             cancelLore = List.of("&7Click to cancel and live.");
         }
 
         String confirmTitle = plugin.getConfigManager().getMenus().getString("CONFIRM-KILL-MENU.CONFIRM-BUTTON.TITLE", "&aConfirm");
-        String confirmMaterialStr = plugin.getConfigManager().getMenus().getString("CONFIRM-KILL-MENU.CONFIRM-BUTTON.MATERIAL", "LIME_STAINED_GLASS_PANE");
+        String confirmMaterialStr = plugin.getConfigManager().getMenus().getString("CONFIRM-KILL-MENU.CONFIRM-BUTTON.MATERIAL", "EMERALD");
         Material confirmMaterial = Material.matchMaterial(confirmMaterialStr);
-        if (confirmMaterial == null) confirmMaterial = Material.LIME_STAINED_GLASS_PANE;
+        if (confirmMaterial == null) confirmMaterial = Material.EMERALD;
         List<String> confirmLore = plugin.getConfigManager().getMenus().getStringList("CONFIRM-KILL-MENU.CONFIRM-BUTTON.LORE");
         if (confirmLore.isEmpty()) {
             confirmLore = List.of("&7Click to confirm suicide.");
