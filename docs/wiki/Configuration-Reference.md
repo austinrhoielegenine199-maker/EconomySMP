@@ -504,15 +504,15 @@ SETTINGS:
     # Enable or disable permission based home limits
     ENABLED: true
     # Explicit mapping from permission node to home limit
-    # Players can also be given ultimatedonutsmp.homes.<1-100> directly, for example
-    # ultimatedonutsmp.homes.10 for ten homes, or ultimatedonutsmp.homes.page.<1-100> to
+    # Players can also be given economysmp.homes.<1-100> directly, for example
+    # economysmp.homes.10 for ten homes, or economysmp.homes.page.<1-100> to
     # hand out whole pages of five at a time
     # The highest value the player has wins
     # Players without any of these permissions keep HOME-DEFAULT above
     PERMISSIONS:
-      "ultimatedonutsmp.homes.vip++": 15
-      "ultimatedonutsmp.homes.vip+": 10
-      "ultimatedonutsmp.homes.vip": 5
+      "economysmp.homes.vip++": 15
+      "economysmp.homes.vip+": 10
+      "economysmp.homes.vip": 5
   # The numerical value for Shards Per Kill. Available options: Any valid integer
   SHARDS-PER-KILL: 1
   # The text or value for Shards Kill Message. Available options: Any valid string text
@@ -576,7 +576,7 @@ SETTINGS:
 | `SETTINGS.CHAINMAIL-RESPAWN-ITEMS` | `list` | Configured values | `[{'MATERIAL': 'STONE_SWORD', 'AMOUNT'...` | Configures `CHAINMAIL-RESPAWN-ITEMS` for `SETTINGS`. |
 | `SETTINGS.HOME-DEFAULT` | `int` | Any positive integer | `2` | Default maximum `/sethome` limit for non-donor players. |
 | `SETTINGS.HOME-PERMISSIONS.ENABLED` | `bool` | `true`, `false` | `true` | Master switch for permission based home limits. Set to `false` to ignore every home permission and give everyone `HOME-DEFAULT`. |
-| `SETTINGS.HOME-PERMISSIONS.PERMISSIONS` | `section` | Permission node to home count | `{'ultimatedonutsmp.homes.vip++': 15, 'ultimatedonutsmp.homes.vip+': 10, 'ultimatedonutsmp.homes.vip': 5}` | Named rank nodes mapped to a home limit, for servers that prefer `ultimatedonutsmp.homes.vip` over the numbered nodes. The highest value a player holds wins. See [Commands-and-Permissions](Commands-and-Permissions). |
+| `SETTINGS.HOME-PERMISSIONS.PERMISSIONS` | `section` | Permission node to home count | `{'economysmp.homes.vip++': 15, 'economysmp.homes.vip+': 10, 'economysmp.homes.vip': 5}` | Named rank nodes mapped to a home limit, for servers that prefer `economysmp.homes.vip` over the numbered nodes. The highest value a player holds wins. See [Commands-and-Permissions](Commands-and-Permissions). |
 | `SETTINGS.SHARDS-PER-KILL` | `int` | Any valid integer | `1` | Configures `SHARDS-PER-KILL` for `SETTINGS`. |
 | `SETTINGS.SHARDS-KILL-MESSAGE` | `str` | Any string text | `&#A303F9+{shards} Shard` | Configures `SHARDS-KILL-MESSAGE` for `SETTINGS`. |
 | `SETTINGS.SHARDS-KILL-MESSAGE-BOOSTED` | `str` | Any string text | `&#A303F9+{shards} Shards &7(&ax{multiplier}&7)` | Action bar shown instead of `SHARDS-KILL-MESSAGE` while a shard booster multiplies the kill reward. Supports `{multiplier}`. |
@@ -1131,7 +1131,7 @@ SHARDS:
     # The numerical value for Amount. Available options: Any valid integer
     AMOUNT: 1
     # The text or value for Required Permission. Available options: Any valid string text
-    REQUIRED-PERMISSION: ultimatedonutsmp.shards.everywhere
+    REQUIRED-PERMISSION: economysmp.shards.everywhere
     # The numerical value for Recent Movement Window. Available options: Any valid integer
     RECENT-MOVEMENT-WINDOW: 15
     # Determines whether Disable While In Shard Cuboid is enabled or disabled. Available options: true, false
