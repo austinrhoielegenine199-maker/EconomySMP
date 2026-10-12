@@ -35,21 +35,21 @@ STAFF-MODE:
     # If true, fake join/leave messages are only sent to players who cannot see vanished staff. Available options: true, false
     ONLY-TO-REGULAR-PLAYERS: true
   # The text or value for Staff Permission. Available options: Any valid string text
-  STAFF-PERMISSION: ultimatedonutsmp.staff.mode
+  STAFF-PERMISSION: economysmp.staff.mode
   # The text or value for Admin Permission. Available options: Any valid string text
-  ADMIN-PERMISSION: ultimatedonutsmp.admin.staffmode
+  ADMIN-PERMISSION: economysmp.admin.staffmode
   # The text or value for Vanish Permission. Available options: Any valid string text
-  VANISH-PERMISSION: ultimatedonutsmp.staff.mode.vanish
+  VANISH-PERMISSION: economysmp.staff.mode.vanish
   # The text or value for Better View Permission. Available options: Any valid string text
-  BETTER-VIEW-PERMISSION: ultimatedonutsmp.staff.mode.betterview
+  BETTER-VIEW-PERMISSION: economysmp.staff.mode.betterview
   # The text or value for Staff List Permission. Available options: Any valid string text
-  STAFF-LIST-PERMISSION: ultimatedonutsmp.staff.mode.stafflist
+  STAFF-LIST-PERMISSION: economysmp.staff.mode.stafflist
   # The text or value for Random Teleport Permission. Available options: Any valid string text
-  RANDOM-TELEPORT-PERMISSION: ultimatedonutsmp.staff.mode.randomtp
+  RANDOM-TELEPORT-PERMISSION: economysmp.staff.mode.randomtp
   # The text or value for See Vanished Permission. Available options: Any valid string text
-  SEE-VANISHED-PERMISSION: ultimatedonutsmp.staff.mode.seevanished
+  SEE-VANISHED-PERMISSION: economysmp.staff.mode.seevanished
   # The text or value for Others Permission. Available options: Any valid string text
-  OTHERS-PERMISSION: ultimatedonutsmp.staff.mode.others
+  OTHERS-PERMISSION: economysmp.staff.mode.others
   # Configuration section for Hotbar Slots.
   HOTBAR-SLOTS:
     # The numerical value for Vanish. Available options: Any valid integer
