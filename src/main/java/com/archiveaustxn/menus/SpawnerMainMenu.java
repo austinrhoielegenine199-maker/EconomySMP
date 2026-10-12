@@ -58,7 +58,7 @@ public class SpawnerMainMenu extends BaseMenu {
         if (instance == null) {
             inventory = Bukkit.createInventory(this, 27, ColorUtils.toComponent("&8Spawner Missing"));
             clear();
-            fill(Material.GRAY_STAINED_GLASS_PANE);
+            fill(Material.AIR);
             set(13, ItemUtils.createItem(Material.BARRIER, "&cSpawner Not Found"));
             return;
         }
@@ -68,9 +68,9 @@ public class SpawnerMainMenu extends BaseMenu {
         inventory = Bukkit.createInventory(this, plugin.getSpawnerManager().getMainMenuSize(), ColorUtils.toComponent(titleStr));
 
         clear();
-        String fillerMatName = config.getString("SPAWNER-MENUS.MAIN-MENU.FILLER-MATERIAL", "GRAY_STAINED_GLASS_PANE");
+        String fillerMatName = config.getString("SPAWNER-MENUS.MAIN-MENU.FILLER-MATERIAL", "AIR");
         Material fillerMat = Material.matchMaterial(fillerMatName);
-        if (fillerMat == null) fillerMat = Material.GRAY_STAINED_GLASS_PANE;
+        if (fillerMat == null) fillerMat = Material.AIR;
         fill(fillerMat);
 
         renderDynamicButtons(instance);
@@ -194,9 +194,9 @@ public class SpawnerMainMenu extends BaseMenu {
 
             set(xpSlot, ItemUtils.createItem(xpMat, xpTitle, xpLore));
         } else {
-            String fillerMatName = config.getString("SPAWNER-MENUS.MAIN-MENU.FILLER-MATERIAL", "GRAY_STAINED_GLASS_PANE");
+            String fillerMatName = config.getString("SPAWNER-MENUS.MAIN-MENU.FILLER-MATERIAL", "AIR");
             Material fillerMat = Material.matchMaterial(fillerMatName);
-            if (fillerMat == null) fillerMat = Material.GRAY_STAINED_GLASS_PANE;
+            if (fillerMat == null) fillerMat = Material.AIR;
             set(xpSlot, ItemUtils.createItem(fillerMat, " "));
         }
     }
