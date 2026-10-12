@@ -169,7 +169,7 @@ public class SpawnerStorageMenu extends BaseMenu {
         if (instance == null) {
             inventory = Bukkit.createInventory(this, plugin.getSpawnerManager().getStorageSize(), ColorUtils.toComponent("&8Spawner Missing"));
             clear();
-            fill(Material.GRAY_STAINED_GLASS_PANE);
+            fill(Material.AIR);
             set(inventory.getSize() / 2, ItemUtils.createItem(Material.BARRIER, "&cSpawner Not Found"));
             return;
         }
@@ -186,7 +186,7 @@ public class SpawnerStorageMenu extends BaseMenu {
         clear();
         int lastRow = inventory.getSize() - 9;
         for (int r = lastRow; r < inventory.getSize(); r++) {
-            set(r, ItemUtils.createPlaceholder(Material.GRAY_STAINED_GLASS_PANE));
+            set(r, ItemUtils.createPlaceholder(Material.AIR));
         }
 
         int contentSlots = Math.min(itemsPerPage, inventory.getSize() - 9);
@@ -250,7 +250,7 @@ public class SpawnerStorageMenu extends BaseMenu {
             }
             set(prevSlot, ItemUtils.createItem(prevMat, prevTitle, prevLore));
         } else {
-            set(prevSlot, ItemUtils.createPlaceholder(Material.GRAY_STAINED_GLASS_PANE));
+            set(prevSlot, ItemUtils.createPlaceholder(Material.AIR));
         }
 
         // 4. Next Page Button
@@ -271,7 +271,7 @@ public class SpawnerStorageMenu extends BaseMenu {
             }
             set(nextSlot, ItemUtils.createItem(nextMat, nextTitle, nextLore));
         } else {
-            set(nextSlot, ItemUtils.createPlaceholder(Material.GRAY_STAINED_GLASS_PANE));
+            set(nextSlot, ItemUtils.createPlaceholder(Material.AIR));
         }
 
         // 5. Drop Loot Button
