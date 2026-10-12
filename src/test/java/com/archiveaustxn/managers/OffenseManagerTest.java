@@ -92,7 +92,7 @@ class OffenseManagerTest {
 
     @Test
     void bundledOffensesParseAndNoneWipeByDefault() {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/offenses.yml"));
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(new File("src/main/resources/core/offenses/offenses.yml"));
         ConfigurationSection offenses = config.getConfigurationSection("offenses");
         assertNotNull(offenses, "offenses.yml should contain an offenses section");
 

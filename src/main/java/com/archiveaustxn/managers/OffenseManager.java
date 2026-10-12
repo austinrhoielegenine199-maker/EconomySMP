@@ -7,6 +7,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.logging.Level;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,9 +47,22 @@ public class OffenseManager {
     }
 
     private void loadConfig() {
-        File file = new File(plugin.getDataFolder(), "offenses.yml");
+        File file = new File(plugin.getDataFolder(), "core/offenses/offenses.yml");
         if (!file.exists()) {
-            plugin.saveResource("offenses.yml", false);
+            File legacyFile = new File(plugin.getDataFolder(), "offenses.yml");
+            try {
+                Files.createDirectories(file.getParentFile().toPath());
+                if (legacyFile.isFile()) {
+                    Files.move(legacyFile.toPath(), file.toPath());
+                    plugin.getLogger().info("Migrated configuration offenses.yml -> core/offenses/offenses.yml");
+                } else {
+                    plugin.saveResource("core/offenses/offenses.yml", false);
+                }
+            } catch (IOException | IllegalArgumentException e) {
+                plugin.getLogger().log(Level.SEVERE,
+                        "Could not initialize core/offenses/offenses.yml; refusing to load an empty default config.", e);
+                return;
+            }
         }
 
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
