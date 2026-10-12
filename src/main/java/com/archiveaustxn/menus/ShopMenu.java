@@ -571,11 +571,25 @@ public class ShopMenu extends BaseMenu {
 
     private static int resolveSize(EconomySMP plugin, String menuSection, boolean favoritesMenu) {
         FileConfiguration config = plugin.getConfigManager().getShop();
-        int configured = favoritesMenu
-                ? config.getInt("SHOP-GUI.FAVORITES.MENU.SIZE", 54)
-                : menuSection == null
-                ? config.getInt("CATEGORIES.MENU-SIZE", 27)
-                : config.getInt(menuSection + ".SIZE", 27);
+        int configured;
+        if (favoritesMenu) {
+            configured = config.getInt("SHOP-GUI.FAVORITES.MENU.SIZE", 54);
+        } else if (menuSection == null) {
+            configured = config.getInt("CATEGORIES.MENU-SIZE", 27);
+            int highestCategorySlot = -1;
+            for (ShopManager.ShopCategory category : plugin.getShopManager().loadCategories()) {
+                highestCategorySlot = Math.max(highestCategorySlot, category.slot());
+            }
+            int required = highestCategorySlot + 1;
+            if (required > configured) {
+                configured = Math.min(54, ((required + 8) / 9) * 9);
+            }
+        } else {
+            int rows = config.getInt(menuSection + ".ROW", -1);
+            configured = rows >= 1 && rows <= 6
+                    ? rows * 9
+                    : config.getInt(menuSection + ".SIZE", 27);
+        }
         return normalizeSize(configured);
     }
 

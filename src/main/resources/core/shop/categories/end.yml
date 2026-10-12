@@ -1,3 +1,6 @@
+# Number of GUI rows (1-6). Each row contains 9 slots; ROW overrides SIZE.
+ROW: 3
+
 # Configuration section for End Menu.
 END-MENU:
   # The text or value for Currency. Available options: Any valid string text
