@@ -86,7 +86,7 @@ public class FrozenPlayersMenu extends BaseMenu {
 
     private void render() {
         clear();
-        fill(plugin.getStaffModeManager().getMenuPlaceholderMaterial(MENU_KEY, Material.LIGHT_BLUE_STAINED_GLASS_PANE));
+        fill(plugin.getStaffModeManager().getMenuPlaceholderMaterial(MENU_KEY, Material.AIR));
         slotTargets.clear();
 
         int refreshSlot = plugin.getStaffModeManager().getMenuRefreshSlot(MENU_KEY);
