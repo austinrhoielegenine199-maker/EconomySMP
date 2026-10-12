@@ -53,7 +53,7 @@ public final class SellGui extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         List<Integer> durations = plugin.getAuctionHouseManager().getAllowedDurations();
 
         set(AuctionHouseMenuSupport.slot(plugin, "GUI.SELL.ITEM", 4), escrowItem.clone());
@@ -81,7 +81,7 @@ public final class SellGui extends BaseMenu {
             set(durationStart + index, AuctionHouseMenuSupport.control(
                     plugin,
                     "GUI.SELL.DURATION",
-                    selected ? Material.LIME_STAINED_GLASS_PANE : Material.GRAY_STAINED_GLASS_PANE,
+                    selected ? Material.EMERALD : Material.AIR,
                     (selected ? "&a" : "&f") + "{duration}",
                     List.of("{state}"),
                     "{duration}", plugin.getAuctionHouseManager().formatDuration(hours),
@@ -109,7 +109,7 @@ public final class SellGui extends BaseMenu {
                     plugin,
                     "GUI.SELL.CATEGORY",
                     selected
-                            ? Material.LIME_STAINED_GLASS_PANE
+                            ? Material.EMERALD
                             : plugin.getAuctionHouseManager().getCategoryIcon(category),
                     (selected ? "&a" : "&f") + "{category}",
                     List.of("{state}"),
@@ -132,7 +132,7 @@ public final class SellGui extends BaseMenu {
                 AuctionHouseMenuSupport.control(
                         plugin,
                         "GUI.SELL.CONFIRM",
-                        Material.LIME_STAINED_GLASS_PANE,
+                        Material.EMERALD,
                         "&aConfirm listing",
                         List.of("&7Price: {price}", "&7Duration: &f{duration}", "&eClick to list"),
                         "{price}", plugin.getCurrencyManager().formatMoney(price),
@@ -142,7 +142,7 @@ public final class SellGui extends BaseMenu {
                 AuctionHouseMenuSupport.control(
                         plugin,
                         "GUI.SELL.CANCEL",
-                        Material.RED_STAINED_GLASS_PANE,
+                        Material.BARRIER,
                         "&cCancel",
                         List.of("&7Return the item without listing")
                 ));
