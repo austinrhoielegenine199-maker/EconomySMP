@@ -94,7 +94,7 @@ TEAM-MENUS:
     TITLE: '&8Edit {player}'
     SIZE: 27
     PLACEHOLDER: false
-    PLACEHOLDER-MATERIAL: BLACK_STAINED_GLASS_PANE
+    PLACEHOLDER-MATERIAL: AIR
     EDIT-HOME-BUTTON:
       TITLE: '&#6BF18DEdit Home'
       MATERIAL: WHITE_BANNER
@@ -148,7 +148,7 @@ TEAM-MENUS:
       - '&fCurrently: {state}'
     BACK-BUTTON:
       TITLE: '&cBack'
-      MATERIAL: RED_STAINED_GLASS_PANE
+      MATERIAL: AIR
       SLOT: 18
       LORE:
       - '&fClick to return'
@@ -158,13 +158,13 @@ TEAM-MENUS:
     SIZE: 27
     CANCEL-BUTTON:
       TITLE: '&#FC0000Cancel'
-      MATERIAL: RED_STAINED_GLASS_PANE
+      MATERIAL: AIR
       SLOT: 11
       LORE:
       - '&fClick to cancel'
     CONFIRM-BUTTON:
       TITLE: '&#00FC00Confirm'
-      MATERIAL: LIME_STAINED_GLASS_PANE
+      MATERIAL: AIR
       SLOT: 15
       LORE:
       - '&fClick to kick {player}'
@@ -174,13 +174,13 @@ TEAM-MENUS:
     SIZE: 27
     CANCEL-BUTTON:
       TITLE: '&#FC0000Cancel'
-      MATERIAL: RED_STAINED_GLASS_PANE
+      MATERIAL: AIR
       SLOT: 11
       LORE:
       - '&fClick to cancel'
     CONFIRM-BUTTON:
       TITLE: '&#00FC00Confirm'
-      MATERIAL: LIME_STAINED_GLASS_PANE
+      MATERIAL: AIR
       SLOT: 15
       LORE:
       - '&fClick to confirm'
@@ -383,9 +383,6 @@ MEDIA-MENU:
 RANKS-MENU:
   TITLE: '&8Ranks'
   SIZE: 27
-  # Every button takes an optional HEAD-TEXTURE, used when its MATERIAL is PLAYER_HEAD. It accepts a
-  # skin url or a base64 texture value. Uncomment the line inside a button to give that rank its own
-  # head; leaving it commented renders a plain player head.
   BUTTONS:
     DEFAULT:
       MATERIAL: PLAYER_HEAD
@@ -395,7 +392,6 @@ RANKS-MENU:
       - '&73 Homes'
       - '&718 Auction Slots'
       - '&718 Order Slots'
-      # HEAD-TEXTURE: 'https://textures.minecraft.net/texture/<texture id>'
       COMMAND: ''
     DONUT_PLUS:
       MATERIAL: PLAYER_HEAD
@@ -405,7 +401,6 @@ RANKS-MENU:
       - '&79 Homes'
       - '&745 Auction Slots'
       - '&745 Order Slots'
-      # HEAD-TEXTURE: 'https://textures.minecraft.net/texture/<texture id>'
       COMMAND: ''
     DONUT_PLUS_PLUS:
       MATERIAL: PLAYER_HEAD
@@ -415,7 +410,6 @@ RANKS-MENU:
       - '&727 Homes'
       - '&790 Auction Slots'
       - '&790 Order Slots'
-      # HEAD-TEXTURE: 'https://textures.minecraft.net/texture/<texture id>'
       COMMAND: ''
     DONUT_PLUS_PLUS_PLUS:
       MATERIAL: PLAYER_HEAD
@@ -425,7 +419,6 @@ RANKS-MENU:
       - '&790 Homes'
       - '&790 Auction Slots'
       - '&790 Order Slots'
-      # HEAD-TEXTURE: 'https://textures.minecraft.net/texture/<texture id>'
       COMMAND: ''
 STATS-MENU:
   TITLE: '&8{username} Stats'
@@ -506,15 +499,6 @@ STATS-MENU:
 SETTINGS-MENU:
   TITLE: '&8Settings'
   SIZE: 54
-  # Feedback messages sent in chat when players change settings in /settings:
-  # Placeholders available:
-  #   {setting}         Setting label or button FEEDBACK-NAME / clean DISPLAY-NAME
-  #   {setting_display} Setting button DISPLAY-NAME preserving colors
-  #   {state}           Enabled/Disabled state or the selected choice text
-  #   {choice}          Selected choice text (for three-choice settings)
-  # Individual buttons under BUTTONS can also override:
-  #   FEEDBACK-NAME: <custom setting label in chat>
-  #   FEEDBACK-MESSAGE: <custom message template for this button>
   FEEDBACK:
     TOGGLE-MESSAGE: '&7{setting} is now {state}&7.'
     CHOICE-MESSAGE: '&7{setting} is now set to {choice}&7.'
@@ -524,35 +508,6 @@ SETTINGS-MENU:
     CHOICE-ANYONE-TEXT: '&aAnyone'
     CHOICE-FRIENDS-FOLLOWED-TEXT: '&dFriends/Followed'
   BUTTONS:
-    # Buttons are grouped a row at a time: chat and messages on the first row,
-    # alerts on the second, gameplay and display on the third, who may reach you on
-    # the fourth, the scoreboard on the fifth, and the world around you on the last.
-    # Every setting below accepts two optional keys:
-    #   DEFAULT: <value>  Starting value for players who never touched the setting.
-    #                     On/off buttons take true or false. The privacy buttons
-    #                     (PRIVATE_MESSAGES, TPA_REQUESTS, TPA_HERE_REQUESTS, PAYMENTS)
-    #                     take ANYONE, FRIENDS_FOLLOWED or OFF. DEATH_MESSAGES and
-    #                     JOIN_LEAVE_MESSAGES are on or off: both feeds are server
-    #                     wide, so those buttons only mute them.
-    #                     true/false also work as shortcuts.
-    #   ENABLED: false    Removes the option from /settings and pins every player to the
-    #                     DEFAULT above. Use this instead of deleting the block - deleted
-    #                     blocks are restored from the bundled defaults on the next start.
-    # Example, hide advancement messages and keep them off for everyone:
-    # ADVANCEMENT_MESSAGES:
-    #   DEFAULT: OFF
-    #   ENABLED: false
-    # Custom redirect buttons can also be added here:
-    # EXTERNAL_FLY:
-    #   DISPLAY-NAME: '&bFlight Mode'
-    #   MATERIAL: FEATHER
-    #   SLOT: 25
-    #   COMMAND: '[player] /fly'
-    #   STATUS-PLACEHOLDER: '%cmi_user_flying%'
-    #   LORE:
-    #   - '&7Toggle flight via external plugin'
-    #   - '&fCurrently: {status}'
-    # Row 1 - chat and messages
     PUBLIC_CHAT:
       DISPLAY-NAME: '&#6BF18DPublic Chat'
       MATERIAL: OAK_SIGN
@@ -616,7 +571,6 @@ SETTINGS-MENU:
       LORE:
       - '&7Show message when amethyst cluster breaks'
       - '&fCurrently: {status}'
-    # Row 2 - alerts
     PAY_ALERTS:
       DISPLAY-NAME: '&#6BF18DPay Alerts'
       MATERIAL: GOLD_NUGGET
@@ -680,7 +634,6 @@ SETTINGS-MENU:
       LORE:
       - '&7Show the coordinates /rtp drops you at'
       - '&fCurrently: {status}'
-    # Row 3 - gameplay and display
     FAST_CRYSTALS:
       DISPLAY-NAME: '&#6BF18DFast Crystals'
       MATERIAL: END_CRYSTAL
@@ -744,7 +697,6 @@ SETTINGS-MENU:
       LORE:
       - '&7Show confirmation GUI for TPA'
       - '&fCurrently: {status}'
-    # Row 4 - who may reach you
     TPA_REQUESTS:
       DISPLAY-NAME: '&#6BF18DTpa Requests'
       MATERIAL: ENDER_PEARL
@@ -808,7 +760,6 @@ SETTINGS-MENU:
       LORE:
       - '&7Play music and sounds during duels'
       - '&fCurrently: {status}'
-    # Row 5 - the scoreboard and the lines on it
     SCOREBOARD_VISIBILITY:
       DISPLAY-NAME: '&#6BF18DShow Scoreboard'
       MATERIAL: LECTERN
@@ -858,7 +809,6 @@ SETTINGS-MENU:
       LORE:
       - '&7Show the entity clear countdown'
       - '&fCurrently: {status}'
-    # Row 6 - the world around you
     QUICK_AUCTION_PURCHASE:
       DISPLAY-NAME: '&#6BF18DQuick Auction Purchase'
       MATERIAL: GOLD_INGOT
@@ -1140,29 +1090,24 @@ PROGRESS-MENU:
       BLOCKS: BRICK
   WORKING-BUTTON:
     TITLE: '&eWorking'
-    MATERIAL: YELLOW_STAINED_GLASS_PANE
+    MATERIAL: AIR
     LORE:
     - '{porcentage_level} &f{next_multiplier} {porcentage}%'
     - '&7{current_earned}/{next_goal}'
   COMPLETED-BUTTON:
     TITLE: '&aCompleted'
-    MATERIAL: LIME_STAINED_GLASS_PANE
+    MATERIAL: AIR
     LORE:
     - '{porcentage_level} &f{next_multiplier} {porcentage}%'
     - '&7{current_earned}/{next_goal}'
 SELL-MENU:
   TITLE: '&8Place Items In Here To Sell'
   MULTIPLIER-TITLE: '&8Sell Multipliers'
-  # MODE decides when the menu takes payment. 'confirm' shows the Confirm Sell button and gives
-  # items back if the player closes without clicking it. 'close' sells the whole grid the moment
-  # the menu is shut. 'instant' pays out item by item as things land, and AUTO-SELL only applies
-  # there: set it false and instant behaves like 'close'.
   AUTO-SELL: true
   MODE: "confirm"
   CONFIRM-BUTTON:
-    MATERIAL: "LIME_STAINED_GLASS_PANE"
+    MATERIAL: "AIR"
     TITLE: "&a&lConfirm Sell"
-    # {price} is the compact total, {price_formatted} is the full money format.
     LORE:
     - "&a{price_formatted}"
   CROPS-BUTTON:
@@ -1257,12 +1202,12 @@ TPA-CONFIRM-MENU:
   SIZE: 27
   BUTTONS:
     CANCEL:
-      MATERIAL: RED_STAINED_GLASS_PANE
+      MATERIAL: AIR
       NAME: '&cCancel'
       LORE:
       - '&fCLICK TO CANCEL'
     CONFIRM:
-      MATERIAL: LIME_STAINED_GLASS_PANE
+      MATERIAL: AIR
       NAME: '&aConfirm'
       LORE:
       - '&fCLICK TO CONFIRM'
@@ -1303,7 +1248,7 @@ BOUNTY-CONFIRM-MENU:
   TITLE: '&8Confirm Bounty'
   SIZE: 27
   CANCEL-BUTTON:
-    MATERIAL: RED_STAINED_GLASS_PANE
+    MATERIAL: AIR
     NAME: '&#FC0000Cancel'
     LORE:
     - '&7Click to cancel the bounty adding!'
@@ -1313,7 +1258,7 @@ BOUNTY-CONFIRM-MENU:
     LORE:
     - '&fYou''re going to set &#00FC00{amount}'
   CONFIRM-BUTTON:
-    MATERIAL: LIME_STAINED_GLASS_PANE
+    MATERIAL: AIR
     NAME: '&#00FC00Confirm'
     LORE:
     - '&7Click to confirm to add {amount} bounty!'
@@ -1361,17 +1306,17 @@ PURCHASE-SHOP-MENU:
         DEFAULT: '&fBUY PRICE: &a${price}'
     CANCEL:
       SLOT: 21
-      MATERIAL: RED_STAINED_GLASS_PANE
+      MATERIAL: AIR
       NAME: '&cCancel'
       LORE: '&fCLICK TO CANCEL'
     CONFIRM:
       SLOT: 23
-      MATERIAL: LIME_STAINED_GLASS_PANE
+      MATERIAL: AIR
       NAME: '&aConfirm'
       LORE: '&fCLICK TO BUY'
     QUANTITY_ADJUST:
       ADD:
-        MATERIAL: LIME_STAINED_GLASS_PANE
+        MATERIAL: AIR
         ADD_1:
           SLOT: 15
           NAME: '&aAdd 1'
@@ -1385,7 +1330,7 @@ PURCHASE-SHOP-MENU:
           NAME: '&aSet To 64'
           INCREMENT: 64
       REMOVE:
-        MATERIAL: RED_STAINED_GLASS_PANE
+        MATERIAL: AIR
         REMOVE_1:
           SLOT: 11
           NAME: '&cRemove 1'
@@ -1425,12 +1370,12 @@ PAY-CONFIRM-MENU:
   SIZE: 27
   CONFIRM-BUTTON:
     TITLE: '&#00FC00Confirm'
-    MATERIAL: LIME_STAINED_GLASS_PANE
+    MATERIAL: AIR
     LORE:
     - '&7Click to confirm to pay {amount}!'
   CANCEL-BUTTON:
     TITLE: '&#FC0000Cancel'
-    MATERIAL: RED_STAINED_GLASS_PANE
+    MATERIAL: AIR
     LORE:
     - '&7Click to cancel'
   PLAYER-BUTTON:
@@ -1441,14 +1386,14 @@ SELLALL-CONFIRM-MENU:
   SIZE: 27
   CONFIRM-BUTTON:
     TITLE: '&#00FC00Confirm'
-    MATERIAL: LIME_STAINED_GLASS_PANE
+    MATERIAL: AIR
     SLOT: 15
     LORE:
     - '&7Click to confirm to sell all'
     - '&7sellable items in your inventory.'
   CANCEL-BUTTON:
     TITLE: '&#FC0000Cancel'
-    MATERIAL: RED_STAINED_GLASS_PANE
+    MATERIAL: AIR
     SLOT: 11
     LORE:
     - '&7Click to cancel'
@@ -1948,12 +1893,12 @@ PROFILE-VIEWER-HOMES-MENU:
     LORE:
     - '&7This player has no homes saved.'
   BACK-BUTTON:
-    MATERIAL: RED_STAINED_GLASS_PANE
+    MATERIAL: AIR
     DISPLAY-NAME: '&cBack'
     LORE:
     - '&7Return to the main profile viewer'
   CLOSE-BUTTON:
-    MATERIAL: RED_STAINED_GLASS_PANE
+    MATERIAL: AIR
     DISPLAY-NAME: '&cClose'
     LORE:
     - '&7Close this home list'
@@ -2095,7 +2040,7 @@ STATS-WIPE-MENU:
   TITLE: '&8Stats Wipe'
   SIZE: 27
   PLACEHOLDER: true
-  PLACEHOLDER-MATERIAL: BLACK_STAINED_GLASS_PANE
+  PLACEHOLDER-MATERIAL: AIR
   STATUS:
     SLOT: 13
     MATERIAL: BARRIER
@@ -2171,7 +2116,7 @@ STATS-WIPE-CONFIRM-MENU:
   TITLE: '&8Confirm {target}'
   SIZE: 27
   PLACEHOLDER: true
-  PLACEHOLDER-MATERIAL: BLACK_STAINED_GLASS_PANE
+  PLACEHOLDER-MATERIAL: AIR
   BUTTONS:
     TARGET:
       SLOT: 13
@@ -2183,13 +2128,13 @@ STATS-WIPE-CONFIRM-MENU:
       - '&7Click confirm only if you are sure.'
     CANCEL:
       SLOT: 11
-      MATERIAL: RED_STAINED_GLASS_PANE
+      MATERIAL: AIR
       DISPLAY-NAME: '&cCancel'
       LORE:
       - '&7Return to the Stats Wipe menu.'
     CONFIRM:
       SLOT: 15
-      MATERIAL: LIME_STAINED_GLASS_PANE
+      MATERIAL: AIR
       DISPLAY-NAME: '&aConfirm'
       LORE:
       - '&7Run wipe for &f{target}&7.'
@@ -2198,7 +2143,7 @@ SERVERS-MENU:
   TITLE: '&8Ongoing Servers'
   SIZE: 27
   REFRESH-TICKS: 40
-  PLACEHOLDER-MATERIAL: BLACK_STAINED_GLASS_PANE
+  PLACEHOLDER-MATERIAL: AIR
   SERVER_STATUS:
     TITLE: '&8Ongoing Servers'
     SERVER_NAME: '&b%server%'
@@ -2220,7 +2165,7 @@ SPAWNER-MENUS:
   MAIN-MENU:
     TITLE: '{stack} {mob}'
     SIZE: 27
-    FILLER-MATERIAL: GRAY_STAINED_GLASS_PANE
+    FILLER-MATERIAL: AIR
     STORAGE-BUTTON:
       SLOT: 11
       MATERIAL: CHEST
@@ -2341,7 +2286,7 @@ SPAWNER-MENUS:
     SIZE: 27
     CONFIRM-BUTTON:
       SLOT: 11
-      MATERIAL: LIME_STAINED_GLASS_PANE
+      MATERIAL: AIR
       TITLE: '&aConfirm Sell'
       LORE:
       - '&fTotal Value: &a${price}'
@@ -2350,7 +2295,7 @@ SPAWNER-MENUS:
       - '&eClick to confirm sale!'
     CANCEL-BUTTON:
       SLOT: 15
-      MATERIAL: RED_STAINED_GLASS_PANE
+      MATERIAL: AIR
       TITLE: '&cCancel'
       LORE:
       - '&7Cancel transaction and return to storage.'
@@ -2390,13 +2335,13 @@ VOICE-CHAT-CONSENT-MENU:
     - '&f/voicechatconsent revoke'
   CONFIRM-BUTTON:
     DISPLAY-NAME: '&aConfirm'
-    MATERIAL: LIME_STAINED_GLASS_PANE
+    MATERIAL: AIR
     SLOT: 11
     LORE:
     - '&fClick to turn voice chat on'
   DECLINE-BUTTON:
     DISPLAY-NAME: '&cDecline'
-    MATERIAL: RED_STAINED_GLASS_PANE
+    MATERIAL: AIR
     SLOT: 15
     LORE:
     - '&fVoice chat will stay disabled'
