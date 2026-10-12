@@ -42,7 +42,7 @@ public class ShulkerPreviewGui extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
 
         List<ItemStack> contents = ShulkerBoxSupport.getContents(shulkerItem);
         for (int i = 0; i < 27 && i < contents.size(); i++) {
