@@ -33,7 +33,7 @@ class CrateMessageKeyTest {
 
     @Test
     void messagesYmlContainsAllCrateMessageKeys() {
-        YamlConfiguration messages = load("src/main/resources/messages.yml");
+        YamlConfiguration messages = load("src/main/resources/core/messages/messages.yml");
         for (String key : EXPECTED_KEYS) {
             assertTrue(
                     messages.contains("CRATES." + key),

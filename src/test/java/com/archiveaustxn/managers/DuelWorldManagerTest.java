@@ -14,7 +14,7 @@ class DuelWorldManagerTest {
     private static final String VANILLA_POOL = "MAP_SOURCES.RANDOM_BIOMES.VANILLA_POOL.";
 
     private static YamlConfiguration bundledDuels() {
-        return YamlConfiguration.loadConfiguration(new File("src/main/resources/duels.yml"));
+        return YamlConfiguration.loadConfiguration(new File("src/main/resources/core/duels/duels.yml"));
     }
 
     @Test

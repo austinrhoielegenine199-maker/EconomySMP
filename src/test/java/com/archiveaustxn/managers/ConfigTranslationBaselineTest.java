@@ -62,7 +62,13 @@ class ConfigTranslationBaselineTest {
     );
 
     private static YamlConfiguration resource(String name) {
-        return YamlConfiguration.loadConfiguration(new File("src/main/resources/" + name));
+        String resourcePath = switch (name) {
+            case "config.yml" -> "core/config/config.yml";
+            case "network.yml" -> "core/network/network.yml";
+            case "messages.yml" -> "core/messages/messages.yml";
+            default -> name;
+        };
+        return YamlConfiguration.loadConfiguration(new File("src/main/resources/" + resourcePath));
     }
 
     private static ConfigurationSection catalogue(String root) {

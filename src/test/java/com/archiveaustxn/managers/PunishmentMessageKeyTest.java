@@ -32,7 +32,7 @@ class PunishmentMessageKeyTest {
 
     @Test
     void theDeadPunishmentKeysAreNoLongerShipped() {
-        YamlConfiguration messages = load("src/main/resources/messages.yml");
+        YamlConfiguration messages = load("src/main/resources/core/messages/messages.yml");
         for (String key : REMOVED) {
             assertFalse(
                     messages.contains("PUNISHMENTS." + key),
@@ -56,7 +56,7 @@ class PunishmentMessageKeyTest {
 
     @Test
     void theKeysThatActuallyReachPlayersStayPut() {
-        YamlConfiguration messages = load("src/main/resources/messages.yml");
+        YamlConfiguration messages = load("src/main/resources/core/messages/messages.yml");
         for (String key : List.of("BAN", "BLACKLIST", "MUTE", "KICK", "VOICE-MUTE", "WARN-RECEIVED")) {
             assertTrue(
                     messages.contains("PUNISHMENTS." + key),
