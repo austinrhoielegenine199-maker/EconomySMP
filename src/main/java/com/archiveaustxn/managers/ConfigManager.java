@@ -1297,6 +1297,12 @@ public class ConfigManager {
                     continue;
                 }
                 String fileType = category.getString("FILE-TYPE", "").trim();
+                if (fileType.isBlank()) {
+                    fileType = defaultShopCategoryFile(key);
+                    if (!fileType.isBlank()) {
+                        category.set("FILE-TYPE", fileType);
+                    }
+                }
                 String menuSection = category.getString("OPEN-MENU", "").replace("{", "").replace("}", "").trim().toUpperCase(java.util.Locale.ROOT);
                 if (fileType.isBlank() || menuSection.isBlank() || !fileType.matches("[A-Za-z0-9_-]+\\.yml")) {
                     continue;
@@ -1337,6 +1343,23 @@ public class ConfigManager {
         }
     }
 
+    private String defaultShopCategoryFile(String categoryKey) {
+        if (categoryKey == null) {
+            return "";
+        }
+        return switch (categoryKey.trim().toUpperCase(java.util.Locale.ROOT)) {
+            case "END" -> "end.yml";
+            case "NETHER" -> "nether.yml";
+            case "GEAR" -> "gear.yml";
+            case "FOOD" -> "food.yml";
+            case "SHARD", "FLAKES" -> "flakes.yml";
+            case "EXTRA-1" -> "extra-1.yml";
+            case "EXTRA-2" -> "extra-2.yml";
+            case "EXTRA-3" -> "extra-3.yml";
+            default -> "";
+        };
+    }
+
     private FileConfiguration loadShopWithCategories(FileConfiguration configuration) {
         if (configuration == null) {
             return null;
@@ -1352,6 +1375,12 @@ public class ConfigManager {
                 continue;
             }
             String fileType = category.getString("FILE-TYPE", "").trim();
+            if (fileType.isBlank()) {
+                fileType = defaultShopCategoryFile(key);
+                if (!fileType.isBlank()) {
+                    category.set("FILE-TYPE", fileType);
+                }
+            }
             String menuSection = category.getString("OPEN-MENU", "").replace("{", "").replace("}", "").trim().toUpperCase(java.util.Locale.ROOT);
             if (fileType.isBlank() || menuSection.isBlank() || !fileType.matches("[A-Za-z0-9_-]+\\.yml")) {
                 continue;
