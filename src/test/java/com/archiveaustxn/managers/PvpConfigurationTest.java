@@ -16,7 +16,7 @@ class PvpConfigurationTest {
 
     private static YamlConfiguration pvp() throws Exception {
         YamlConfiguration configuration = new YamlConfiguration();
-        configuration.load(new File("src/main/resources/pvp.yml"));
+        configuration.load(new File("src/main/resources/core/pvp/pvp.yml"));
         return configuration;
     }
 

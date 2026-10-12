@@ -14,7 +14,7 @@ class OrdersConfigurationTest {
     @Test
     void donutStyleDefaultsAndOptionalIntegrationsParse() throws Exception {
         YamlConfiguration orders = new YamlConfiguration();
-        orders.load(Path.of("src/main/resources/orders.yml").toFile());
+        orders.load(Path.of("src/main/resources/core/orders/orders.yml").toFile());
 
         assertEquals("DEPOSIT_GUI", orders.getString("DELIVERY.MODE"));
         assertEquals(2304, orders.getInt("DELIVERY.MAX_DELIVER_PER_TRANSACTION"));
@@ -37,7 +37,7 @@ class OrdersConfigurationTest {
     @Test
     void privateMessageReceiverSoundConfigured() throws Exception {
         YamlConfiguration sounds = new YamlConfiguration();
-        sounds.load(Path.of("src/main/resources/sounds.yml").toFile());
+        sounds.load(Path.of("src/main/resources/core/sounds/sounds.yml").toFile());
         assertEquals("minecraft:entity.experience_orb.pickup|0.85|1.35", sounds.getString("MESSAGES.RECEIVER"));
     }
 
@@ -76,7 +76,7 @@ class OrdersConfigurationTest {
     @Test
     void filterConfigIncludesGildedBlackstoneAndAllWoolColors() throws Exception {
         YamlConfiguration filter = new YamlConfiguration();
-        filter.load(Path.of("src/main/resources/filter.yml").toFile());
+        filter.load(Path.of("src/main/resources/core/filter/filter.yml").toFile());
 
         List<String> blocks = filter.getStringList("Blocks");
         assertTrue(blocks.contains("GILDED_BLACKSTONE"), "filter.yml Blocks must contain GILDED_BLACKSTONE");

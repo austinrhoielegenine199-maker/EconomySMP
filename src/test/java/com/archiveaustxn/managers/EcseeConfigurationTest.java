@@ -26,7 +26,7 @@ class EcseeConfigurationTest {
         );
 
         YamlConfiguration enderChest = new YamlConfiguration();
-        enderChest.load(new File("src/main/resources/ender-chest.yml"));
+        enderChest.load(new File("src/main/resources/core/ender-chest/ender-chest.yml"));
 
         assertTrue(enderChest.getBoolean("ENDER-CHEST.ECSEE.ENABLED"));
         assertEquals(

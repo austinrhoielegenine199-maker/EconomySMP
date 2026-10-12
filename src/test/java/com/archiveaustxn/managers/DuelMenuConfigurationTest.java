@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class DuelMenuConfigurationTest {
 
     private YamlConfiguration loadDuels() {
-        return YamlConfiguration.loadConfiguration(new File("src/main/resources/duels.yml"));
+        return YamlConfiguration.loadConfiguration(new File("src/main/resources/core/duels/duels.yml"));
     }
 
     @Test

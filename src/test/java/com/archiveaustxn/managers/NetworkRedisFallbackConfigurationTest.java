@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class NetworkRedisFallbackConfigurationTest {
 
     private static YamlConfiguration network() {
-        return YamlConfiguration.loadConfiguration(new File("src/main/resources/network.yml"));
+        return YamlConfiguration.loadConfiguration(new File("src/main/resources/core/network/network.yml"));
     }
 
     @Test
