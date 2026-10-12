@@ -51,7 +51,7 @@ public class ProfileViewerHomesMenu extends BaseMenu {
     @Override
     public void build(Player player) {
         clear();
-        fill(Material.GRAY_STAINED_GLASS_PANE);
+        fill(Material.AIR);
         slotHomes.clear();
 
         snapshot = plugin.getProfileViewerManager().resolveProfile(targetUuid).orElse(null);
@@ -196,7 +196,7 @@ public class ProfileViewerHomesMenu extends BaseMenu {
                 : List.of("&7Close this home list.");
 
         set(BACK_SLOT, ItemUtils.createItem(
-                ItemUtils.parseMaterial(menus().getString(path + ".MATERIAL", "RED_STAINED_GLASS_PANE")),
+                ItemUtils.parseMaterial(menus().getString(path + ".MATERIAL", "BARRIER")),
                 menus().getString(path + ".DISPLAY-NAME", fallbackName),
                 defaultIfEmpty(menus().getStringList(path + ".LORE"), fallbackLore)
         ));
