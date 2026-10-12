@@ -28,7 +28,7 @@ Three things are deliberately left to the plugins that already do them.
 
 ## Setting one up
 
-Give yourself `ultimatedonutsmp.admin.pvp` and work through this in the world the arena lives in.
+Give yourself `economysmp.admin.pvp` and work through this in the world the arena lives in.
 
 ```
 /pvp create Arena
@@ -77,7 +77,7 @@ The rest of a kit is set from the command line:
 ```
 /pvp kit icon warrior NETHERITE_SWORD
 /pvp kit display warrior &cWarrior
-/pvp kit permission warrior ultimatedonutsmp.pvp.kit.warrior
+/pvp kit permission warrior economysmp.pvp.kit.warrior
 /pvp kit slot warrior 11
 ```
 
@@ -183,7 +183,7 @@ correctly long after the ladder has moved on.
 `/pvp assign` is the tester's menu. Click the two player slots to cycle through everyone online,
 click the middle slot to pick the kit, then confirm to start the match without either player having
 queued. `/pvp assign <player> <player> [kit]` does the same thing from the command line, which is
-what you want when running the same fixture repeatedly. Both need `ultimatedonutsmp.admin.pvp`.
+what you want when running the same fixture repeatedly. Both need `economysmp.admin.pvp`.
 
 Hits and crystals are counted separately during a match. A crystal explosion names the crystal as
 the damager rather than whoever set it off, so in a ranked match it is credited to the opponent,
@@ -309,7 +309,7 @@ BLOCKED_COMMANDS:
 
 A blocked entry covers its subcommands, so `shop` also blocks `/shop sell`, and a plugin-qualified
 form like `/otherplugin:shop` is caught too. `BLOCK_ENDER_CHEST_BLOCK` closes the other door into
-the ender chest, the block itself. Holders of `ultimatedonutsmp.admin.pvp` are exempt from all of
+the ender chest, the block itself. Holders of `economysmp.admin.pvp` are exempt from all of
 it.
 
 ---

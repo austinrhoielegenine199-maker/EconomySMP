@@ -28,7 +28,7 @@ Explore the complete feature guide and documentation pages:
   Requirements, server engine installation, storage setup (SQLite, MySQL, MongoDB), and Redis multi-server networking.
 
 - **[Commands & Permissions](Commands-and-Permissions)**  
-  Comprehensive reference table of all player and administrator commands, syntax, aliases, and permission nodes (`ultimatedonutsmp.command.*`, `ultimatedonutsmp.admin.*`).
+  Comprehensive reference table of all player and administrator commands, syntax, aliases, and permission nodes (`economysmp.command.*`, `economysmp.admin.*`).
 
 - **[Cuboids & Portals](Cuboids-and-Portals)**  
   Guide to region selections, `/cuboid` creation, binding regions to feature zones (Spawn, AFK, Shard Cuboids, RTP), and creating custom `/portal` triggers.
