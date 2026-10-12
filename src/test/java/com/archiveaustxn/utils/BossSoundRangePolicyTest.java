@@ -130,7 +130,7 @@ class BossSoundRangePolicyTest {
     void theShippedConfigLimitsBothSoundsToAHundredChunks() throws Exception {
         YamlConfiguration config = new YamlConfiguration();
         config.loadFromString(Files.readString(
-                new File("src/main/resources/config.yml").toPath(), StandardCharsets.UTF_8));
+                new File("src/main/resources/core/config/config.yml").toPath(), StandardCharsets.UTF_8));
 
         BossSoundRangePolicy policy = BossSoundRangePolicy.fromConfig(config);
 

@@ -169,7 +169,7 @@ class PlayerSettingsFeedbackTest {
     }
 
     private static YamlConfiguration loadMenusYaml() {
-        try (InputStream in = PlayerSettingsFeedbackTest.class.getClassLoader().getResourceAsStream("menus.yml")) {
+        try (InputStream in = PlayerSettingsFeedbackTest.class.getClassLoader().getResourceAsStream("core/gui/menus.yml")) {
             Objects.requireNonNull(in, "menus.yml resource not found");
             YamlConfiguration config = new YamlConfiguration();
             config.load(new InputStreamReader(in, StandardCharsets.UTF_8));

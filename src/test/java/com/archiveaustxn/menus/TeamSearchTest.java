@@ -18,7 +18,7 @@ class TeamSearchTest {
     @Test
     void teamMenuShipsASearchSignLikeTheOtherBrowseMenus() throws Exception {
         YamlConfiguration menus = new YamlConfiguration();
-        menus.load(Path.of("src/main/resources/menus.yml").toFile());
+        menus.load(Path.of("src/main/resources/core/gui/menus.yml").toFile());
 
         assertTrue(menus.isConfigurationSection("TEAM-MENUS.TEAM.SEARCH_SIGN"));
         assertEquals(0, menus.getInt("TEAM-MENUS.TEAM.SEARCH_SIGN.input-line"));

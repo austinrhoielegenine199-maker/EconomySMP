@@ -72,7 +72,7 @@ class SellMenuTest {
     @Test
     void shippedMenusYmlOpensTheSellMenuInConfirmMode() throws Exception {
         YamlConfiguration menus = new YamlConfiguration();
-        menus.load(Path.of("src/main/resources/menus.yml").toFile());
+        menus.load(Path.of("src/main/resources/core/gui/menus.yml").toFile());
 
         assertTrue(
                 SellMenu.isConfirmMode(menus.getString("SELL-MENU.MODE", "instant")),

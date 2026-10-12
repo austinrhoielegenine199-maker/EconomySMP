@@ -105,7 +105,12 @@ class MenuLoreDefaultsTest {
     private static YamlConfiguration load(String name) throws Exception {
         YamlConfiguration configuration = new YamlConfiguration();
         configuration.options().parseComments(true);
-        configuration.load(Path.of("src/main/resources", name).toFile());
+        String resourcePath = switch (name) {
+            case "shop.yml" -> "core/shop/shop.yml";
+            case "rtp.yml" -> "core/rtp/rtp.yml";
+            default -> "core/" + name;
+        };
+        configuration.load(Path.of("src/main/resources", resourcePath).toFile());
         return configuration;
     }
 }

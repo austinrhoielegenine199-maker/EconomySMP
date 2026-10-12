@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class PlayerSettingsMenuButtonCoverageTest {
 
     private static final Path MENU_SOURCE = Path.of(
-            "src", "main", "java", "com", "bx", "archiveaustxn", "menus", "PlayerSettingsMenu.java");
+            "src", "main", "java", "com", "archiveaustxn", "menus", "PlayerSettingsMenu.java");
 
     /** A {@code case} arm, including multi-label arms such as {@code case "A", "B" ->}. */
     private static final Pattern CASE_ARM =
@@ -79,7 +79,7 @@ class PlayerSettingsMenuButtonCoverageTest {
      */
     private static Set<String> bundledButtons() throws Exception {
         YamlConfiguration menus = new YamlConfiguration();
-        menus.load(Path.of("src/main/resources", "menus.yml").toFile());
+        menus.load(Path.of("src/main/resources", "core/gui/menus.yml").toFile());
 
         ConfigurationSection buttons = menus.getConfigurationSection("SETTINGS-MENU.BUTTONS");
         assertNotNull(buttons);

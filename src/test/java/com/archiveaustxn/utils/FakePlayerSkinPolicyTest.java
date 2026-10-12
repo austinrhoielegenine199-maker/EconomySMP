@@ -32,7 +32,7 @@ class FakePlayerSkinPolicyTest {
     @Test
     void bundledStaffModeLeavesCreatorSkinsOn() throws Exception {
         YamlConfiguration config = new YamlConfiguration();
-        config.load(Path.of("src/main/resources", "staff-mode.yml").toFile());
+        config.load(Path.of("src/main/resources", "core/staff-mode/staff-mode.yml").toFile());
 
         assertFalse(config.getBoolean("FAKE-PLAYER.USE-DEFAULT-SKIN", true),
                 "staff-mode.yml must ship USE-DEFAULT-SKIN as false so a config restore keeps copying the staff member");

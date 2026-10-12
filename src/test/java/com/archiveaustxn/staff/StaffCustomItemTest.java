@@ -193,7 +193,7 @@ class StaffCustomItemTest {
     @Test
     void bundledExampleIsValidAndShipsDisabled() throws Exception {
         YamlConfiguration config = new YamlConfiguration();
-        config.load(Path.of("src/main/resources", "staff-mode.yml").toFile());
+        config.load(Path.of("src/main/resources", "core/staff-mode/staff-mode.yml").toFile());
 
         assertNotNull(config.getConfigurationSection("CUSTOM-ITEMS"),
                 "staff-mode.yml must document the CUSTOM-ITEMS section");

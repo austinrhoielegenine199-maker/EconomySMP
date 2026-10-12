@@ -74,7 +74,7 @@ class RanksMenuTest {
 
     @Test
     void theCommentedHeadTextureHintSurvivesAConfigRewrite() throws Exception {
-        String bundled = Files.readString(Path.of("src/main/resources/menus.yml"), StandardCharsets.UTF_8);
+        String bundled = Files.readString(Path.of("src/main/resources/core/gui/menus.yml"), StandardCharsets.UTF_8);
         assertTrue(bundled.contains("# HEAD-TEXTURE:"),
                 "menus.yml must keep the commented HEAD-TEXTURE hint so owners can find the option");
 
@@ -118,7 +118,7 @@ class RanksMenuTest {
 
         YamlConfiguration config = new YamlConfiguration();
         config.options().parseComments(true);
-        config.load(Path.of("src/main/resources/config.yml").toFile());
+        config.load(Path.of("src/main/resources/core/config/config.yml").toFile());
         assertTrue(config.contains("COMMANDS.RANKS"),
                 "config.yml must ship COMMANDS.RANKS so the feature toggle can disable the menu");
     }
@@ -126,7 +126,7 @@ class RanksMenuTest {
     private static YamlConfiguration loadMenus() throws Exception {
         YamlConfiguration menus = new YamlConfiguration();
         menus.options().parseComments(true);
-        menus.load(Path.of("src/main/resources/menus.yml").toFile());
+        menus.load(Path.of("src/main/resources/core/gui/menus.yml").toFile());
         return menus;
     }
 }
