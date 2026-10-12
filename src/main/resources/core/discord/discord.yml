@@ -178,3 +178,20 @@ ACCOUNT_LINKING:
   EXPIRES: 10m
   # Code length; values are clamped to 4-16 characters.
   CODE_LENGTH: 6
+
+# Settings consumed by discord-bot-example/src/index.js.
+# Prefer environment variables for production secrets. If configured here, protect this file
+# from public access and never commit a real bot token to the repository.
+BOT:
+  # Discord bot token. Keep blank here and set DISCORD_TOKEN in .env for safer deployments.
+  TOKEN: ''
+  # Discord application/client ID.
+  CLIENT_ID: ''
+  # Optional test guild ID; blank deploys commands globally.
+  GUILD_ID: ''
+  # Optional channel for ranked PvP match result embeds.
+  PVP_MATCH_CHANNEL_ID: ''
+  # Polling interval for match results, in seconds.
+  PVP_MATCH_POLL_SECONDS: 15
+  # Bot-owned link database file, relative to discord-bot-example unless absolute.
+  LINKS_FILE: data/links.db
