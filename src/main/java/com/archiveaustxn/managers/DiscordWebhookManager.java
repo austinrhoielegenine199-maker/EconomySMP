@@ -2,6 +2,8 @@ package com.archiveaustxn.managers;
 
 import com.archiveaustxn.EconomySMP;
 import com.archiveaustxn.models.PunishmentRecord;
+import com.archiveaustxn.models.AuctionListing;
+import com.archiveaustxn.models.Order;
 import com.archiveaustxn.utils.NumberUtils;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import org.bukkit.inventory.ItemStack;
 import java.util.logging.Level;
 
 public class DiscordWebhookManager {
@@ -48,6 +51,43 @@ public class DiscordWebhookManager {
         Map<String, String> placeholders = basePunishmentPlaceholders(record);
         placeholders.put("%type%", plugin.getPunishmentManager().getDisplayType(record));
         sendMessage(messageKey, placeholders, record.getTargetUuid());
+    }
+
+    public void sendAuctionListed(AuctionListing listing) {
+        if (listing == null || listing.item() == null) {
+            return;
+        }
+        Map<String, String> placeholders = new HashMap<>();
+        placeholders.put("%player%", fallback(listing.sellerName(), "unknown"));
+        placeholders.put("%uuid%", listing.sellerUuid() == null ? "" : listing.sellerUuid().toString());
+        placeholders.put("%id%", String.valueOf(listing.id()));
+        placeholders.put("%item%", displayItem(listing.item()));
+        placeholders.put("%amount%", String.valueOf(listing.item().getAmount()));
+        placeholders.put("%price%", plugin.getCurrencyManager().formatMoney(listing.price()));
+        placeholders.put("%category%", fallback(listing.category(), "ALL"));
+        placeholders.put("%expires%", formatDate(listing.expiresAt()));
+        sendMessage("AUCTION_LISTED", placeholders, listing.sellerUuid());
+    }
+
+    public void sendOrderCreated(Order order) {
+        if (order == null || order.requestedItem() == null) {
+            return;
+        }
+        Map<String, String> placeholders = new HashMap<>();
+        placeholders.put("%player%", fallback(order.ownerName(), "unknown"));
+        placeholders.put("%uuid%", order.ownerUuid() == null ? "" : order.ownerUuid().toString());
+        placeholders.put("%id%", String.valueOf(order.id()));
+        placeholders.put("%item%", displayItem(order.requestedItem()));
+        placeholders.put("%quantity%", String.valueOf(order.requestedQuantity()));
+        placeholders.put("%price%", plugin.getCurrencyManager().formatMoney(order.priceEach()));
+        placeholders.put("%total%", plugin.getCurrencyManager().formatMoney(order.totalBudget()));
+        placeholders.put("%category%", fallback(order.categoryKey(), "ALL"));
+        placeholders.put("%expires%", formatDate(order.expiresAt()));
+        sendMessage("ORDER_CREATED", placeholders, order.ownerUuid());
+    }
+
+    private String displayItem(ItemStack item) {
+        return item.getType().name().toLowerCase(Locale.ROOT).replace('_', ' ');
     }
 
     public void reload() {
