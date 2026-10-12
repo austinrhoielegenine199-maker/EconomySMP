@@ -62,7 +62,7 @@ public class OrdersDepositMenu extends BaseMenu {
                 plugin,
                 "GUI.DELIVERY_DEPOSIT.BUTTONS.CONFIRM",
                 "ORDERS.GUI.DEPOSIT.CONFIRM",
-                Material.LIME_STAINED_GLASS_PANE,
+                Material.AIR,
                 "&aConfirm delivery",
                 List.of(
                         "&fPlace matching items in this menu.",
