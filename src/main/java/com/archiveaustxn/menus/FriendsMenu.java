@@ -164,7 +164,7 @@ public class FriendsMenu extends BaseMenu {
 
         // 5. Build bottom row buttons (45 to 53)
         for (int s = 45; s <= 53; s++) {
-            set(s, new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
+            set(s, new ItemStack(Material.AIR));
         }
 
         // Previous Page (45)
