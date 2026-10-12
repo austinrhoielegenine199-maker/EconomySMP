@@ -562,6 +562,9 @@ public final class AuctionHouseManager {
                     if (plugin.getServerNotificationManager() != null) {
                         plugin.getServerNotificationManager().announceAuctionListing(seller, created.listing());
                     }
+                    if (plugin.getDiscordWebhookManager() != null) {
+                        plugin.getDiscordWebhookManager().sendAuctionListed(created.listing());
+                    }
                     result.complete(new CreateListingResult(true, null, created.listing(), listingFee));
                 });
             } finally {
