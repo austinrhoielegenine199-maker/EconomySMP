@@ -105,7 +105,7 @@ public class HideListMenu extends BaseMenu {
 
     private void renderNavigation(int total) {
         for (int slot = 45; slot < 54; slot++) {
-            set(slot, ItemUtils.createItem(Material.BLACK_STAINED_GLASS_PANE, " ", List.of()));
+            set(slot, ItemUtils.createItem(Material.AIR, " ", List.of()));
         }
         if (page > 0) {
             set(45, ItemUtils.createItem(Material.ARROW, "&bPrevious page", List.of()));
