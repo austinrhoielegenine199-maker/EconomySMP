@@ -25,16 +25,16 @@ FREEZE:
   SERVER-NAME: survival-01
 
   # Required permission node to execute /freeze
-  STAFF-PERMISSION: ultimatedonutsmp.staff.freeze
+  STAFF-PERMISSION: economysmp.staff.freeze
 
   # Permission node to receive staff freeze broadcast alerts
-  ALERT-PERMISSION: ultimatedonutsmp.staff.freeze.alert
+  ALERT-PERMISSION: economysmp.staff.freeze.alert
 
   # Permission node granting exemption from being frozen
-  EXEMPT-PERMISSION: ultimatedonutsmp.staff.freeze.exempt
+  EXEMPT-PERMISSION: economysmp.staff.freeze.exempt
 
   # Permission node to reload/administer freeze system
-  ADMIN-PERMISSION: ultimatedonutsmp.admin.freeze
+  ADMIN-PERMISSION: economysmp.admin.freeze
 
   # Commands allowed for frozen players (e.g., messaging staff or discord)
   ALLOWED-COMMANDS:

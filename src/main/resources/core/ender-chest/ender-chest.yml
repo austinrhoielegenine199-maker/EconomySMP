@@ -15,7 +15,7 @@ ENDER-CHEST:
   # Determines whether Command Requires Permission is enabled or disabled. Available options: true, false
   COMMAND-REQUIRES-PERMISSION: false
   # The text or value for Permission. Available options: Any valid string text
-  PERMISSION: ultimatedonutsmp.enderchest
+  PERMISSION: economysmp.enderchest
   # The numerical value for Auto Save Ticks. Available options: Any valid integer
   AUTO-SAVE-TICKS: 1200
   # Per-rank Ender Chest size resolved from permissions
@@ -29,20 +29,20 @@ ENDER-CHEST:
     # Available options: KEEP-SIZE, RETURN-ITEMS
     ON-DOWNGRADE: KEEP-SIZE
     # Explicit mapping from permission node to Ender Chest rows
-    # Players can also be given ultimatedonutsmp.enderchest.rows.<1-6> directly, for example
-    # ultimatedonutsmp.enderchest.rows.4 for a 36 slot chest
+    # Players can also be given economysmp.enderchest.rows.<1-6> directly, for example
+    # economysmp.enderchest.rows.4 for a 36 slot chest
     # The highest value the player has wins
     # Players without any of these permissions keep DEFAULT-ROWS above
     PERMISSIONS:
-      "ultimatedonutsmp.enderchest.rows.vip++": 6
-      "ultimatedonutsmp.enderchest.rows.vip+": 5
-      "ultimatedonutsmp.enderchest.rows.vip": 4
+      "economysmp.enderchest.rows.vip++": 6
+      "economysmp.enderchest.rows.vip+": 5
+      "economysmp.enderchest.rows.vip": 4
   # Configuration section for Ecsee.
   ECSEE:
     # Determines whether Enabled is enabled or disabled. Available options: true, false
     ENABLED: true
     # The text or value for Permission. Available options: Any valid string text
-    PERMISSION: ultimatedonutsmp.admin.ecsee
+    PERMISSION: economysmp.admin.ecsee
     # The numerical value for Auto Refresh Ticks. Available options: Any valid integer
     AUTO-REFRESH-TICKS: 20
     # Determines whether staff can edit other players' ender chests. Available options: true, false
