@@ -1,42 +1,27 @@
-# ==============================================================================
-# UltimateDonutSMP - Freeze System Configuration
-# ==============================================================================
 
 FREEZE:
-  # Enable or disable the freeze system globally (true / false)
   ENABLED: true
 
-  # Preserve frozen status across player logouts (true / false)
   PERSIST-ON-QUIT: true
 
-  # Preserve frozen status across server restarts (true / false)
   PERSIST-ON-RESTART: true
 
-  # Allow frozen players to look around (true / false)
   ALLOW-LOOK: true
 
-  # Interval in ticks between periodic freeze alert messages sent to frozen players (20 ticks = 1s)
   ALERT-INTERVAL-TICKS: 100
 
-  # Log freeze system actions to console/database (true / false)
   LOG-USAGE: true
 
-  # Server identifier used in quit broadcast alerts
   SERVER-NAME: survival-01
 
-  # Required permission node to execute /freeze
   STAFF-PERMISSION: economysmp.staff.freeze
 
-  # Permission node to receive staff freeze broadcast alerts
   ALERT-PERMISSION: economysmp.staff.freeze.alert
 
-  # Permission node granting exemption from being frozen
   EXEMPT-PERMISSION: economysmp.staff.freeze.exempt
 
-  # Permission node to reload/administer freeze system
   ADMIN-PERMISSION: economysmp.admin.freeze
 
-  # Commands allowed for frozen players (e.g., messaging staff or discord)
   ALLOWED-COMMANDS:
     - /discord
     - /social
@@ -44,16 +29,12 @@ FREEZE:
     - /r
     - /helpop
 
-  # Display tag for active freeze status
   STATUS_ON: '&a&lON'
 
-  # Display tag for inactive freeze status
   STATUS_OFF: '&c&lOFF'
 
-  # Toggle feedback message sent to staff (%player% and %status% placeholders)
   MESSAGE: '&bFreeze &a%player% &7is now %status%'
 
-  # Periodic notification screen broadcast to frozen players
   ALERT:
     - ''
     - '&c&lYou''re currently frozen!'
@@ -64,10 +45,8 @@ FREEZE:
     - '&6&ohttps://discord.com'
     - ''
 
-  # Alert broadcast to staff when a frozen player leaves the server
   QUIT_MESSAGE: '&c[Freeze] &4%player% &cleft while frozen on &4%server%'
 
-# System and user feedback messages
 MESSAGES:
   NO-PERMISSION: '&cYou do not have permission.'
   FEATURE-DISABLED: '&cThe Freeze system is disabled.'
