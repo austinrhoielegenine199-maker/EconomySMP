@@ -88,7 +88,7 @@ public class StaffListMenu extends BaseMenu {
 
     private void render(Player viewer) {
         clear();
-        fill(plugin.getStaffModeManager().getMenuPlaceholderMaterial(MENU_KEY, Material.GRAY_STAINED_GLASS_PANE));
+        fill(plugin.getStaffModeManager().getMenuPlaceholderMaterial(MENU_KEY, Material.AIR));
         slotTargets.clear();
 
         int refreshSlot = plugin.getStaffModeManager().getMenuRefreshSlot(MENU_KEY);
