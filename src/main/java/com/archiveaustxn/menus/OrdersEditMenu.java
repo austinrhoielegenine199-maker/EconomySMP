@@ -47,7 +47,7 @@ public class OrdersEditMenu extends BaseMenu {
 
         OrdersManager manager = plugin.getOrdersManager();
         Order order = manager.getOrder(orderId);
-        set(18, ItemUtils.createItem(Material.AIR, "&cBack", List.of("&7Return to the previous menu")));
+        set(18, ItemUtils.createItem(Material.BARRIER, "&cBack", List.of("&7Return to the previous menu")));
 
         if (order == null) {
             set(13, ItemUtils.createItem(
