@@ -58,7 +58,7 @@ public final class FilterGui extends BaseMenu {
                     plugin,
                     "GUI.FILTER.CATEGORY",
                     selected
-                            ? Material.AIR
+                            ? Material.EMERALD
                             : plugin.getAuctionHouseManager().getCategoryIcon(category),
                     (selected ? "&a" : "&f")
                             + plugin.getAuctionHouseManager().getCategoryDisplayName(category),
