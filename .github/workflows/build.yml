@@ -49,7 +49,7 @@ jobs:
       - name: Upload Shaded Jar
         uses: actions/upload-artifact@v7
         with:
-          name: UltimateDonutSmp-${{ steps.metadata.outputs.version }}
+          name: EconomySMP.jar
           path: target/EconomySMP.jar
           if-no-files-found: error
 
@@ -64,9 +64,9 @@ jobs:
         uses: softprops/action-gh-release@v3
         with:
           tag_name: "v${{ steps.metadata.outputs.version }}-pre"
-          name: "UltimateDonutSMP v${{ steps.metadata.outputs.version }}-pre (nightly)"
+          name: "EconomySMP v${{ steps.metadata.outputs.version }}-pre (nightly)"
           body: |
-            ### UltimateDonutSMP v${{ steps.metadata.outputs.version }}-pre
+            ### EconomySMP v${{ steps.metadata.outputs.version }}-pre
             This is an automated pre-release build, updated in place on every push to `main`.
 
             - **Commit:** ${{ github.sha }}
