@@ -1132,6 +1132,9 @@ public class OrdersManager {
         if (plugin.getServerNotificationManager() != null) {
             plugin.getServerNotificationManager().announceOrderCreated(player, created);
         }
+        if (plugin.getDiscordWebhookManager() != null) {
+            plugin.getDiscordWebhookManager().sendOrderCreated(created);
+        }
         return new CreateOrderResult(true, null, created, creationFee);
     }
 
