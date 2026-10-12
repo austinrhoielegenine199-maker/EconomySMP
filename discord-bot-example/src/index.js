@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { loadCoreDiscordConfig } from './core-discord-config.js';
 import { Client, Events, GatewayIntentBits, MessageFlags } from 'discord.js';
 import { createPlayerRepository, leaderboardTypes } from './database.js';
 import { createPvpRepository, tierLeaderboardTypes } from './pvp.js';
@@ -7,6 +8,8 @@ import { createLeaderboardEmbed, createStatsEmbed } from './embeds.js';
 import { createCompetitiveStatsEmbed, createTierLeaderboardEmbed } from './pvp-embeds.js';
 import { createMatchWatcher } from './match-watcher.js';
 import { registerCommands } from './register-commands.js';
+
+loadCoreDiscordConfig();
 
 const token = process.env.DISCORD_TOKEN;
 
