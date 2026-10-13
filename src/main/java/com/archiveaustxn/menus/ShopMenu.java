@@ -374,7 +374,7 @@ public class ShopMenu extends BaseMenu {
         );
 
         String normalizedLine = ColorUtils.normalizeLabel(line);
-        if ((normalizedLine.contains("buy price:") || normalizedLine.contains("harga beli:")) && !line.contains("{price")) {
+        if ((normalizedLine.contains("buy price:") || normalizedLine.contains("harga beli:")) && !line.contains("{price") && !line.contains("%price%") && !line.contains("${price")) {
             int colonIndex = line.indexOf(':');
             if (colonIndex >= 0) {
                 return line.substring(0, colonIndex + 1) + " " + formattedPrice;
