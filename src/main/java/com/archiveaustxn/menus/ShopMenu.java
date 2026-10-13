@@ -392,7 +392,12 @@ public class ShopMenu extends BaseMenu {
     }
 
     private void buildBackButton() {
-        ConfigurationSection backButton = config().getConfigurationSection("BACK-BUTTON");
+        ConfigurationSection backButton = favoritesMenu
+                ? null
+                : config().getConfigurationSection(menuPath() + ".BACK-BUTTON");
+        if (backButton == null) {
+            backButton = config().getConfigurationSection("BACK-BUTTON");
+        }
         if (backButton == null) {
             return;
         }
@@ -486,7 +491,7 @@ public class ShopMenu extends BaseMenu {
     }
 
     private int getBackSlot() {
-        return config().getInt(menuPath() + ".BACK-BUTTON-SLOT", inventory.getSize() - 9);
+        return config().getInt(menuPath() + ".BACK-BUTTON.SLOT", config().getInt(menuPath() + ".BACK-BUTTON-SLOT", inventory.getSize() - 9));
     }
 
     private int getFirstPageSlot() {
@@ -568,7 +573,7 @@ public class ShopMenu extends BaseMenu {
             return config.getString("SHOP-GUI.FAVORITES.MENU.TITLE", "&8Favorite shop items");
         }
         if (menuSection == null) {
-            return config.getString("CATEGORIES.MENU-TITLE", "&8Shop");
+            return config.getString("title", config.getString("CATEGORIES.MENU-TITLE", "&8Shop"));
         }
         return config.getString(menuSection + ".TITLE", "&8Shop");
     }
@@ -579,7 +584,7 @@ public class ShopMenu extends BaseMenu {
         if (favoritesMenu) {
             configured = config.getInt("SHOP-GUI.FAVORITES.MENU.SIZE", 54);
         } else if (menuSection == null) {
-            configured = config.getInt("CATEGORIES.MENU-SIZE", 27);
+            configured = config.getInt("size", config.getInt("CATEGORIES.MENU-SIZE", 27));
             int highestCategorySlot = -1;
             for (ShopManager.ShopCategory category : plugin.getShopManager().loadCategories()) {
                 highestCategorySlot = Math.max(highestCategorySlot, category.slot());
