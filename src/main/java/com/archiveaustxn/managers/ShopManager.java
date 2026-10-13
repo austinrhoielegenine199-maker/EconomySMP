@@ -519,6 +519,14 @@ public class ShopManager {
         List<ShopCategory> categories = new ArrayList<>();
         for (String key : orderedKeys) {
             ConfigurationSection section = categoriesSection.getConfigurationSection(key);
+            if (section == null) {
+                for (String configuredKey : categoriesSection.getKeys(false)) {
+                    if (configuredKey.equalsIgnoreCase(key)) {
+                        section = categoriesSection.getConfigurationSection(configuredKey);
+                        break;
+                    }
+                }
+            }
             if (section == null || !section.getBoolean("ENABLED", true)) {
                 continue;
             }
@@ -527,7 +535,7 @@ public class ShopManager {
                     key,
                     normalizeMenuSection(section.getString("OPEN-MENU"), key),
                     ItemUtils.parseMaterial(section.getString("MATERIAL", "STONE")),
-                    section.getString("DISPLAY-NAME", key),
+                    section.getString("DISPLAY-NAME", ""),
                     section.getStringList("LORE"),
                     section.getInt("SLOT", 0)
             ));
@@ -579,7 +587,7 @@ public class ShopManager {
                     key,
                     menuSection,
                     material,
-                    itemSec.getString("DISPLAY-NAME", key),
+                    itemSec.getString("DISPLAY-NAME", ""),
                     itemSec.getStringList("LORE"),
                     itemSec.getInt("SLOT", 0),
                     itemSec.getDouble("PRICE-PER-UNIT", 0),
