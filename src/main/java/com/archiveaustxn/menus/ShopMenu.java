@@ -175,9 +175,13 @@ public class ShopMenu extends BaseMenu {
     private void buildMainMenu(Player player) {
         List<ShopManager.ShopCategory> categories = plugin.getShopManager().loadCategories();
         for (ShopManager.ShopCategory category : categories) {
+            String categoryName = category.displayName();
+            if (categoryName == null || ColorUtils.strip(categoryName).isBlank()) {
+                categoryName = plugin.getWorthManager().prettifyMaterial(category.material());
+            }
             set(category.slot(), ItemUtils.createItem(
                     category.material(),
-                    plugin.getCurrencyManager().applyStaticPlaceholders(category.displayName()),
+                    plugin.getCurrencyManager().applyStaticPlaceholders(categoryName),
                     plugin.getCurrencyManager().applyStaticPlaceholders(category.lore())
             ));
             slotCategories.put(category.slot(), category);
