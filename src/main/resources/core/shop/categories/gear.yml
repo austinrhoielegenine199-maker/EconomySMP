@@ -1,61 +1,74 @@
-row: 3
+title: "ѕʜᴏᴘ - ɢᴇᴀʀ"
+size: 27
 
-GEAR-MENU:
-  TITLE: '&8gear - shop'
-  SIZE: 27
-  OBSIDIAN-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: OBSIDIAN
-    SLOT: 9
-    PRICE-PER-UNIT: 100
-    LORE:
-    - '&fBuy price: &a$100'
-  END-CRYSTAL-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: END_CRYSTAL
-    SLOT: 10
-    PRICE-PER-UNIT: 350
-    LORE:
-    - '&fBuy price: &a$350'
-  RESPAWN-ANCHOR-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: RESPAWN_ANCHOR
-    SLOT: 11
-    PRICE-PER-UNIT: 1000
-    LORE:
-    - '&fBuy price: &a$1000'
-  GLOWSTONE-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: GLOWSTONE
-    SLOT: 12
-    PRICE-PER-UNIT: 100
-    LORE:
-    - '&fBuy price: &a$100'
-  TOTEM-OF-UNDYING-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: TOTEM_OF_UNDYING
-    SLOT: 13
-    PRICE-PER-UNIT: 1250
-    LORE:
-    - '&fBuy price: &a$1250'
-  ENDER-PEARL-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: ENDER_PEARL
-    SLOT: 14
-    PRICE-PER-UNIT: 75
-    LORE:
-    - '&fBuy price: &a$75'
-  GOLDEN-APPLE-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: GOLDEN_APPLE
-    SLOT: 15
-    PRICE-PER-UNIT: 250
-    LORE:
-    - '&fBuy price: &a$250'
-  BOTTLE-O-ENCHANTING-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: EXPERIENCE_BOTTLE
-    SLOT: 16
-    PRICE-PER-UNIT: 100
-    LORE:
-    - '&fBuy price: &a$100'
+items:
+  obsidian:
+    material: OBSIDIAN
+    slot: 9
+    amount: 1
+    price: 100
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  end_crystal:
+    material: END_CRYSTAL
+    slot: 10
+    amount: 1
+    price: 350
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  respawn_anchor:
+    material: RESPAWN_ANCHOR
+    slot: 11
+    amount: 1
+    price: 1000
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  glowstone:
+    material: GLOWSTONE
+    slot: 12
+    amount: 1
+    price: 100
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  totem_of_undying:
+    material: TOTEM_OF_UNDYING
+    slot: 13
+    amount: 1
+    price: 1250
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  ender_pearl:
+    material: ENDER_PEARL
+    slot: 14
+    amount: 1
+    price: 75
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  golden_apple:
+    material: GOLDEN_APPLE
+    slot: 15
+    amount: 1
+    price: 250
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  experience_bottle:
+    material: EXPERIENCE_BOTTLE
+    slot: 16
+    amount: 1
+    price: 100
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+back:
+  material: RED_STAINED_GLASS_PANE
+  slot: 18
+  name: "#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "#FFFFFFClick to return"
