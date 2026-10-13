@@ -1403,12 +1403,55 @@ public class ConfigManager {
 
                 YamlConfiguration categoryConfig = loadYamlFile(categoryFile);
                 ConfigurationSection menu = categoryConfig.getConfigurationSection(menuSection);
-                if (menu == null) {
-                    plugin.getLogger().warning("Shop category file " + fileType + " does not contain " + menuSection + ".");
+                configuration.set(menuSection, null);
+                if (menu != null) {
+                    copySection(configuration, menuSection, menu);
+                } else if (categoryConfig.isConfigurationSection("items")) {
+                    // Modern, concise category YAML format: title/size/items/back.
+                    configuration.set(menuSection + ".TITLE", categoryConfig.getString("title", "&8Shop"));
+                    configuration.set(menuSection + ".SIZE", categoryConfig.getInt("size", 27));
+                    configuration.set(menuSection + ".CURRENCY", categoryConfig.getString("currency", "MONEY"));
+                    ConfigurationSection items = categoryConfig.getConfigurationSection("items");
+                    if (items != null) {
+                        for (String itemKey : items.getKeys(false)) {
+                            ConfigurationSection item = items.getConfigurationSection(itemKey);
+                            if (item == null) {
+                                continue;
+                            }
+                            String itemPath = menuSection + ".ITEMS." + itemKey;
+                            int bundleAmount = Math.max(1, item.getInt("amount", 1));
+                            double bundlePrice = item.getDouble("price", item.getDouble("price-per-unit", 0D));
+                            configuration.set(itemPath + ".MATERIAL", item.getString("material", "STONE"));
+                            configuration.set(itemPath + ".SLOT", item.getInt("slot", 0));
+                            configuration.set(itemPath + ".LORE", item.getStringList("lore"));
+                            configuration.set(itemPath + ".PRICE-PER-UNIT", bundlePrice / bundleAmount);
+                            configuration.set(itemPath + ".DEFAULT-QUANTITY", bundleAmount);
+                            if (item.contains("currency")) {
+                                configuration.set(itemPath + ".CURRENCY", item.getString("currency"));
+                            }
+                            if (item.contains("command")) {
+                                configuration.set(itemPath + ".COMMAND", item.getString("command"));
+                            }
+                            if (item.contains("give-item")) {
+                                configuration.set(itemPath + ".GIVE-ITEM", item.getBoolean("give-item"));
+                            }
+                            if (item.contains("name")) {
+                                configuration.set(itemPath + ".DISPLAY-NAME", item.getString("name"));
+                            }
+                        }
+                    }
+                    ConfigurationSection back = categoryConfig.getConfigurationSection("back");
+                    if (back != null) {
+                        String backPath = menuSection + ".BACK-BUTTON";
+                        configuration.set(backPath + ".MATERIAL", back.getString("material", "BARRIER"));
+                        configuration.set(backPath + ".SLOT", back.getInt("slot", 18));
+                        configuration.set(backPath + ".DISPLAY-NAME", back.getString("name", "&cBack"));
+                        configuration.set(backPath + ".LORE", back.getStringList("lore"));
+                    }
+                } else {
+                    plugin.getLogger().warning("Shop category file " + fileType + " does not contain " + menuSection + " or a modern items section.");
                     continue;
                 }
-                configuration.set(menuSection, null);
-                copySection(configuration, menuSection, menu);
             } catch (IOException | InvalidConfigurationException exception) {
                 plugin.getLogger().log(Level.WARNING, "Failed to load shop category file " + fileType + ".", exception);
             }
