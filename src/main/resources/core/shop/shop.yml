@@ -1,69 +1,61 @@
 CATEGORIES:
   MENU-TITLE: '&8Shop'
   MENU-SIZE: 27
-  END:
+  end:
     FILE-TYPE: end.yml
     MATERIAL: END_STONE
-    DISPLAY-NAME: '&#6BF18DEnd'
     SLOT: 11
     LORE:
     - '&fClick to view the end shop'
     OPEN-MENU: '{end-menu}'
-  NETHER:
+  nether:
     FILE-TYPE: nether.yml
     MATERIAL: NETHERRACK
-    DISPLAY-NAME: '&#6BF18DNether'
     SLOT: 12
     LORE:
     - '&fClick to view the nether shop'
     OPEN-MENU: '{nether-menu}'
-  GEAR:
+  gear:
     FILE-TYPE: gear.yml
     MATERIAL: TOTEM_OF_UNDYING
-    DISPLAY-NAME: '&#6BF18DGear'
     SLOT: 13
     LORE:
     - '&fClick to view the gear shop'
     OPEN-MENU: '{gear-menu}'
-  FOOD:
+  food:
     FILE-TYPE: food.yml
     MATERIAL: COOKED_BEEF
-    DISPLAY-NAME: '&#6BF18DFood'
     SLOT: 14
     LORE:
     - '&fClick to view the food shop'
     OPEN-MENU: '{food-menu}'
-  SHARD:
+  shard:
     FILE-TYPE: flakes.yml
     MATERIAL: AMETHYST_SHARD
-    DISPLAY-NAME: '&#6BF18DShard shop'
     SLOT: 15
     LORE:
     - '&fClick to view the shard shop'
     OPEN-MENU: '{shard-menu}'
-  EXTRA-1:
+  extra-1:
     FILE-TYPE: extra-1.yml
     ENABLED: false
     MATERIAL: DIAMOND_ORE
-    DISPLAY-NAME: '&#6BF18DExtra Menu (1)'
     SLOT: 22
     LORE:
     - '&fClick to view extra menu'
     OPEN-MENU: '{extra-1-menu}'
-  EXTRA-2:
+  extra-2:
     FILE-TYPE: extra-2.yml
     ENABLED: false
     MATERIAL: IRON_ORE
-    DISPLAY-NAME: '&#6BF18DExtra Menu (2)'
     SLOT: 23
     LORE:
     - '&fClick to view extra menu'
     OPEN-MENU: '{extra-2-menu}'
-  EXTRA-3:
+  extra-3:
     FILE-TYPE: extra-3.yml
     ENABLED: false
     MATERIAL: GOLD_ORE
-    DISPLAY-NAME: '&#6BF18DExtra Menu (3)'
     SLOT: 24
     LORE:
     - '&fClick to view extra menu'
