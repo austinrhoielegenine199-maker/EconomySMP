@@ -1,72 +1,82 @@
-row: 3
+title: "ѕʜᴏᴘ - ᴇɴᴅ"
+size: 27
 
-END-MENU:
-  CURRENCY: MONEY
-  TITLE: '&8shop - end'
-  SIZE: 27
-  ENDER-CHEST-ITEM:
-    MATERIAL: ENDER_CHEST
-    SLOT: 9
-    PRICE-PER-UNIT: 2500.0
-    LORE:
-    - '&fBuy price: &a$2,500'
-    COMMAND: ''
-  ENDER-PEARL-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: ENDER_PEARL
-    SLOT: 10
-    PRICE-PER-UNIT: 75.0
-    LORE:
-    - '&fBuy price: &a$75'
-    COMMAND: ''
-  END-STONE-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: END_STONE
-    SLOT: 11
-    PRICE-PER-UNIT: 8.0
-    LORE:
-    - '&fBuy price: &a$8'
-    COMMAND: ''
-  DRAGON-BREATH-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: DRAGON_BREATH
-    SLOT: 12
-    PRICE-PER-UNIT: 1000.0
-    LORE:
-    - '&fBuy price: &a$1,000'
-    COMMAND: ''
-  END-ROD-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: END_ROD
-    SLOT: 13
-    PRICE-PER-UNIT: 100.0
-    LORE:
-    - '&fBuy price: &a$100'
-  CHORUS-FRUIT-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: CHORUS_FRUIT
-    SLOT: 14
-    PRICE-PER-UNIT: 25.0
-    LORE:
-    - '&fBuy price: &a$25'
-  POPPED-CHORUS-FRUIT-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: POPPED_CHORUS_FRUIT
-    SLOT: 15
-    PRICE-PER-UNIT: 15.0
-    LORE:
-    - '&fBuy price: &a$15'
-  SHULKER-SHELL-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: SHULKER_SHELL
-    SLOT: 16
-    PRICE-PER-UNIT: 350.0
-    LORE:
-    - '&fBuy price: &a$350'
-  SHULKER-BOX-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: SHULKER_BOX
-    SLOT: 17
-    PRICE-PER-UNIT: 800.0
-    LORE:
-    - '&fBuy price: &a$800'
+items:
+  ender_chest:
+    material: ENDER_CHEST
+    slot: 9
+    amount: 1
+    price: 2500
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  ender_pearl:
+    material: ENDER_PEARL
+    slot: 10
+    amount: 1
+    price: 75
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  end_stone:
+    material: END_STONE
+    slot: 11
+    amount: 16
+    price: 128
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  dragon_breath:
+    material: DRAGON_BREATH
+    slot: 12
+    amount: 1
+    price: 1000
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  end_rod:
+    material: END_ROD
+    slot: 13
+    amount: 1
+    price: 100
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  chorus_fruit:
+    material: CHORUS_FRUIT
+    slot: 14
+    amount: 1
+    price: 108
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  popped_chorus_fruit:
+    material: POPPED_CHORUS_FRUIT
+    slot: 15
+    amount: 1
+    price: 24
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  shulker_shell:
+    material: SHULKER_SHELL
+    slot: 16
+    amount: 1
+    price: 350
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  shulker_box:
+    material: SHULKER_BOX
+    slot: 17
+    amount: 1
+    price: 800
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+back:
+  material: RED_STAINED_GLASS_PANE
+  slot: 18
+  name: "#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "#FFFFFFClick to return"
