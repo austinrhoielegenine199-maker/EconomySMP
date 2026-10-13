@@ -290,12 +290,15 @@ public class ShopMenu extends BaseMenu {
         String displayName = plugin.getCurrencyManager().applyStaticPlaceholders(item.displayName());
         List<String> displayLore = plugin.getCurrencyManager().applyStaticPlaceholders(lore);
 
+        int configuredAmount = item.defaultQuantity() > 0 ? item.defaultQuantity() : 1;
         ItemStack custom = plugin.getShopManager().createCustomItem(item);
         if (custom != null) {
+            custom.setAmount(Math.min(configuredAmount, custom.getMaxStackSize()));
             return ItemUtils.withDisplay(custom, displayName, displayLore);
         }
 
         ItemStack displayStack = ItemUtils.createItem(item.material(), displayName, displayLore);
+        displayStack.setAmount(Math.min(configuredAmount, displayStack.getMaxStackSize()));
         if (item.enchantments() != null && !item.enchantments().isEmpty()) {
             ItemUtils.addEnchantments(displayStack, item.enchantments());
         }
@@ -357,9 +360,11 @@ public class ShopMenu extends BaseMenu {
 
     private String replaceShopItemCurrencyPlaceholders(String line, ShopManager.ShopItem item) {
         CurrencyManager.CurrencyType currencyType = currencyType(item);
+        double configuredBundlePrice = item.pricePerUnit()
+                * (item.defaultQuantity() > 0 ? item.defaultQuantity() : 1);
         double price = item.currency() == ShopManager.Currency.SHARD
-                ? Math.round(item.pricePerUnit())
-                : item.pricePerUnit();
+                ? Math.round(configuredBundlePrice)
+                : configuredBundlePrice;
         String formattedPrice = plugin.getCurrencyManager().format(currencyType, price);
         String rawPrice = plugin.getCurrencyManager().formatAmount(currencyType, price);
         String result = replacePricePlaceholders(
