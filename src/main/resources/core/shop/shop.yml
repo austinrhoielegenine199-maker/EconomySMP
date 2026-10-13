@@ -1,86 +1,72 @@
+title: "ѕʜᴏᴘ"
+size: 27
+
 CATEGORIES:
-  MENU-TITLE: '&8Shop'
-  MENU-SIZE: 27
   end:
     FILE-TYPE: end.yml
+    OPEN-MENU: "{end-menu}"
     MATERIAL: END_STONE
     SLOT: 11
+    NAME: "#00FC88ᴇɴᴅ"
     LORE:
-    - '&fClick to view the end shop'
-    OPEN-MENU: '{end-menu}'
+      - "#FFFFFFClick to view the end shop"
+
   nether:
     FILE-TYPE: nether.yml
+    OPEN-MENU: "{nether-menu}"
     MATERIAL: NETHERRACK
     SLOT: 12
+    NAME: "#00FC88ɴᴇᴛʜᴇʀ"
     LORE:
-    - '&fClick to view the nether shop'
-    OPEN-MENU: '{nether-menu}'
+      - "#FFFFFFClick to view the nether shop"
+
   gear:
     FILE-TYPE: gear.yml
+    OPEN-MENU: "{gear-menu}"
     MATERIAL: TOTEM_OF_UNDYING
     SLOT: 13
+    NAME: "#00FC88ɢᴇᴀʀ"
     LORE:
-    - '&fClick to view the gear shop'
-    OPEN-MENU: '{gear-menu}'
+      - "#FFFFFFClick to view the gear shop"
+
   food:
     FILE-TYPE: food.yml
+    OPEN-MENU: "{food-menu}"
     MATERIAL: COOKED_BEEF
     SLOT: 14
+    NAME: "#00FC88ꜰᴏᴏᴅ"
     LORE:
-    - '&fClick to view the food shop'
-    OPEN-MENU: '{food-menu}'
-  shard:
+      - "#FFFFFFClick to view the food shop"
+
+  shards:
     FILE-TYPE: flakes.yml
-    MATERIAL: AMETHYST_SHARD
-    SLOT: 15
-    LORE:
-    - '&fClick to view the shard shop'
-    OPEN-MENU: '{shard-menu}'
-  extra-1:
-    FILE-TYPE: extra-1.yml
-    ENABLED: false
-    MATERIAL: DIAMOND_ORE
+    OPEN-MENU: "{shard-menu}"
+    MATERIAL: SNOWBALL
     SLOT: 22
+    NAME: "#73cffaꜰʟᴀᴋᴇ ѕʜᴏᴘ"
     LORE:
-    - '&fClick to view extra menu'
-    OPEN-MENU: '{extra-1-menu}'
-  extra-2:
-    FILE-TYPE: extra-2.yml
-    ENABLED: false
-    MATERIAL: IRON_ORE
-    SLOT: 23
-    LORE:
-    - '&fClick to view extra menu'
-    OPEN-MENU: '{extra-2-menu}'
-  extra-3:
-    FILE-TYPE: extra-3.yml
-    ENABLED: false
-    MATERIAL: GOLD_ORE
-    SLOT: 24
-    LORE:
-    - '&fClick to view extra menu'
-    OPEN-MENU: '{extra-3-menu}'
+      - "#FFFFFFClick to view the flake shop"
+
 BACK-BUTTON:
   MATERIAL: BARRIER
-  DISPLAY-NAME: '&cback'
+  DISPLAY-NAME: "#FF0000ʙᴀᴄᴋ"
   LORE:
-  - '&fClick to return'
+    - "#FFFFFFClick to return"
 
 SHOP-GUI:
   SHOW-AUCTION-PRICE: true
   ITEM:
     LORE:
-    - '&7Shop price: {shop_price}'
-    - '{auction_line}'
-    - ''
-    - '{favorite_line}'
-    - '&eLeft-click to buy from the shop'
-    - '{auction_action}'
-    - '{favorite_action}'
+      - "&7Shop price: {shop_price}"
+      - "{auction_line}"
+      - ""
+      - "{favorite_line}"
+      - "&eLeft-click to buy from the shop"
+      - "{auction_action}"
+      - "{favorite_action}"
   FAVORITES:
     ENABLED: true
   WEB-SERVER:
     ENABLED: false
     PORT: 8080
     PUBLIC-URL: ""
-
