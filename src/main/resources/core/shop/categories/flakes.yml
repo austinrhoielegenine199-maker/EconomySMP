@@ -1,95 +1,125 @@
-row: 3
+title: "ѕʜᴏᴘ - ꜰʟᴀᴋᴇ"
+size: 27
+currency: SHARD
 
-SHARD-MENU:
-  TITLE: '&8shard - shop'
-  SIZE: 27
-  PIG-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 9
-    PRICE-PER-UNIT: 250.0
-    LORE:
-    - '&ePig'
-    - '&fBuy price: &5250x &lShards'
-    COMMAND: spawner give {username} pig {amount}
-    GIVE-ITEM: false
-  COW-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 10
-    PRICE-PER-UNIT: 350.0
-    LORE:
-    - '&eCow'
-    - '&fBuy price: &5350x &lShards'
-    COMMAND: spawner give {username} cow {amount}
-    GIVE-ITEM: false
-  ZOMBIE-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 11
-    PRICE-PER-UNIT: 400.0
-    LORE:
-    - '&eZombie'
-    - '&fBuy price: &5400x &lShards'
-    COMMAND: spawner give {username} zombie {amount}
-    GIVE-ITEM: false
-  SPIDER-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 12
-    PRICE-PER-UNIT: 750.0
-    LORE:
-    - '&eSpider'
-    - '&fBuy price: &5750x &lShards'
-    COMMAND: spawner give {username} spider {amount}
-    GIVE-ITEM: false
-  SKELETON-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 13
-    PRICE-PER-UNIT: 500.0
-    LORE:
-    - '&eSkeleton'
-    - '&fBuy price: &5500x &lShards'
-    COMMAND: spawner give {username} skeleton {amount}
-    GIVE-ITEM: false
-  CREEPER-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 14
-    PRICE-PER-UNIT: 625.0
-    LORE:
-    - '&eCreeper'
-    - '&fBuy price: &5625x &lShards'
-    COMMAND: spawner give {username} creeper {amount}
-    GIVE-ITEM: false
-  ZOMBIFIED-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 15
-    PRICE-PER-UNIT: 750.0
-    LORE:
-    - '&eZombified Piglin'
-    - '&fBuy price: &5750x &lShards'
-    COMMAND: spawner give {username} piglin {amount}
-    GIVE-ITEM: false
-  BLAZE-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 16
-    PRICE-PER-UNIT: 1000.0
-    LORE:
-    - '&eBlaze'
-    - '&fBuy price: &51000x &lShards'
-    COMMAND: spawner give {username} blaze {amount}
-    GIVE-ITEM: false
-  GOLEM-SPAWNER-ITEM:
-    CURRENCY: SHARD
-    MATERIAL: SPAWNER
-    SLOT: 17
-    PRICE-PER-UNIT: 1500.0
-    LORE:
-    - '&eIron Golem'
-    - '&fBuy price: &51500x &lShards'
-    COMMAND: spawner give {username} iron_golem {amount}
-    GIVE-ITEM: false
+items:
+  pig_spawner:
+    material: SPAWNER
+    slot: 9
+    amount: 1
+    price: 250
+    currency: SHARD
+    name: "Pig Spawner"
+    lore:
+      - "#FFFFFFPig"
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} pig {amount}"
+    give-item: false
+
+  cow_spawner:
+    material: SPAWNER
+    slot: 10
+    amount: 1
+    price: 350
+    currency: SHARD
+    name: "Cow Spawner"
+    lore:
+      - "#FFFFFFCow"
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} cow {amount}"
+    give-item: false
+
+  zombie_spawner:
+    material: SPAWNER
+    slot: 11
+    amount: 1
+    price: 400
+    currency: SHARD
+    name: "Zombie Spawner"
+    lore:
+      - "#FFFFFFZombie"
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} zombie {amount}"
+    give-item: false
+
+  spider_spawner:
+    material: SPAWNER
+    slot: 12
+    amount: 1
+    price: 750
+    currency: SHARD
+    name: "Spider Spawner"
+    lore:
+      - "#FFFFFFSpider"
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} spider {amount}"
+    give-item: false
+
+  skeleton_spawner:
+    material: SPAWNER
+    slot: 13
+    amount: 1
+    price: 500
+    currency: SHARD
+    name: "Skeleton Spawner"
+    lore:
+      - "#FFFFFFSkeleton"
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} skeleton {amount}"
+    give-item: false
+
+  creeper_spawner:
+    material: SPAWNER
+    slot: 14
+    amount: 1
+    price: 625
+    currency: SHARD
+    name: "Creeper Spawner"
+    lore:
+      - "#FFFFFFCreeper"
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} creeper {amount}"
+    give-item: false
+
+  zombified_spawner:
+    material: SPAWNER
+    slot: 15
+    amount: 1
+    price: 750
+    currency: SHARD
+    name: "Zombified Piglin"
+    lore:
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} piglin {amount}"
+    give-item: false
+
+  blaze_spawner:
+    material: SPAWNER
+    slot: 16
+    amount: 1
+    price: 1000
+    currency: SHARD
+    name: "Blaze Spawner"
+    lore:
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} blaze {amount}"
+    give-item: false
+
+  golem_spawner:
+    material: SPAWNER
+    slot: 17
+    amount: 1
+    price: 1500
+    currency: SHARD
+    name: "Iron Golem Spawner"
+    lore:
+      - "#FFFFFFBuy price: #73cffa%price% flakes"
+    command: "spawner give {username} iron_golem {amount}"
+    give-item: false
+
+back:
+  material: RED_STAINED_GLASS_PANE
+  slot: 18
+  name: "#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "#FFFFFFClick to return"
