@@ -1,68 +1,82 @@
-row: 3
+title: "ѕʜᴏᴘ - ꜰᴏᴏᴅ"
+size: 27
 
-FOOD-MENU:
-  TITLE: '&8food - shop'
-  SIZE: 27
-  POTATO-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: POTATO
-    SLOT: 9
-    PRICE-PER-UNIT: 75
-    LORE:
-    - '&fBuy price: &a$75'
-  SWEET-BERRIES-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: SWEET_BERRIES
-    SLOT: 10
-    PRICE-PER-UNIT: 50
-    LORE:
-    - '&fBuy price: &a$50'
-  MELON-SLICE-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: MELON_SLICE
-    SLOT: 11
-    PRICE-PER-UNIT: 10
-    LORE:
-    - '&fBuy price: &a$10'
-  CARROT-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: CARROT
-    SLOT: 12
-    PRICE-PER-UNIT: 65
-    LORE:
-    - '&fBuy price: &a$65'
-  APPLE-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: APPLE
-    SLOT: 13
-    PRICE-PER-UNIT: 25
-    LORE:
-    - '&fBuy price: &a$25'
-  COOKED-CHICKEN-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: COOKED_CHICKEN
-    SLOT: 14
-    PRICE-PER-UNIT: 30
-    LORE:
-    - '&fBuy price: &a$30'
-  STEAK-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: COOKED_BEEF
-    SLOT: 15
-    PRICE-PER-UNIT: 35
-    LORE:
-    - '&fBuy price: &a$35'
-  GOLDEN-CARROT-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: GOLDEN_CARROT
-    SLOT: 16
-    PRICE-PER-UNIT: 50
-    LORE:
-    - '&fBuy price: &a$50'
-  GOLDEN-APPLE-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: GOLDEN_APPLE
-    SLOT: 17
-    PRICE-PER-UNIT: 250
-    LORE:
-    - '&fBuy price: &a$250'
+items:
+  potato:
+    material: POTATO
+    slot: 9
+    amount: 1
+    price: 75
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  sweet_berries:
+    material: SWEET_BERRIES
+    slot: 10
+    amount: 1
+    price: 50
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  melon_slice:
+    material: MELON_SLICE
+    slot: 11
+    amount: 1
+    price: 10
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  carrot:
+    material: CARROT
+    slot: 12
+    amount: 1
+    price: 65
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  apple:
+    material: APPLE
+    slot: 13
+    amount: 1
+    price: 25
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  cooked_chicken:
+    material: COOKED_CHICKEN
+    slot: 14
+    amount: 1
+    price: 30
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  steak:
+    material: COOKED_BEEF
+    slot: 15
+    amount: 1
+    price: 35
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  golden_carrot:
+    material: GOLDEN_CARROT
+    slot: 16
+    amount: 1
+    price: 50
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  golden_apple:
+    material: GOLDEN_APPLE
+    slot: 17
+    amount: 1
+    price: 250
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+back:
+  material: RED_STAINED_GLASS_PANE
+  slot: 18
+  name: "#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "#FFFFFFClick to return"
