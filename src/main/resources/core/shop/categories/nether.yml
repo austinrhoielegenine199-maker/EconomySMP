@@ -1,68 +1,82 @@
-row: 3
+title: "ѕʜᴏᴘ - ɴᴇᴛʜᴇʀ"
+size: 27
 
-NETHER-MENU:
-  TITLE: '&8shop - nether'
-  SIZE: 27
-  BLAZE-ROD-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: BLAZE_ROD
-    SLOT: 9
-    PRICE-PER-UNIT: 150.0
-    LORE:
-    - '&fBuy price: &a$150'
-  NETHER-WART-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: NETHER_WART
-    SLOT: 10
-    PRICE-PER-UNIT: 25
-    LORE:
-    - '&fBuy price: &a$25'
-  GLOWSTONE-DUST-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: GLOWSTONE_DUST
-    SLOT: 11
-    PRICE-PER-UNIT: 15
-    LORE:
-    - '&fBuy price: &a$15'
-  MAGMA-CREAM-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: MAGMA_CREAM
-    SLOT: 12
-    PRICE-PER-UNIT: 25
-    LORE:
-    - '&fBuy price: &a$25'
-  GHAST-TEAR-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: GHAST_TEAR
-    SLOT: 13
-    PRICE-PER-UNIT: 350
-    LORE:
-    - '&fBuy price: &a$350'
-  NETHER-QUARTZ-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: QUARTZ
-    SLOT: 14
-    PRICE-PER-UNIT: 15
-    LORE:
-    - '&fBuy price: &a$15'
-  SOUL-SAND-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: SOUL_SAND
-    SLOT: 15
-    PRICE-PER-UNIT: 50
-    LORE:
-    - '&fBuy price: &a$50'
-  MAGMA-BLOCK-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: MAGMA_BLOCK
-    SLOT: 16
-    PRICE-PER-UNIT: 35
-    LORE:
-    - '&fBuy price: &a$35'
-  CRYING-OBSIDIAN-ITEM:
-    CURRENCY: MONEY
-    MATERIAL: CRYING_OBSIDIAN
-    SLOT: 17
-    PRICE-PER-UNIT: 150
-    LORE:
-    - '&fBuy price: &a$150'
+items:
+  blaze_rod:
+    material: BLAZE_ROD
+    slot: 9
+    amount: 1
+    price: 150
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  nether_wart:
+    material: NETHER_WART
+    slot: 10
+    amount: 1
+    price: 25
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  glowstone_dust:
+    material: GLOWSTONE_DUST
+    slot: 11
+    amount: 1
+    price: 15
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  magma_cream:
+    material: MAGMA_CREAM
+    slot: 12
+    amount: 1
+    price: 25
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  ghast_tear:
+    material: GHAST_TEAR
+    slot: 13
+    amount: 1
+    price: 350
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  nether_quartz:
+    material: QUARTZ
+    slot: 14
+    amount: 1
+    price: 15
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  soul_sand:
+    material: SOUL_SAND
+    slot: 15
+    amount: 1
+    price: 50
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  magma_block:
+    material: MAGMA_BLOCK
+    slot: 16
+    amount: 1
+    price: 35
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+  crying_obsidian:
+    material: CRYING_OBSIDIAN
+    slot: 17
+    amount: 1
+    price: 150
+    lore:
+      - "#FFFFFFBuy price: #55FF55%price%"
+
+back:
+  material: RED_STAINED_GLASS_PANE
+  slot: 18
+  name: "#FF0000ʙᴀᴄᴋ"
+  lore:
+    - "#FFFFFFClick to return"
