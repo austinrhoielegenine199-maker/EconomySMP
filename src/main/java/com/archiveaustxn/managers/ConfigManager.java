@@ -60,7 +60,8 @@ public class ConfigManager {
             "core/database/database.yml",
             "core/server-wipe/server-wipe.yml",
             "core/discord/discord.yml",
-            "core/anvil-moderation/anvil-moderation.yml"
+            "core/anvil-moderation/anvil-moderation.yml",
+            "core/sus/sus.yml"
     );
 
     private static final Map<String, String> LEGACY_CONFIGURATION_PATHS = Map.ofEntries(
@@ -135,6 +136,7 @@ public class ConfigManager {
     private FileConfiguration anvilModeration;
     private FileConfiguration enchantments;
     private FileConfiguration filter;
+    private FileConfiguration sus;
 
     public ConfigManager(EconomySMP plugin) {
         this.plugin = plugin;
@@ -182,6 +184,7 @@ public class ConfigManager {
         anvilModeration = load("core/anvil-moderation/anvil-moderation.yml", anvilModeration);
         enchantments = load("core/enchantments/enchantments.yml", enchantments);
         filter       = load("core/filter/filter.yml", filter);
+        sus          = load("core/sus/sus.yml", sus);
     }
 
     private final Set<String> migrationFailures = new HashSet<>();
@@ -1247,6 +1250,7 @@ public class ConfigManager {
     public FileConfiguration getAnvilModeration() { return anvilModeration; }
     public FileConfiguration getEnchantments()  { return enchantments; }
     public FileConfiguration getFilter()        { return filter; }
+    public FileConfiguration getSus()           { return sus; }
 
     public FileConfiguration getLegacyMessages() { return messages; }
     public FileConfiguration getLegacyDeathMessages() { return deathMessages; }
