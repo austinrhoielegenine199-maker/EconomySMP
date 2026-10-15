@@ -815,6 +815,11 @@ commands:
     - godmode
     permission: economysmp.staff.god
     permission-message: "&cYou do not have permission to use /god."
+  sus:
+    description: Review reported suspicious players
+    usage: /sus
+    permission: economysmp.sus
+    permission-message: "&cYou do not have permission to use /sus."
 permissions:
   economysmp.admin:
     description: Full admin access
