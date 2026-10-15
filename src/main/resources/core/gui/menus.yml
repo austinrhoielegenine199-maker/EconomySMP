@@ -385,6 +385,7 @@ RANKS-MENU:
   SIZE: 27
   BUTTONS:
     DEFAULT:
+      # HEAD-TEXTURE: Optional Base64 texture for this rank's player head.
       MATERIAL: PLAYER_HEAD
       SLOT: 11
       DISPLAY-NAME: '&fDefault'
@@ -394,6 +395,7 @@ RANKS-MENU:
       - '&718 Order Slots'
       COMMAND: ''
     DONUT_PLUS:
+      # HEAD-TEXTURE: Optional Base64 texture for this rank's player head.
       MATERIAL: PLAYER_HEAD
       SLOT: 13
       DISPLAY-NAME: '&fDonut&#00A4FC+'
@@ -403,6 +405,7 @@ RANKS-MENU:
       - '&745 Order Slots'
       COMMAND: ''
     DONUT_PLUS_PLUS:
+      # HEAD-TEXTURE: Optional Base64 texture for this rank's player head.
       MATERIAL: PLAYER_HEAD
       SLOT: 14
       DISPLAY-NAME: '&fDonut&#00A4FC++'
@@ -412,6 +415,7 @@ RANKS-MENU:
       - '&790 Order Slots'
       COMMAND: ''
     DONUT_PLUS_PLUS_PLUS:
+      # HEAD-TEXTURE: Optional Base64 texture for this rank's player head.
       MATERIAL: PLAYER_HEAD
       SLOT: 15
       DISPLAY-NAME: '&fDonut&#00A4FC+++'
