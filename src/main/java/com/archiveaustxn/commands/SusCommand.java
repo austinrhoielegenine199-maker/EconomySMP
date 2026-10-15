@@ -77,7 +77,7 @@ public final class SusCommand implements CommandExecutor {
         private final Map<Integer, UUID> headSlots = new LinkedHashMap<>();
 
         private SusMenu(int page) {
-            super(plugin, "&7ѕᴜѕ", 54);
+            super(SusCommand.this.plugin, "&7ѕᴜѕ", 54);
             this.page = Math.max(0, page);
             for (Map.Entry<UUID, Suspect> entry : SUSPECTS.entrySet()) {
                 if (Bukkit.getPlayer(entry.getKey()) != null) {
@@ -151,7 +151,7 @@ public final class SusCommand implements CommandExecutor {
         private final List<Map.Entry<UUID, Suspect>> history = new ArrayList<>();
 
         private HistoryMenu(int page) {
-            super(plugin, "&7ѕᴜѕ &8» &eʜɪѕᴛᴏʀʏ", 54);
+            super(SusCommand.this.plugin, "&7ѕᴜѕ &8» &eʜɪѕᴛᴏʀʏ", 54);
             this.page = Math.max(0, page);
             history.addAll(HISTORY.entrySet());
         }
