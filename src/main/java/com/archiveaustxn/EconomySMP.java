@@ -729,6 +729,7 @@ public final class EconomySMP extends JavaPlugin {
         setExecutor("teleport", teleportCommand);
         registerTpoCommand(new TpoCommand(this, teleportCommand));
         setExecutor("alts", new AltsCommand(this));
+        setExecutor("sus", new SusCommand(this));
         setExecutor("vanish", new VanishCommand(this), FeatureManager.Feature.STAFF_MODE);
         setExecutor("invsee", new InvseeCommand(this));
         setExecutor("profileviewer", new ProfileViewerCommand(this), FeatureManager.Feature.PROFILE_VIEWER);
