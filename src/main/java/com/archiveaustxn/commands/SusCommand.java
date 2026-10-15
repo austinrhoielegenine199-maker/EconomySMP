@@ -29,6 +29,10 @@ public final class SusCommand implements CommandExecutor {
 
     private final EconomySMP plugin;
 
+    private String setting(String path, String fallback) {
+        return plugin.getConfigManager().getSus().getString(path, fallback);
+    }
+
     public SusCommand(EconomySMP plugin) {
         this.plugin = plugin;
     }
@@ -48,11 +52,11 @@ public final class SusCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player)) {
-            sender.sendMessage(ColorUtils.toComponent("&cOnly players can use this command."));
+            sender.sendMessage(ColorUtils.toComponent(setting("messages.players-only", "&cOnly players can use this command.")));
             return true;
         }
         if (!PermissionUtils.has(player, PERMISSION)) {
-            player.sendMessage(ColorUtils.toComponent("&cYou do not have permission."));
+            player.sendMessage(ColorUtils.toComponent(setting("messages.no-permission", "&cYou do not have permission.")));
             return true;
         }
         new SusMenu(0).open(player);
@@ -77,7 +81,7 @@ public final class SusCommand implements CommandExecutor {
         private final Map<Integer, UUID> headSlots = new LinkedHashMap<>();
 
         private SusMenu(int page) {
-            super(SusCommand.this.plugin, "&7ѕᴜѕ", 54);
+            super(SusCommand.this.plugin, setting("gui.title", "&7ѕᴜѕ"), 54);
             this.page = Math.max(0, page);
             for (Map.Entry<UUID, Suspect> entry : SUSPECTS.entrySet()) {
                 if (Bukkit.getPlayer(entry.getKey()) != null) {
@@ -98,25 +102,25 @@ public final class SusCommand implements CommandExecutor {
                 if (target == null) continue;
                 int slot = index - start;
                 List<String> lore = new ArrayList<>();
-                lore.add("&eClick to mark as reviewed");
-                lore.add("&7Reports: &f" + entry.getValue().reports);
+                lore.add(setting("gui.suspects.click-lore", "&eClick to mark as reviewed"));
+                lore.add(setting("gui.suspects.reports-lore", "&7Reports: &f{reports}").replace("{reports}", String.valueOf(entry.getValue().reports)));
                 if (!entry.getValue().lastReason.isBlank()) {
-                    lore.add("&7Last reason: &f" + entry.getValue().lastReason);
+                    lore.add(setting("gui.suspects.reason-lore", "&7Last reason: &f{reason}").replace("{reason}", entry.getValue().lastReason));
                 }
                 ItemStack head = ItemUtils.createPlayerHead(target, target.getName(), lore);
                 set(slot, head);
                 headSlots.put(slot, entry.getKey());
             }
 
-            set(49, ItemUtils.createItem(Material.CLOCK, "&eʜɪѕᴛᴏʀʏ",
-                    List.of("&7View reviewed players")));
+            set(49, ItemUtils.createItem(Material.CLOCK, setting("gui.history-button.name", "&eʜɪѕᴛᴏʀʏ"),
+                    List.of(setting("gui.history-button.lore", "&7View reviewed players"))));
             if (page > 0) {
-                set(45, ItemUtils.createItem(Material.ARROW, "&cʙᴀᴄᴋ",
-                        List.of("&7Go to the previous page")));
+                set(45, ItemUtils.createItem(Material.ARROW, setting("gui.previous-button.name", "&cʙᴀᴄᴋ"),
+                        List.of(setting("gui.previous-button.lore", "&7Go to the previous page"))));
             }
             if (end < suspects.size()) {
-                set(53, ItemUtils.createItem(Material.ARROW, "&aɴᴇxᴛ",
-                        List.of("&7Go to the next page")));
+                set(53, ItemUtils.createItem(Material.ARROW, setting("gui.next-button.name", "&aɴᴇxᴛ"),
+                        List.of(setting("gui.next-button.lore", "&7Go to the next page"))));
             }
         }
 
@@ -140,7 +144,7 @@ public final class SusCommand implements CommandExecutor {
             Suspect reviewed = SUSPECTS.remove(targetId);
             if (reviewed != null) {
                 HISTORY.put(targetId, reviewed);
-                player.sendMessage(ColorUtils.toComponent("&a" + reviewed.name + " &7was moved to suspect history."));
+                player.sendMessage(ColorUtils.toComponent(setting("messages.reviewed", "&a{player} &7was moved to suspect history.").replace("{player}", reviewed.name)));
             }
             new SusMenu(page).open(player);
         }
@@ -151,7 +155,7 @@ public final class SusCommand implements CommandExecutor {
         private final List<Map.Entry<UUID, Suspect>> history = new ArrayList<>();
 
         private HistoryMenu(int page) {
-            super(SusCommand.this.plugin, "&7ѕᴜѕ &8» &eʜɪѕᴛᴏʀʏ", 54);
+            super(SusCommand.this.plugin, setting("gui.history-title", "&7ѕᴜѕ &8» &eʜɪѕᴛᴏʀʏ"), 54);
             this.page = Math.max(0, page);
             history.addAll(HISTORY.entrySet());
         }
@@ -165,17 +169,17 @@ public final class SusCommand implements CommandExecutor {
                 Map.Entry<UUID, Suspect> entry = history.get(index);
                 OfflinePlayer offline = Bukkit.getOfflinePlayer(entry.getKey());
                 List<String> lore = new ArrayList<>();
-                lore.add("&7Status: &aReviewed");
-                lore.add("&7Reports: &f" + entry.getValue().reports);
+                lore.add(setting("gui.history.status-lore", "&7Status: &aReviewed"));
+                lore.add(setting("gui.history.reports-lore", "&7Reports: &f{reports}").replace("{reports}", String.valueOf(entry.getValue().reports)));
                 if (!entry.getValue().lastReason.isBlank()) {
-                    lore.add("&7Last reason: &f" + entry.getValue().lastReason);
+                    lore.add(setting("gui.history.reason-lore", "&7Last reason: &f{reason}").replace("{reason}", entry.getValue().lastReason));
                 }
                 set(index - start, ItemUtils.createPlayerHead(offline, entry.getValue().name, lore));
             }
 
-            set(45, ItemUtils.createItem(Material.ARROW, "&cʙᴀᴄᴋ", List.of("&7Return to suspicious players")));
+            set(45, ItemUtils.createItem(Material.ARROW, setting("gui.history.back-button.name", "&cʙᴀᴄᴋ"), List.of(setting("gui.history.back-button.lore", "&7Return to suspicious players"))));
             if (end < history.size()) {
-                set(53, ItemUtils.createItem(Material.ARROW, "&aɴᴇxᴛ", List.of("&7Go to the next page")));
+                set(53, ItemUtils.createItem(Material.ARROW, setting("gui.next-button.name", "&aɴᴇxᴛ"), List.of(setting("gui.next-button.lore", "&7Go to the next page"))));
             }
         }
 
