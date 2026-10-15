@@ -535,6 +535,7 @@ public final class EconomySMP extends JavaPlugin {
     private void registerListeners() {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerContextListener(this), this);
+        pm.registerEvents(new FlyPersistenceListener(this), this);
         pm.registerEvents(new PlayerJoinQuitListener(this), this);
         pm.registerEvents(new PlayerDeathListener(this), this);
         pm.registerEvents(new ChatListener(this), this);
@@ -710,6 +711,14 @@ public final class EconomySMP extends JavaPlugin {
         setExecutor("leaderboard", lbCmd, FeatureManager.Feature.LEADERBOARDS);
         setExecutor("freeze", new FreezeCommand(this));
         setExecutor("fly", new FlyCommand(this));
+        EssentialsPerkCommand essentialsPerks = new EssentialsPerkCommand(this);
+        setExecutor("repair", essentialsPerks);
+        setExecutor("condense", essentialsPerks);
+        setExecutor("craft", essentialsPerks);
+        setExecutor("workbench", essentialsPerks);
+        setExecutor("anvil", essentialsPerks);
+        setExecutor("smithingtable", essentialsPerks);
+        setExecutor("smithing", essentialsPerks);
         setExecutor("flyspeed", new FlySpeedCommand(this));
         setExecutor("kill", new KillCommand(this));
         setExecutor("heal", new HealCommand(this));
