@@ -58,7 +58,9 @@ public class ReportCommand implements TabExecutor {
             return true;
         }
 
-        plugin.getNetworkStaffAlertManager().sendReport(reporter, reported, joinArgs(args, 1));
+        String reason = joinArgs(args, 1);
+        SusCommand.recordReport(reported, reporter, reason);
+        plugin.getNetworkStaffAlertManager().sendReport(reporter, reported, reason);
         return true;
     }
 
