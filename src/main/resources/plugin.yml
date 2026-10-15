@@ -821,6 +821,9 @@ commands:
     permission: economysmp.sus
     permission-message: "&cYou do not have permission to use /sus."
 permissions:
+  economysmp.sus:
+    description: Access the suspicious-player review GUI
+    default: op
   economysmp.admin:
     description: Full admin access
     default: op
