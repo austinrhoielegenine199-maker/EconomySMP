@@ -63,7 +63,9 @@ public class EnderChestCommand implements CommandExecutor {
         }
 
         if (plugin.getEnderChestManager().commandRequiresPermission()
-                && !PermissionUtils.has(player, plugin.getEnderChestManager().getCommandPermission())) {
+                && !PermissionUtils.has(player, plugin.getEnderChestManager().getCommandPermission())
+                && !PermissionUtils.has(player, "economysmp.perks.enderchest")
+                && !PermissionUtils.has(player, "economysmp.staff.*")) {
             player.sendMessage(ColorUtils.toComponent(
                     plugin.getEnderChestManager().getMessage("NO-PERMISSION", "&cYou do not have permission.")
             ));
