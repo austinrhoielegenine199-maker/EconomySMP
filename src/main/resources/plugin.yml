@@ -19,6 +19,29 @@ loadbefore:
 - UltraCosmetics
 - DeluxeMenus
 commands:
+  repair:
+    description: Repair the item in your hand
+    permission: economysmp.perks.repair
+  condense:
+    description: Condense eligible inventory items into blocks
+    permission: economysmp.perks.condense
+  craft:
+    description: Open a crafting table
+    aliases: [workbench]
+    permission: economysmp.perks.craft
+  workbench:
+    description: Open a crafting table
+    permission: economysmp.perks.craft
+  anvil:
+    description: Open an anvil
+    permission: economysmp.perks.anvil
+  smithingtable:
+    description: Open a smithing table
+    aliases: [smithing]
+    permission: economysmp.perks.smithingtable
+  smithing:
+    description: Open a smithing table
+    permission: economysmp.perks.smithingtable
   team:
     description: Team management
     usage: /team <create|disband|invite|kick|join|leave|home|sethome|delhome|chat|info|pvp>
