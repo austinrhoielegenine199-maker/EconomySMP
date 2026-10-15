@@ -188,7 +188,7 @@ ORDERS:
       FAILED: 'Lieferung fehlgeschlagen: {reason}'
     ORDER:
       TITLE: 'Bestellung #{id}'
-      BUTTON: "#{id} {item} X{remaining}\n{price} Pro stück - {owner}"
+      BUTTON: "{price} Pro stück - {owner}"
     CANCEL:
       TITLE: Bestellung stornieren
       CONTENT: "Bestellung #{id} stornieren? das restguthaben wird rückerstattet."
