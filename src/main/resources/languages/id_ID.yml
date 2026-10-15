@@ -187,9 +187,7 @@ ORDERS:
       FAILED: 'Pengiriman gagal: {reason}'
     ORDER:
       TITLE: 'Order #{id}'
-      BUTTON: '#{id} {item} X{remaining}
-
-        {price} Per item - {owner}'
+      BUTTON: '{price} Per item - {owner}'
     CANCEL:
       TITLE: Batalkan order
       CONTENT: 'Batalkan order #{id}? sisa escrow akan menjadi klaim refund.'
