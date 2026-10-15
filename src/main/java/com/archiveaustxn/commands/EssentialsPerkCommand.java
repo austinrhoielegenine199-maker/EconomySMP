@@ -9,11 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.AnvilInventory;
-import org.bukkit.inventory.GrindstoneInventory;
-import org.bukkit.inventory.SmithingInventory;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.Bukkit;
+import org.bukkit.event.inventory.InventoryType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +41,8 @@ public final class EssentialsPerkCommand implements CommandExecutor {
         }
         switch (name) {
             case "craft", "workbench" -> player.openWorkbench(player.getLocation(), true);
-            case "anvil" -> player.openAnvil(player.getLocation(), true);
-            case "smithingtable", "smithing" -> player.openSmithingTable(player.getLocation(), true);
+            case "anvil" -> player.openInventory(Bukkit.createInventory(player, InventoryType.ANVIL));
+            case "smithingtable", "smithing" -> player.openInventory(Bukkit.createInventory(player, InventoryType.SMITHING));
             case "repair" -> {
                 ItemStack item = player.getInventory().getItemInMainHand();
                 if (item.getType().isAir() || !(item.getItemMeta() instanceof Damageable meta) || !meta.hasDamage()) {
