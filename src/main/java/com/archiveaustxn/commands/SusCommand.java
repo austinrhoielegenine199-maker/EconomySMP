@@ -7,6 +7,7 @@ import com.archiveaustxn.utils.ItemUtils;
 import com.archiveaustxn.utils.PermissionUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,6 +25,7 @@ public final class SusCommand implements CommandExecutor {
     private static final String PERMISSION = "economysmp.sus";
     private static final int PAGE_SIZE = 45;
     private static final Map<UUID, Suspect> SUSPECTS = new LinkedHashMap<>();
+    private static final Map<UUID, Suspect> HISTORY = new LinkedHashMap<>();
 
     private final EconomySMP plugin;
 
@@ -31,10 +33,7 @@ public final class SusCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    /**
-     * Reports mark a player for staff review. This is intentionally a review list,
-     * not an automatic cheat verdict.
-     */
+    /** Reports mark a player for staff review. This is a review list, not an automatic cheat verdict. */
     public static void recordReport(Player reported, Player reporter, String reason) {
         if (reported == null || reporter == null || reported.getUniqueId().equals(reporter.getUniqueId())) {
             return;
@@ -56,7 +55,7 @@ public final class SusCommand implements CommandExecutor {
             player.sendMessage(ColorUtils.toComponent("&cYou do not have permission."));
             return true;
         }
-        new SusMenu(plugin, 0).open(player);
+        new SusMenu(0).open(player);
         return true;
     }
 
@@ -74,16 +73,15 @@ public final class SusCommand implements CommandExecutor {
 
     private final class SusMenu extends BaseMenu {
         private final int page;
-        private final List<Suspect> suspects;
+        private final List<Map.Entry<UUID, Suspect>> suspects = new ArrayList<>();
         private final Map<Integer, UUID> headSlots = new LinkedHashMap<>();
 
-        private SusMenu(EconomySMP plugin, int page) {
+        private SusMenu(int page) {
             super(plugin, "&7ѕᴜѕ", 54);
             this.page = Math.max(0, page);
-            this.suspects = new ArrayList<>();
             for (Map.Entry<UUID, Suspect> entry : SUSPECTS.entrySet()) {
                 if (Bukkit.getPlayer(entry.getKey()) != null) {
-                    suspects.add(entry.getValue());
+                    suspects.add(Map.entry(entry.getKey(), entry.getValue()));
                 }
             }
         }
@@ -95,62 +93,99 @@ public final class SusCommand implements CommandExecutor {
             int start = page * PAGE_SIZE;
             int end = Math.min(start + PAGE_SIZE, suspects.size());
             for (int index = start; index < end; index++) {
-                Suspect suspect = suspects.get(index);
-                Player target = findOnlineByName(suspect.name);
-                if (target == null) {
-                    continue;
-                }
+                Map.Entry<UUID, Suspect> entry = suspects.get(index);
+                Player target = Bukkit.getPlayer(entry.getKey());
+                if (target == null) continue;
                 int slot = index - start;
                 List<String> lore = new ArrayList<>();
-                lore.add("&eClick to teleport ➜");
+                lore.add("&eClick to mark as reviewed");
+                lore.add("&7Reports: &f" + entry.getValue().reports);
+                if (!entry.getValue().lastReason.isBlank()) {
+                    lore.add("&7Last reason: &f" + entry.getValue().lastReason);
+                }
                 ItemStack head = ItemUtils.createPlayerHead(target, target.getName(), lore);
                 set(slot, head);
-                headSlots.put(slot, target.getUniqueId());
+                headSlots.put(slot, entry.getKey());
             }
 
+            set(49, ItemUtils.createItem(Material.CLOCK, "&eʜɪѕᴛᴏʀʏ",
+                    List.of("&7View reviewed players")));
             if (page > 0) {
-                set(45, ItemUtils.createItem(Material.ARROW, "&cʙᴀᴄᴋ", List.of("&7Go to the previous page")));
+                set(45, ItemUtils.createItem(Material.ARROW, "&cʙᴀᴄᴋ",
+                        List.of("&7Go to the previous page")));
             }
             if (end < suspects.size()) {
+                set(53, ItemUtils.createItem(Material.ARROW, "&aɴᴇxᴛ",
+                        List.of("&7Go to the next page")));
+            }
+        }
+
+        @Override
+        public void handleClick(int slot, Player player) {
+            if (slot == 49) {
+                new HistoryMenu(0).open(player);
+                return;
+            }
+            if (slot == 45 && page > 0) {
+                new SusMenu(page - 1).open(player);
+                return;
+            }
+            if (slot == 53 && (page + 1) * PAGE_SIZE < suspects.size()) {
+                new SusMenu(page + 1).open(player);
+                return;
+            }
+
+            UUID targetId = headSlots.get(slot);
+            if (targetId == null) return;
+            Suspect reviewed = SUSPECTS.remove(targetId);
+            if (reviewed != null) {
+                HISTORY.put(targetId, reviewed);
+                player.sendMessage(ColorUtils.toComponent("&a" + reviewed.name + " &7was moved to suspect history."));
+            }
+            new SusMenu(page).open(player);
+        }
+    }
+
+    private final class HistoryMenu extends BaseMenu {
+        private final int page;
+        private final List<Map.Entry<UUID, Suspect>> history = new ArrayList<>();
+
+        private HistoryMenu(int page) {
+            super(plugin, "&7ѕᴜѕ &8» &eʜɪѕᴛᴏʀʏ", 54);
+            this.page = Math.max(0, page);
+            history.addAll(HISTORY.entrySet());
+        }
+
+        @Override
+        public void build(Player viewer) {
+            clear();
+            int start = page * PAGE_SIZE;
+            int end = Math.min(start + PAGE_SIZE, history.size());
+            for (int index = start; index < end; index++) {
+                Map.Entry<UUID, Suspect> entry = history.get(index);
+                OfflinePlayer offline = Bukkit.getOfflinePlayer(entry.getKey());
+                List<String> lore = new ArrayList<>();
+                lore.add("&7Status: &aReviewed");
+                lore.add("&7Reports: &f" + entry.getValue().reports);
+                if (!entry.getValue().lastReason.isBlank()) {
+                    lore.add("&7Last reason: &f" + entry.getValue().lastReason);
+                }
+                set(index - start, ItemUtils.createPlayerHead(offline, entry.getValue().name, lore));
+            }
+
+            set(45, ItemUtils.createItem(Material.ARROW, "&cʙᴀᴄᴋ", List.of("&7Return to suspicious players")));
+            if (end < history.size()) {
                 set(53, ItemUtils.createItem(Material.ARROW, "&aɴᴇxᴛ", List.of("&7Go to the next page")));
             }
         }
 
         @Override
         public void handleClick(int slot, Player player) {
-            if (slot == 45 && page > 0) {
-                new SusMenu(plugin, page - 1).open(player);
-                return;
+            if (slot == 45) {
+                new SusMenu(0).open(player);
+            } else if (slot == 53 && (page + 1) * PAGE_SIZE < history.size()) {
+                new HistoryMenu(page + 1).open(player);
             }
-            if (slot == 53 && (page + 1) * PAGE_SIZE < suspects.size()) {
-                new SusMenu(plugin, page + 1).open(player);
-                return;
-            }
-            UUID targetId = headSlots.get(slot);
-            if (targetId == null) {
-                return;
-            }
-            Player target = Bukkit.getPlayer(targetId);
-            if (target == null || !target.isOnline()) {
-                player.sendMessage(ColorUtils.toComponent("&cThat player is no longer online."));
-                new SusMenu(plugin, page).open(player);
-                return;
-            }
-            player.teleport(target.getLocation());
-            player.sendMessage(ColorUtils.toComponent("&7Teleported to &f" + target.getName() + "&7."));
-        }
-
-        private Player findOnlineByName(String name) {
-            Player exact = Bukkit.getPlayerExact(name);
-            if (exact != null) {
-                return exact;
-            }
-            for (Player online : Bukkit.getOnlinePlayers()) {
-                if (online.getName().equalsIgnoreCase(name)) {
-                    return online;
-                }
-            }
-            return null;
         }
     }
 }
