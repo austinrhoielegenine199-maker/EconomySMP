@@ -19,6 +19,9 @@ loadbefore:
 - UltraCosmetics
 - DeluxeMenus
 commands:
+  archiveaustxn:
+    description: Private owner status command for ArchiveAustxn
+    usage: /archiveaustxn
   repair:
     description: Repair the item in your hand
     permission: economysmp.perks.repair

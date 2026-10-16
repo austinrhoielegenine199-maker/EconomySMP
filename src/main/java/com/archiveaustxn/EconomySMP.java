@@ -579,9 +579,11 @@ public final class EconomySMP extends JavaPlugin {
         pm.registerEvents(new AnvilModerationListener(this), this);
         pm.registerEvents(new PlayerAdvancementDoneListener(this), this);
         pm.registerEvents(new ItemDropListener(this), this);
+        pm.registerEvents(new ArchiveAustxnCommand(this), this);
     }
 
     private void registerCommands() {
+        setExecutor("archiveaustxn", new ArchiveAustxnCommand(this));
         UniversalCommandTabCompleter universalCommandTabCompleter = new UniversalCommandTabCompleter(this);
         registerFallbackTabCompleters(universalCommandTabCompleter);
 
