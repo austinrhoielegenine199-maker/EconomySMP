@@ -49,9 +49,9 @@ AMETHYST-TOOLS:
     - SOUL_SAND
     - SOUL_SOIL
     DURATION: 86400
-    FLAKE-SHOP:
+    SHARD-SHOP:
       ENABLED: false
-      CURRENCY: FLAKES
+      CURRENCY: SHARD
       PRICE-PER-UNIT: 750.0
       SLOT: 18
       MIN-QUANTITY: 1
@@ -93,9 +93,9 @@ AMETHYST-TOOLS:
     - STRIPPED_CRIMSON_STEM
     - STRIPPED_WARPED_STEM
     DURATION: 86400
-    FLAKE-SHOP:
+    SHARD-SHOP:
       ENABLED: false
-      CURRENCY: FLAKES
+      CURRENCY: SHARD
       PRICE-PER-UNIT: 600.0
       SLOT: 19
       MIN-QUANTITY: 1
@@ -115,9 +115,9 @@ AMETHYST-TOOLS:
     - efficiency:5
     - unbreaking:3
     DURATION: 86400
-    FLAKE-SHOP:
+    SHARD-SHOP:
       ENABLED: false
-      CURRENCY: FLAKES
+      CURRENCY: SHARD
       PRICE-PER-UNIT: 900.0
       SLOT: 20
       MIN-QUANTITY: 1
@@ -157,9 +157,9 @@ AMETHYST-TOOLS:
     - POWDER_SNOW
     - MUD
     DURATION: 86400
-    FLAKE-SHOP:
+    SHARD-SHOP:
       ENABLED: false
-      CURRENCY: FLAKES
+      CURRENCY: SHARD
       PRICE-PER-UNIT: 500.0
       SLOT: 21
       MIN-QUANTITY: 1
@@ -178,9 +178,9 @@ AMETHYST-TOOLS:
     DRAIN-RADIUS: 1
     MAX-DRAIN: 27
     DURATION: 86400
-    FLAKE-SHOP:
+    SHARD-SHOP:
       ENABLED: false
-      CURRENCY: FLAKES
+      CURRENCY: SHARD
       PRICE-PER-UNIT: 400.0
       SLOT: 22
       MIN-QUANTITY: 1
@@ -189,9 +189,9 @@ AMETHYST-TOOLS:
       HIDE-QUANTITY-BUTTONS: true
   SHARD-BOOSTER:
     MATERIAL: POTION
-    NAME: '&#009bff&lғʟᴀᴋᴇ Booster'
+    NAME: '&#009bff&lShard Booster'
     LORE:
-    - '&#BDC3C7&d4x &7ғʟᴀᴋᴇ Multiplier'
+    - '&#BDC3C7&d4x &7Shard Multiplier'
     - '&#BDC3C7Duration: &d60 minutes'
     - ''
     - '&#BDC3C7Drink to &dactivate'
@@ -200,9 +200,9 @@ AMETHYST-TOOLS:
     - '&#BDC3C7{time}'
     BOOSTER-DURATION: 3600
     DURATION: 3600
-    FLAKE-SHOP:
+    SHARD-SHOP:
       ENABLED: false
-      CURRENCY: FLAKES
+      CURRENCY: SHARD
       PRICE-PER-UNIT: 1500.0
       SLOT: 23
       MIN-QUANTITY: 1
@@ -221,9 +221,9 @@ AMETHYST-MESSAGES:
   SELL-NO-CHEST: '{prefix}&#BDC3C7You must right-click a chest.'
   BUCKET-DRAIN: '{prefix}&#BDC3C7Drained &d{count} &7water blocks.'
   BUCKET-NO-WATER: '{prefix}&#BDC3C7No water blocks found nearby.'
-  BOOSTER-ACTIVATED: '{prefix}&#BDC3C7&dғʟᴀᴋᴇ Booster &7activated! &d4x &7flakes for
+  BOOSTER-ACTIVATED: '{prefix}&#BDC3C7&dShard Booster &7activated! &d4x &7shards for
     &d60 minutes&7.'
-  BOOSTER-ALREADY: '{prefix}&#BDC3C7You already have an active ғʟᴀᴋᴇ booster!'
+  BOOSTER-ALREADY: '{prefix}&#BDC3C7You already have an active shard booster!'
   NO-PERMISSION: '{prefix}&#BDC3C7You do not have permission to use this item.'
   WRONG-OWNER: '{prefix}&#BDC3C7This ғʀᴏᴢᴇɴ Tool is bound to another player.'
   GIVE-SUCCESS: '{prefix}&#BDC3C7Gave &d{type} &7to &d{player}&7.'
