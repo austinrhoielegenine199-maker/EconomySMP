@@ -102,7 +102,7 @@ public class ShopManager {
     );
     private static final int MAX_MULTIPLIER_BAR_SEGMENTS = 10;
 
-    public enum Currency { MONEY, FLAKES }
+    public enum Currency { MONEY, SHARD }
 
     public enum PurchaseFailureReason {
         INVALID_ITEM,
@@ -110,7 +110,7 @@ public class ShopManager {
         NO_PLAYER_DATA,
         NO_PERMISSION,
         NO_MONEY,
-        NO_FLAKES,
+        NO_SHARDS,
         INVENTORY_FULL,
         REWARD_FAILED
     }
@@ -200,8 +200,8 @@ public class ShopManager {
             return reason == PurchaseFailureReason.NO_MONEY;
         }
 
-        public boolean insufficientFlakes() {
-            return reason == PurchaseFailureReason.NO_FLAKES;
+        public boolean insufficientShards() {
+            return reason == PurchaseFailureReason.NO_SHARDS;
         }
 
         public boolean inventoryFull() {
@@ -651,7 +651,7 @@ public class ShopManager {
                     lore,
                     shopSection.getInt("SLOT", 0),
                     price,
-                    parseCurrency(shopSection.getString("CURRENCY", Currency.FLAKES.name())),
+                    parseCurrency(shopSection.getString("CURRENCY", Currency.SHARD.name())),
                     "",
                     true,
                     shopSection.getString("PERMISSION", ""),
@@ -731,10 +731,10 @@ public class ShopManager {
             return failPurchase(item, amount, preview.totalPrice(), PurchaseFailureReason.NO_PLAYER_DATA);
         }
 
-        long flakeCost = preview.currency() == Currency.FLAKES ? Math.round(preview.totalPrice()) : 0L;
-        if (preview.currency() == Currency.FLAKES) {
+        long flakeCost = preview.currency() == Currency.SHARD ? Math.round(preview.totalPrice()) : 0L;
+        if (preview.currency() == Currency.SHARD) {
             if (!data.removeShards(flakeCost)) {
-                return failPurchase(item, amount, preview.totalPrice(), PurchaseFailureReason.NO_FLAKES);
+                return failPurchase(item, amount, preview.totalPrice(), PurchaseFailureReason.NO_SHARDS);
             }
         } else {
             var withdrawResult = plugin.getEconomyManager().withdraw(player, preview.totalPrice(), EconomyReason.SHOP_PURCHASE);
@@ -757,14 +757,14 @@ public class ShopManager {
             return failPurchase(item, preview.quantity(), preview.totalPrice(), PurchaseFailureReason.REWARD_FAILED);
         }
 
-        if (preview.currency() != Currency.FLAKES) {
+        if (preview.currency() != Currency.SHARD) {
             data.addMoneySpent(preview.totalPrice());
         }
 
         String itemName = item.displayName() != null && !item.displayName().isBlank()
                 ? ColorUtils.strip(item.displayName())
                 : plugin.getWorthManager().prettifyMaterial(item.material());
-        String formattedPrice = preview.currency() == Currency.FLAKES
+        String formattedPrice = preview.currency() == Currency.SHARD
                 ? preview.totalPrice() + " ғʟᴀᴋᴇs"
                 : plugin.getCurrencyManager().formatMoney(preview.totalPrice());
         plugin.getPlayerLogsManager().log(
@@ -899,7 +899,7 @@ public class ShopManager {
     }
 
     private void refundPurchase(Player player, PlayerData data, PurchaseResult purchase, long flakeCost) {
-        if (purchase.currency() == Currency.FLAKES) {
+        if (purchase.currency() == Currency.SHARD) {
             data.addShards(flakeCost);
             return;
         }
@@ -959,10 +959,10 @@ public class ShopManager {
         }
 
         double totalPrice = item.pricePerUnit() * amount;
-        if (item.currency() == Currency.FLAKES) {
+        if (item.currency() == Currency.SHARD) {
             long flakeCost = Math.round(totalPrice);
             if (!data.hasShards(flakeCost)) {
-                return failPurchase(item, amount, totalPrice, PurchaseFailureReason.NO_FLAKES);
+                return failPurchase(item, amount, totalPrice, PurchaseFailureReason.NO_SHARDS);
             }
         } else if (!plugin.getEconomyManager().has(player, totalPrice)) {
             return failPurchase(item, amount, totalPrice, PurchaseFailureReason.NO_MONEY);
@@ -992,7 +992,7 @@ public class ShopManager {
         }
 
         return "FLAKE".equalsIgnoreCase(currencyName) || "FLAKES".equalsIgnoreCase(currencyName)
-                ? Currency.FLAKES
+                ? Currency.SHARD
                 : Currency.MONEY;
     }
 
