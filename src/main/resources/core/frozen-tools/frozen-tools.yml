@@ -19,10 +19,10 @@ AMETHYST-TOOLS:
     BLOCK-HOPPER-PICKUP: true
   DRILL:
     MATERIAL: NETHERITE_PICKAXE
-    NAME: '&#9B59B6&lAmethyst Drill'
+    NAME: '&#009bff&lғʀᴏᴢᴇɴ Drill'
     LORE:
     - '&#BDC3C7Breaks &d9 blocks &7per strike'
-    - '&#BDC3C7Powered by amethyst energy'
+    - '&#BDC3C7Powered by ғʀᴏᴢᴇɴ energy'
     - ''
     - '&#9B59B6✦ Self Destruct'
     - '&#BDC3C7{time}'
@@ -60,7 +60,7 @@ AMETHYST-TOOLS:
       HIDE-QUANTITY-BUTTONS: true
   CHOPPER:
     MATERIAL: NETHERITE_AXE
-    NAME: '&#9B59B6&lAmethyst Tree Chopper'
+    NAME: '&#009bff&lғʀᴏᴢᴇɴ Tree Chopper'
     LORE:
     - '&#BDC3C7Chops entire trees &dinstantly'
     - '&#BDC3C7Vein-style breaking'
@@ -104,7 +104,7 @@ AMETHYST-TOOLS:
       HIDE-QUANTITY-BUTTONS: true
   SELL-AXE:
     MATERIAL: NETHERITE_AXE
-    NAME: '&#9B59B6&lAmethyst Sell Axe'
+    NAME: '&#009bff&lғʀᴏᴢᴇɴ Sell Axe'
     LORE:
     - '&#BDC3C7Instantly sells all items in a chest'
     - '&#BDC3C7Right-click a chest to sell'
@@ -126,7 +126,7 @@ AMETHYST-TOOLS:
       HIDE-QUANTITY-BUTTONS: true
   SHOVEL:
     MATERIAL: NETHERITE_SHOVEL
-    NAME: '&#9B59B6&lAmethyst Shovel'
+    NAME: '&#009bff&lғʀᴏᴢᴇɴ Shovel'
     LORE:
     - '&#BDC3C7Breaks &d9 blocks &7per strike'
     - '&#BDC3C7Only for soft terrain blocks'
@@ -168,7 +168,7 @@ AMETHYST-TOOLS:
       HIDE-QUANTITY-BUTTONS: true
   BUCKET:
     MATERIAL: BUCKET
-    NAME: '&#9B59B6&lAmethyst Bucket'
+    NAME: '&#009bff&lғʀᴏᴢᴇɴ Bucket'
     LORE:
     - '&#BDC3C7Drains &d27 water blocks &7at once'
     - '&#BDC3C7Right-click water to drain'
@@ -189,9 +189,9 @@ AMETHYST-TOOLS:
       HIDE-QUANTITY-BUTTONS: true
   SHARD-BOOSTER:
     MATERIAL: POTION
-    NAME: '&#9B59B6&lShard Booster'
+    NAME: '&#009bff&lғʟᴀᴋᴇ Booster'
     LORE:
-    - '&#BDC3C7&d4x &7Shard Multiplier'
+    - '&#BDC3C7&d4x &7ғʟᴀᴋᴇ Multiplier'
     - '&#BDC3C7Duration: &d60 minutes'
     - ''
     - '&#BDC3C7Drink to &dactivate'
@@ -210,24 +210,24 @@ AMETHYST-TOOLS:
       DEFAULT-QUANTITY: 1
       HIDE-QUANTITY-BUTTONS: true
 AMETHYST-MESSAGES:
-  PREFIX: '&#9B59B6[Amethyst] &r'
+  PREFIX: '&#9B59B6[ғʀᴏᴢᴇɴ] &r'
   EXPIRED: '{prefix}&#BDC3C7Your &d{tool} &7has &cexpired &7and self-destructed!'
-  EXCLUDED-WORLD: '{prefix}&#BDC3C7Amethyst Tools cannot be used in this world.'
-  DRILL-BREAK: '{prefix}&#BDC3C7&dAmethyst Drill &7broke &d{count} &7blocks.'
-  CHOP-BREAK: '{prefix}&#BDC3C7&dAmethyst Tree Chopper &7chopped &d{count} &7logs.'
+  EXCLUDED-WORLD: '{prefix}&#BDC3C7ғʀᴏᴢᴇɴ Tools cannot be used in this world.'
+  DRILL-BREAK: '{prefix}&#BDC3C7&dғʀᴏᴢᴇɴ Drill &7broke &d{count} &7blocks.'
+  CHOP-BREAK: '{prefix}&#BDC3C7&dғʀᴏᴢᴇɴ Tree Chopper &7chopped &d{count} &7logs.'
   SELL-SUCCESS: '{prefix}&#BDC3C7Sold all chest contents for &a${amount}&7.'
   SELL-EMPTY: '{prefix}&#BDC3C7That chest is empty or has no sellable items.'
   SELL-FAILED: '{prefix}&#BDC3C7The sale failed. no items were removed.'
   SELL-NO-CHEST: '{prefix}&#BDC3C7You must right-click a chest.'
   BUCKET-DRAIN: '{prefix}&#BDC3C7Drained &d{count} &7water blocks.'
   BUCKET-NO-WATER: '{prefix}&#BDC3C7No water blocks found nearby.'
-  BOOSTER-ACTIVATED: '{prefix}&#BDC3C7&dShard Booster &7activated! &d4x &7shards for
+  BOOSTER-ACTIVATED: '{prefix}&#BDC3C7&dғʟᴀᴋᴇ Booster &7activated! &d4x &7flakes for
     &d60 minutes&7.'
-  BOOSTER-ALREADY: '{prefix}&#BDC3C7You already have an active shard booster!'
+  BOOSTER-ALREADY: '{prefix}&#BDC3C7You already have an active ғʟᴀᴋᴇ booster!'
   NO-PERMISSION: '{prefix}&#BDC3C7You do not have permission to use this item.'
-  WRONG-OWNER: '{prefix}&#BDC3C7This Amethyst Tool is bound to another player.'
+  WRONG-OWNER: '{prefix}&#BDC3C7This ғʀᴏᴢᴇɴ Tool is bound to another player.'
   GIVE-SUCCESS: '{prefix}&#BDC3C7Gave &d{type} &7to &d{player}&7.'
-  GIVE-USAGE: '{prefix}&#BDC3C7Usage: &d/amethysttool give <player> <type> [duration_seconds]'
+  GIVE-USAGE: '{prefix}&#BDC3C7Usage: &d/frozentool give <player> <type> [duration_seconds]'
   GIVE-INVALID-TYPE: '{prefix}&#BDC3C7Invalid tool type. Types: DRILL, CHOPPER, SELL_AXE,
     SHOVEL, BUCKET, SHARD_BOOSTER'
   RELOAD-SUCCESS: '{prefix}&#BDC3C7Configuration reloaded.'

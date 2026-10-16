@@ -1,6 +1,6 @@
 title: "ѕʜᴏᴘ - ꜰʟᴀᴋᴇ"
 size: 27
-currency: SHARD
+currency: FLAKES
 
 items:
   pig_spawner:
@@ -8,7 +8,7 @@ items:
     slot: 9
     amount: 1
     price: 250
-    currency: SHARD
+    currency: FLAKES
     name: "Pig Spawner"
     lore:
       - "#FFFFFFPig"
@@ -21,7 +21,7 @@ items:
     slot: 10
     amount: 1
     price: 350
-    currency: SHARD
+    currency: FLAKES
     name: "Cow Spawner"
     lore:
       - "#FFFFFFCow"
@@ -34,7 +34,7 @@ items:
     slot: 11
     amount: 1
     price: 400
-    currency: SHARD
+    currency: FLAKES
     name: "Zombie Spawner"
     lore:
       - "#FFFFFFZombie"
@@ -47,7 +47,7 @@ items:
     slot: 12
     amount: 1
     price: 750
-    currency: SHARD
+    currency: FLAKES
     name: "Spider Spawner"
     lore:
       - "#FFFFFFSpider"
@@ -60,7 +60,7 @@ items:
     slot: 13
     amount: 1
     price: 500
-    currency: SHARD
+    currency: FLAKES
     name: "Skeleton Spawner"
     lore:
       - "#FFFFFFSkeleton"
@@ -73,7 +73,7 @@ items:
     slot: 14
     amount: 1
     price: 625
-    currency: SHARD
+    currency: FLAKES
     name: "Creeper Spawner"
     lore:
       - "#FFFFFFCreeper"
@@ -86,7 +86,7 @@ items:
     slot: 15
     amount: 1
     price: 750
-    currency: SHARD
+    currency: FLAKES
     name: "Zombified Piglin"
     lore:
       - "#FFFFFFBuy price: #73cffa%price% flakes"
@@ -98,7 +98,7 @@ items:
     slot: 16
     amount: 1
     price: 1000
-    currency: SHARD
+    currency: FLAKES
     name: "Blaze Spawner"
     lore:
       - "#FFFFFFBuy price: #73cffa%price% flakes"
@@ -110,7 +110,7 @@ items:
     slot: 17
     amount: 1
     price: 1500
-    currency: SHARD
+    currency: FLAKES
     name: "Iron Golem Spawner"
     lore:
       - "#FFFFFFBuy price: #73cffa%price% flakes"

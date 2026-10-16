@@ -40,7 +40,7 @@ public class ConfigManager {
             "core/billford/billford.yml",
             "core/rtp/rtp.yml",
             "core/worth/worth.yml",
-            "core/amethyst-tools/amethyst-tools.yml",
+            "core/frozen-tools/frozen-tools.yml",
             "core/ender-chest/ender-chest.yml",
             "core/invsee/invsee.yml",
             "core/freeze/freeze.yml",
@@ -75,7 +75,7 @@ public class ConfigManager {
             Map.entry("billford.yml", "core/billford/billford.yml"),
             Map.entry("rtp.yml", "core/rtp/rtp.yml"),
             Map.entry("worth.yml", "core/worth/worth.yml"),
-            Map.entry("amethyst-tools.yml", "core/amethyst-tools/amethyst-tools.yml"),
+            Map.entry("frozen-tools.yml", "core/frozen-tools/frozen-tools.yml"),
             Map.entry("ender-chest.yml", "core/ender-chest/ender-chest.yml"),
             Map.entry("invsee.yml", "core/invsee/invsee.yml"),
             Map.entry("freeze.yml", "core/freeze/freeze.yml"),
@@ -163,7 +163,7 @@ public class ConfigManager {
         billford     = load("core/billford/billford.yml", billford);
         rtp          = load("core/rtp/rtp.yml", rtp);
         worth        = load("core/worth/worth.yml", worth);
-        amethystTools = load("core/amethyst-tools/amethyst-tools.yml", amethystTools);
+        amethystTools = load("core/frozen-tools/frozen-tools.yml", amethystTools);
         enderChest   = load("core/ender-chest/ender-chest.yml", enderChest);
         invsee       = load("core/invsee/invsee.yml", invsee);
         freeze       = load("core/freeze/freeze.yml", freeze);
@@ -1262,7 +1262,7 @@ public class ConfigManager {
     public void reloadMenus() { menus = load("core/gui/menus.yml", menus); }
     public void reloadSounds() { sounds = load("core/sounds/sounds.yml", sounds); }
     public void reloadWorth() { worth = load("core/worth/worth.yml", worth); }
-    public void reloadAmethystTools() { amethystTools = load("core/amethyst-tools/amethyst-tools.yml", amethystTools); }
+    public void reloadAmethystTools() { amethystTools = load("core/frozen-tools/frozen-tools.yml", amethystTools); }
     public void reloadEnderChest() { enderChest = load("core/ender-chest/ender-chest.yml", enderChest); }
     public void reloadInvsee() { invsee = load("core/invsee/invsee.yml", invsee); }
     public void reloadFreeze() { freeze = load("core/freeze/freeze.yml", freeze); }
