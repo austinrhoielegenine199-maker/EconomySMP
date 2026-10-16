@@ -2036,9 +2036,9 @@ CONFIG:
         - '&#9B59B6✦ Self Destruct'
         - '&#BDC3C7{time}'
       SHARD-BOOSTER:
-        NAME: '&#009bff&lғʟᴀᴋᴇ Booster'
+        NAME: '&#009bff&lShard Booster'
         LORE:
-        - '&#BDC3C7&d4x &7ғʟᴀᴋᴇ Multiplier'
+        - '&#BDC3C7&d4x &7Shard Multiplier'
         - '&#BDC3C7Duration: &d60 minutes'
         - ''
         - '&#BDC3C7Drink to &dactivate'
@@ -2057,9 +2057,9 @@ CONFIG:
       SELL-NO-CHEST: '{prefix}&#BDC3C7You must right-click a chest.'
       BUCKET-DRAIN: '{prefix}&#BDC3C7Drained &d{count} &7water blocks.'
       BUCKET-NO-WATER: '{prefix}&#BDC3C7No water blocks found nearby.'
-      BOOSTER-ACTIVATED: '{prefix}&#BDC3C7&dғʟᴀᴋᴇ Booster &7activated! &d4x &7flakes for
+      BOOSTER-ACTIVATED: '{prefix}&#BDC3C7&dShard Booster &7activated! &d4x &7shards for
         &d60 minutes&7.'
-      BOOSTER-ALREADY: '{prefix}&#BDC3C7You already have an active ғʟᴀᴋᴇ booster!'
+      BOOSTER-ALREADY: '{prefix}&#BDC3C7You already have an active shard booster!'
       NO-PERMISSION: '{prefix}&#BDC3C7You do not have permission to use this item.'
       WRONG-OWNER: '{prefix}&#BDC3C7This ғʀᴏᴢᴇɴ Tool is bound to another player.'
       GIVE-SUCCESS: '{prefix}&#BDC3C7Gave &d{type} &7to &d{player}&7.'
