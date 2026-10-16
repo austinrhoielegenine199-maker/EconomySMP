@@ -991,7 +991,10 @@ public class ShopManager {
             return Currency.MONEY;
         }
 
-        return "FLAKE".equalsIgnoreCase(currencyName) || "FLAKES".equalsIgnoreCase(currencyName)
+        return "FLAKE".equalsIgnoreCase(currencyName)
+                || "FLAKES".equalsIgnoreCase(currencyName)
+                || "SHARD".equalsIgnoreCase(currencyName)
+                || "SHARDS".equalsIgnoreCase(currencyName)
                 ? Currency.SHARD
                 : Currency.MONEY;
     }
