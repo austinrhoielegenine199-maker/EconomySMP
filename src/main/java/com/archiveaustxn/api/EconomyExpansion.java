@@ -25,14 +25,14 @@ import org.jetbrains.annotations.Nullable;
  *   %economy_top_money_1_value%    full leaderboard value for rank 1
  *   %economy_top_money_1_value_short% compact leaderboard value for rank 1
  *   %economy_top_money_1_display%  ready-to-render leaderboard line for rank 1
- *   %economy_shards%               shard count
- *   %economy_nicestShards%         compact shard count
- *   %economy_shards_short%         compact shard count
- *   %economy_shards_formatted%     configured shard display
- *   %economy_shards_symbol%        configured shard symbol
- *   %economy_shards_symbol_color%  configured shard symbol color
- *   %economy_shards_color%         configured shard amount/display color
- *   %economy_shards_name%          configured singular shard name
+ *   %economy_flakes%               shard count
+ *   %economy_nicestFlakes%         compact shard count
+ *   %economy_flakes_short%         compact shard count
+ *   %economy_flakes_formatted%     configured shard display
+ *   %economy_flakes_symbol%        configured shard symbol
+ *   %economy_flakes_symbol_color%  configured shard symbol color
+ *   %economy_flakes_color%         configured shard amount/display color
+ *   %economy_flakes_name%          configured singular shard name
  *   %economy_kills%                kill count
  *   %economy_deaths%               death count
  *   %economy_playtime%             formatted playtime
@@ -41,9 +41,9 @@ import org.jetbrains.annotations.Nullable;
  *   %economy_username%             player name
  *   %economy_keyall_countdown%     time until next key-all
  *   %economy_booster_countdown%    time until booster expires (or "inactive")
- *   %economy_shard_cuboid_display% shard cuboid HUD text for scoreboard/action info
- *   %economy_shard_cuboid_status%  current shard cuboid state
- *   %economy_shard_cuboid_name%    active shard cuboid name
+ *   %economy_flake_cuboid_display% shard cuboid HUD text for scoreboard/action info
+ *   %economy_flake_cuboid_status%  current shard cuboid state
+ *   %economy_flake_cuboid_name%    active shard cuboid name
  *   %economy_x%                    player display X coordinate (randomized if setting enabled)
  *   %economy_y%                    player display Y coordinate
  *   %economy_z%                    player display Z coordinate (randomized if setting enabled)
@@ -107,17 +107,17 @@ public class EconomyExpansion extends PlaceholderExpansion {
             return plugin.getBillfordManager().getFormattedCountdown();
         }
 
-        if (params.equalsIgnoreCase("shard_cuboid_display")) {
+        if (params.equalsIgnoreCase("flake_cuboid_display")) {
             if (offlinePlayer == null || !offlinePlayer.isOnline()) return "-";
             return plugin.getShardManager().getShardCuboidDisplay(offlinePlayer.getUniqueId());
         }
 
-        if (params.equalsIgnoreCase("shard_cuboid_status")) {
+        if (params.equalsIgnoreCase("flake_cuboid_status")) {
             if (offlinePlayer == null || !offlinePlayer.isOnline()) return "outside";
             return plugin.getShardManager().getShardCuboidStatus(offlinePlayer.getUniqueId());
         }
 
-        if (params.equalsIgnoreCase("shard_cuboid_name")) {
+        if (params.equalsIgnoreCase("flake_cuboid_name")) {
             if (offlinePlayer == null || !offlinePlayer.isOnline()) return "none";
             return plugin.getShardManager().getShardCuboidName(offlinePlayer.getUniqueId());
         }
@@ -155,22 +155,22 @@ public class EconomyExpansion extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("money_name_plural")) {
             return currencyManager.plural(CurrencyManager.CurrencyType.MONEY);
         }
-        if (params.equalsIgnoreCase("shards_symbol")) {
+        if (params.equalsIgnoreCase("flakes_symbol")) {
             return currencyManager.symbol(CurrencyManager.CurrencyType.SHARDS);
         }
-        if (params.equalsIgnoreCase("shards_symbol_color")) {
+        if (params.equalsIgnoreCase("flakes_symbol_color")) {
             return currencyManager.symbolColor(CurrencyManager.CurrencyType.SHARDS);
         }
-        if (params.equalsIgnoreCase("shards_symbol_colored")) {
+        if (params.equalsIgnoreCase("flakes_symbol_colored")) {
             return currencyManager.coloredSymbol(CurrencyManager.CurrencyType.SHARDS);
         }
-        if (params.equalsIgnoreCase("shards_color")) {
+        if (params.equalsIgnoreCase("flakes_color")) {
             return currencyManager.color(CurrencyManager.CurrencyType.SHARDS);
         }
-        if (params.equalsIgnoreCase("shards_name")) {
+        if (params.equalsIgnoreCase("flakes_name")) {
             return currencyManager.singular(CurrencyManager.CurrencyType.SHARDS);
         }
-        if (params.equalsIgnoreCase("shards_name_plural")) {
+        if (params.equalsIgnoreCase("flakes_name_plural")) {
             return currencyManager.plural(CurrencyManager.CurrencyType.SHARDS);
         }
 
@@ -202,10 +202,10 @@ public class EconomyExpansion extends PlaceholderExpansion {
                         currencyManager.formatCompactAmount(CurrencyManager.CurrencyType.MONEY, 0D);
                 case "money_formatted", "money-formatted" -> currencyManager.formatMoney(0D);
                 case "money_short_formatted", "nicestMoney_formatted", "nicestmoney_formatted" -> currencyManager.formatMoneyCompact(0D);
-                case "nicestShards", "shards_short", "shards_amount_short", "nicestshards" ->
+                case "nicestFlakes", "flakes_short", "flakes_amount_short", "nicestflakes" ->
                         currencyManager.formatCompactAmount(CurrencyManager.CurrencyType.SHARDS, 0D);
-                case "shards_formatted", "shards-formatted" -> currencyManager.formatShards(0L);
-                case "shards_short_formatted" -> currencyManager.formatShardsCompact(0L);
+                case "flakes_formatted", "flakes-formatted" -> currencyManager.formatShards(0L);
+                case "flakes_short_formatted" -> currencyManager.formatShardsCompact(0L);
                 default -> "0";
             };
         }
@@ -224,11 +224,11 @@ public class EconomyExpansion extends PlaceholderExpansion {
                     currencyManager.formatCompactAmount(CurrencyManager.CurrencyType.MONEY, data.getMoney());
             case "money_formatted", "money-formatted" -> currencyManager.formatMoney(data.getMoney());
             case "money_short_formatted", "nicestMoney_formatted", "nicestmoney_formatted" -> currencyManager.formatMoneyCompact(data.getMoney());
-            case "shards" -> String.valueOf(data.getShards());
-            case "nicestShards", "shards_short", "shards_amount_short", "nicestshards" ->
+            case "flakes" -> String.valueOf(data.getShards());
+            case "nicestFlakes", "flakes_short", "flakes_amount_short", "nicestflakes" ->
                     currencyManager.formatCompactAmount(CurrencyManager.CurrencyType.SHARDS, data.getShards());
-            case "shards_formatted", "shards-formatted" -> currencyManager.formatShards(data.getShards());
-            case "shards_short_formatted" -> currencyManager.formatShardsCompact(data.getShards());
+            case "flakes_formatted", "flakes-formatted" -> currencyManager.formatShards(data.getShards());
+            case "flakes_short_formatted" -> currencyManager.formatShardsCompact(data.getShards());
             case "kills" -> String.valueOf(data.getKills());
             case "deaths" -> String.valueOf(data.getDeaths());
             case "playtime" -> NumberUtils.formatTimeLong(data.getTotalPlaytimeSeconds());

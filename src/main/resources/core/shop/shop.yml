@@ -38,9 +38,9 @@ CATEGORIES:
     LORE:
       - "#FFFFFFClick to view the food shop"
 
-  shards:
+  flakes:
     FILE-TYPE: flakes.yml
-    OPEN-MENU: "{shard-menu}"
+    OPEN-MENU: "{flake-menu}"
     MATERIAL: SNOWBALL
     SLOT: 22
     NAME: "#73cffaꜰʟᴀᴋᴇ ѕʜᴏᴘ"

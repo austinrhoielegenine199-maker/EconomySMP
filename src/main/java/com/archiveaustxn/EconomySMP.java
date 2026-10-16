@@ -661,7 +661,7 @@ public final class EconomySMP extends JavaPlugin {
         // Shop / Sell / Worth
         ShopCommand shopCommand = new ShopCommand(this);
         setExecutor("shop", shopCommand, FeatureManager.Feature.SHOP);
-        setExecutor("shardshop", shopCommand, FeatureManager.Feature.SHOP, FeatureManager.Feature.SHARDS);
+        setExecutor("flakeshop", shopCommand, FeatureManager.Feature.SHOP, FeatureManager.Feature.SHARDS);
         ShopEditCommand shopEditCommand = new ShopEditCommand(this);
         setExecutor("shopedit", shopEditCommand, FeatureManager.Feature.SHOP);
         setTabCompleter("shopedit", shopEditCommand);

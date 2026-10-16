@@ -751,10 +751,10 @@ commands:
     description: Command setshards
     permission: economysmp.command.setshards
     permission-message: "&cYou do not have permission to use /setshards."
-  shardshop:
-    description: Command shardshop
-    permission: economysmp.command.shardshop
-    permission-message: "&cYou do not have permission to use /shardshop."
+  flakeshop:
+    description: Command flakeshop
+    permission: economysmp.command.flakeshop
+    permission-message: "&cYou do not have permission to use /flakeshop."
   create:
     description: Command create
     permission: economysmp.command.create
@@ -1439,7 +1439,7 @@ permissions:
       economysmp.command.addshards: true
       economysmp.command.removeshards: true
       economysmp.command.setshards: true
-      economysmp.command.shardshop: true
+      economysmp.command.flakeshop: true
       economysmp.command.create: true
       economysmp.command.kill: true
       economysmp.command.safety: true
@@ -1859,8 +1859,8 @@ permissions:
   economysmp.command.setshards:
     description: Access to /setshards command
     default: op
-  economysmp.command.shardshop:
-    description: Access to /shardshop command
+  economysmp.command.flakeshop:
+    description: Access to /flakeshop command
     default: true
   economysmp.command.create:
     description: Access to /create command

@@ -17,7 +17,7 @@ public class CurrencyManager {
     public enum CurrencyType {
         MONEY("MONEY", "dollar", "dollars", "$", "&a", "&a", 2,
                 "{symbol_color}{symbol}{color}{amount}", "{symbol_color}{symbol}{color}{amount_short}"),
-        SHARDS("SHARDS", "Shard", "Shards", "★", "&#A303F9", "&#A303F9", 0,
+        SHARDS("FLAKES", "ғʟᴀᴋᴇ", "ғʟᴀᴋᴇs", "✦", "&#009bff", "&#009bff", 0,
                 "{symbol_color}{symbol} {color}{amount} {name}", "{symbol_color}{symbol} {color}{amount_short} {name}");
 
         private final String configKey;
@@ -175,17 +175,17 @@ public class CurrencyManager {
     }
 
     public String applyShardPlaceholders(String input, double amount) {
-        return applyNamedPlaceholders(input, "shards", CurrencyType.SHARDS, amount);
+        return applyNamedPlaceholders(input, "flakes", CurrencyType.SHARDS, amount);
     }
 
     public String applyAllPlaceholders(String input, double moneyAmount, double shardAmount) {
         String result = applyNamedPlaceholders(input, "money", CurrencyType.MONEY, moneyAmount);
-        return applyNamedPlaceholders(result, "shards", CurrencyType.SHARDS, shardAmount);
+        return applyNamedPlaceholders(result, "flakes", CurrencyType.SHARDS, shardAmount);
     }
 
     public String applyStaticPlaceholders(String input) {
         String result = applyNamedStaticPlaceholders(input, "money", CurrencyType.MONEY);
-        return applyNamedStaticPlaceholders(result, "shards", CurrencyType.SHARDS);
+        return applyNamedStaticPlaceholders(result, "flakes", CurrencyType.SHARDS);
     }
 
     public List<String> applyStaticPlaceholders(List<String> input) {

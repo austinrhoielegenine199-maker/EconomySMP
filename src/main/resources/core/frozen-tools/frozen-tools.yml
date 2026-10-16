@@ -49,9 +49,9 @@ AMETHYST-TOOLS:
     - SOUL_SAND
     - SOUL_SOIL
     DURATION: 86400
-    SHARD-SHOP:
+    FLAKE-SHOP:
       ENABLED: false
-      CURRENCY: SHARD
+      CURRENCY: FLAKES
       PRICE-PER-UNIT: 750.0
       SLOT: 18
       MIN-QUANTITY: 1
@@ -93,9 +93,9 @@ AMETHYST-TOOLS:
     - STRIPPED_CRIMSON_STEM
     - STRIPPED_WARPED_STEM
     DURATION: 86400
-    SHARD-SHOP:
+    FLAKE-SHOP:
       ENABLED: false
-      CURRENCY: SHARD
+      CURRENCY: FLAKES
       PRICE-PER-UNIT: 600.0
       SLOT: 19
       MIN-QUANTITY: 1
@@ -115,9 +115,9 @@ AMETHYST-TOOLS:
     - efficiency:5
     - unbreaking:3
     DURATION: 86400
-    SHARD-SHOP:
+    FLAKE-SHOP:
       ENABLED: false
-      CURRENCY: SHARD
+      CURRENCY: FLAKES
       PRICE-PER-UNIT: 900.0
       SLOT: 20
       MIN-QUANTITY: 1
@@ -157,9 +157,9 @@ AMETHYST-TOOLS:
     - POWDER_SNOW
     - MUD
     DURATION: 86400
-    SHARD-SHOP:
+    FLAKE-SHOP:
       ENABLED: false
-      CURRENCY: SHARD
+      CURRENCY: FLAKES
       PRICE-PER-UNIT: 500.0
       SLOT: 21
       MIN-QUANTITY: 1
@@ -178,16 +178,16 @@ AMETHYST-TOOLS:
     DRAIN-RADIUS: 1
     MAX-DRAIN: 27
     DURATION: 86400
-    SHARD-SHOP:
+    FLAKE-SHOP:
       ENABLED: false
-      CURRENCY: SHARD
+      CURRENCY: FLAKES
       PRICE-PER-UNIT: 400.0
       SLOT: 22
       MIN-QUANTITY: 1
       MAX-QUANTITY: 1
       DEFAULT-QUANTITY: 1
       HIDE-QUANTITY-BUTTONS: true
-  SHARD-BOOSTER:
+  FLAKE-BOOSTER:
     MATERIAL: POTION
     NAME: '&#009bff&lғʟᴀᴋᴇ Booster'
     LORE:
@@ -200,9 +200,9 @@ AMETHYST-TOOLS:
     - '&#BDC3C7{time}'
     BOOSTER-DURATION: 3600
     DURATION: 3600
-    SHARD-SHOP:
+    FLAKE-SHOP:
       ENABLED: false
-      CURRENCY: SHARD
+      CURRENCY: FLAKES
       PRICE-PER-UNIT: 1500.0
       SLOT: 23
       MIN-QUANTITY: 1
@@ -229,5 +229,5 @@ AMETHYST-MESSAGES:
   GIVE-SUCCESS: '{prefix}&#BDC3C7Gave &d{type} &7to &d{player}&7.'
   GIVE-USAGE: '{prefix}&#BDC3C7Usage: &d/frozentool give <player> <type> [duration_seconds]'
   GIVE-INVALID-TYPE: '{prefix}&#BDC3C7Invalid tool type. Types: DRILL, CHOPPER, SELL_AXE,
-    SHOVEL, BUCKET, SHARD_BOOSTER'
+    SHOVEL, BUCKET, FLAKE_BOOSTER'
   RELOAD-SUCCESS: '{prefix}&#BDC3C7Configuration reloaded.'

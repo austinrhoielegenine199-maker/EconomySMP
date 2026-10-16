@@ -102,7 +102,7 @@ public class ShopManager {
     );
     private static final int MAX_MULTIPLIER_BAR_SEGMENTS = 10;
 
-    public enum Currency { MONEY, SHARD }
+    public enum Currency { MONEY, FLAKES }
 
     public enum PurchaseFailureReason {
         INVALID_ITEM,
@@ -110,7 +110,7 @@ public class ShopManager {
         NO_PLAYER_DATA,
         NO_PERMISSION,
         NO_MONEY,
-        NO_SHARDS,
+        NO_FLAKES,
         INVENTORY_FULL,
         REWARD_FAILED
     }
@@ -200,8 +200,8 @@ public class ShopManager {
             return reason == PurchaseFailureReason.NO_MONEY;
         }
 
-        public boolean insufficientShards() {
-            return reason == PurchaseFailureReason.NO_SHARDS;
+        public boolean insufficientFlakes() {
+            return reason == PurchaseFailureReason.NO_FLAKES;
         }
 
         public boolean inventoryFull() {
@@ -607,15 +607,15 @@ public class ShopManager {
             ));
         }
 
-        if ("SHARD-MENU".equalsIgnoreCase(menuSection)) {
-            items.addAll(loadAmethystShardShopItems(menuSection));
+        if ("FLAKE-MENU".equalsIgnoreCase(menuSection)) {
+            items.addAll(loadFrozenFlakeShopItems(menuSection));
         }
 
         items.sort(Comparator.comparingInt(ShopItem::slot).thenComparing(ShopItem::key, String.CASE_INSENSITIVE_ORDER));
         return List.copyOf(items);
     }
 
-    private List<ShopItem> loadAmethystShardShopItems(String menuSection) {
+    private List<ShopItem> loadFrozenFlakeShopItems(String menuSection) {
         if (plugin.getAmethystToolsManager() == null || !plugin.getAmethystToolsManager().isEnabled()) {
             return List.of();
         }
@@ -625,7 +625,7 @@ public class ShopManager {
             ConfigurationSection toolSection = plugin.getAmethystToolsManager().getToolSection(type);
             ConfigurationSection shopSection = toolSection == null
                     ? null
-                    : toolSection.getConfigurationSection("SHARD-SHOP");
+                    : toolSection.getConfigurationSection("FLAKE-SHOP");
             if (toolSection == null || shopSection == null || !shopSection.getBoolean("ENABLED", false)) {
                 continue;
             }
@@ -651,7 +651,7 @@ public class ShopManager {
                     lore,
                     shopSection.getInt("SLOT", 0),
                     price,
-                    parseCurrency(shopSection.getString("CURRENCY", Currency.SHARD.name())),
+                    parseCurrency(shopSection.getString("CURRENCY", Currency.FLAKES.name())),
                     "",
                     true,
                     shopSection.getString("PERMISSION", ""),
@@ -731,10 +731,10 @@ public class ShopManager {
             return failPurchase(item, amount, preview.totalPrice(), PurchaseFailureReason.NO_PLAYER_DATA);
         }
 
-        long shardCost = preview.currency() == Currency.SHARD ? Math.round(preview.totalPrice()) : 0L;
-        if (preview.currency() == Currency.SHARD) {
-            if (!data.removeShards(shardCost)) {
-                return failPurchase(item, amount, preview.totalPrice(), PurchaseFailureReason.NO_SHARDS);
+        long flakeCost = preview.currency() == Currency.FLAKES ? Math.round(preview.totalPrice()) : 0L;
+        if (preview.currency() == Currency.FLAKES) {
+            if (!data.removeShards(flakeCost)) {
+                return failPurchase(item, amount, preview.totalPrice(), PurchaseFailureReason.NO_FLAKES);
             }
         } else {
             var withdrawResult = plugin.getEconomyManager().withdraw(player, preview.totalPrice(), EconomyReason.SHOP_PURCHASE);
@@ -745,27 +745,27 @@ public class ShopManager {
 
         RewardDeliveryResult commandReward = deliverCommandReward(player, item, preview.quantity());
         if (!commandReward.success()) {
-            refundPurchase(player, data, preview, shardCost);
+            refundPurchase(player, data, preview, flakeCost);
             logRewardFailure(player, item, preview, commandReward);
             return failPurchase(item, preview.quantity(), preview.totalPrice(), PurchaseFailureReason.REWARD_FAILED);
         }
 
         RewardDeliveryResult itemReward = deliverItemReward(player, item, preview.quantity());
         if (!itemReward.success()) {
-            refundPurchase(player, data, preview, shardCost);
+            refundPurchase(player, data, preview, flakeCost);
             logRewardFailure(player, item, preview, itemReward);
             return failPurchase(item, preview.quantity(), preview.totalPrice(), PurchaseFailureReason.REWARD_FAILED);
         }
 
-        if (preview.currency() != Currency.SHARD) {
+        if (preview.currency() != Currency.FLAKES) {
             data.addMoneySpent(preview.totalPrice());
         }
 
         String itemName = item.displayName() != null && !item.displayName().isBlank()
                 ? ColorUtils.strip(item.displayName())
                 : plugin.getWorthManager().prettifyMaterial(item.material());
-        String formattedPrice = preview.currency() == Currency.SHARD
-                ? preview.totalPrice() + " Shards"
+        String formattedPrice = preview.currency() == Currency.FLAKES
+                ? preview.totalPrice() + " ғʟᴀᴋᴇs"
                 : plugin.getCurrencyManager().formatMoney(preview.totalPrice());
         plugin.getPlayerLogsManager().log(
                 player.getUniqueId(),
@@ -898,9 +898,9 @@ public class ShopManager {
                 .replace("{amount}", String.valueOf(quantity));
     }
 
-    private void refundPurchase(Player player, PlayerData data, PurchaseResult purchase, long shardCost) {
-        if (purchase.currency() == Currency.SHARD) {
-            data.addShards(shardCost);
+    private void refundPurchase(Player player, PlayerData data, PurchaseResult purchase, long flakeCost) {
+        if (purchase.currency() == Currency.FLAKES) {
+            data.addShards(flakeCost);
             return;
         }
 
@@ -959,10 +959,10 @@ public class ShopManager {
         }
 
         double totalPrice = item.pricePerUnit() * amount;
-        if (item.currency() == Currency.SHARD) {
-            long shardCost = Math.round(totalPrice);
-            if (!data.hasShards(shardCost)) {
-                return failPurchase(item, amount, totalPrice, PurchaseFailureReason.NO_SHARDS);
+        if (item.currency() == Currency.FLAKES) {
+            long flakeCost = Math.round(totalPrice);
+            if (!data.hasShards(flakeCost)) {
+                return failPurchase(item, amount, totalPrice, PurchaseFailureReason.NO_FLAKES);
             }
         } else if (!plugin.getEconomyManager().has(player, totalPrice)) {
             return failPurchase(item, amount, totalPrice, PurchaseFailureReason.NO_MONEY);
@@ -991,8 +991,8 @@ public class ShopManager {
             return Currency.MONEY;
         }
 
-        return "SHARD".equalsIgnoreCase(currencyName) || "SHARDS".equalsIgnoreCase(currencyName)
-                ? Currency.SHARD
+        return "FLAKE".equalsIgnoreCase(currencyName) || "FLAKES".equalsIgnoreCase(currencyName)
+                ? Currency.FLAKES
                 : Currency.MONEY;
     }
 
@@ -1438,14 +1438,14 @@ public class ShopManager {
             ConfigurationSection toolSection = plugin.getAmethystToolsManager().getToolSection(type);
             ConfigurationSection shopSection = toolSection == null
                     ? null
-                    : toolSection.getConfigurationSection("SHARD-SHOP");
+                    : toolSection.getConfigurationSection("FLAKE-SHOP");
             if (shopSection == null || !shopSection.getBoolean("ENABLED", false)) {
                 continue;
             }
             double price = shopSection.getDouble("PRICE-PER-UNIT", 0D);
             if (!Double.isFinite(price) || price <= 0D) {
                 plugin.getLogger().warning("Amethyst tool " + type.name()
-                        + " is enabled for /shardshop but price-per-unit is not greater than zero.");
+                        + " is enabled for /flakeshop but price-per-unit is not greater than zero.");
             }
         }
     }

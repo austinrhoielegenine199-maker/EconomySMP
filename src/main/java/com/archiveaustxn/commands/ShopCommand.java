@@ -31,8 +31,8 @@ public class ShopCommand implements CommandExecutor {
             return true;
         }
 
-        if (command.getName().equalsIgnoreCase("shardshop")) {
-            new ShopMenu(plugin, "SHARD-MENU", 0).open(player);
+        if (command.getName().equalsIgnoreCase("flakeshop")) {
+            new ShopMenu(plugin, "FLAKE-MENU", 0).open(player);
             return true;
         }
 
