@@ -1666,7 +1666,7 @@ CONFIG:
   AMETHYST_TOOLS:
     AMETHYST-TOOLS:
       DRILL:
-        NAME: '&#9B59B6&lAmethyst drill'
+        NAME: '&#009bff&lAmethyst drill'
         LORE:
         - '&#BDC3C7Breaks &d9 blocks &7per strike'
         - '&#BDC3C7Poweredbyamethystenergy'
@@ -1674,7 +1674,7 @@ CONFIG:
         - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       CHOPPER:
-        NAME: '&#9B59B6&lAmethyst tree chopper'
+        NAME: '&#009bff&lAmethyst tree chopper'
         LORE:
         - '&#BDC3C7Chops entire trees &dinstantly'
         - '&#BDC3C7Vein-style breaking'
@@ -1682,7 +1682,7 @@ CONFIG:
         - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       SELL-AXE:
-        NAME: '&#9B59B6&lAmethyst sell axe'
+        NAME: '&#009bff&lAmethyst sell axe'
         LORE:
         - '&#BDC3C7Instantly sells all items in a chest'
         - '&#BDC3C7Right-click a chest to sell'
@@ -1690,7 +1690,7 @@ CONFIG:
         - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       SHOVEL:
-        NAME: '&#9B59B6&lAmethyst shovel'
+        NAME: '&#009bff&lAmethyst shovel'
         LORE:
         - '&#BDC3C7Breaks &d9 blocks &7per strike'
         - '&#BDC3C7Only for soft terrain blocks'
@@ -1698,7 +1698,7 @@ CONFIG:
         - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       BUCKET:
-        NAME: '&#9B59B6&lAmethyst bucket'
+        NAME: '&#009bff&lAmethyst bucket'
         LORE:
         - '&#BDC3C7Drains &d27 water blocks &7at once'
         - '&#BDC3C7Right-click water to drain'
@@ -1706,7 +1706,7 @@ CONFIG:
         - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       SHARD-BOOSTER:
-        NAME: '&#9B59B6&lShard booster'
+        NAME: '&#009bff&lShard booster'
         LORE:
         - '&#BDC3C7&d4X &7shardmultiplier'
         - '&#BDC3C7Duration: &d60 minutes'
