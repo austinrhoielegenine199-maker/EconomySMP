@@ -1670,15 +1670,15 @@ CONFIG:
   AMETHYST_TOOLS:
     AMETHYST-TOOLS:
       DRILL:
-        NAME: '&#009bff&lAmethyst drill'
+        NAME: '&#9B59B6&lAmethyst drill'
         LORE:
         - '&#BDC3C7Breaks &d9 blocks &7per strike'
         - '&#BDC3C7Powered by amethyst energy'
         - ''
-        - "&#009bff✦ Self destruct"
+        - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       CHOPPER:
-        NAME: '&#009bff&lAmethyst tree chopper'
+        NAME: '&#9B59B6&lAmethyst tree chopper'
         LORE:
         - '&#BDC3C7Chops entire trees &dinstantly'
         - '&#BDC3C7Vein-style breaking'
@@ -1686,41 +1686,41 @@ CONFIG:
         - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       SELL-AXE:
-        NAME: '&#009bff&lAmethyst sell axe'
+        NAME: '&#9B59B6&lAmethyst sell axe'
         LORE:
         - '&#BDC3C7Instantly sells all items in a chest'
         - '&#BDC3C7Right-click a chest to sell'
         - ''
-        - "&#009bff✦ Self destruct"
+        - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       SHOVEL:
-        NAME: '&#009bff&lAmethyst shovel'
+        NAME: '&#9B59B6&lAmethyst shovel'
         LORE:
         - '&#BDC3C7Breaks &d9 blocks &7per strike'
         - '&#BDC3C7Only for soft terrain blocks'
         - ''
-        - "&#009bff✦ Self destruct"
+        - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       BUCKET:
-        NAME: '&#009bff&lAmethyst bucket'
+        NAME: '&#9B59B6&lAmethyst bucket'
         LORE:
         - '&#BDC3C7Drains &d27 water blocks &7at once'
         - '&#BDC3C7Right-click water to drain'
         - ''
-        - "&#009bff✦ Self destruct"
+        - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       SHARD-BOOSTER:
-        NAME: '&#009bff&lShard booster'
+        NAME: '&#9B59B6&lShard booster'
         LORE:
         - '&#BDC3C7&d4X &7shard multiplier'
         - '&#BDC3C7Duration: &d60 minutes'
         - ''
         - '&#BDC3C7Drink to &dactivate'
         - ''
-        - "&#009bff✦ Self destruct"
+        - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
     AMETHYST-MESSAGES:
-      PREFIX: "&#009bff[Amethyst] &r"
+      PREFIX: "&#9B59B6[Amethyst] &r"
       EXPIRED: "{prefix}&#BDC3C7Your &d{tool} &7has &cexpired &7and self-destructed!"
       EXCLUDED-WORLD: "{prefix}&#BDC3C7Amethyst tools cannot be used in this world."
       DRILL-BREAK: "{prefix}&#BDC3C7&dAmethyst drill &7broke &d{count} &7blocks."
