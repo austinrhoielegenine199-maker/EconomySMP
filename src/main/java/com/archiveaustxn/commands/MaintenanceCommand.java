@@ -49,7 +49,13 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length < 1) {
-            sender.sendMessage(ColorUtils.toComponent("&cUsage: " + usage + " " + ARGUMENTS));
+            if (mm.isMaintenanceActive()) {
+                mm.stopMaintenance();
+                sender.sendMessage(ColorUtils.toComponent(mm.getMessage("disabled", "&aMaintenance mode disabled.")));
+            } else {
+                mm.startMaintenance();
+                sender.sendMessage(ColorUtils.toComponent(mm.getMessage("enabled", "&aMaintenance mode enabled. Non-whitelisted players have been kicked.")));
+            }
             return;
         }
 
@@ -62,7 +68,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
         switch (args[0].toLowerCase(Locale.ROOT)) {
             case "on", "start", "enable" -> {
                 if (mm.isMaintenanceActive()) {
-                    sender.sendMessage(ColorUtils.toComponent("&eMaintenance mode is already active."));
+                    sender.sendMessage(ColorUtils.toComponent(mm.getMessage("already-enabled", "&eMaintenance mode is already enabled.")));
                     return;
                 }
                 long durationMillis = 0L;
@@ -78,12 +84,11 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                 mm.startMaintenance(durationMillis);
                 if (durationMillis > 0L) {
                     sender.sendMessage(ColorUtils.toComponent(
-                            "&aMaintenance mode has been enabled for &b"
-                                    + plugin.getLanguageManager().formatDuration(durationMillis / 1000L, true)
-                                    + "&a. Players are being redirected."));
+                            mm.getMessage("enabled-duration", "&aMaintenance mode enabled for &b%duration%&a.")
+                                    .replace("%duration%", plugin.getLanguageManager().formatDuration(durationMillis / 1000L, true))));
                     return;
                 }
-                sender.sendMessage(ColorUtils.toComponent("&aMaintenance mode has been enabled. Players are being redirected."));
+                sender.sendMessage(ColorUtils.toComponent(mm.getMessage("enabled", "&aMaintenance mode enabled. Non-whitelisted players have been kicked.")));
             }
             case "off", "stop", "disable" -> {
                 if (!mm.isMaintenanceActive()) {
@@ -91,7 +96,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                     return;
                 }
                 mm.stopMaintenance();
-                sender.sendMessage(ColorUtils.toComponent("&aMaintenance mode has been disabled. Reconnect signal sent."));
+                sender.sendMessage(ColorUtils.toComponent(mm.getMessage("disabled", "&aMaintenance mode disabled.")));
             }
             case "status" -> {
                 boolean active = mm.isMaintenanceActive();
