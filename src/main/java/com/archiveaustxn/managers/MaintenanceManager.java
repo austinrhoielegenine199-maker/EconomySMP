@@ -27,6 +27,9 @@ public class MaintenanceManager {
 
     private final EconomySMP plugin;
     private final File stateFile;
+    private final File maintenanceConfigFile;
+    private YamlConfiguration maintenanceConfig;
+    private final Set<String> whitelist = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     private boolean maintenanceActive;
     private String customLobbyServer;
     private long maintenanceEndsAt;
@@ -35,10 +38,31 @@ public class MaintenanceManager {
     public MaintenanceManager(EconomySMP plugin) {
         this.plugin = plugin;
         this.stateFile = new File(plugin.getDataFolder(), "maintenance-state.yml");
+        this.maintenanceConfigFile = new File(plugin.getDataFolder(), "core/maintenance/maintenance.yml");
+        loadMessages();
         load();
     }
 
+    private void loadMessages() {
+        if (!maintenanceConfigFile.exists()) {
+            try {
+                File parent = maintenanceConfigFile.getParentFile();
+                if (parent != null && !parent.exists()) parent.mkdirs();
+                plugin.saveResource("core/maintenance/maintenance.yml", false);
+            } catch (IllegalArgumentException ignored) {
+                plugin.getLogger().warning("Missing bundled core/maintenance/maintenance.yml; using built-in maintenance messages.");
+            }
+        }
+        maintenanceConfig = YamlConfiguration.loadConfiguration(maintenanceConfigFile);
+    }
+
+    public String getMessage(String key, String fallback) {
+        if (maintenanceConfig == null) loadMessages();
+        return maintenanceConfig.getString("messages." + key, fallback);
+    }
+
     public void load() {
+        whitelist.clear();
         if (!stateFile.exists()) {
             this.maintenanceActive = false;
             this.customLobbyServer = null;
@@ -50,11 +74,15 @@ public class MaintenanceManager {
         this.maintenanceActive = config.getBoolean("active", false);
         this.customLobbyServer = config.getString("lobby", null);
         this.maintenanceEndsAt = config.getLong("until", 0L);
+        for (String name : config.getStringList("whitelist")) {
+            if (name != null && !name.isBlank()) whitelist.add(name.toLowerCase(Locale.ROOT));
+        }
     }
 
     public void save() {
         YamlConfiguration config = new YamlConfiguration();
         config.set("active", maintenanceActive);
+        config.set("whitelist", new ArrayList<>(whitelist));
         if (customLobbyServer != null) {
             config.set("lobby", customLobbyServer);
         }
@@ -71,6 +99,32 @@ public class MaintenanceManager {
 
     public boolean isMaintenanceActive() {
         return maintenanceActive;
+    }
+
+    public boolean isWhitelisted(String playerName) {
+        return playerName != null && whitelist.contains(playerName.toLowerCase(Locale.ROOT));
+    }
+
+    public boolean addWhitelistedPlayer(String playerName) {
+        if (playerName == null || playerName.isBlank()) return false;
+        boolean added = whitelist.add(playerName.toLowerCase(Locale.ROOT));
+        if (added) save();
+        return added;
+    }
+
+    public boolean removeWhitelistedPlayer(String playerName) {
+        if (playerName == null || playerName.isBlank()) return false;
+        boolean removed = whitelist.remove(playerName.toLowerCase(Locale.ROOT));
+        if (removed) save();
+        return removed;
+    }
+
+    public Set<String> getWhitelistedPlayers() {
+        return Collections.unmodifiableSet(whitelist);
+    }
+
+    private boolean canStayDuringMaintenance(Player player, String bypassPermission) {
+        return player.hasPermission(bypassPermission) || isWhitelisted(player.getName());
     }
 
     public void setMaintenanceActive(boolean active) {
@@ -237,15 +291,15 @@ public class MaintenanceManager {
 
         FileConfiguration config = plugin.getConfigManager().getNetwork();
         String bypassPerm = config.getString("MAINTENANCE.BYPASS_PERMISSION", "economysmp.admin.maintenance.bypass");
-        String enteringMessage = config.getString("MAINTENANCE.MESSAGES.ENTERING", "&d[Maintenance] &7server is entering maintenance. Moving you to the lobby...");
+        String enteringMessage = getMessage("kick", "&cServer maintenance has started.");
         String lobby = getLobbyServer();
         String localServerId = config.getString("NETWORK.LOCAL_SERVER_ID", "local");
         boolean useProxy = isUseProxy();
         Location localDestination = useProxy ? null : resolveLocalDestination();
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.hasPermission(bypassPerm)) {
-                String bypassJoinMsg = config.getString("MAINTENANCE.MESSAGES.BYPASS_JOIN", "&d[Maintenance] &7you joined while maintenance mode is active.");
+            if (canStayDuringMaintenance(player, bypassPerm)) {
+                String bypassJoinMsg = getMessage("whitelisted-online", "&aYou are allowed to remain online during maintenance.");
                 player.sendMessage(ColorUtils.toComponent(bypassJoinMsg));
                 continue;
             }
@@ -265,26 +319,12 @@ public class MaintenanceManager {
                 );
             }
 
-            player.sendMessage(ColorUtils.toComponent(enteringMessage));
-            if (useProxy) {
-                sendToLobby(player, lobby);
-            } else if (localDestination != null) {
-                plugin.getSpigotScheduler().teleport(player, localDestination);
-            }
+            player.kickPlayer(ColorUtils.colorize(enteringMessage));
         }
 
         // Kick whoever is still here 2 seconds later: a proxy handoff can fail, and a local server
         // with no lobby world set never had anywhere to move them to in the first place
-        if (kicksLeftoverPlayers(useProxy, localDestination != null)) {
-            plugin.getSpigotScheduler().runGlobalLater(() -> {
-                String kickMessage = config.getString("MAINTENANCE.MESSAGES.KICK_FALLBACK", "&cThis server is in maintenance and no lobby is available.");
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    if (!player.hasPermission(bypassPerm)) {
-                        player.kickPlayer(ColorUtils.colorize(kickMessage));
-                    }
-                }
-            }, 40L);
-        }
+
     }
 
     public void stopMaintenance() {
