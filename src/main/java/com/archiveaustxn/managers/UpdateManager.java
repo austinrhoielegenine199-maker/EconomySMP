@@ -31,6 +31,8 @@ public final class UpdateManager {
 
     private final EconomySMP plugin;
     private final AtomicBoolean scheduleStarted = new AtomicBoolean(false);
+    private volatile String latestVersion;
+    private volatile boolean updateAvailable;
     private YamlConfiguration settings;
     private Path settingsFile;
     private Path stateFile;
@@ -120,6 +122,7 @@ public final class UpdateManager {
             }
 
             ReleaseAsset asset = findJarAsset(json.toString());
+            latestVersion = tag;
             if (asset == null) {
                 plugin.getLogger().warning("The GitHub release " + tag + " does not contain an asset named " + ASSET_NAME + ".");
                 return;
@@ -128,12 +131,15 @@ public final class UpdateManager {
             String previousAssetId = readSavedAssetId();
             if (previousAssetId == null) {
                 saveAssetId(asset.id());
+                updateAvailable = false;
                 plugin.getLogger().info("Updater initialized against GitHub release " + tag + "; future release asset changes will be installed automatically.");
                 return;
             }
             if (previousAssetId.equals(asset.id())) {
+                updateAvailable = false;
                 return;
             }
+            updateAvailable = true;
 
             if (!settings.getBoolean("auto-download", true)) {
                 plugin.getLogger().info("A new EconomySMP release asset is available (" + tag + "). Automatic downloading is disabled.");
