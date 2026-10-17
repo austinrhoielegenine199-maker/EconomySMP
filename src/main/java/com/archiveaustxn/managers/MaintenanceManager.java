@@ -79,7 +79,7 @@ public class MaintenanceManager implements Listener {
         this.customLobbyServer = config.getString("lobby", null);
         this.maintenanceEndsAt = config.getLong("until", 0L);
         for (String name : config.getStringList("whitelist")) {
-            if (name != null && !name.isBlank()) whitelist.add(name.toLowerCase(Locale.ROOT));
+            if (name != null && !name.isBlank()) whitelist.add(name);
         }
     }
 
@@ -122,7 +122,7 @@ public class MaintenanceManager implements Listener {
 
     public boolean addWhitelistedPlayer(String playerName) {
         if (playerName == null || playerName.isBlank()) return false;
-        boolean added = whitelist.add(playerName.toLowerCase(Locale.ROOT));
+        boolean added = whitelist.add(playerName);
         if (added) save();
         return added;
     }
@@ -307,10 +307,7 @@ public class MaintenanceManager implements Listener {
         FileConfiguration config = plugin.getConfigManager().getNetwork();
         String bypassPerm = config.getString("MAINTENANCE.BYPASS_PERMISSION", "economysmp.admin.maintenance.bypass");
         String enteringMessage = getMessage("kick", "&cServer maintenance has started.");
-        String lobby = getLobbyServer();
         String localServerId = config.getString("NETWORK.LOCAL_SERVER_ID", "local");
-        boolean useProxy = isUseProxy();
-        Location localDestination = useProxy ? null : resolveLocalDestination();
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (canStayDuringMaintenance(player, bypassPerm)) {
@@ -336,9 +333,6 @@ public class MaintenanceManager implements Listener {
 
             player.kickPlayer(ColorUtils.colorize(enteringMessage));
         }
-
-        // Kick whoever is still here 2 seconds later: a proxy handoff can fail, and a local server
-        // with no lobby world set never had anywhere to move them to in the first place
 
     }
 
