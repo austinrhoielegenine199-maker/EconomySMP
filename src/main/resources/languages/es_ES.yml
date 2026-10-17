@@ -1686,7 +1686,7 @@ CONFIG:
         - "&#9B59B6✦ Self destruct"
         - '&#BDC3C7{time}'
       SELL-AXE:
-        NAME: '&#9B59B6&lAmethyst sell axe'
+        NAME: '&#009bff&lAmethyst sell axe'
         LORE:
         - '&#BDC3C7Instantly sells all items in a chest'
         - '&#BDC3C7Right-click a chest to sell'
