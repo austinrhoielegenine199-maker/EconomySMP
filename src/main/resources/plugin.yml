@@ -847,6 +847,9 @@ commands:
     permission: economysmp.sus
     permission-message: "&cYou do not have permission to use /sus."
 permissions:
+  economysmp.commandwhitelist.bypass:
+    description: Bypass the EconomySMP command whitelist
+    default: op
   economysmp.sus:
     description: Access the suspicious-player review GUI
     default: op
