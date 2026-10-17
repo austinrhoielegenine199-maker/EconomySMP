@@ -245,6 +245,6 @@ public final class UpdateManager {
         return value.replace("\\/", "/").replace("\\\"", "\"").replace("\\\\", "\\");
     }
 
-    private record ReleaseAsset(String id, String downloadUrl) {
+    public boolean isUpdateAvailable() {\n        return updateAvailable;\n    }\n\n    public String getLatestVersion() {\n        return latestVersion;\n    }\n\n    private record ReleaseAsset(String id, String downloadUrl) {
     }
 }
