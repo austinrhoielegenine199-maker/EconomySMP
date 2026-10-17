@@ -5,6 +5,5 @@ enabled: true
 auto-download: true
 check-interval-minutes: 30
 
-# The Build Jar workflow updates this pre-release on each successful push to main.
-# Maven replaces ${project.version} while building the plugin.
-release-tag: "v${project.version}-pre"
+# "auto" follows the plugin version and checks the matching nightly release tag (v<version>-pre).
+release-tag: "auto"
