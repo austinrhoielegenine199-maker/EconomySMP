@@ -1,0 +1,10 @@
+# EconomySMP automatic updater
+# The updater checks the configured GitHub release asset and stages a replacement JAR
+# in plugins/update/EconomySMP.jar. Bukkit/Paper installs it on the next server restart.
+enabled: true
+auto-download: true
+check-interval-minutes: 30
+
+# The Build Jar workflow updates this pre-release on each successful push to main.
+# Maven replaces ${project.version} while building the plugin.
+release-tag: "v${project.version}-pre"
