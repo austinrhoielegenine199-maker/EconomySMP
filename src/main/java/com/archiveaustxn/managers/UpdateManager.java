@@ -252,6 +252,7 @@ public final class UpdateManager {
     public String getLatestVersion() {
         return latestVersion;
     }
-\n    private record ReleaseAsset(String id, String downloadUrl) {
+
+    private record ReleaseAsset(String id, String downloadUrl) {
     }
 }
