@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class MaintenanceCommand implements CommandExecutor, TabCompleter {
 
-    static final String ARGUMENTS = "<on [duration]|off|status|setlobby [server]>";
+    static final String ARGUMENTS = "<on [duration]|off|status|setlobby [server]|whitelist <player>|unwhitelist <player>>";
 
     /** Offered after /maintenance on. Any duration the punishment commands accept works too. */
     static final List<String> DURATION_SUGGESTIONS = List.of("15m", "30m", "1h", "2h", "6h");
@@ -101,6 +101,26 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(ColorUtils.toComponent("  &fLobby server: " + describeLobbyServer(lobby)));
                 sender.sendMessage(ColorUtils.toComponent("  &fEnds in: " + describeRemaining(mm.getRemainingSeconds())));
             }
+            case "whitelist", "unwhitelist" -> {
+                if (args.length < 2 || args[1].isBlank()) {
+                    sender.sendMessage(ColorUtils.toComponent("&cUsage: " + usage + " " + args[0].toLowerCase(Locale.ROOT) + " <player>"));
+                    return;
+                }
+                String target = args[1];
+                if (args[0].equalsIgnoreCase("whitelist")) {
+                    if (mm.addWhitelistedPlayer(target)) {
+                        sender.sendMessage(ColorUtils.toComponent(mm.getMessage("whitelist-added", "&aAdded &f%player% &ato the maintenance whitelist.").replace("%player%", target)));
+                    } else {
+                        sender.sendMessage(ColorUtils.toComponent(mm.getMessage("whitelist-already", "&e%player% is already whitelisted.").replace("%player%", target)));
+                    }
+                } else {
+                    if (mm.removeWhitelistedPlayer(target)) {
+                        sender.sendMessage(ColorUtils.toComponent(mm.getMessage("whitelist-removed", "&aRemoved &f%player% &afrom the maintenance whitelist.").replace("%player%", target)));
+                    } else {
+                        sender.sendMessage(ColorUtils.toComponent(mm.getMessage("whitelist-missing", "&e%player% is not on the maintenance whitelist.").replace("%player%", target)));
+                    }
+                }
+            }
             case "setlobby" -> {
                 if (clearsLobbyServer(args)) {
                     mm.setLobbyServer(null);
@@ -157,11 +177,15 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            return StringUtil.copyPartialMatches(args[0], List.of("on", "off", "status", "setlobby"), new ArrayList<>());
+            return StringUtil.copyPartialMatches(args[0], List.of("on", "off", "status", "setlobby", "whitelist", "unwhitelist"), new ArrayList<>());
         }
 
         if (args.length == 2 && isEnableArgument(args[0])) {
             return StringUtil.copyPartialMatches(args[1], DURATION_SUGGESTIONS, new ArrayList<>());
+        }
+
+        if (args.length == 2 && (args[0].equalsIgnoreCase("whitelist") || args[0].equalsIgnoreCase("unwhitelist"))) {
+            return StringUtil.copyPartialMatches(args[1], new ArrayList<>(plugin.getMaintenanceManager().getWhitelistedPlayers()), new ArrayList<>());
         }
 
         if (args.length == 2 && args[0].equalsIgnoreCase("setlobby")) {
