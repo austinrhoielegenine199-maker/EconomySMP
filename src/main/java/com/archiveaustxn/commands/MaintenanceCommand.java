@@ -44,7 +44,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
      */
     static void handle(EconomySMP plugin, CommandSender sender, String usage, String[] args) {
         if (!sender.hasPermission("economysmp.admin.maintenance")) {
-            sender.sendMessage(ColorUtils.toComponent("&cYou do not have permission to manage maintenance mode."));
+            sender.sendMessage(ColorUtils.toComponent(plugin.getMaintenanceManager() == null ? "&cYou do not have permission to manage maintenance mode." : plugin.getMaintenanceManager().getMessage("no-permission", "&cYou do not have permission to manage maintenance mode.")));
             return;
         }
 
@@ -92,7 +92,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
             }
             case "off", "stop", "disable" -> {
                 if (!mm.isMaintenanceActive()) {
-                    sender.sendMessage(ColorUtils.toComponent("&eMaintenance mode is not active."));
+                    sender.sendMessage(ColorUtils.toComponent(mm.getMessage("already-disabled", "&eMaintenance mode is not enabled.")));
                     return;
                 }
                 mm.stopMaintenance();
@@ -138,7 +138,7 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                 mm.setLobbyServer(lobby);
                 sender.sendMessage(ColorUtils.toComponent("&aLobby server set to &b" + lobby + "&a."));
             }
-            default -> sender.sendMessage(ColorUtils.toComponent("&cUsage: " + usage + " " + ARGUMENTS));
+            default -> sender.sendMessage(ColorUtils.toComponent(mm.getMessage("usage", "&cUsage: /maintenance <on|off|status|whitelist <player>|unwhitelist <player>>")));
         }
     }
 
