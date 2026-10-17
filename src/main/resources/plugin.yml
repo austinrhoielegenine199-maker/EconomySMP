@@ -19,6 +19,11 @@ loadbefore:
 - UltraCosmetics
 - DeluxeMenus
 commands:
+  commandwhitelist:
+    description: Enable, disable, or reload the command whitelist
+    usage: /commandwhitelist <enable|disable|reload>
+    permission: economysmp.commandwhitelist.manage
+    permission-message: "&cYou do not have permission to manage the command whitelist."
   archiveaustxn:
     description: Private owner status command for ArchiveAustxn
     usage: /archiveaustxn
@@ -847,6 +852,9 @@ commands:
     permission: economysmp.sus
     permission-message: "&cYou do not have permission to use /sus."
 permissions:
+  economysmp.commandwhitelist.manage:
+    description: Enable, disable, or reload the command whitelist
+    default: op
   economysmp.commandwhitelist.bypass:
     description: Bypass the EconomySMP command whitelist
     default: op
