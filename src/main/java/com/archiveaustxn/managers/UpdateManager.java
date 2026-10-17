@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
@@ -92,8 +91,8 @@ public final class UpdateManager {
     private void checkNow() {
         HttpURLConnection connection = null;
         try {
-            String tag = settings.getString("release-tag", "v" + plugin.getDescription().getVersion() + "-pre").trim();
-            if (tag.isEmpty()) {
+            String tag = settings.getString("release-tag", "auto").trim();
+            if (tag.isEmpty() || "auto".equalsIgnoreCase(tag)) {
                 tag = "v" + plugin.getDescription().getVersion() + "-pre";
             }
             String encodedTag = java.net.URLEncoder.encode(tag, StandardCharsets.UTF_8).replace("+", "%20");
