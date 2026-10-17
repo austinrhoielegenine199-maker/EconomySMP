@@ -48,6 +48,12 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
             return;
         }
 
+        var mm = plugin.getMaintenanceManager();
+        if (mm == null) {
+            sender.sendMessage(ColorUtils.toComponent("&cMaintenance manager is not available."));
+            return;
+        }
+
         if (args.length < 1) {
             if (mm.isMaintenanceActive()) {
                 mm.stopMaintenance();
@@ -56,12 +62,6 @@ public class MaintenanceCommand implements CommandExecutor, TabCompleter {
                 mm.startMaintenance();
                 sender.sendMessage(ColorUtils.toComponent(mm.getMessage("enabled", "&aMaintenance mode enabled. Non-whitelisted players have been kicked.")));
             }
-            return;
-        }
-
-        var mm = plugin.getMaintenanceManager();
-        if (mm == null) {
-            sender.sendMessage(ColorUtils.toComponent("&cMaintenance manager is not available."));
             return;
         }
 
