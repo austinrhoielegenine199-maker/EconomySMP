@@ -48,6 +48,7 @@ public final class EconomySMP extends JavaPlugin {
     private DatabaseManager databaseManager;
     private PlayerLogsManager playerLogsManager;
     private PlayerDataManager playerDataManager;
+    private CommandWhitelistManager commandWhitelistManager;
     private PlayerVisibilityManager playerVisibilityManager;
     private ExplosionParticleFilter explosionParticleFilter;
     private BossSoundRangeFilter bossSoundRangeFilter;
@@ -302,7 +303,7 @@ public final class EconomySMP extends JavaPlugin {
         // 6. Commands
         registerCommands();
         // Hide unapproved commands from suggestions and report them as unknown.
-        new CommandWhitelistManager(this);
+        commandWhitelistManager = new CommandWhitelistManager(this);
 
         // 7. Background tasks
         ScoreboardTask.start(this);
@@ -1125,6 +1126,9 @@ public final class EconomySMP extends JavaPlugin {
             teleportManager.restoreAllRtpChunkThrottles();
         }
         configManager.reload();
+        if (commandWhitelistManager != null) {
+            commandWhitelistManager.reload();
+        }
         languageManager.reload();
         crashProtectionManager.reload();
         currencyManager.reload();
