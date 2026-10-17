@@ -9,6 +9,9 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.io.ByteArrayOutputStream;
@@ -18,7 +21,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.logging.Level;
 
-public class MaintenanceManager {
+public class MaintenanceManager implements Listener {
 
     private static final String REDIS_MAINTENANCE_CHANNEL = "economysmp:maintenance";
 
@@ -41,6 +44,7 @@ public class MaintenanceManager {
         this.maintenanceConfigFile = new File(plugin.getDataFolder(), "core/maintenance/maintenance.yml");
         loadMessages();
         load();
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     private void loadMessages() {
@@ -99,6 +103,17 @@ public class MaintenanceManager {
 
     public boolean isMaintenanceActive() {
         return maintenanceActive;
+    }
+
+    @EventHandler
+    public void onPlayerLogin(PlayerLoginEvent event) {
+        if (!maintenanceActive) return;
+        Player player = event.getPlayer();
+        String bypassPermission = plugin.getConfigManager().getNetwork().getString(
+                "MAINTENANCE.BYPASS_PERMISSION", "economysmp.admin.maintenance.bypass");
+        if (canStayDuringMaintenance(player, bypassPermission)) return;
+        event.disallow(PlayerLoginEvent.Result.KICK_OTHER,
+                ColorUtils.colorize(getMessage("kick", "&cEconomySMP is under maintenance. Please try again later.")));
     }
 
     public boolean isWhitelisted(String playerName) {
