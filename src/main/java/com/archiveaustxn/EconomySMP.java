@@ -14,6 +14,7 @@ import com.archiveaustxn.listeners.*;
 import com.archiveaustxn.managers.*;
 import com.archiveaustxn.tasks.*;
 import com.archiveaustxn.utils.ColorUtils;
+import com.archiveaustxn.utils.NightVisionUtils;
 import com.archiveaustxn.utils.CommandMapFeatureSync;
 import com.archiveaustxn.utils.SpigotScheduler;
 import org.bukkit.NamespacedKey;
@@ -300,6 +301,8 @@ public final class EconomySMP extends JavaPlugin {
 
         // 6. Commands
         registerCommands();
+        // Hide unapproved commands from suggestions and report them as unknown.
+        new CommandWhitelistManager(this);
 
         // 7. Background tasks
         ScoreboardTask.start(this);
@@ -347,6 +350,15 @@ public final class EconomySMP extends JavaPlugin {
         com.archiveaustxn.managers.SellStatsExporter.startEmbeddedHttpServer(this);
 
         syncCommands();
+        // Bukkit plugin reloads do not fire PlayerJoinEvent for players already online.
+        // Reload their persisted settings and reapply toggled effects such as night vision.
+        getServer().getScheduler().runTask(this, () -> {
+            if (playerDataManager == null) return;
+            for (Player onlinePlayer : getServer().getOnlinePlayers()) {
+                playerDataManager.loadOrCreate(onlinePlayer);
+                NightVisionUtils.restoreIfEnabled(this, onlinePlayer);
+            }
+        });
         getLogger().info("EconomySMP enabled successfully.");
     }
 
