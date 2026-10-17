@@ -10,6 +10,7 @@ messages:
   whitelist-removed: "&aRemoved &f%player% &afrom the maintenance whitelist."
   whitelist-missing: "&e%player% is not on the maintenance whitelist."
   enabled: "&aMaintenance mode enabled. Non-whitelisted players have been kicked."
+  enabled-duration: "&aMaintenance mode enabled for &b%duration%&a."
   disabled: "&aMaintenance mode disabled."
   already-enabled: "&eMaintenance mode is already enabled."
   already-disabled: "&eMaintenance mode is not enabled."
